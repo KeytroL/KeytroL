@@ -2,6 +2,7 @@
 *.hpp               text diff=cpp
 *.md                text
 *.txt               text
+*.yml               text
 .gitattributes      text
 .gitignore          text
 LICENSE             text
