@@ -17,13 +17,13 @@ cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project(KeytroL VERSION 0.1.0)
 
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
     add_compile_options(
         -std=c++11
         -Werror -Weverything
     )
 
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+elseif (MSVC)
     add_compile_options(
         /WX /W4 /Wall
         /wd4514 /wd4710 /wd4711 # inlining information
@@ -32,7 +32,7 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         /wd4820 # padding
     )
 
-    if (MSVC_VERSION VERSION_GREATER "1800")
+    if (MSVC_VERSION VERSION_GREATER 1800)
         add_compile_options(
             /wd5026 /wd5027 # implicitly defined as deleted
         )

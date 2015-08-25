@@ -15,7 +15,7 @@ add_library(Catch INTERFACE)
 
 target_include_directories(Catch INTERFACE ${CMAKE_CURRENT_LIST_DIR})
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+if (MSVC)
     target_compile_options(Catch INTERFACE
         /wd4242 # 'identifier' : conversion from 'type1' to 'type2', possible loss of data
     )
