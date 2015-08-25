@@ -4,11 +4,6 @@ os: osx
 branches:
     only:
         - master
-
-install:
-    - brew update
-    - brew upgrade cmake
-
 script:
     - mkdir build build/i386 build/x86_64
 
