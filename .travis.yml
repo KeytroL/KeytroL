@@ -1,0 +1,29 @@
+language: objective-c
+os: osx
+
+branches:
+    only:
+        - master
+
+install:
+    - brew update
+    - brew upgrade cmake
+
+script:
+    - mkdir build build/i386 build/x86_64
+
+    - cd build/i386
+    - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=i386
+    - cmake --build . --config Debug
+    - cmake --build . --config Release
+    - ctest --build-config Debug
+    - ctest --build-config Release
+    - cd ../..
+
+    - cd build/x86_64
+    - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=x86_64
+    - cmake --build . --config Debug
+    - cmake --build . --config Release
+    - ctest --build-config Debug
+    - ctest --build-config Release
+    - cd ../..
