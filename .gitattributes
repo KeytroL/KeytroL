@@ -3,6 +3,7 @@
 *.md                text
 *.txt               text
 *.yml               text
+.clang-format       text
 .gitattributes      text
 .gitignore          text
 LICENSE             text

@@ -4,6 +4,15 @@ os: osx
 branches:
     only:
         - master
+
+install:
+    - brew update
+    - brew install clang-format
+
+before_script:
+    - clang-format -i $(git ls-files include/ src/*.hpp src/*.cpp)
+    - git diff --exit-code
+
 script:
     - mkdir build build/i386 build/x86_64
 
