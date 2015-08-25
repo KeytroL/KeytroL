@@ -19,5 +19,4 @@ if (MSVC)
     target_compile_options(Catch INTERFACE
         /wd4242 # 'identifier' : conversion from 'type1' to 'type2', possible loss of data
     )
-
 endif ()

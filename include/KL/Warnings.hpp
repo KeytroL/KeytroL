@@ -24,7 +24,6 @@
         __pragma(warning(disable: 4668)) \
         __pragma(warning(disable: 4702))
 
-
     #define KL_RESTORE_WARNINGS \
         __pragma(warning(pop))
 

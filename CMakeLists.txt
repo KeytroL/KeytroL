@@ -22,7 +22,6 @@ if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
         -std=c++11
         -Werror -Weverything
     )
-
 elseif (MSVC)
     add_compile_options(
         /WX /W4 /Wall
@@ -44,7 +43,6 @@ add_subdirectory(src/KeytroLCore)
 add_subdirectory(src/KeytroLCore/test)
 
 add_subdirectory(third-party/Catch)
-
 
 enable_testing()
 add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)
