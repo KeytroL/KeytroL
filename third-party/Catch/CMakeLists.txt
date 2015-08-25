@@ -11,25 +11,9 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-include(ExternalProject)
-
 add_library(Catch INTERFACE)
 
-ExternalProject_Add(
-    EP_Catch
-    GIT_REPOSITORY https://github.com/philsquared/Catch
-    GIT_TAG v1.2.1
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMAND ""
-)
-
-if (NOT CMAKE_VERSION VERSION_LESS "3.3")
-    add_dependencies(Catch EP_Catch)
-endif ()
-
-ExternalProject_Get_Property(EP_Catch SOURCE_DIR)
-target_include_directories(Catch INTERFACE ${SOURCE_DIR}/include)
+target_include_directories(Catch INTERFACE ${CMAKE_CURRENT_LIST_DIR})
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(Catch INTERFACE
