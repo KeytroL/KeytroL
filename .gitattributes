@@ -1,5 +1,6 @@
 *.cpp               text diff=cpp
 *.hpp               text diff=cpp
+*.ipp               text diff=cpp
 *.md                text
 *.txt               text
 *.yml               text
