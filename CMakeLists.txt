@@ -25,8 +25,8 @@ if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
 elseif (MSVC)
     add_compile_options(
         /WX /W4 /Wall
-        /wd4514 /wd4710 /wd4711 # inlining information
         /wd4350 /wd4571 /wd4640 # obsolete
+        /wd4514 /wd4710 /wd4711 # inlining information
         /wd4625 /wd4626 # implicitly defined as deleted
         /wd4820 # padding
     )
