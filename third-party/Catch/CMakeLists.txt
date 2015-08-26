@@ -15,9 +15,12 @@ add_library(Catch INTERFACE)
 
 target_include_directories(Catch INTERFACE ${CMAKE_CURRENT_LIST_DIR})
 
-if (MSVC)
+if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
+    target_compile_options(Catch INTERFACE
+        -Wno-exit-time-destructors
+    )
+elseif (MSVC)
     target_compile_options(Catch INTERFACE
         /wd4242 # 'identifier' : conversion from 'type1' to 'type2', possible loss of data
     )
-
 endif ()

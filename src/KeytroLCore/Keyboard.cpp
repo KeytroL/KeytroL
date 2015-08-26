@@ -11,27 +11,33 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
+#include "KL/Keyboard.hpp"
 
-// clang-format off
 
-#if defined(_MSC_VER)
+namespace KL
+{
 
-    #define KL_DISABLE_WARNINGS \
-        __pragma(warning(push)) \
-        __pragma(warning(disable: 4061)) \
-        __pragma(warning(disable: 4371)) \
-        __pragma(warning(disable: 4668)) \
-        __pragma(warning(disable: 4702))
+Signal<Keyboard::KeyCode> & Keyboard::keyPressed()
+{
+    return mKeyPressed;
+}
 
-    #define KL_RESTORE_WARNINGS \
-        __pragma(warning(pop))
 
-#else
+Signal<Keyboard::KeyCode> & Keyboard::keyReleased()
+{
+    return mKeyReleased;
+}
 
-    #define KL_DISABLE_WARNINGS
-    #define KL_RESTORE_WARNINGS
 
-#endif
+void Keyboard::pressKey(const Keyboard::KeyCode keyCode) const
+{
+    mKeyPressed.emit(keyCode);
+}
 
-// clang-format on
+
+void Keyboard::releaseKey(const Keyboard::KeyCode keyCode) const
+{
+    mKeyReleased.emit(keyCode);
+}
+
+} // namespace KL

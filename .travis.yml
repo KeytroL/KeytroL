@@ -4,6 +4,15 @@ os: osx
 branches:
     only:
         - master
+
+install:
+    - brew update
+    - brew install clang-format
+
+before_script:
+    - clang-format -i $(git ls-files include/ src/*.hpp src/*.cpp)
+    - git diff --exit-code
+
 script:
     - mkdir build build/i386 build/x86_64
 
@@ -11,14 +20,14 @@ script:
     - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=i386
     - cmake --build . --config Debug
     - cmake --build . --config Release
-    - ctest --build-config Debug
-    - ctest --build-config Release
+    - ctest --output-on-failure --build-config Debug
+    - ctest --output-on-failure --build-config Release
     - cd ../..
 
     - cd build/x86_64
     - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=x86_64
     - cmake --build . --config Debug
     - cmake --build . --config Release
-    - ctest --build-config Debug
-    - ctest --build-config Release
+    - ctest --output-on-failure --build-config Debug
+    - ctest --output-on-failure --build-config Release
     - cd ../..

@@ -21,13 +21,14 @@ if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
     add_compile_options(
         -std=c++11
         -Werror -Weverything
+        -Wno-c++98-compat
     )
-
 elseif (MSVC)
     add_compile_options(
         /WX /W4 /Wall
-        /wd4514 /wd4710 /wd4711 # inlining information
+        /wd4265 # from standard headers
         /wd4350 /wd4571 /wd4640 # obsolete
+        /wd4514 /wd4710 /wd4711 # inlining information
         /wd4625 /wd4626 # implicitly defined as deleted
         /wd4820 # padding
     )
@@ -44,7 +45,6 @@ add_subdirectory(src/KeytroLCore)
 add_subdirectory(src/KeytroLCore/test)
 
 add_subdirectory(third-party/Catch)
-
 
 enable_testing()
 add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)

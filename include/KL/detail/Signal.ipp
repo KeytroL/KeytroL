@@ -11,27 +11,29 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
+namespace KL
+{
 
-// clang-format off
+template <typename T>
+Signal<T>::Signal()
+{
+}
 
-#if defined(_MSC_VER)
 
-    #define KL_DISABLE_WARNINGS \
-        __pragma(warning(push)) \
-        __pragma(warning(disable: 4061)) \
-        __pragma(warning(disable: 4371)) \
-        __pragma(warning(disable: 4668)) \
-        __pragma(warning(disable: 4702))
+template <typename T>
+void Signal<T>::connect(const std::function<void(T)> slot)
+{
+    mSlots.emplace_back(std::move(slot));
+}
 
-    #define KL_RESTORE_WARNINGS \
-        __pragma(warning(pop))
 
-#else
+template <typename T>
+void PrivateSignal<T>::emit(const T value) const
+{
+    for (const auto & slot : PrivateSignal<T>::mSlots)
+    {
+        slot(value);
+    }
+}
 
-    #define KL_DISABLE_WARNINGS
-    #define KL_RESTORE_WARNINGS
-
-#endif
-
-// clang-format on
+} // namespace KL

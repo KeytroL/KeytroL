@@ -13,25 +13,37 @@
 
 #pragma once
 
-// clang-format off
+#include <functional>
+#include <vector>
 
-#if defined(_MSC_VER)
 
-    #define KL_DISABLE_WARNINGS \
-        __pragma(warning(push)) \
-        __pragma(warning(disable: 4061)) \
-        __pragma(warning(disable: 4371)) \
-        __pragma(warning(disable: 4668)) \
-        __pragma(warning(disable: 4702))
+namespace KL
+{
 
-    #define KL_RESTORE_WARNINGS \
-        __pragma(warning(pop))
+template <typename T>
+class Signal
+{
+public:
+    Signal();
 
-#else
+    Signal(const Signal &) = delete;
+    Signal & operator=(const Signal &) = delete;
 
-    #define KL_DISABLE_WARNINGS
-    #define KL_RESTORE_WARNINGS
+    void connect(std::function<void(T)> slot);
 
-#endif
+protected:
+    std::vector<std::function<void(T)>> mSlots;
+};
 
-// clang-format on
+
+template <typename T>
+class PrivateSignal : public Signal<T>
+{
+public:
+    void emit(T value) const;
+};
+
+} // namespace KL
+
+
+#include "detail/Signal.ipp"

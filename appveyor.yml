@@ -21,11 +21,11 @@ build_script:
 
 test_script:
     - cd build\msvc2013_32
-    - ctest --build-config Debug
-    - ctest --build-config Release
+    - ctest --output-on-failure --build-config Debug
+    - ctest --output-on-failure --build-config Release
     - cd ..\..
 
     - cd build\msvc2013_64
-    - ctest --build-config Debug
-    - ctest --build-config Release
+    - ctest --output-on-failure --build-config Debug
+    - ctest --output-on-failure --build-config Release
     - cd ..\..
