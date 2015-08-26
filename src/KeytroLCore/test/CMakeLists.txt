@@ -13,6 +13,7 @@
 
 add_executable(KeytroLCoreTest
     CatchMain.cpp
+    tst_Keyboard.cpp
     tst_Signal.cpp
 )
 

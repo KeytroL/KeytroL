@@ -11,6 +11,8 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(KeytroLCore INTERFACE)
+add_library(KeytroLCore STATIC
+    Keyboard.cpp
+)
 
-target_include_directories(KeytroLCore INTERFACE ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(KeytroLCore PUBLIC ${PROJECT_SOURCE_DIR}/include)
