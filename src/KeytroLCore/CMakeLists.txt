@@ -16,3 +16,6 @@ add_library(KeytroLCore STATIC
 )
 
 target_include_directories(KeytroLCore PUBLIC ${PROJECT_SOURCE_DIR}/include)
+
+
+add_subdirectory(test)

@@ -42,7 +42,6 @@ endif ()
 
 
 add_subdirectory(src/KeytroLCore)
-add_subdirectory(src/KeytroLCore/test)
 
 add_subdirectory(third-party/Catch)
 
