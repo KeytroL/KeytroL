@@ -11,21 +11,16 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(BaseKeytroLCore STATIC
-    IKeyboard.cpp
+add_library(WinKeytroLCore STATIC
+    Keyboard.cpp
+    KeyboardPlatformImpl.cpp
 )
 
-target_include_directories(BaseKeytroLCore PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(WinKeytroLCore PUBLIC
+    ${PROJECT_SOURCE_DIR}/include/KL/platform/win
+)
 
-
-add_subdirectory(platform/default)
-
-if (WIN32)
-    add_subdirectory(platform/win)
-    add_library(KeytroLCore ALIAS WinKeytroLCore)
-else ()
-    add_library(KeytroLCore ALIAS DefaultKeytroLCore)
-endif ()
-
-
-add_subdirectory(test)
+target_link_libraries(WinKeytroLCore
+    BaseKeytroLCore
+    User32.lib
+)
