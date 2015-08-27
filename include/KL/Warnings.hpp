@@ -20,7 +20,10 @@
     #define KL_DISABLE_WARNINGS \
         __pragma(warning(push)) \
         __pragma(warning(disable: 4061)) \
+        __pragma(warning(disable: 4127)) \
+        __pragma(warning(disable: 4365)) \
         __pragma(warning(disable: 4371)) \
+        __pragma(warning(disable: 4619)) \
         __pragma(warning(disable: 4668)) \
         __pragma(warning(disable: 4702))
 
