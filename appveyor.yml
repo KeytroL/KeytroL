@@ -1,9 +1,5 @@
 clone_depth: 50
 
-branches:
-    only:
-        - master
-
 build_script:
     - mkdir build build\msvc2013_32 build\msvc2013_64
 

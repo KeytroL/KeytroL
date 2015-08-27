@@ -1,10 +1,6 @@
 language: cpp
 os: osx
 
-branches:
-    only:
-        - master
-
 install:
     - brew update
     - brew install clang-format
