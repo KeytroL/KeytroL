@@ -6,6 +6,9 @@ env:
         - ARCHITECTURE=i386
         - ARCHITECTURE=x86_64
 
+matrix:
+    fast_finish: true
+
 install:
     - brew update
     - brew install clang-format
