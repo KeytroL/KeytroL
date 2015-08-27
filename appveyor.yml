@@ -1,31 +1,23 @@
 clone_depth: 50
 
-branches:
-    only:
-        - master
+environment:
+    matrix:
+        - CMAKE_GENERATOR: "Visual Studio 12 2013"
+        - CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
+        - CMAKE_GENERATOR: "Visual Studio 14 2015"
+        - CMAKE_GENERATOR: "Visual Studio 14 2015 Win64"
+
+matrix:
+    fast_finish: true
 
 build_script:
-    - mkdir build build\msvc2013_32 build\msvc2013_64
+    - mkdir build
+    - cd build
 
-    - cd build\msvc2013_32
-    - cmake ..\.. -G"Visual Studio 12 2013"
+    - cmake .. -G"%CMAKE_GENERATOR%"
     - cmake --build . --config Debug
     - cmake --build . --config Release
-    - cd ..\..
-
-    - cd build\msvc2013_64
-    - cmake ..\.. -G"Visual Studio 12 2013 Win64"
-    - cmake --build . --config Debug
-    - cmake --build . --config Release
-    - cd ..\..
 
 test_script:
-    - cd build\msvc2013_32
     - ctest --output-on-failure --build-config Debug
     - ctest --output-on-failure --build-config Release
-    - cd ..\..
-
-    - cd build\msvc2013_64
-    - ctest --output-on-failure --build-config Debug
-    - ctest --output-on-failure --build-config Release
-    - cd ..\..
