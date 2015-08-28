@@ -1,17 +1,17 @@
 language: cpp
-os: osx
 
 branches:
     only:
         - master
 
-env:
-    matrix:
-        - ARCHITECTURE=i386
-        - ARCHITECTURE=x86_64
-
 matrix:
     fast_finish: true
+
+    include:
+        - os: osx
+          env: ARCHITECTURE=i386
+        - os: osx
+          env: ARCHITECTURE=x86_64
 
 install:
     # - brew update
