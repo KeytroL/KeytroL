@@ -11,11 +11,16 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(KeytroLCore STATIC
+add_library(BaseKeytroLCore STATIC
     IKeyboard.cpp
 )
 
-target_include_directories(KeytroLCore PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(BaseKeytroLCore PUBLIC ${PROJECT_SOURCE_DIR}/include)
+
+
+add_subdirectory(platform/default)
+
+add_library(KeytroLCore ALIAS DefaultKeytroLCore)
 
 
 add_subdirectory(test)

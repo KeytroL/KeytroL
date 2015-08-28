@@ -15,4 +15,4 @@
 
 #include "KL/IKeyboard.hpp"
 
-#include "detail/Keyboard.ipp"
+#include "Keyboard.ipp"
