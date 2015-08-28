@@ -14,24 +14,24 @@ matrix:
       env: ARCHITECTURE=x86_64
 
 install:
-  # - brew update
-  # - brew install clang-format
+  # - if [ ${TRAVIS_OS_NAME} == 'osx' ]; then brew update; fi
+  # - if [ ${TRAVIS_OS_NAME} == 'osx' ]; then brew install clang-format; fi
 
 before_script:
-  # - clang-format -i $(git ls-files include/ src/*.hpp src/*.cpp)
-  # - git diff --exit-code
+  # - if [ ${TRAVIS_OS_NAME} == 'osx' ]; then clang-format -i $(git ls-files include/ src/*.hpp src/*.cpp); fi
+  # - if [ ${TRAVIS_OS_NAME} == 'osx' ]; then git diff --exit-code; fi
 
 script:
   - mkdir build build/Debug build/Release
 
   - cd build/Debug
-  - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Debug
+  - if [ ${TRAVIS_OS_NAME} == 'osx' ]; then cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Debug; fi
   - cmake --build .
   - ctest --output-on-failure
   - cd ../..
 
   - cd build/Release
-  - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Release
+  - if [ ${TRAVIS_OS_NAME} == 'osx' ]; then cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Release; fi
   - cmake --build .
   - ctest --output-on-failure
   - cd ../..
