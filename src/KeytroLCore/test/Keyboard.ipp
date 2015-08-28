@@ -13,27 +13,14 @@
 
 #pragma once
 
-#include "KL/Signal.hpp"
-
 
 namespace KL
 {
 
-class IKeyboard
+class Keyboard : public IKeyboard
 {
 public:
-    using KeyCode = unsigned int;
-
-    Signal<KeyCode> & keyPressed();
-    Signal<KeyCode> & keyReleased();
-
-protected:
-    void pressKey(KeyCode keyCode) const;
-    void releaseKey(KeyCode keyCode) const;
-
-private:
-    PrivateSignal<KeyCode> mKeyPressed;
-    PrivateSignal<KeyCode> mKeyReleased;
+    class PlatformImpl;
 };
 
 } // namespace KL

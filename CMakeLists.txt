@@ -28,6 +28,7 @@ elseif (MSVC)
         /WX /W4 /Wall
         /wd4265 # from standard headers
         /wd4350 /wd4571 /wd4640 # obsolete
+        /wd4512 # could not be generated
         /wd4514 /wd4710 /wd4711 # inlining information
         /wd4625 /wd4626 # implicitly defined as deleted
         /wd4820 # padding

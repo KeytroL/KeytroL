@@ -11,29 +11,27 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
-
-#include "KL/Signal.hpp"
+#include "KeyboardPlatformImpl.hpp"
 
 
 namespace KL
 {
 
-class IKeyboard
+Keyboard::PlatformImpl::PlatformImpl(const Keyboard & keyboard)
+    : mKeyboard(keyboard)
 {
-public:
-    using KeyCode = unsigned int;
+}
 
-    Signal<KeyCode> & keyPressed();
-    Signal<KeyCode> & keyReleased();
 
-protected:
-    void pressKey(KeyCode keyCode) const;
-    void releaseKey(KeyCode keyCode) const;
+void Keyboard::PlatformImpl::pressKey(Keyboard::KeyCode keyCode) const
+{
+    mKeyboard.pressKey(keyCode);
+}
 
-private:
-    PrivateSignal<KeyCode> mKeyPressed;
-    PrivateSignal<KeyCode> mKeyReleased;
-};
+
+void Keyboard::PlatformImpl::releaseKey(Keyboard::KeyCode keyCode) const
+{
+    mKeyboard.releaseKey(keyCode);
+}
 
 } // namespace KL
