@@ -18,12 +18,16 @@ before_script:
     - git diff --exit-code
 
 script:
-    - mkdir build
-    - cd build
+    - mkdir build build/Debug build/Release
 
-    - cmake .. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE
-    - cmake --build . --config Debug
-    - cmake --build . --config Release
+    - cd build/Debug
+    - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Debug
+    - cmake --build .
+    - ctest --output-on-failure
+    - cd ../..
 
-    - ctest --output-on-failure --build-config Debug
-    - ctest --output-on-failure --build-config Release
+    - cd build/Release
+    - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Release
+    - cmake --build .
+    - ctest --output-on-failure
+    - cd ../..
