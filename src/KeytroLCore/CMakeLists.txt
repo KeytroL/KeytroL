@@ -12,7 +12,7 @@
 #  GNU General Public License for more details.
 
 add_library(KeytroLCore STATIC
-    Keyboard.cpp
+    IKeyboard.cpp
 )
 
 target_include_directories(KeytroLCore PUBLIC ${PROJECT_SOURCE_DIR}/include)

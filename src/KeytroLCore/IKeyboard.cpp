@@ -11,31 +11,31 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard.hpp"
+#include "KL/IKeyboard.hpp"
 
 
 namespace KL
 {
 
-Signal<Keyboard::KeyCode> & Keyboard::keyPressed()
+Signal<IKeyboard::KeyCode> & IKeyboard::keyPressed()
 {
     return mKeyPressed;
 }
 
 
-Signal<Keyboard::KeyCode> & Keyboard::keyReleased()
+Signal<IKeyboard::KeyCode> & IKeyboard::keyReleased()
 {
     return mKeyReleased;
 }
 
 
-void Keyboard::pressKey(const Keyboard::KeyCode keyCode) const
+void IKeyboard::pressKey(const IKeyboard::KeyCode keyCode) const
 {
     mKeyPressed.emit(keyCode);
 }
 
 
-void Keyboard::releaseKey(const Keyboard::KeyCode keyCode) const
+void IKeyboard::releaseKey(const IKeyboard::KeyCode keyCode) const
 {
     mKeyReleased.emit(keyCode);
 }
