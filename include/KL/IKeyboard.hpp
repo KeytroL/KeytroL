@@ -13,28 +13,27 @@
 
 #pragma once
 
-// clang-format off
+#include "KL/Signal.hpp"
 
-#if defined(_MSC_VER)
 
-    #define KL_DISABLE_WARNINGS \
-        __pragma(warning(push)) \
-        __pragma(warning(disable: 4061)) \
-        __pragma(warning(disable: 4127)) \
-        __pragma(warning(disable: 4365)) \
-        __pragma(warning(disable: 4371)) \
-        __pragma(warning(disable: 4619)) \
-        __pragma(warning(disable: 4668)) \
-        __pragma(warning(disable: 4702))
+namespace KL
+{
 
-    #define KL_RESTORE_WARNINGS \
-        __pragma(warning(pop))
+class IKeyboard
+{
+public:
+    using KeyCode = unsigned int;
 
-#else
+    Signal<KeyCode> & keyPressed();
+    Signal<KeyCode> & keyReleased();
 
-    #define KL_DISABLE_WARNINGS
-    #define KL_RESTORE_WARNINGS
+protected:
+    void pressKey(KeyCode keyCode) const;
+    void releaseKey(KeyCode keyCode) const;
 
-#endif
+private:
+    PrivateSignal<KeyCode> mKeyPressed;
+    PrivateSignal<KeyCode> mKeyReleased;
+};
 
-// clang-format on
+} // namespace KL

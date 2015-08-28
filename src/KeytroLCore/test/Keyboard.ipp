@@ -13,6 +13,14 @@
 
 #pragma once
 
-#include "KL/IKeyboard.hpp"
 
-#include "Keyboard.ipp"
+namespace KL
+{
+
+class Keyboard : public IKeyboard
+{
+public:
+    class PlatformImpl;
+};
+
+} // namespace KL

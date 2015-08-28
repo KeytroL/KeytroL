@@ -13,6 +13,8 @@
 
 #include "KL/Keyboard.hpp"
 
+#include "KeyboardPlatformImpl.hpp"
+
 #include "KL/Warnings.hpp"
 
 KL_DISABLE_WARNINGS
@@ -23,6 +25,7 @@ KL_RESTORE_WARNINGS
 TEST_CASE("Press a key", "[Keyboard]")
 {
     KL::Keyboard keyboard;
+    KL::Keyboard::PlatformImpl platformKeyboard(keyboard);
     auto count = 0;
 
     keyboard.keyPressed().connect([&count](KL::Keyboard::KeyCode keyCode)
@@ -34,7 +37,7 @@ TEST_CASE("Press a key", "[Keyboard]")
         });
     REQUIRE(count == 0);
 
-    keyboard.pressKey(42);
+    platformKeyboard.pressKey(42);
     REQUIRE(count == 1);
 }
 
@@ -42,6 +45,7 @@ TEST_CASE("Press a key", "[Keyboard]")
 TEST_CASE("Release a key", "[Keyboard]")
 {
     KL::Keyboard keyboard;
+    KL::Keyboard::PlatformImpl platformKeyboard(keyboard);
     auto count = 0;
 
     keyboard.keyReleased().connect([&count](KL::Keyboard::KeyCode keyCode)
@@ -53,6 +57,6 @@ TEST_CASE("Release a key", "[Keyboard]")
         });
     REQUIRE(count == 0);
 
-    keyboard.releaseKey(23);
+    platformKeyboard.releaseKey(23);
     REQUIRE(count == 1);
 }

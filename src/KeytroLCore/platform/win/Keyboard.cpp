@@ -11,8 +11,23 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
+#include "KL/Keyboard.hpp"
 
-#include "KL/IKeyboard.hpp"
+#include "KeyboardPlatformImpl.hpp"
 
-#include "Keyboard.ipp"
+
+namespace KL
+{
+
+Keyboard::Keyboard()
+{
+    PlatformImpl::instance().addKeyboard(this);
+}
+
+
+Keyboard::~Keyboard()
+{
+    PlatformImpl::instance().removeKeyboard(this);
+}
+
+} // namespace KL

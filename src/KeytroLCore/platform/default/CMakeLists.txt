@@ -11,16 +11,12 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_executable(KeytroLCoreTest
-    CatchMain.cpp
-    KeyboardPlatformImpl.cpp
-    tst_Keyboard.cpp
-    tst_Signal.cpp
+add_library(DefaultKeytroLCore INTERFACE)
+
+target_include_directories(DefaultKeytroLCore INTERFACE
+    ${PROJECT_SOURCE_DIR}/include/KL/platform/default
 )
 
-target_include_directories(KeytroLCoreTest PRIVATE ${CMAKE_CURRENT_LIST_DIR})
-
-target_link_libraries(KeytroLCoreTest
-    Catch
+target_link_libraries(DefaultKeytroLCore INTERFACE
     BaseKeytroLCore
 )

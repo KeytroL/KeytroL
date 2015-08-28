@@ -28,6 +28,7 @@ elseif (MSVC)
         /WX /W4 /Wall
         /wd4265 # from standard headers
         /wd4350 /wd4571 /wd4640 # obsolete
+        /wd4512 # could not be generated
         /wd4514 /wd4710 /wd4711 # inlining information
         /wd4625 /wd4626 # implicitly defined as deleted
         /wd4820 # padding
@@ -42,9 +43,14 @@ endif ()
 
 
 add_subdirectory(src/KeytroLCore)
-add_subdirectory(src/KeytroLCore/test)
 
 add_subdirectory(third-party/Catch)
 
 enable_testing()
 add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)
+
+
+find_package(Qt5Widgets)
+if (Qt5Widgets_FOUND)
+    add_subdirectory(src/KeyboardTestApp)
+endif ()
