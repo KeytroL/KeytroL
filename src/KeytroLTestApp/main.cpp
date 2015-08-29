@@ -12,6 +12,7 @@
 // GNU General Public License for more details.
 
 #include "KL/Keyboard.hpp"
+#include "KL/MidiOut.hpp"
 #include "KL/Warnings.hpp"
 
 KL_DISABLE_WARNINGS
@@ -39,6 +40,11 @@ int main(int argc, char * argv[])
         {
             qDebug() << "released: " << keyCode;
         });
+
+    qDebug() << KL::MidiOut::deviceCount() << "MIDI out device(s)";
+    qDebug() << "First device:" << QString::fromStdString(KL::MidiOut::deviceName(0));
+    qDebug() << "Second device:" << QString::fromStdString(KL::MidiOut::deviceName(1));
+    qDebug() << "Third device:" << QString::fromStdString(KL::MidiOut::deviceName(2));
 
     return application.exec();
 }
