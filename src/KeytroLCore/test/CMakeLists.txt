@@ -13,12 +13,12 @@
 
 add_executable(KeytroLCoreTest
     CatchMain.cpp
-    KeyboardPlatformImpl.cpp
+    ../platform/mock/KeyboardPlatformImpl.cpp
     tst_Keyboard.cpp
     tst_Signal.cpp
 )
 
-target_include_directories(KeytroLCoreTest PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(KeytroLCoreTest PRIVATE ../platform/mock)
 
 target_link_libraries(KeytroLCoreTest PRIVATE
     Catch
