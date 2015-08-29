@@ -1,5 +1,9 @@
 clone_depth: 50
 
+branches:
+    only:
+        - master
+
 environment:
     matrix:
         - CMAKE_GENERATOR: "Visual Studio 12 2013"
