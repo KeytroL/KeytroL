@@ -13,7 +13,6 @@
 
 add_library(BaseKeytroLCore STATIC
     IKeyboard.cpp
-    MidiOut.cpp
 )
 
 target_include_directories(BaseKeytroLCore PUBLIC ${PROJECT_SOURCE_DIR}/include)
