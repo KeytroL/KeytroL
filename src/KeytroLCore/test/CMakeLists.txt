@@ -20,7 +20,7 @@ add_executable(KeytroLCoreTest
 
 target_include_directories(KeytroLCoreTest PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
-target_link_libraries(KeytroLCoreTest
+target_link_libraries(KeytroLCoreTest PRIVATE
     Catch
     BaseKeytroLCore
 )
