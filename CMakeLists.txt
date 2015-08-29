@@ -52,5 +52,5 @@ add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)
 
 find_package(Qt5Widgets)
 if (Qt5Widgets_FOUND)
-    add_subdirectory(src/KeyboardTestApp)
+    add_subdirectory(src/KeytroLTestApp)
 endif ()
