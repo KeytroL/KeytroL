@@ -1,6 +1,10 @@
 language: cpp
 os: osx
 
+branches:
+    only:
+        - master
+
 env:
     matrix:
         - ARCHITECTURE=i386

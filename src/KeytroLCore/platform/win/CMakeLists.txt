@@ -14,13 +14,18 @@
 add_library(WinKeytroLCore STATIC
     Keyboard.cpp
     KeyboardPlatformImpl.cpp
+    MidiOut.cpp
 )
 
 target_include_directories(WinKeytroLCore PUBLIC
     ${PROJECT_SOURCE_DIR}/include/KL/platform/win
 )
 
-target_link_libraries(WinKeytroLCore
+target_link_libraries(WinKeytroLCore PUBLIC
     BaseKeytroLCore
+)
+
+target_link_libraries(WinKeytroLCore PRIVATE
     User32.lib
+    Winmm.lib
 )

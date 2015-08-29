@@ -11,12 +11,14 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(DefaultKeytroLCore INTERFACE)
+add_library(DefaultKeytroLCore STATIC
+    MidiOut.cpp
+)
 
-target_include_directories(DefaultKeytroLCore INTERFACE
+target_include_directories(DefaultKeytroLCore PUBLIC
     ${PROJECT_SOURCE_DIR}/include/KL/platform/default
 )
 
-target_link_libraries(DefaultKeytroLCore INTERFACE
+target_link_libraries(DefaultKeytroLCore PUBLIC
     BaseKeytroLCore
 )

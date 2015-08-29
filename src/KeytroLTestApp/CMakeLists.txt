@@ -11,8 +11,8 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_executable(KeyboardTestApp
+add_executable(KeytroLTestApp
     main.cpp
 )
 
-target_link_libraries(KeyboardTestApp KeytroLCore Qt5::Widgets)
+target_link_libraries(KeytroLTestApp KeytroLCore Qt5::Widgets)
