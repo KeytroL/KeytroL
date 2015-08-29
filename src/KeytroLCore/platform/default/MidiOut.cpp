@@ -17,6 +17,11 @@
 namespace KL
 {
 
+class MidiOut::PlatformImpl
+{
+};
+
+
 unsigned int MidiOut::deviceCount()
 {
     return 0;
@@ -26,6 +31,20 @@ unsigned int MidiOut::deviceCount()
 std::string MidiOut::deviceName(unsigned int)
 {
     return {};
+}
+
+
+MidiOut::MidiOut(unsigned int)
+    : mPlatformImpl(nullptr)
+{
+}
+
+
+MidiOut::~MidiOut() = default;
+
+
+void MidiOut::sendMessage(Byte, Byte, Byte) const
+{
 }
 
 } // namespace KL

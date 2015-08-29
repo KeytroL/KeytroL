@@ -13,6 +13,7 @@
 
 #pragma once
 
+#include <memory>
 #include <string>
 
 
@@ -22,8 +23,19 @@ namespace KL
 class MidiOut
 {
 public:
+    using Byte = unsigned char;
+
     static unsigned int deviceCount();
     static std::string deviceName(unsigned int deviceIndex);
+
+    explicit MidiOut(unsigned int deviceIndex);
+    ~MidiOut();
+
+    void sendMessage(Byte statusByte, Byte dataByte1, Byte dataByte2) const;
+
+private:
+    class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
 } // namespace KL
