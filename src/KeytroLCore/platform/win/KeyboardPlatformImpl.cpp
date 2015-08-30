@@ -38,11 +38,12 @@ void Keyboard::PlatformImpl::removeKeyboard(const Keyboard * const keyboard)
 
 Keyboard::PlatformImpl::PlatformImpl()
 {
-    auto lowLevelKeyboardProc = [](int nCode, WPARAM wParam, LPARAM lParam) -> LRESULT
+    const auto lowLevelKeyboardProc = [](int nCode, WPARAM wParam, LPARAM lParam)
+                                          -> LRESULT
     {
         if (nCode == HC_ACTION)
         {
-            auto & platformKeyboard = PlatformImpl::instance();
+            const auto & platformKeyboard = PlatformImpl::instance();
             const auto hookStruct = reinterpret_cast<const KBDLLHOOKSTRUCT *>(lParam);
 
             if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)
@@ -71,7 +72,7 @@ Keyboard::PlatformImpl::~PlatformImpl()
 
 void Keyboard::PlatformImpl::pressKey(const Keyboard::KeyCode keyCode) const
 {
-    for (const auto * keyboard : mKeyboards)
+    for (const auto * const keyboard : mKeyboards)
     {
         keyboard->pressKey(keyCode);
     }
@@ -80,7 +81,7 @@ void Keyboard::PlatformImpl::pressKey(const Keyboard::KeyCode keyCode) const
 
 void Keyboard::PlatformImpl::releaseKey(const Keyboard::KeyCode keyCode) const
 {
-    for (const auto * keyboard : mKeyboards)
+    for (const auto * const keyboard : mKeyboards)
     {
         keyboard->releaseKey(keyCode);
     }
