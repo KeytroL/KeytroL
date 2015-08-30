@@ -22,6 +22,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
         -std=c++11
         -Werror -Weverything
         -Wno-c++98-compat
+        -Wno-padded
     )
 elseif (MSVC)
     add_compile_options(

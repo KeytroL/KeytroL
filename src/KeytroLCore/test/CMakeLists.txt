@@ -16,6 +16,7 @@ add_executable(KeytroLCoreTest
     ../platform/mock/KeyboardPlatformImpl.cpp
     tst_Keyboard.cpp
     tst_MidiOut.cpp
+    tst_Property.cpp
     tst_Signal.cpp
 )
 
