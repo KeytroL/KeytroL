@@ -38,8 +38,8 @@ void Keyboard::PlatformImpl::removeKeyboard(const Keyboard * const keyboard)
 
 Keyboard::PlatformImpl::PlatformImpl()
 {
-    const auto lowLevelKeyboardProc = [](int nCode, WPARAM wParam, LPARAM lParam)
-                                          -> LRESULT
+    const auto lowLevelKeyboardProc =
+        [](const int nCode, const WPARAM wParam, const LPARAM lParam) -> LRESULT
     {
         if (nCode == HC_ACTION)
         {

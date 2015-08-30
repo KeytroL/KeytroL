@@ -23,13 +23,13 @@ Keyboard::PlatformImpl::PlatformImpl(const Keyboard & keyboard)
 }
 
 
-void Keyboard::PlatformImpl::pressKey(Keyboard::KeyCode keyCode) const
+void Keyboard::PlatformImpl::pressKey(const Keyboard::KeyCode keyCode) const
 {
     mKeyboard.pressKey(keyCode);
 }
 
 
-void Keyboard::PlatformImpl::releaseKey(Keyboard::KeyCode keyCode) const
+void Keyboard::PlatformImpl::releaseKey(const Keyboard::KeyCode keyCode) const
 {
     mKeyboard.releaseKey(keyCode);
 }

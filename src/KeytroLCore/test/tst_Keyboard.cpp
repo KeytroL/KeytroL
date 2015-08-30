@@ -28,7 +28,7 @@ TEST_CASE("Press a key", "[Keyboard]")
     const KL::Keyboard::PlatformImpl platformKeyboard(keyboard);
     auto count = 0;
 
-    keyboard.keyPressed().connect([&count](KL::Keyboard::KeyCode keyCode)
+    keyboard.keyPressed().connect([&count](const KL::Keyboard::KeyCode keyCode)
         {
             if (keyCode == 42)
             {
@@ -48,7 +48,7 @@ TEST_CASE("Release a key", "[Keyboard]")
     const KL::Keyboard::PlatformImpl platformKeyboard(keyboard);
     auto count = 0;
 
-    keyboard.keyReleased().connect([&count](KL::Keyboard::KeyCode keyCode)
+    keyboard.keyReleased().connect([&count](const KL::Keyboard::KeyCode keyCode)
         {
             if (keyCode == 23)
             {

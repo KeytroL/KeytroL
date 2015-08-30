@@ -32,14 +32,14 @@ int main(int argc, char * argv[])
     KL::Keyboard keyboard;
     const KL::MidiOut midiOut(0);
 
-    keyboard.keyPressed().connect([&midiOut](KL::Keyboard::KeyCode keyCode)
+    keyboard.keyPressed().connect([&midiOut](const KL::Keyboard::KeyCode keyCode)
         {
             qDebug() << "pressed : " << keyCode;
             const auto note = keyCode % 0x80;
             midiOut.sendMessage(0x90, static_cast<KL::MidiOut::Byte>(note), 100);
         });
 
-    keyboard.keyReleased().connect([&midiOut](KL::Keyboard::KeyCode keyCode)
+    keyboard.keyReleased().connect([&midiOut](const KL::Keyboard::KeyCode keyCode)
         {
             qDebug() << "released: " << keyCode;
             const auto note = keyCode % 0x80;
