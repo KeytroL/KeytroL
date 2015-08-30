@@ -14,12 +14,12 @@ matrix:
     fast_finish: true
 
 install:
-    - brew update
-    - brew install clang-format
+    # - brew update
+    # - brew install clang-format
 
 before_script:
-    - clang-format -i $(git ls-files include/ src/*.hpp src/*.cpp)
-    - git diff --exit-code
+    # - clang-format -i $(git ls-files include/ src/*.hpp src/*.cpp)
+    # - git diff --exit-code
 
 script:
     - mkdir build build/Debug build/Release
