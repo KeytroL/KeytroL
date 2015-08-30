@@ -28,13 +28,13 @@ unsigned int MidiOut::deviceCount()
 }
 
 
-std::string MidiOut::deviceName(unsigned int)
+std::string MidiOut::deviceName(const unsigned int)
 {
     return {};
 }
 
 
-MidiOut::MidiOut(unsigned int)
+MidiOut::MidiOut(const unsigned int)
     : mPlatformImpl(nullptr)
 {
 }
@@ -43,7 +43,7 @@ MidiOut::MidiOut(unsigned int)
 MidiOut::~MidiOut() = default;
 
 
-void MidiOut::sendMessage(Byte, Byte, Byte) const
+void MidiOut::sendMessage(const Byte, const Byte, const Byte) const
 {
 }
 

@@ -25,10 +25,10 @@ KL_RESTORE_WARNINGS
 TEST_CASE("Press a key", "[Keyboard]")
 {
     KL::Keyboard keyboard;
-    KL::Keyboard::PlatformImpl platformKeyboard(keyboard);
+    const KL::Keyboard::PlatformImpl platformKeyboard(keyboard);
     auto count = 0;
 
-    keyboard.keyPressed().connect([&count](KL::Keyboard::KeyCode keyCode)
+    keyboard.keyPressed().connect([&count](const KL::Keyboard::KeyCode keyCode)
         {
             if (keyCode == 42)
             {
@@ -45,10 +45,10 @@ TEST_CASE("Press a key", "[Keyboard]")
 TEST_CASE("Release a key", "[Keyboard]")
 {
     KL::Keyboard keyboard;
-    KL::Keyboard::PlatformImpl platformKeyboard(keyboard);
+    const KL::Keyboard::PlatformImpl platformKeyboard(keyboard);
     auto count = 0;
 
-    keyboard.keyReleased().connect([&count](KL::Keyboard::KeyCode keyCode)
+    keyboard.keyReleased().connect([&count](const KL::Keyboard::KeyCode keyCode)
         {
             if (keyCode == 23)
             {

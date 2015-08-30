@@ -30,19 +30,19 @@ int main(int argc, char * argv[])
     window.show();
 
     KL::Keyboard keyboard;
-    KL::MidiOut midiOut(0);
+    const KL::MidiOut midiOut(0);
 
-    keyboard.keyPressed().connect([&midiOut](KL::Keyboard::KeyCode keyCode)
+    keyboard.keyPressed().connect([&midiOut](const KL::Keyboard::KeyCode keyCode)
         {
             qDebug() << "pressed : " << keyCode;
-            auto note = keyCode % 0x80;
+            const auto note = keyCode % 0x80;
             midiOut.sendMessage(0x90, static_cast<KL::MidiOut::Byte>(note), 100);
         });
 
-    keyboard.keyReleased().connect([&midiOut](KL::Keyboard::KeyCode keyCode)
+    keyboard.keyReleased().connect([&midiOut](const KL::Keyboard::KeyCode keyCode)
         {
             qDebug() << "released: " << keyCode;
-            auto note = keyCode % 0x80;
+            const auto note = keyCode % 0x80;
             midiOut.sendMessage(0x80, static_cast<KL::MidiOut::Byte>(note), 0);
         });
 

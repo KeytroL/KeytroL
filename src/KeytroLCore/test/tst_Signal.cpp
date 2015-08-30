@@ -24,7 +24,7 @@ TEST_CASE("Connect to a Signal", "[Signal]")
 {
     KL::Signal<bool> signal;
 
-    signal.connect([](bool)
+    signal.connect([](const bool)
         {
         });
 }
@@ -35,7 +35,7 @@ TEST_CASE("Emit a Signal", "[Signal]")
     KL::PrivateSignal<bool> signal;
     auto count = 0;
 
-    signal.connect([&count](bool value)
+    signal.connect([&count](const bool value)
         {
             if (value)
             {
