@@ -12,7 +12,6 @@
 #  GNU General Public License for more details.
 
 add_executable(KeytroLCoreTest
-    CatchMain.cpp
     ../platform/default/MidiOut.cpp
     ../platform/mock/KeyboardPlatformImpl.cpp
     tst_Keyboard.cpp
