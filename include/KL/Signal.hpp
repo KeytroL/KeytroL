@@ -40,7 +40,7 @@ template <typename T>
 class PrivateSignal : public Signal<T>
 {
 public:
-    void emit(T value) const;
+    void emit(const T & value) const;
 };
 
 } // namespace KL

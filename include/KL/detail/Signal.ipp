@@ -31,7 +31,7 @@ void Signal<T>::connect(const std::function<void(T)> slot)
 
 
 template <typename T>
-void PrivateSignal<T>::emit(const T value) const
+void PrivateSignal<T>::emit(const T & value) const
 {
     for (const auto & slot : PrivateSignal<T>::mSlots)
     {
