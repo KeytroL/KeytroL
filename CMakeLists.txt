@@ -46,11 +46,13 @@ endif ()
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_subdirectory(src/KeytroLCore)
+add_subdirectory(src/KeytroLModel)
 
 add_subdirectory(third-party/Catch)
 
 enable_testing()
 add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)
+add_test(NAME KeytroLModel COMMAND KeytroLModelTest)
 
 
 find_package(Qt5Widgets)
