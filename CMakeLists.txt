@@ -42,6 +42,8 @@ elseif (MSVC)
 endif ()
 
 
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
 add_subdirectory(src/KeytroLCore)
 
 add_subdirectory(third-party/Catch)

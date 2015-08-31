@@ -15,8 +15,6 @@ add_library(BaseKeytroLCore STATIC
     IKeyboard.cpp
 )
 
-target_include_directories(BaseKeytroLCore PUBLIC ${PROJECT_SOURCE_DIR}/include)
-
 
 add_subdirectory(platform/default)
 
