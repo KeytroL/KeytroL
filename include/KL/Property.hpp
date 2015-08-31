@@ -13,30 +13,28 @@
 
 #pragma once
 
+#include "KL/Signal.hpp"
+
 
 namespace KL
 {
 
 template <typename T>
-Signal<T>::Signal()
+class Property
 {
-}
+public:
+    explicit Property(T value);
 
+    const T & value() const;
+    void setValue(const T & value);
+    Signal<T> & valueChanged();
 
-template <typename T>
-void Signal<T>::connect(const std::function<void(T)> slot)
-{
-    mSlots.emplace_back(std::move(slot));
-}
-
-
-template <typename T>
-void PrivateSignal<T>::emit(const T & value) const
-{
-    for (const auto & slot : PrivateSignal<T>::mSlots)
-    {
-        slot(value);
-    }
-}
+private:
+    T mValue;
+    PrivateSignal<T> mValueChanged;
+};
 
 } // namespace KL
+
+
+#include "detail/Property.ipp"

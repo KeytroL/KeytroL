@@ -11,18 +11,11 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_executable(KeytroLCoreTest
-    ../platform/default/MidiOut.cpp
-    ../platform/mock/KeyboardPlatformImpl.cpp
-    tst_Keyboard.cpp
-    tst_MidiOut.cpp
-    tst_Property.cpp
-    tst_Signal.cpp
+add_executable(KeytroLModelTest
+    tst_ComputerKey.cpp
 )
 
-target_include_directories(KeytroLCoreTest PRIVATE ../platform/mock)
-
-target_link_libraries(KeytroLCoreTest PRIVATE
+target_link_libraries(KeytroLModelTest PRIVATE
     Catch
-    BaseKeytroLCore
+    KeytroLModel
 )
