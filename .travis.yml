@@ -1,37 +1,37 @@
 language: cpp
 
 branches:
-    only:
-        - master
+  only:
+    - master
 
 matrix:
-    fast_finish: true
+  fast_finish: true
 
-    include:
-        - os: osx
-          env: ARCHITECTURE=i386
-        - os: osx
-          env: ARCHITECTURE=x86_64
+  include:
+    - os: osx
+      env: ARCHITECTURE=i386
+    - os: osx
+      env: ARCHITECTURE=x86_64
 
 install:
-    # - brew update
-    # - brew install clang-format
+  # - brew update
+  # - brew install clang-format
 
 before_script:
-    # - clang-format -i $(git ls-files include/ src/*.hpp src/*.cpp)
-    # - git diff --exit-code
+  # - clang-format -i $(git ls-files include/ src/*.hpp src/*.cpp)
+  # - git diff --exit-code
 
 script:
-    - mkdir build build/Debug build/Release
+  - mkdir build build/Debug build/Release
 
-    - cd build/Debug
-    - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Debug
-    - cmake --build .
-    - ctest --output-on-failure
-    - cd ../..
+  - cd build/Debug
+  - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Debug
+  - cmake --build .
+  - ctest --output-on-failure
+  - cd ../..
 
-    - cd build/Release
-    - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Release
-    - cmake --build .
-    - ctest --output-on-failure
-    - cd ../..
+  - cd build/Release
+  - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Release
+  - cmake --build .
+  - ctest --output-on-failure
+  - cd ../..
