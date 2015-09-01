@@ -24,6 +24,11 @@ if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
         -Wno-c++98-compat
         -Wno-padded
     )
+elseif (CMAKE_COMPILER_IS_GNUCXX)
+    add_compile_options(
+        -std=c++11
+        -Werror -Wall -Wextra -pedantic
+    )
 elseif (MSVC)
     add_compile_options(
         /WX /W4 /Wall
