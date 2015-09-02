@@ -15,4 +15,7 @@ add_executable(KeytroLTestApp
     main.cpp
 )
 
-target_link_libraries(KeytroLTestApp KeytroLCore Qt5::Widgets)
+target_link_libraries(KeytroLTestApp PRIVATE
+    KeytroLCore
+    Qt5::Widgets
+)
