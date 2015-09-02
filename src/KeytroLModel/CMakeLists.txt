@@ -13,6 +13,7 @@
 
 add_library(KeytroLModel STATIC
     ComputerKey.cpp
+    KeyboardLayout.cpp
 )
 
 

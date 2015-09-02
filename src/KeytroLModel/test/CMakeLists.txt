@@ -13,6 +13,7 @@
 
 add_executable(KeytroLModelTest
     tst_ComputerKey.cpp
+    tst_KeyboardLayout.cpp
 )
 
 target_link_libraries(KeytroLModelTest PRIVATE
