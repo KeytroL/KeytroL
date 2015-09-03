@@ -27,6 +27,8 @@ TEST_CASE("Connect to a Signal", "[Signal]")
     auto connection = signal.connect([](const bool)
         {
         });
+
+    REQUIRE(connection.isConnected());
 }
 
 
