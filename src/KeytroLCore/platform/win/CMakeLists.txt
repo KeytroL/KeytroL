@@ -17,10 +17,6 @@ add_library(WinKeytroLCore STATIC
     MidiOut.cpp
 )
 
-target_include_directories(WinKeytroLCore PUBLIC
-    ${PROJECT_SOURCE_DIR}/include/KL/platform/win
-)
-
 target_link_libraries(WinKeytroLCore PUBLIC
     BaseKeytroLCore
 )
