@@ -28,9 +28,3 @@ target_link_libraries(KeytroLCoreTest PRIVATE
     Catch
     BaseKeytroLCore
 )
-
-if (MSVC)
-    target_compile_options(KeytroLCoreTest PRIVATE
-        /wd4355 # 'this' used in initializer list
-    )
-endif ()

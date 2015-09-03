@@ -21,24 +21,28 @@ namespace KL
 {
 
 Keyboard::Keyboard()
-    : mKeyPressConnection(testing::TestKeyboard::instance().mKeyPressed.connect(
-          [this](const KeyCode keyCode)
-          {
-              pressKey(keyCode);
-          }))
-    , mKeyReleaseConnection(testing::TestKeyboard::instance().mKeyReleased.connect(
-          [this](const KeyCode keyCode)
-          {
-              releaseKey(keyCode);
-          }))
 {
+    auto keyPressConnection = testing::TestKeyboard::instance().mKeyPressed.connect(
+        [this](const KeyCode keyCode)
+        {
+            pressKey(keyCode);
+        });
+
+    auto keyReleaseConnection = testing::TestKeyboard::instance().mKeyReleased.connect(
+        [this](const KeyCode keyCode)
+        {
+            releaseKey(keyCode);
+        });
+
+    mPlatformImpl = std::unique_ptr<PlatformImpl>(
+        new PlatformImpl{keyPressConnection, keyReleaseConnection});
 }
 
 
 Keyboard::~Keyboard()
 {
-    mKeyPressConnection.disconnect();
-    mKeyReleaseConnection.disconnect();
+    mPlatformImpl->mKeyPressConnection.disconnect();
+    mPlatformImpl->mKeyReleaseConnection.disconnect();
 }
 
 } // namespace KL

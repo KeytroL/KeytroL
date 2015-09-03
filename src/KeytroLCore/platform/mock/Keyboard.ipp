@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "KL/Signal.hpp"
+#include <memory>
 
 
 namespace KL
@@ -25,11 +25,9 @@ public:
     Keyboard();
     ~Keyboard();
 
-    class PlatformImpl;
-
 private:
-    Signal<KeyCode>::Connection mKeyPressConnection;
-    Signal<KeyCode>::Connection mKeyReleaseConnection;
+    class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
 } // namespace KL

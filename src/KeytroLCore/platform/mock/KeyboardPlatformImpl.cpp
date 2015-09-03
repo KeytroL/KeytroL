@@ -17,4 +17,11 @@
 namespace KL
 {
 
+Keyboard::PlatformImpl::PlatformImpl(const Signal<KeyCode>::Connection keyPressConnection,
+    const Signal<KeyCode>::Connection keyReleaseConnection)
+    : mKeyPressConnection(std::move(keyPressConnection))
+    , mKeyReleaseConnection(std::move(keyReleaseConnection))
+{
+}
+
 } // namespace KL

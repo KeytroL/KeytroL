@@ -12,6 +12,7 @@
 // GNU General Public License for more details.
 
 #include "KL/Keyboard.hpp"
+#include "KL/Signal.hpp"
 
 
 namespace KL
@@ -19,6 +20,12 @@ namespace KL
 
 class Keyboard::PlatformImpl
 {
+public:
+    PlatformImpl(Signal<KeyCode>::Connection keyPressConnection,
+        Signal<KeyCode>::Connection keyReleaseConnection);
+
+    Signal<KeyCode>::Connection mKeyPressConnection;
+    Signal<KeyCode>::Connection mKeyReleaseConnection;
 };
 
 } // namespace KL
