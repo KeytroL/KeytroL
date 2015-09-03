@@ -20,7 +20,7 @@ namespace KL
 class Keyboard::PlatformImpl
 {
 public:
-    PlatformImpl(const Keyboard & keyboard);
+    explicit PlatformImpl(const Keyboard & keyboard);
 
     void pressKey(Keyboard::KeyCode keyCode) const;
     void releaseKey(Keyboard::KeyCode keyCode) const;
