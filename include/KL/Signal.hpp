@@ -14,6 +14,8 @@
 #pragma once
 
 #include <functional>
+#include <memory>
+#include <utility>
 #include <vector>
 
 
@@ -29,10 +31,28 @@ public:
     Signal(const Signal &) = delete;
     Signal & operator=(const Signal &) = delete;
 
-    void connect(std::function<void(T)> slot);
+    class Connection;
+
+    Connection connect(std::function<void(T)> slot);
 
 protected:
-    std::vector<std::function<void(T)>> mSlots;
+    std::vector<std::pair<std::shared_ptr<bool>, std::function<void(T)>>> mSlots;
+};
+
+
+template <typename T>
+class Signal<T>::Connection
+{
+public:
+    bool isConnected() const;
+
+    void disconnect() const;
+
+private:
+    friend Signal<T>;
+    Connection(std::shared_ptr<bool> connected);
+
+    const std::shared_ptr<bool> mConnected;
 };
 
 

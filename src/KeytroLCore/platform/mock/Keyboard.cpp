@@ -14,21 +14,35 @@
 #include "KL/Keyboard.hpp"
 
 #include "KeyboardPlatformImpl.hpp"
+#include "TestKeyboard.hpp"
 
 
 namespace KL
 {
 
 Keyboard::Keyboard()
-    : mPlatformImpl(nullptr)
 {
-    PlatformImpl::instance().addKeyboard(this);
+    auto keyPressConnection = testing::TestKeyboard::instance().mKeyPressed.connect(
+        [this](const KeyCode keyCode)
+        {
+            pressKey(keyCode);
+        });
+
+    auto keyReleaseConnection = testing::TestKeyboard::instance().mKeyReleased.connect(
+        [this](const KeyCode keyCode)
+        {
+            releaseKey(keyCode);
+        });
+
+    mPlatformImpl = std::unique_ptr<PlatformImpl>(
+        new PlatformImpl{keyPressConnection, keyReleaseConnection});
 }
 
 
 Keyboard::~Keyboard()
 {
-    PlatformImpl::instance().removeKeyboard(this);
+    mPlatformImpl->mKeyPressConnection.disconnect();
+    mPlatformImpl->mKeyReleaseConnection.disconnect();
 }
 
 } // namespace KL

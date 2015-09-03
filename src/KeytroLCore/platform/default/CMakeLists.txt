@@ -12,11 +12,8 @@
 #  GNU General Public License for more details.
 
 add_library(DefaultKeytroLCore STATIC
+    Keyboard.cpp
     MidiOut.cpp
-)
-
-target_include_directories(DefaultKeytroLCore PUBLIC
-    ${PROJECT_SOURCE_DIR}/include/KL/platform/default
 )
 
 target_link_libraries(DefaultKeytroLCore PUBLIC

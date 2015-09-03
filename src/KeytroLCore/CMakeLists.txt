@@ -12,7 +12,7 @@
 #  GNU General Public License for more details.
 
 add_library(BaseKeytroLCore STATIC
-    IKeyboard.cpp
+    Keyboard.cpp
 )
 
 

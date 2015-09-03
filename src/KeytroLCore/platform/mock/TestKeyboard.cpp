@@ -11,20 +11,31 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
+#include "TestKeyboard.hpp"
 
 
 namespace KL
 {
-
-class Keyboard : public IKeyboard
+namespace testing
 {
-public:
-    Keyboard();
-    ~Keyboard();
 
-private:
-    class PlatformImpl;
-};
+TestKeyboard & TestKeyboard::instance()
+{
+    static TestKeyboard testKeyboard;
+    return testKeyboard;
+}
 
+
+void TestKeyboard::pressKey(const Keyboard::KeyCode keyCode) const
+{
+    mKeyPressed.emit(keyCode);
+}
+
+
+void TestKeyboard::releaseKey(const Keyboard::KeyCode keyCode) const
+{
+    mKeyReleased.emit(keyCode);
+}
+
+} // namespace testing
 } // namespace KL

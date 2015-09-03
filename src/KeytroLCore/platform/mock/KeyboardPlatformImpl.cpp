@@ -17,21 +17,11 @@
 namespace KL
 {
 
-Keyboard::PlatformImpl::PlatformImpl(const Keyboard & keyboard)
-    : mKeyboard(keyboard)
+Keyboard::PlatformImpl::PlatformImpl(const Signal<KeyCode>::Connection keyPressConnection,
+    const Signal<KeyCode>::Connection keyReleaseConnection)
+    : mKeyPressConnection(std::move(keyPressConnection))
+    , mKeyReleaseConnection(std::move(keyReleaseConnection))
 {
-}
-
-
-void Keyboard::PlatformImpl::pressKey(const Keyboard::KeyCode keyCode) const
-{
-    mKeyboard.pressKey(keyCode);
-}
-
-
-void Keyboard::PlatformImpl::releaseKey(const Keyboard::KeyCode keyCode) const
-{
-    mKeyboard.releaseKey(keyCode);
 }
 
 } // namespace KL

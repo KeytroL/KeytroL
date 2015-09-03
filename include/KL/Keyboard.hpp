@@ -13,6 +13,35 @@
 
 #pragma once
 
-#include "KL/IKeyboard.hpp"
+#include "KL/Signal.hpp"
 
-#include "Keyboard.ipp"
+#include <memory>
+
+
+namespace KL
+{
+
+class Keyboard
+{
+public:
+    using KeyCode = unsigned int;
+
+    Keyboard();
+    ~Keyboard();
+
+    Signal<KeyCode> & keyPressed();
+    Signal<KeyCode> & keyReleased();
+
+protected:
+    void pressKey(KeyCode keyCode) const;
+    void releaseKey(KeyCode keyCode) const;
+
+private:
+    PrivateSignal<KeyCode> mKeyPressed;
+    PrivateSignal<KeyCode> mKeyReleased;
+
+    class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
+};
+
+} // namespace KL
