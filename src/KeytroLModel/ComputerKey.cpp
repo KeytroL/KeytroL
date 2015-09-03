@@ -89,13 +89,13 @@ const Property<std::string> & ComputerKey::label() const
 }
 
 
-Property<IKeyboard::KeyCode> & ComputerKey::keyCode()
+Property<Keyboard::KeyCode> & ComputerKey::keyCode()
 {
     return mKeyCode;
 }
 
 
-const Property<IKeyboard::KeyCode> & ComputerKey::keyCode() const
+const Property<Keyboard::KeyCode> & ComputerKey::keyCode() const
 {
     return mKeyCode;
 }
