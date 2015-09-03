@@ -24,6 +24,9 @@ class TestKeyboard
 public:
     static TestKeyboard & instance();
 
+    void pressKey(Keyboard::KeyCode keyCode) const;
+    void releaseKey(Keyboard::KeyCode keyCode) const;
+
 private:
     TestKeyboard() = default;
 

@@ -25,5 +25,17 @@ TestKeyboard & TestKeyboard::instance()
     return testKeyboard;
 }
 
+
+void TestKeyboard::pressKey(const Keyboard::KeyCode keyCode) const
+{
+    mKeyPressed.emit(keyCode);
+}
+
+
+void TestKeyboard::releaseKey(const Keyboard::KeyCode keyCode) const
+{
+    mKeyReleased.emit(keyCode);
+}
+
 } // namespace testing
 } // namespace KL

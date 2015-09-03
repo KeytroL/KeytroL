@@ -19,14 +19,6 @@ namespace KL
 
 class Keyboard::PlatformImpl
 {
-public:
-    explicit PlatformImpl(const Keyboard & keyboard);
-
-    void pressKey(Keyboard::KeyCode keyCode) const;
-    void releaseKey(Keyboard::KeyCode keyCode) const;
-
-private:
-    const Keyboard & mKeyboard;
 };
 
 } // namespace KL
