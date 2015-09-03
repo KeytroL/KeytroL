@@ -52,3 +52,26 @@ TEST_CASE("Emit a Signal", "[Signal]")
     signal.emit(false);
     REQUIRE(count == 1);
 }
+
+
+TEST_CASE("Disconnect from a Signal", "[Signal]")
+{
+    KL::PrivateSignal<bool> signal;
+    auto count = 0;
+
+    auto connection = signal.connect([&count](const bool)
+        {
+            ++count;
+        });
+    REQUIRE(count == 0);
+    REQUIRE(connection.isConnected());
+
+    signal.emit(true);
+    REQUIRE(count == 1);
+
+    connection.disconnect();
+    REQUIRE_FALSE(connection.isConnected());
+
+    signal.emit(true);
+    REQUIRE(count == 1);
+}

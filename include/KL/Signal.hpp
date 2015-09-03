@@ -46,6 +46,8 @@ class Signal<T>::Connection
 public:
     bool isConnected() const;
 
+    void disconnect() const;
+
 private:
     friend Signal<T>;
     Connection(std::shared_ptr<bool> connected);

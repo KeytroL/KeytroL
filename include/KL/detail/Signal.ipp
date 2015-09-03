@@ -46,6 +46,13 @@ bool Signal<T>::Connection::isConnected() const
 
 
 template <typename T>
+void Signal<T>::Connection::disconnect() const
+{
+    *mConnected = false;
+}
+
+
+template <typename T>
 void PrivateSignal<T>::emit(const T & value) const
 {
     for (const auto & slot : PrivateSignal<T>::mSlots)
