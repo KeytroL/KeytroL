@@ -13,6 +13,7 @@
 
 add_executable(KeytroLCoreTest
     ../platform/default/MidiOut.cpp
+    ../platform/mock/Keyboard.cpp
     ../platform/mock/KeyboardPlatformImpl.cpp
     ../platform/mock/TestKeyboard.cpp
     tst_Keyboard.cpp
@@ -27,3 +28,9 @@ target_link_libraries(KeytroLCoreTest PRIVATE
     Catch
     BaseKeytroLCore
 )
+
+if (MSVC)
+    target_compile_options(KeytroLCoreTest PRIVATE
+        /wd4355 # 'this' used in initializer list
+    )
+endif ()

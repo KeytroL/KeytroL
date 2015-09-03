@@ -13,25 +13,32 @@
 
 #include "KL/Keyboard.hpp"
 
+#include "KeyboardPlatformImpl.hpp"
+#include "TestKeyboard.hpp"
+
 
 namespace KL
 {
-namespace testing
+
+Keyboard::Keyboard()
+    : mKeyPressConnection(testing::TestKeyboard::instance().mKeyPressed.connect(
+          [this](const KeyCode keyCode)
+          {
+              pressKey(keyCode);
+          }))
+    , mKeyReleaseConnection(testing::TestKeyboard::instance().mKeyReleased.connect(
+          [this](const KeyCode keyCode)
+          {
+              releaseKey(keyCode);
+          }))
 {
+}
 
-class TestKeyboard
+
+Keyboard::~Keyboard()
 {
-public:
-    static TestKeyboard & instance();
+    mKeyPressConnection.disconnect();
+    mKeyReleaseConnection.disconnect();
+}
 
-private:
-    TestKeyboard() = default;
-
-    friend class KL::Keyboard;
-
-    PrivateSignal<Keyboard::KeyCode> mKeyPressed;
-    PrivateSignal<Keyboard::KeyCode> mKeyReleased;
-};
-
-} // namespace testing
 } // namespace KL

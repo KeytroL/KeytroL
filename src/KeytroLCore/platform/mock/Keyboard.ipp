@@ -13,6 +13,8 @@
 
 #pragma once
 
+#include "KL/Signal.hpp"
+
 
 namespace KL
 {
@@ -20,7 +22,14 @@ namespace KL
 class Keyboard : public IKeyboard
 {
 public:
+    Keyboard();
+    ~Keyboard();
+
     class PlatformImpl;
+
+private:
+    Signal<KeyCode>::Connection mKeyPressConnection;
+    Signal<KeyCode>::Connection mKeyReleaseConnection;
 };
 
 } // namespace KL
