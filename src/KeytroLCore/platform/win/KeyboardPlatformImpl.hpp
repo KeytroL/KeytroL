@@ -28,13 +28,13 @@ class Keyboard::PlatformImpl
 {
 public:
     static PlatformImpl & instance();
+    ~PlatformImpl();
 
     void addKeyboard(const Keyboard * const keyboard);
     void removeKeyboard(const Keyboard * const keyboard);
 
 private:
     PlatformImpl();
-    ~PlatformImpl();
 
     void pressKey(Keyboard::KeyCode keyCode) const;
     void releaseKey(Keyboard::KeyCode keyCode) const;

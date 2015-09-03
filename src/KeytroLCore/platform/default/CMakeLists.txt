@@ -12,6 +12,7 @@
 #  GNU General Public License for more details.
 
 add_library(DefaultKeytroLCore STATIC
+    Keyboard.cpp
     MidiOut.cpp
 )
 

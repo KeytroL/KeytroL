@@ -13,22 +13,21 @@
 
 #include "KL/Keyboard.hpp"
 
-#include "KeyboardPlatformImpl.hpp"
-
 
 namespace KL
 {
 
+class Keyboard::PlatformImpl
+{
+};
+
+
 Keyboard::Keyboard()
     : mPlatformImpl(nullptr)
 {
-    PlatformImpl::instance().addKeyboard(this);
 }
 
 
-Keyboard::~Keyboard()
-{
-    PlatformImpl::instance().removeKeyboard(this);
-}
+Keyboard::~Keyboard() = default;
 
 } // namespace KL

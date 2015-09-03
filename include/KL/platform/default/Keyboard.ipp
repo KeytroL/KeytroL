@@ -13,12 +13,21 @@
 
 #pragma once
 
+#include <memory>
+
 
 namespace KL
 {
 
 class Keyboard : public IKeyboard
 {
+public:
+    Keyboard();
+    ~Keyboard();
+
+private:
+    class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
 } // namespace KL

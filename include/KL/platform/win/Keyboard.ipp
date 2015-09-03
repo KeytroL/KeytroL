@@ -13,6 +13,8 @@
 
 #pragma once
 
+#include <memory>
+
 
 namespace KL
 {
@@ -25,6 +27,7 @@ public:
 
 private:
     class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
 } // namespace KL
