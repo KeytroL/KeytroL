@@ -24,9 +24,10 @@ Signal<T>::Signal()
 
 
 template <typename T>
-void Signal<T>::connect(const std::function<void(T)> slot)
+typename Signal<T>::Connection Signal<T>::connect(const std::function<void(T)> slot)
 {
     mSlots.emplace_back(std::move(slot));
+    return {};
 }
 
 

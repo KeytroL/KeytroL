@@ -29,10 +29,21 @@ public:
     Signal(const Signal &) = delete;
     Signal & operator=(const Signal &) = delete;
 
-    void connect(std::function<void(T)> slot);
+    class Connection;
+
+    Connection connect(std::function<void(T)> slot);
 
 protected:
     std::vector<std::function<void(T)>> mSlots;
+};
+
+
+template <typename T>
+class Signal<T>::Connection
+{
+private:
+    friend Signal<T>;
+    Connection() = default;
 };
 
 

@@ -24,7 +24,7 @@ TEST_CASE("Connect to a Signal", "[Signal]")
 {
     KL::Signal<bool> signal;
 
-    signal.connect([](const bool)
+    auto connection = signal.connect([](const bool)
         {
         });
 }
