@@ -50,8 +50,8 @@ endif ()
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-add_subdirectory(src/KeytroLCore)
-add_subdirectory(src/KeytroLModel)
+add_subdirectory(src/Core)
+add_subdirectory(src/Model)
 
 add_subdirectory(third-party/Catch)
 
@@ -62,5 +62,5 @@ add_test(NAME KeytroLModel COMMAND KeytroLModelTest)
 
 find_package(Qt5Widgets)
 if (Qt5Widgets_FOUND)
-    add_subdirectory(src/KeytroLTestApp)
+    add_subdirectory(src/TestApp)
 endif ()
