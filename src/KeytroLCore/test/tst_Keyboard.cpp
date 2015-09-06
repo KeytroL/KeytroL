@@ -13,7 +13,6 @@
 
 #include "KL/Keyboard.hpp"
 
-#include "KeyboardPlatformImpl.hpp"
 #include "TestKeyboard.hpp"
 
 #include "KL/Warnings.hpp"
