@@ -11,8 +11,8 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard.hpp"
-#include "KL/Warnings.hpp"
+#include "KL/Core/Warnings.hpp"
+#include "KL/Keyboard/Keyboard.hpp"
 
 KL_DISABLE_WARNINGS
 #include <Windows.h>

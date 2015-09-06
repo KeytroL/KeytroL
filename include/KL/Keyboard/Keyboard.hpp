@@ -13,28 +13,35 @@
 
 #pragma once
 
-#include "KL/Signal.hpp"
+#include "KL/Core/Signal.hpp"
+
+#include <memory>
 
 
 namespace KL
 {
 
-template <typename T>
-class Property
+class Keyboard
 {
 public:
-    explicit Property(T value);
+    using KeyCode = unsigned int;
 
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
+    Keyboard();
+    ~Keyboard();
+
+    Signal<KeyCode> & keyPressed();
+    Signal<KeyCode> & keyReleased();
+
+protected:
+    void pressKey(KeyCode keyCode) const;
+    void releaseKey(KeyCode keyCode) const;
 
 private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
+    PrivateSignal<KeyCode> mKeyPressed;
+    PrivateSignal<KeyCode> mKeyReleased;
+
+    class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
 } // namespace KL
-
-
-#include "detail/Property.ipp"

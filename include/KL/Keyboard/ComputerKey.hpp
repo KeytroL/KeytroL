@@ -13,8 +13,8 @@
 
 #pragma once
 
-#include "KL/Keyboard.hpp"
-#include "KL/Property.hpp"
+#include "KL/Core/Property.hpp"
+#include "KL/Keyboard/Keyboard.hpp"
 
 #include <string>
 

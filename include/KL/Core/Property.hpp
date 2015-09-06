@@ -13,31 +13,28 @@
 
 #pragma once
 
-#include "KL/ComputerKey.hpp"
-
-#include <memory>
-#include <set>
+#include "KL/Core/Signal.hpp"
 
 
 namespace KL
 {
 
-class KeyboardLayout
+template <typename T>
+class Property
 {
-    using ComputerKeySet = std::set<std::unique_ptr<KL::ComputerKey>>;
-    using ComputerKeyIterator = ComputerKeySet::const_iterator;
-
 public:
-    KeyboardLayout();
+    explicit Property(T value);
 
-    ComputerKeyIterator addComputerKey(
-        int x, int y, unsigned int width, unsigned int height);
-    void removeComputerKey(ComputerKeyIterator computerKeyIt);
-
-    const ComputerKeySet & computerKeys() const;
+    const T & value() const;
+    void setValue(const T & value);
+    Signal<T> & valueChanged();
 
 private:
-    ComputerKeySet mComputerKeys;
+    T mValue;
+    PrivateSignal<T> mValueChanged;
 };
 
 } // namespace KL
+
+
+#include "detail/Property.ipp"

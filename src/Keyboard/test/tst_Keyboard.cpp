@@ -11,11 +11,11 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard.hpp"
+#include "KL/Keyboard/Keyboard.hpp"
 
 #include "TestKeyboard.hpp"
 
-#include "KL/Warnings.hpp"
+#include "KL/Core/Warnings.hpp"
 
 KL_DISABLE_WARNINGS
 #include <catch.hpp>

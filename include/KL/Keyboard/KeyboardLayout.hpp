@@ -13,35 +13,31 @@
 
 #pragma once
 
-#include "KL/Signal.hpp"
+#include "KL/Keyboard/ComputerKey.hpp"
 
 #include <memory>
+#include <set>
 
 
 namespace KL
 {
 
-class Keyboard
+class KeyboardLayout
 {
+    using ComputerKeySet = std::set<std::unique_ptr<KL::ComputerKey>>;
+    using ComputerKeyIterator = ComputerKeySet::const_iterator;
+
 public:
-    using KeyCode = unsigned int;
+    KeyboardLayout();
 
-    Keyboard();
-    ~Keyboard();
+    ComputerKeyIterator addComputerKey(
+        int x, int y, unsigned int width, unsigned int height);
+    void removeComputerKey(ComputerKeyIterator computerKeyIt);
 
-    Signal<KeyCode> & keyPressed();
-    Signal<KeyCode> & keyReleased();
-
-protected:
-    void pressKey(KeyCode keyCode) const;
-    void releaseKey(KeyCode keyCode) const;
+    const ComputerKeySet & computerKeys() const;
 
 private:
-    PrivateSignal<KeyCode> mKeyPressed;
-    PrivateSignal<KeyCode> mKeyReleased;
-
-    class PlatformImpl;
-    std::unique_ptr<PlatformImpl> mPlatformImpl;
+    ComputerKeySet mComputerKeys;
 };
 
 } // namespace KL
