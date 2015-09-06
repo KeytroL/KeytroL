@@ -11,4 +11,14 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
+add_subdirectory(platform/default)
+
+if (WIN32)
+    add_subdirectory(platform/win)
+    add_library(KeytroLMidi ALIAS WinKeytroLMidi)
+else ()
+    add_library(KeytroLMidi ALIAS DefaultKeytroLMidi)
+endif ()
+
+
 add_subdirectory(test)

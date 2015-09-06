@@ -12,12 +12,10 @@
 #  GNU General Public License for more details.
 
 add_executable(KeytroLCoreTest
-    tst_MidiOut.cpp
     tst_Property.cpp
     tst_Signal.cpp
 )
 
 target_link_libraries(KeytroLCoreTest PRIVATE
     Catch
-    DefaultKeytroLCore
 )

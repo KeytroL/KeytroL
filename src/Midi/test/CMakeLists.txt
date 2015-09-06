@@ -11,4 +11,11 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_subdirectory(test)
+add_executable(KeytroLMidiTest
+    tst_MidiOut.cpp
+)
+
+target_link_libraries(KeytroLMidiTest PRIVATE
+    Catch
+    DefaultKeytroLMidi
+)
