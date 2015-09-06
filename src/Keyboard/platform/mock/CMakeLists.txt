@@ -11,22 +11,20 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(BaseKeytroLKeyboard STATIC
-    ComputerKey.cpp
+add_library(MockKeytroLKeyboard STATIC
     Keyboard.cpp
-    KeyboardLayout.cpp
+    KeyboardPlatformImpl.cpp
+    TestKeyboard.cpp
 )
 
+target_include_directories(MockKeytroLKeyboard PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 
-add_subdirectory(platform/default)
+target_link_libraries(MockKeytroLKeyboard PUBLIC
+    BaseKeytroLKeyboard
+)
 
-if (WIN32)
-    add_subdirectory(platform/win)
-    add_library(KeytroLKeyboard ALIAS WinKeytroLKeyboard)
-else ()
-    add_library(KeytroLKeyboard ALIAS DefaultKeytroLKeyboard)
+if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
+    target_compile_options(MockKeytroLKeyboard PRIVATE
+        -Wno-exit-time-destructors
+    )
 endif ()
-
-
-add_subdirectory(platform/mock)
-add_subdirectory(test)
