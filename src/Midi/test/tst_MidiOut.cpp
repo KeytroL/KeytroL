@@ -11,10 +11,22 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Warnings.hpp"
+#include "KL/Midi/MidiOut.hpp"
 
-#define CATCH_CONFIG_MAIN
+#include "KL/Core/Warnings.hpp"
 
 KL_DISABLE_WARNINGS
 #include <catch.hpp>
 KL_RESTORE_WARNINGS
+
+
+TEST_CASE("Default MIDI out device count is null", "[MidiOut]")
+{
+    REQUIRE(KL::MidiOut::deviceCount() == 0);
+}
+
+
+TEST_CASE("Default MIDI out device name is empty", "[MidiOut]")
+{
+    REQUIRE(KL::MidiOut::deviceName(0) == std::string());
+}

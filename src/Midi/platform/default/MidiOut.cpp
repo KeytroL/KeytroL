@@ -11,10 +11,40 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Warnings.hpp"
+#include "KL/Midi/MidiOut.hpp"
 
-#define CATCH_CONFIG_MAIN
 
-KL_DISABLE_WARNINGS
-#include <catch.hpp>
-KL_RESTORE_WARNINGS
+namespace KL
+{
+
+class MidiOut::PlatformImpl
+{
+};
+
+
+unsigned int MidiOut::deviceCount()
+{
+    return 0;
+}
+
+
+std::string MidiOut::deviceName(const unsigned int)
+{
+    return {};
+}
+
+
+MidiOut::MidiOut(const unsigned int)
+    : mPlatformImpl(nullptr)
+{
+}
+
+
+MidiOut::~MidiOut() = default;
+
+
+void MidiOut::sendMessage(const Byte, const Byte, const Byte) const
+{
+}
+
+} // namespace KL

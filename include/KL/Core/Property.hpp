@@ -11,10 +11,30 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Warnings.hpp"
+#pragma once
 
-#define CATCH_CONFIG_MAIN
+#include "KL/Core/Signal.hpp"
 
-KL_DISABLE_WARNINGS
-#include <catch.hpp>
-KL_RESTORE_WARNINGS
+
+namespace KL
+{
+
+template <typename T>
+class Property
+{
+public:
+    explicit Property(T value);
+
+    const T & value() const;
+    void setValue(const T & value);
+    Signal<T> & valueChanged();
+
+private:
+    T mValue;
+    PrivateSignal<T> mValueChanged;
+};
+
+} // namespace KL
+
+
+#include "detail/Property.ipp"

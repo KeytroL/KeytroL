@@ -11,10 +11,37 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Warnings.hpp"
+#pragma once
 
-#define CATCH_CONFIG_MAIN
+#include "KL/Core/Signal.hpp"
 
-KL_DISABLE_WARNINGS
-#include <catch.hpp>
-KL_RESTORE_WARNINGS
+#include <memory>
+
+
+namespace KL
+{
+
+class Keyboard
+{
+public:
+    using KeyCode = unsigned int;
+
+    Keyboard();
+    ~Keyboard();
+
+    Signal<KeyCode> & keyPressed();
+    Signal<KeyCode> & keyReleased();
+
+protected:
+    void pressKey(KeyCode keyCode) const;
+    void releaseKey(KeyCode keyCode) const;
+
+private:
+    PrivateSignal<KeyCode> mKeyPressed;
+    PrivateSignal<KeyCode> mKeyReleased;
+
+    class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
+};
+
+} // namespace KL

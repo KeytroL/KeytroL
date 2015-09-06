@@ -11,10 +11,30 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Warnings.hpp"
+#include "KL/Keyboard/Keyboard.hpp"
 
-#define CATCH_CONFIG_MAIN
 
-KL_DISABLE_WARNINGS
-#include <catch.hpp>
-KL_RESTORE_WARNINGS
+namespace KL
+{
+namespace testing
+{
+
+class TestKeyboard
+{
+public:
+    static TestKeyboard & instance();
+
+    void pressKey(Keyboard::KeyCode keyCode) const;
+    void releaseKey(Keyboard::KeyCode keyCode) const;
+
+private:
+    TestKeyboard() = default;
+
+    friend class KL::Keyboard;
+
+    PrivateSignal<Keyboard::KeyCode> mKeyPressed;
+    PrivateSignal<Keyboard::KeyCode> mKeyReleased;
+};
+
+} // namespace testing
+} // namespace KL

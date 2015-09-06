@@ -11,10 +11,21 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Warnings.hpp"
+#include "KL/Core/Signal.hpp"
+#include "KL/Keyboard/Keyboard.hpp"
 
-#define CATCH_CONFIG_MAIN
 
-KL_DISABLE_WARNINGS
-#include <catch.hpp>
-KL_RESTORE_WARNINGS
+namespace KL
+{
+
+class Keyboard::PlatformImpl
+{
+public:
+    PlatformImpl(Signal<KeyCode>::Connection keyPressConnection,
+        Signal<KeyCode>::Connection keyReleaseConnection);
+
+    Signal<KeyCode>::Connection mKeyPressConnection;
+    Signal<KeyCode>::Connection mKeyReleaseConnection;
+};
+
+} // namespace KL

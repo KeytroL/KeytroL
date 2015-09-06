@@ -12,9 +12,36 @@
 // GNU General Public License for more details.
 
 #include "KL/Core/Warnings.hpp"
-
-#define CATCH_CONFIG_MAIN
+#include "KL/Keyboard/Keyboard.hpp"
 
 KL_DISABLE_WARNINGS
-#include <catch.hpp>
+#include <Windows.h>
 KL_RESTORE_WARNINGS
+
+#include <set>
+
+
+namespace KL
+{
+
+class Keyboard::PlatformImpl
+{
+public:
+    static PlatformImpl & instance();
+    ~PlatformImpl();
+
+    void addKeyboard(const Keyboard * const keyboard);
+    void removeKeyboard(const Keyboard * const keyboard);
+
+private:
+    PlatformImpl();
+
+    void pressKey(Keyboard::KeyCode keyCode) const;
+    void releaseKey(Keyboard::KeyCode keyCode) const;
+
+    std::set<const Keyboard *> mKeyboards;
+
+    HHOOK mLowLevelKeyboardHookHandle = nullptr;
+};
+
+} // namespace KL

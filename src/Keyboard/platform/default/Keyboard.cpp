@@ -11,10 +11,23 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Warnings.hpp"
+#include "KL/Keyboard/Keyboard.hpp"
 
-#define CATCH_CONFIG_MAIN
 
-KL_DISABLE_WARNINGS
-#include <catch.hpp>
-KL_RESTORE_WARNINGS
+namespace KL
+{
+
+class Keyboard::PlatformImpl
+{
+};
+
+
+Keyboard::Keyboard()
+    : mPlatformImpl(nullptr)
+{
+}
+
+
+Keyboard::~Keyboard() = default;
+
+} // namespace KL

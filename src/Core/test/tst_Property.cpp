@@ -11,10 +11,35 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Warnings.hpp"
+#include "KL/Core/Property.hpp"
 
-#define CATCH_CONFIG_MAIN
+#include "KL/Core/Warnings.hpp"
 
 KL_DISABLE_WARNINGS
 #include <catch.hpp>
 KL_RESTORE_WARNINGS
+
+
+TEST_CASE("Construct a char Property", "[Property]")
+{
+    const KL::Property<char> property('a');
+
+    REQUIRE(property.value() == 'a');
+}
+
+
+TEST_CASE("Modify a char Property", "[Property]")
+{
+    KL::Property<char> property('a');
+    auto sentinel = 'b';
+
+    property.valueChanged().connect([&sentinel](const char value)
+        {
+            sentinel = value;
+        });
+
+    REQUIRE(sentinel == 'b');
+
+    property.setValue('c');
+    REQUIRE(sentinel == 'c');
+}
