@@ -11,12 +11,12 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_executable(KeytroLModelTest
+add_executable(KeytroLKeyboardTest
     tst_ComputerKey.cpp
     tst_KeyboardLayout.cpp
 )
 
-target_link_libraries(KeytroLModelTest PRIVATE
+target_link_libraries(KeytroLKeyboardTest PRIVATE
     Catch
-    KeytroLModel
+    KeytroLKeyboard
 )

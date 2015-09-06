@@ -51,13 +51,13 @@ endif ()
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_subdirectory(src/Core)
-add_subdirectory(src/Model)
+add_subdirectory(src/Keyboard)
 
 add_subdirectory(third-party/Catch)
 
 enable_testing()
 add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)
-add_test(NAME KeytroLModel COMMAND KeytroLModelTest)
+add_test(NAME KeytroLKeyboard COMMAND KeytroLKeyboardTest)
 
 
 find_package(Qt5Widgets)
