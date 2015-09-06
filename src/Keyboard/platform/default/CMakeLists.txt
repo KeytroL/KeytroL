@@ -11,10 +11,10 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(WinKeytroLCore STATIC
-    MidiOut.cpp
+add_library(DefaultKeytroLKeyboard STATIC
+    Keyboard.cpp
 )
 
-target_link_libraries(WinKeytroLCore PRIVATE
-    Winmm.lib
+target_link_libraries(DefaultKeytroLKeyboard PUBLIC
+    BaseKeytroLKeyboard
 )

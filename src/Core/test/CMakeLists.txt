@@ -12,19 +12,12 @@
 #  GNU General Public License for more details.
 
 add_executable(KeytroLCoreTest
-    ../platform/default/MidiOut.cpp
-    ../platform/mock/Keyboard.cpp
-    ../platform/mock/KeyboardPlatformImpl.cpp
-    ../platform/mock/TestKeyboard.cpp
-    tst_Keyboard.cpp
     tst_MidiOut.cpp
     tst_Property.cpp
     tst_Signal.cpp
 )
 
-target_include_directories(KeytroLCoreTest PRIVATE ../platform/mock)
-
 target_link_libraries(KeytroLCoreTest PRIVATE
     Catch
-    BaseKeytroLCore
+    DefaultKeytroLCore
 )

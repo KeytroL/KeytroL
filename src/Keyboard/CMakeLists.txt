@@ -11,10 +11,21 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(KeytroLKeyboard STATIC
+add_library(BaseKeytroLKeyboard STATIC
     ComputerKey.cpp
+    Keyboard.cpp
     KeyboardLayout.cpp
 )
+
+
+add_subdirectory(platform/default)
+
+if (WIN32)
+    add_subdirectory(platform/win)
+    add_library(KeytroLKeyboard ALIAS WinKeytroLKeyboard)
+else ()
+    add_library(KeytroLKeyboard ALIAS DefaultKeytroLKeyboard)
+endif ()
 
 
 add_subdirectory(test)
