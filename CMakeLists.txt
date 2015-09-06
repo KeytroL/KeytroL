@@ -50,17 +50,12 @@ endif ()
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
+enable_testing()
+add_subdirectory(third-party/Catch)
+
 add_subdirectory(src/Core)
 add_subdirectory(src/Keyboard)
 add_subdirectory(src/Midi)
-
-add_subdirectory(third-party/Catch)
-
-enable_testing()
-add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)
-add_test(NAME KeytroLKeyboard COMMAND KeytroLKeyboardTest)
-add_test(NAME KeytroLMidi COMMAND KeytroLMidiTest)
-
 
 find_package(Qt5Widgets)
 if (Qt5Widgets_FOUND)

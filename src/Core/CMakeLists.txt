@@ -12,3 +12,4 @@
 #  GNU General Public License for more details.
 
 add_subdirectory(test)
+add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)

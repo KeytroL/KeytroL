@@ -30,3 +30,4 @@ endif ()
 
 add_subdirectory(platform/mock)
 add_subdirectory(test)
+add_test(NAME KeytroLKeyboard COMMAND KeytroLKeyboardTest)
