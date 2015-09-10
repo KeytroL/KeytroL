@@ -47,6 +47,6 @@ TEST_CASE("Remove a ComputerKey from a KeyboardLayout", "[KeyboardLayout]")
         keyboardLayout.addComputerKey(KL::ComputerKey(23, 42, 8, 7, "", 0));
     REQUIRE(keyboardLayout.computerKeys().size() == 1u);
 
-    keyboardLayout.removeComputerKey(computerKeyIt);
+    keyboardLayout.removeComputerKey(KL::ComputerKey(23, 42, 8, 7, "", 0));
     REQUIRE(keyboardLayout.computerKeys().size() == 0u);
 }

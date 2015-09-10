@@ -13,6 +13,8 @@
 
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
+#include <algorithm>
+
 
 namespace KL
 {
@@ -33,9 +35,19 @@ KeyboardLayout::ComputerKeyIterator KeyboardLayout::addComputerKey(
 }
 
 
-void KeyboardLayout::removeComputerKey(ComputerKeyIterator computerKeyIt)
+void KeyboardLayout::removeComputerKey(const ComputerKey & computerKey)
 {
-    mComputerKeys.erase(computerKeyIt);
+    auto foundComputerKey = std::find_if(mComputerKeys.begin(),
+        mComputerKeys.end(),
+        [&computerKey](const std::unique_ptr<ComputerKey> & ptr)
+        {
+            return (*ptr.get()) == computerKey;
+        });
+
+    if (foundComputerKey != mComputerKeys.end())
+    {
+        mComputerKeys.erase(foundComputerKey);
+    }
 }
 
 

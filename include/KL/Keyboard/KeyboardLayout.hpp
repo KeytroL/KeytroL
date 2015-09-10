@@ -31,7 +31,7 @@ public:
     KeyboardLayout();
 
     ComputerKeyIterator addComputerKey(ComputerKey computerKey);
-    void removeComputerKey(ComputerKeyIterator computerKeyIt);
+    void removeComputerKey(const ComputerKey & computerKey);
 
     const ComputerKeySet & computerKeys() const;
 
