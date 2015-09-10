@@ -15,8 +15,7 @@
 
 #include "KL/Keyboard/ComputerKey.hpp"
 
-#include <memory>
-#include <set>
+#include <vector>
 
 
 namespace KL
@@ -24,18 +23,16 @@ namespace KL
 
 class KeyboardLayout
 {
-    using ComputerKeySet = std::set<std::unique_ptr<KL::ComputerKey>>;
-
 public:
     KeyboardLayout();
 
     void addComputerKey(ComputerKey computerKey);
     void removeComputerKey(const ComputerKey & computerKey);
 
-    const ComputerKeySet & computerKeys() const;
+    const std::vector<ComputerKey> & computerKeys() const;
 
 private:
-    ComputerKeySet mComputerKeys;
+    std::vector<ComputerKey> mComputerKeys;
 };
 
 } // namespace KL

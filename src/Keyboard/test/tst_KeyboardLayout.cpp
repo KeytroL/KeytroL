@@ -35,7 +35,7 @@ TEST_CASE("Add a ComputerKey to a KeyboardLayout", "[KeyboardLayout]")
     keyboardLayout.addComputerKey(KL::ComputerKey(23, 42, 8, 7, "", 0));
 
     REQUIRE(keyboardLayout.computerKeys().size() == 1u);
-    REQUIRE((*keyboardLayout.computerKeys().begin())->y() == 42);
+    REQUIRE(keyboardLayout.computerKeys().begin()->y() == 42);
 }
 
 

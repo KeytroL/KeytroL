@@ -27,18 +27,14 @@ KeyboardLayout::KeyboardLayout()
 
 void KeyboardLayout::addComputerKey(const ComputerKey computerKey)
 {
-    mComputerKeys.insert(std::unique_ptr<ComputerKey>{new ComputerKey(computerKey)});
+    mComputerKeys.emplace_back(std::move(computerKey));
 }
 
 
 void KeyboardLayout::removeComputerKey(const ComputerKey & computerKey)
 {
-    auto foundComputerKey = std::find_if(mComputerKeys.begin(),
-        mComputerKeys.end(),
-        [&computerKey](const std::unique_ptr<ComputerKey> & ptr)
-        {
-            return (*ptr.get()) == computerKey;
-        });
+    auto foundComputerKey =
+        std::find(mComputerKeys.begin(), mComputerKeys.end(), computerKey);
 
     if (foundComputerKey != mComputerKeys.end())
     {
@@ -47,7 +43,7 @@ void KeyboardLayout::removeComputerKey(const ComputerKey & computerKey)
 }
 
 
-const KeyboardLayout::ComputerKeySet & KeyboardLayout::computerKeys() const
+const std::vector<ComputerKey> & KeyboardLayout::computerKeys() const
 {
     return mComputerKeys;
 }
