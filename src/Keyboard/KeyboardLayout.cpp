@@ -13,6 +13,8 @@
 
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
+#include <algorithm>
+
 
 namespace KL
 {
@@ -23,23 +25,25 @@ KeyboardLayout::KeyboardLayout()
 }
 
 
-KeyboardLayout::ComputerKeyIterator KeyboardLayout::addComputerKey(
-    int x, int y, unsigned int width, unsigned int height)
+void KeyboardLayout::addComputerKey(const ComputerKey computerKey)
 {
-    const auto newComputerKeyAndBool = mComputerKeys.insert(
-        std::unique_ptr<ComputerKey>{new ComputerKey(x, y, width, height)});
-
-    return newComputerKeyAndBool.first;
+    mComputerKeys.emplace_back(std::move(computerKey));
 }
 
 
-void KeyboardLayout::removeComputerKey(ComputerKeyIterator computerKeyIt)
+void KeyboardLayout::removeComputerKey(const ComputerKey & computerKey)
 {
-    mComputerKeys.erase(computerKeyIt);
+    auto foundComputerKey =
+        std::find(mComputerKeys.begin(), mComputerKeys.end(), computerKey);
+
+    if (foundComputerKey != mComputerKeys.end())
+    {
+        mComputerKeys.erase(foundComputerKey);
+    }
 }
 
 
-const KeyboardLayout::ComputerKeySet & KeyboardLayout::computerKeys() const
+const std::vector<ComputerKey> & KeyboardLayout::computerKeys() const
 {
     return mComputerKeys;
 }

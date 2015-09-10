@@ -17,87 +17,63 @@
 namespace KL
 {
 
-ComputerKey::ComputerKey(
-    const int x, const int y, const unsigned int width, const unsigned int height)
+ComputerKey::ComputerKey(const int x,
+    const int y,
+    const unsigned int width,
+    const unsigned int height,
+    const std::string label,
+    const Keyboard::KeyCode keyCode)
     : mX(x)
     , mY(y)
     , mWidth(width)
     , mHeight(height)
-    , mLabel(std::string())
-    , mKeyCode(0)
+    , mLabel(std::move(label))
+    , mKeyCode(keyCode)
 {
 }
 
 
-Property<int> & ComputerKey::x()
+const int & ComputerKey::x() const
 {
     return mX;
 }
 
 
-const Property<int> & ComputerKey::x() const
-{
-    return mX;
-}
-
-
-Property<int> & ComputerKey::y()
+const int & ComputerKey::y() const
 {
     return mY;
 }
 
 
-const Property<int> & ComputerKey::y() const
-{
-    return mY;
-}
-
-
-Property<unsigned int> & ComputerKey::width()
+const unsigned int & ComputerKey::width() const
 {
     return mWidth;
 }
 
 
-const Property<unsigned int> & ComputerKey::width() const
-{
-    return mWidth;
-}
-
-
-Property<unsigned int> & ComputerKey::height()
+const unsigned int & ComputerKey::height() const
 {
     return mHeight;
 }
 
 
-const Property<unsigned int> & ComputerKey::height() const
-{
-    return mHeight;
-}
-
-
-Property<std::string> & ComputerKey::label()
+const std::string & ComputerKey::label() const
 {
     return mLabel;
 }
 
 
-const Property<std::string> & ComputerKey::label() const
-{
-    return mLabel;
-}
-
-
-Property<Keyboard::KeyCode> & ComputerKey::keyCode()
+const Keyboard::KeyCode & ComputerKey::keyCode() const
 {
     return mKeyCode;
 }
 
 
-const Property<Keyboard::KeyCode> & ComputerKey::keyCode() const
+bool ComputerKey::operator==(const ComputerKey & other) const
 {
-    return mKeyCode;
+    return mX == other.mX && mY == other.mY && mWidth == other.mWidth
+        && mHeight == other.mHeight && mLabel == other.mLabel
+        && mKeyCode == other.mKeyCode;
 }
 
 } // namespace KL

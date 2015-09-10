@@ -13,7 +13,6 @@
 
 #pragma once
 
-#include "KL/Core/Property.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
 
 #include <string>
@@ -25,33 +24,35 @@ namespace KL
 class ComputerKey
 {
 public:
-    ComputerKey(int x, int y, unsigned int width, unsigned int height);
+    ComputerKey(int x,
+        int y,
+        unsigned int width,
+        unsigned int height,
+        std::string label,
+        Keyboard::KeyCode keyCode);
 
-    Property<int> & x();
-    const Property<int> & x() const;
+    const int & x() const;
+    const int & y() const;
 
-    Property<int> & y();
-    const Property<int> & y() const;
+    const unsigned int & width() const;
+    const unsigned int & height() const;
 
-    Property<unsigned int> & width();
-    const Property<unsigned int> & width() const;
+    const std::string & label() const;
 
-    Property<unsigned int> & height();
-    const Property<unsigned int> & height() const;
+    const Keyboard::KeyCode & keyCode() const;
 
-    Property<std::string> & label();
-    const Property<std::string> & label() const;
-
-    Property<Keyboard::KeyCode> & keyCode();
-    const Property<Keyboard::KeyCode> & keyCode() const;
+    bool operator==(const ComputerKey & other) const;
 
 private:
-    Property<int> mX;
-    Property<int> mY;
-    Property<unsigned int> mWidth;
-    Property<unsigned int> mHeight;
-    Property<std::string> mLabel;
-    Property<Keyboard::KeyCode> mKeyCode;
+    int mX;
+    int mY;
+
+    unsigned int mWidth;
+    unsigned int mHeight;
+
+    std::string mLabel;
+
+    Keyboard::KeyCode mKeyCode;
 };
 
 } // namespace KL

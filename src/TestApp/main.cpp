@@ -12,6 +12,7 @@
 // GNU General Public License for more details.
 
 #include "KL/Core/Warnings.hpp"
+#include "KL/Keyboard/ComputerKey.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
 #include "KL/Midi/MidiOut.hpp"
@@ -31,26 +32,22 @@ int main(int argc, char * argv[])
     window.show();
 
     KL::KeyboardLayout keyboardLayout;
-    const auto computerKey = keyboardLayout.addComputerKey(0, 0, 2, 2);
+    keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "", 0));
 
     KL::Keyboard keyboard;
     const KL::MidiOut midiOut(0);
 
-    keyboard.keyPressed().connect(
-        [&computerKey, &midiOut](const KL::Keyboard::KeyCode keyCode)
+    keyboard.keyPressed().connect([&midiOut](const KL::Keyboard::KeyCode keyCode)
         {
-            (*computerKey)->keyCode().setValue(keyCode);
-            qDebug() << "pressed : " << (*computerKey)->keyCode().value();
+            qDebug() << "pressed : " << keyCode;
 
             const auto note = keyCode % 0x80;
             midiOut.sendMessage(0x90, static_cast<KL::MidiOut::Byte>(note), 100);
         });
 
-    keyboard.keyReleased().connect(
-        [&computerKey, &midiOut](const KL::Keyboard::KeyCode keyCode)
+    keyboard.keyReleased().connect([&midiOut](const KL::Keyboard::KeyCode keyCode)
         {
-            (*computerKey)->keyCode().setValue(keyCode);
-            qDebug() << "released: " << (*computerKey)->keyCode().value();
+            qDebug() << "released: " << keyCode;
 
             const auto note = keyCode % 0x80;
             midiOut.sendMessage(0x80, static_cast<KL::MidiOut::Byte>(note), 0);
