@@ -33,37 +33,37 @@ ComputerKey::ComputerKey(const int x,
 }
 
 
-const Property<int> & ComputerKey::x() const
+const int & ComputerKey::x() const
 {
     return mX;
 }
 
 
-const Property<int> & ComputerKey::y() const
+const int & ComputerKey::y() const
 {
     return mY;
 }
 
 
-const Property<unsigned int> & ComputerKey::width() const
+const unsigned int & ComputerKey::width() const
 {
     return mWidth;
 }
 
 
-const Property<unsigned int> & ComputerKey::height() const
+const unsigned int & ComputerKey::height() const
 {
     return mHeight;
 }
 
 
-const Property<std::string> & ComputerKey::label() const
+const std::string & ComputerKey::label() const
 {
     return mLabel;
 }
 
 
-const Property<Keyboard::KeyCode> & ComputerKey::keyCode() const
+const Keyboard::KeyCode & ComputerKey::keyCode() const
 {
     return mKeyCode;
 }

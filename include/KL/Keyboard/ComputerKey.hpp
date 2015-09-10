@@ -13,7 +13,6 @@
 
 #pragma once
 
-#include "KL/Core/Property.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
 
 #include <string>
@@ -32,26 +31,26 @@ public:
         std::string label,
         Keyboard::KeyCode keyCode);
 
-    const Property<int> & x() const;
-    const Property<int> & y() const;
+    const int & x() const;
+    const int & y() const;
 
-    const Property<unsigned int> & width() const;
-    const Property<unsigned int> & height() const;
+    const unsigned int & width() const;
+    const unsigned int & height() const;
 
-    const Property<std::string> & label() const;
+    const std::string & label() const;
 
-    const Property<Keyboard::KeyCode> & keyCode() const;
+    const Keyboard::KeyCode & keyCode() const;
 
 private:
-    Property<int> mX;
-    Property<int> mY;
+    int mX;
+    int mY;
 
-    Property<unsigned int> mWidth;
-    Property<unsigned int> mHeight;
+    unsigned int mWidth;
+    unsigned int mHeight;
 
-    Property<std::string> mLabel;
+    std::string mLabel;
 
-    Property<Keyboard::KeyCode> mKeyCode;
+    Keyboard::KeyCode mKeyCode;
 };
 
 } // namespace KL

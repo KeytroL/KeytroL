@@ -24,10 +24,10 @@ TEST_CASE("Construct a ComputerKey", "[ComputerKey]")
 {
     const KL::ComputerKey computerKey(23, 42, 8, 7, "A", 2);
 
-    REQUIRE(computerKey.x().value() == 23);
-    REQUIRE(computerKey.y().value() == 42);
-    REQUIRE(computerKey.width().value() == 8);
-    REQUIRE(computerKey.height().value() == 7);
-    REQUIRE(computerKey.label().value() == "A");
-    REQUIRE(computerKey.keyCode().value() == 2);
+    REQUIRE(computerKey.x() == 23);
+    REQUIRE(computerKey.y() == 42);
+    REQUIRE(computerKey.width() == 8);
+    REQUIRE(computerKey.height() == 7);
+    REQUIRE(computerKey.label() == "A");
+    REQUIRE(computerKey.keyCode() == 2);
 }
