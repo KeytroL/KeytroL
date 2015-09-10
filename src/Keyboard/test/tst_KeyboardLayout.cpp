@@ -49,18 +49,3 @@ TEST_CASE("Remove a ComputerKey from a KeyboardLayout", "[KeyboardLayout]")
     keyboardLayout.removeComputerKey(computerKeyIt);
     REQUIRE(keyboardLayout.computerKeys().size() == 0u);
 }
-
-
-TEST_CASE("Modify a ComputerKey in a KeyboardLayout", "[KeyboardLayout]")
-{
-    KL::KeyboardLayout keyboardLayout;
-
-    auto computerKeyIt = keyboardLayout.addComputerKey(23, 42, 8, 7);
-    REQUIRE(keyboardLayout.computerKeys().size() == 1u);
-    REQUIRE((*computerKeyIt)->keyCode().value() == 0u);
-
-    (*computerKeyIt)->keyCode().setValue(42);
-
-    REQUIRE(keyboardLayout.computerKeys().size() == 1u);
-    REQUIRE((*computerKeyIt)->keyCode().value() == 42);
-}

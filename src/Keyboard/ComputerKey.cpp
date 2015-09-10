@@ -33,21 +33,9 @@ ComputerKey::ComputerKey(const int x,
 }
 
 
-Property<int> & ComputerKey::x()
-{
-    return mX;
-}
-
-
 const Property<int> & ComputerKey::x() const
 {
     return mX;
-}
-
-
-Property<int> & ComputerKey::y()
-{
-    return mY;
 }
 
 
@@ -57,21 +45,9 @@ const Property<int> & ComputerKey::y() const
 }
 
 
-Property<unsigned int> & ComputerKey::width()
-{
-    return mWidth;
-}
-
-
 const Property<unsigned int> & ComputerKey::width() const
 {
     return mWidth;
-}
-
-
-Property<unsigned int> & ComputerKey::height()
-{
-    return mHeight;
 }
 
 
@@ -81,21 +57,9 @@ const Property<unsigned int> & ComputerKey::height() const
 }
 
 
-Property<std::string> & ComputerKey::label()
-{
-    return mLabel;
-}
-
-
 const Property<std::string> & ComputerKey::label() const
 {
     return mLabel;
-}
-
-
-Property<Keyboard::KeyCode> & ComputerKey::keyCode()
-{
-    return mKeyCode;
 }
 
 

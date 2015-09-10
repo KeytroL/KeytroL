@@ -32,30 +32,25 @@ public:
         std::string label,
         Keyboard::KeyCode keyCode);
 
-    Property<int> & x();
     const Property<int> & x() const;
-
-    Property<int> & y();
     const Property<int> & y() const;
 
-    Property<unsigned int> & width();
     const Property<unsigned int> & width() const;
-
-    Property<unsigned int> & height();
     const Property<unsigned int> & height() const;
 
-    Property<std::string> & label();
     const Property<std::string> & label() const;
 
-    Property<Keyboard::KeyCode> & keyCode();
     const Property<Keyboard::KeyCode> & keyCode() const;
 
 private:
     Property<int> mX;
     Property<int> mY;
+
     Property<unsigned int> mWidth;
     Property<unsigned int> mHeight;
+
     Property<std::string> mLabel;
+
     Property<Keyboard::KeyCode> mKeyCode;
 };
 
