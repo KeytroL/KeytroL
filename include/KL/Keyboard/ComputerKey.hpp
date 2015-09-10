@@ -41,6 +41,8 @@ public:
 
     const Keyboard::KeyCode & keyCode() const;
 
+    bool operator==(const ComputerKey & other) const;
+
 private:
     int mX;
     int mY;

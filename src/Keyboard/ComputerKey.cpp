@@ -68,4 +68,12 @@ const Keyboard::KeyCode & ComputerKey::keyCode() const
     return mKeyCode;
 }
 
+
+bool ComputerKey::operator==(const ComputerKey & other) const
+{
+    return mX == other.mX && mY == other.mY && mWidth == other.mWidth
+        && mHeight == other.mHeight && mLabel == other.mLabel
+        && mKeyCode == other.mKeyCode;
+}
+
 } // namespace KL
