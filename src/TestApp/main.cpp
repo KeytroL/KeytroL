@@ -12,6 +12,7 @@
 // GNU General Public License for more details.
 
 #include "KL/Core/Warnings.hpp"
+#include "KL/Keyboard/ComputerKey.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
 #include "KL/Midi/MidiOut.hpp"
@@ -31,7 +32,7 @@ int main(int argc, char * argv[])
     window.show();
 
     KL::KeyboardLayout keyboardLayout;
-    keyboardLayout.addComputerKey(0, 0, 2, 2);
+    keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "", 0));
 
     KL::Keyboard keyboard;
     const KL::MidiOut midiOut(0);

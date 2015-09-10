@@ -30,8 +30,7 @@ class KeyboardLayout
 public:
     KeyboardLayout();
 
-    ComputerKeyIterator addComputerKey(
-        int x, int y, unsigned int width, unsigned int height);
+    ComputerKeyIterator addComputerKey(ComputerKey computerKey);
     void removeComputerKey(ComputerKeyIterator computerKeyIt);
 
     const ComputerKeySet & computerKeys() const;
