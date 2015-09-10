@@ -25,13 +25,9 @@ KeyboardLayout::KeyboardLayout()
 }
 
 
-KeyboardLayout::ComputerKeyIterator KeyboardLayout::addComputerKey(
-    const ComputerKey computerKey)
+void KeyboardLayout::addComputerKey(const ComputerKey computerKey)
 {
-    const auto newComputerKeyAndBool =
-        mComputerKeys.insert(std::unique_ptr<ComputerKey>{new ComputerKey(computerKey)});
-
-    return newComputerKeyAndBool.first;
+    mComputerKeys.insert(std::unique_ptr<ComputerKey>{new ComputerKey(computerKey)});
 }
 
 

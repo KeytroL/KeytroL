@@ -25,12 +25,11 @@ namespace KL
 class KeyboardLayout
 {
     using ComputerKeySet = std::set<std::unique_ptr<KL::ComputerKey>>;
-    using ComputerKeyIterator = ComputerKeySet::const_iterator;
 
 public:
     KeyboardLayout();
 
-    ComputerKeyIterator addComputerKey(ComputerKey computerKey);
+    void addComputerKey(ComputerKey computerKey);
     void removeComputerKey(const ComputerKey & computerKey);
 
     const ComputerKeySet & computerKeys() const;
