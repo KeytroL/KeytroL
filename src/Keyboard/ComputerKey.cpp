@@ -17,14 +17,18 @@
 namespace KL
 {
 
-ComputerKey::ComputerKey(
-    const int x, const int y, const unsigned int width, const unsigned int height)
+ComputerKey::ComputerKey(const int x,
+    const int y,
+    const unsigned int width,
+    const unsigned int height,
+    const std::string label,
+    const Keyboard::KeyCode keyCode)
     : mX(x)
     , mY(y)
     , mWidth(width)
     , mHeight(height)
-    , mLabel(std::string())
-    , mKeyCode(0)
+    , mLabel(std::move(label))
+    , mKeyCode(keyCode)
 {
 }
 

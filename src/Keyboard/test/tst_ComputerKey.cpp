@@ -22,13 +22,12 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Construct a ComputerKey", "[ComputerKey]")
 {
-    const KL::ComputerKey computerKey(23, 42, 8, 7);
+    const KL::ComputerKey computerKey(23, 42, 8, 7, "", 0);
 
     REQUIRE(computerKey.x().value() == 23);
     REQUIRE(computerKey.y().value() == 42);
     REQUIRE(computerKey.width().value() == 8);
     REQUIRE(computerKey.height().value() == 7);
-
     REQUIRE(computerKey.label().value() == std::string());
     REQUIRE(computerKey.keyCode().value() == 0);
 }
@@ -36,7 +35,7 @@ TEST_CASE("Construct a ComputerKey", "[ComputerKey]")
 
 TEST_CASE("Give a label to a ComputerKey", "[ComputerKey]")
 {
-    KL::ComputerKey computerKey(23, 42, 8, 7);
+    KL::ComputerKey computerKey(23, 42, 8, 7, "", 0);
 
     computerKey.label().setValue("A");
 
@@ -46,7 +45,7 @@ TEST_CASE("Give a label to a ComputerKey", "[ComputerKey]")
 
 TEST_CASE("Define the key code of a ComputerKey", "[ComputerKey]")
 {
-    KL::ComputerKey computerKey(23, 42, 8, 7);
+    KL::ComputerKey computerKey(23, 42, 8, 7, "", 0);
 
     computerKey.keyCode().setValue(2);
 

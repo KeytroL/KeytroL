@@ -27,7 +27,7 @@ KeyboardLayout::ComputerKeyIterator KeyboardLayout::addComputerKey(
     int x, int y, unsigned int width, unsigned int height)
 {
     const auto newComputerKeyAndBool = mComputerKeys.insert(
-        std::unique_ptr<ComputerKey>{new ComputerKey(x, y, width, height)});
+        std::unique_ptr<ComputerKey>{new ComputerKey(x, y, width, height, "", 0)});
 
     return newComputerKeyAndBool.first;
 }

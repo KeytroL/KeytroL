@@ -25,7 +25,12 @@ namespace KL
 class ComputerKey
 {
 public:
-    ComputerKey(int x, int y, unsigned int width, unsigned int height);
+    ComputerKey(int x,
+        int y,
+        unsigned int width,
+        unsigned int height,
+        std::string label,
+        Keyboard::KeyCode keyCode);
 
     Property<int> & x();
     const Property<int> & x() const;
