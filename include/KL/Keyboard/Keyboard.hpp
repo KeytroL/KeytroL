@@ -26,6 +26,12 @@ class Keyboard
 public:
     using KeyCode = unsigned int;
 
+    enum class KeyState : bool
+    {
+        Pressed,
+        Released,
+    };
+
     Keyboard();
     ~Keyboard();
 
