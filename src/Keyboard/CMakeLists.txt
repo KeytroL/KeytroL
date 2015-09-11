@@ -15,6 +15,7 @@ add_library(BaseKeytroLKeyboard STATIC
     ComputerKey.cpp
     Keyboard.cpp
     KeyboardLayout.cpp
+    KeyMapping.cpp
 )
 
 
