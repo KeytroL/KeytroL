@@ -15,6 +15,7 @@
 #include "KL/Keyboard/ComputerKey.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
+#include "KL/Keyboard/KeyMapping.hpp"
 #include "KL/Midi/MidiOut.hpp"
 
 KL_DISABLE_WARNINGS
@@ -40,22 +41,33 @@ int main(int argc, char * argv[])
     KL::KeyboardLayout keyboardLayout;
     keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "", 0));
 
+    KL::KeyMapping keyMapping;
+
+    for (KL::MidiOut::Byte note = 0; note < 0x80; ++note)
+    {
+        keyMapping.at(note, KL::Keyboard::KeyState::Pressed) = [&midiOut, note]()
+        {
+            midiOut.sendMessage(0x90, note, 100);
+        };
+
+        keyMapping.at(note, KL::Keyboard::KeyState::Released) = [&midiOut, note]()
+        {
+            midiOut.sendMessage(0x80, note, 0);
+        };
+    }
+
     KL::Keyboard keyboard;
 
-    keyboard.keyPressed().connect([&midiOut](const KL::Keyboard::KeyCode keyCode)
+    keyboard.keyPressed().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
         {
             qDebug() << "pressed : " << keyCode;
-
-            const auto note = keyCode % 0x80;
-            midiOut.sendMessage(0x90, static_cast<KL::MidiOut::Byte>(note), 100);
+            keyMapping.at(keyCode, KL::Keyboard::KeyState::Pressed)();
         });
 
-    keyboard.keyReleased().connect([&midiOut](const KL::Keyboard::KeyCode keyCode)
+    keyboard.keyReleased().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
         {
             qDebug() << "released: " << keyCode;
-
-            const auto note = keyCode % 0x80;
-            midiOut.sendMessage(0x80, static_cast<KL::MidiOut::Byte>(note), 0);
+            keyMapping.at(keyCode, KL::Keyboard::KeyState::Released)();
         });
 
     return application.exec();
