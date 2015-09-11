@@ -22,6 +22,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
         -std=c++11
         -Werror -Weverything
         -Wno-c++98-compat
+        -Wno-c++98-compat-pedantic
         -Wno-padded
     )
 elseif (CMAKE_COMPILER_IS_GNUCXX)

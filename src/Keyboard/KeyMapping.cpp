@@ -11,43 +11,21 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
-
-#include "KL/Core/Signal.hpp"
-
-#include <memory>
+#include "KL/Keyboard/KeyMapping.hpp"
 
 
 namespace KL
 {
 
-class Keyboard
+std::function<void()> & KeyMapping::at(Code keyCode, State keyState)
 {
-public:
-    using KeyCode = unsigned int;
+    return mKeyToFunction[std::make_pair(keyCode, keyState)];
+}
 
-    enum class KeyState : bool
-    {
-        Pressed,
-        Released,
-    };
 
-    Keyboard();
-    ~Keyboard();
-
-    Signal<KeyCode> & keyPressed();
-    Signal<KeyCode> & keyReleased();
-
-protected:
-    void pressKey(KeyCode keyCode) const;
-    void releaseKey(KeyCode keyCode) const;
-
-private:
-    PrivateSignal<KeyCode> mKeyPressed;
-    PrivateSignal<KeyCode> mKeyReleased;
-
-    class PlatformImpl;
-    std::unique_ptr<PlatformImpl> mPlatformImpl;
-};
+const std::function<void()> & KeyMapping::at(Code keyCode, State keyState) const
+{
+    return mKeyToFunction.at(std::make_pair(keyCode, keyState));
+}
 
 } // namespace KL

@@ -15,6 +15,7 @@ add_executable(KeytroLKeyboardTest
     tst_ComputerKey.cpp
     tst_Keyboard.cpp
     tst_KeyboardLayout.cpp
+    tst_KeyMapping.cpp
 )
 
 target_link_libraries(KeytroLKeyboardTest PRIVATE

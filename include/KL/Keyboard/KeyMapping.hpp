@@ -13,41 +13,27 @@
 
 #pragma once
 
-#include "KL/Core/Signal.hpp"
+#include "KL/Keyboard/Keyboard.hpp"
 
-#include <memory>
+#include <functional>
+#include <map>
+#include <utility>
 
 
 namespace KL
 {
 
-class Keyboard
+class KeyMapping
 {
+    using Code = Keyboard::KeyCode;
+    using State = Keyboard::KeyState;
+
 public:
-    using KeyCode = unsigned int;
-
-    enum class KeyState : bool
-    {
-        Pressed,
-        Released,
-    };
-
-    Keyboard();
-    ~Keyboard();
-
-    Signal<KeyCode> & keyPressed();
-    Signal<KeyCode> & keyReleased();
-
-protected:
-    void pressKey(KeyCode keyCode) const;
-    void releaseKey(KeyCode keyCode) const;
+    std::function<void()> & at(Code keyCode, State keyState);
+    const std::function<void()> & at(Code keyCode, State keyState) const;
 
 private:
-    PrivateSignal<KeyCode> mKeyPressed;
-    PrivateSignal<KeyCode> mKeyReleased;
-
-    class PlatformImpl;
-    std::unique_ptr<PlatformImpl> mPlatformImpl;
+    std::map<std::pair<Code, State>, std::function<void()>> mKeyToFunction;
 };
 
 } // namespace KL
