@@ -31,11 +31,16 @@ int main(int argc, char * argv[])
     QMainWindow window;
     window.show();
 
+    const KL::MidiOut midiOut(0);
+    qDebug() << KL::MidiOut::deviceCount() << "MIDI out device(s)";
+    qDebug() << "First device:" << QString::fromStdString(KL::MidiOut::deviceName(0));
+    qDebug() << "Second device:" << QString::fromStdString(KL::MidiOut::deviceName(1));
+    qDebug() << "Third device:" << QString::fromStdString(KL::MidiOut::deviceName(2));
+
     KL::KeyboardLayout keyboardLayout;
     keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "", 0));
 
     KL::Keyboard keyboard;
-    const KL::MidiOut midiOut(0);
 
     keyboard.keyPressed().connect([&midiOut](const KL::Keyboard::KeyCode keyCode)
         {
@@ -52,11 +57,6 @@ int main(int argc, char * argv[])
             const auto note = keyCode % 0x80;
             midiOut.sendMessage(0x80, static_cast<KL::MidiOut::Byte>(note), 0);
         });
-
-    qDebug() << KL::MidiOut::deviceCount() << "MIDI out device(s)";
-    qDebug() << "First device:" << QString::fromStdString(KL::MidiOut::deviceName(0));
-    qDebug() << "Second device:" << QString::fromStdString(KL::MidiOut::deviceName(1));
-    qDebug() << "Third device:" << QString::fromStdString(KL::MidiOut::deviceName(2));
 
     return application.exec();
 }
