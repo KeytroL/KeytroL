@@ -22,9 +22,11 @@
 
 KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
 KL_RESTORE_WARNINGS
 
 
@@ -70,10 +72,19 @@ int main(int argc, char * argv[])
 
 
     KL::KeyboardLayout keyboardLayout;
+    char offset = 0;
 
-    keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "A", 1));
-    keyboardLayout.addComputerKey(KL::ComputerKey(2, 1, 2, 2, "B", 2));
-    keyboardLayout.addComputerKey(KL::ComputerKey(4, 2, 2, 2, "C", 3));
+    const auto addComputerKey = [&keyboardLayout, &offset]()
+    {
+        KL::ComputerKey computerKey{
+            2 * offset, offset, 2, 2, std::string(1, 'A' + offset), 1u + offset};
+        keyboardLayout.addComputerKey(computerKey);
+        ++offset;
+    };
+
+    addComputerKey();
+    addComputerKey();
+    addComputerKey();
 
     KL::KeyboardLayoutViewModel viewModel(keyboardLayout);
 
@@ -85,6 +96,20 @@ int main(int argc, char * argv[])
 
     QMainWindow window;
     window.setCentralWidget(listView);
+
+    QObject::connect(
+        window.menuBar()->addAction("Add"), &QAction::triggered, addComputerKey);
+    QObject::connect(window.menuBar()->addAction("Remove"),
+        &QAction::triggered,
+        [&keyboardLayout]()
+        {
+            if (!keyboardLayout.computerKeys().empty())
+            {
+                const auto index = keyboardLayout.computerKeys().size() / 2;
+                keyboardLayout.removeComputerKey(keyboardLayout.computerKeys().at(index));
+            }
+        });
+
     window.show();
 
     return application.exec();
