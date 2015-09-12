@@ -37,4 +37,17 @@ Connection::Connection(const std::shared_ptr<bool> connected)
 {
 }
 
+
+ScopedConnection::ScopedConnection(const Connection & other)
+    : Connection(other)
+{
+}
+
+
+ScopedConnection & ScopedConnection::operator=(const Connection & other)
+{
+    Connection::operator=(other);
+    return *this;
+}
+
 } // namespace KL

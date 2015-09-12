@@ -36,3 +36,21 @@ TEST_CASE("Construct a Connection, then assign it another Connection", "[Connect
     connection = KL::Connection{};
     REQUIRE_FALSE(connection.isConnected());
 }
+
+
+TEST_CASE(
+    "Construct a ScopedConnection, then assign it another Connection", "[Connection]")
+{
+    KL::ScopedConnection scopedConnection;
+    REQUIRE_FALSE(scopedConnection.isConnected());
+
+    KL::PrivateSignal<bool> signal;
+
+    scopedConnection = signal.connect([](const bool)
+        {
+        });
+    REQUIRE(scopedConnection.isConnected());
+
+    scopedConnection = KL::ScopedConnection{};
+    REQUIRE_FALSE(scopedConnection.isConnected());
+}

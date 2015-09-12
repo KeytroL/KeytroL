@@ -43,4 +43,14 @@ private:
     std::shared_ptr<bool> mConnected;
 };
 
+
+class ScopedConnection : public Connection
+{
+public:
+    ScopedConnection() = default;
+
+    ScopedConnection(const Connection & other);
+    ScopedConnection & operator=(const Connection & other);
+};
+
 } // namespace KL
