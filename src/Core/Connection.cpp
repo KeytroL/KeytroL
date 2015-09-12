@@ -11,43 +11,27 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
-
 #include "KL/Core/Connection.hpp"
-
-#include <functional>
-#include <memory>
-#include <utility>
-#include <vector>
 
 
 namespace KL
 {
 
-template <typename T>
-class Signal
+bool Connection::isConnected() const
 {
-public:
-    Signal();
-
-    Signal(const Signal &) = delete;
-    Signal & operator=(const Signal &) = delete;
-
-    Connection connect(std::function<void(T)> slot);
-
-protected:
-    std::vector<std::pair<std::shared_ptr<bool>, std::function<void(T)>>> mSlots;
-};
+    return *mConnected;
+}
 
 
-template <typename T>
-class PrivateSignal : public Signal<T>
+void Connection::disconnect() const
 {
-public:
-    void emit(const T & value) const;
-};
+    *mConnected = false;
+}
+
+
+Connection::Connection(const std::shared_ptr<bool> connected)
+    : mConnected(std::move(connected))
+{
+}
 
 } // namespace KL
-
-
-#include "detail/Signal.ipp"

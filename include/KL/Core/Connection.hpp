@@ -13,41 +13,30 @@
 
 #pragma once
 
-#include "KL/Core/Connection.hpp"
-
-#include <functional>
 #include <memory>
-#include <utility>
-#include <vector>
 
 
 namespace KL
 {
 
 template <typename T>
-class Signal
+class Signal;
+
+
+class Connection
 {
 public:
-    Signal();
+    bool isConnected() const;
 
-    Signal(const Signal &) = delete;
-    Signal & operator=(const Signal &) = delete;
+    void disconnect() const;
 
-    Connection connect(std::function<void(T)> slot);
+private:
+    template <typename T>
+    friend class KL::Signal;
 
-protected:
-    std::vector<std::pair<std::shared_ptr<bool>, std::function<void(T)>>> mSlots;
-};
+    Connection(std::shared_ptr<bool> connected);
 
-
-template <typename T>
-class PrivateSignal : public Signal<T>
-{
-public:
-    void emit(const T & value) const;
+    const std::shared_ptr<bool> mConnected;
 };
 
 } // namespace KL
-
-
-#include "detail/Signal.ipp"

@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Signal.hpp"
+#include "KL/Core/Connection.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
 
 
@@ -21,11 +21,10 @@ namespace KL
 class Keyboard::PlatformImpl
 {
 public:
-    PlatformImpl(Signal<KeyCode>::Connection keyPressConnection,
-        Signal<KeyCode>::Connection keyReleaseConnection);
+    PlatformImpl(Connection keyPressConnection, Connection keyReleaseConnection);
 
-    Signal<KeyCode>::Connection mKeyPressConnection;
-    Signal<KeyCode>::Connection mKeyReleaseConnection;
+    Connection mKeyPressConnection;
+    Connection mKeyReleaseConnection;
 };
 
 } // namespace KL

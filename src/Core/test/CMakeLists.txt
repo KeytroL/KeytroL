@@ -17,5 +17,6 @@ add_executable(KeytroLCoreTest
 )
 
 target_link_libraries(KeytroLCoreTest PRIVATE
+    KeytroLCore
     Catch
 )
