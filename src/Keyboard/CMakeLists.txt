@@ -18,6 +18,10 @@ add_library(BaseKeytroLKeyboard STATIC
     KeyMapping.cpp
 )
 
+target_link_libraries(BaseKeytroLKeyboard PUBLIC
+    KeytroLCore
+)
+
 
 add_subdirectory(platform/default)
 

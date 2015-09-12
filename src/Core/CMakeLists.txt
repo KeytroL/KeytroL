@@ -11,5 +11,9 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
+add_library(KeytroLCore STATIC
+    Connection.cpp
+)
+
 add_subdirectory(test)
 add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)

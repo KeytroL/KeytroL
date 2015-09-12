@@ -24,31 +24,10 @@ Signal<T>::Signal()
 
 
 template <typename T>
-typename Signal<T>::Connection Signal<T>::connect(const std::function<void(T)> slot)
+Connection Signal<T>::connect(const std::function<void(T)> slot)
 {
     mSlots.emplace_back(std::make_shared<bool>(true), std::move(slot));
-    return {mSlots.back().first};
-}
-
-
-template <typename T>
-Signal<T>::Connection::Connection(const std::shared_ptr<bool> connected)
-    : mConnected(std::move(connected))
-{
-}
-
-
-template <typename T>
-bool Signal<T>::Connection::isConnected() const
-{
-    return *mConnected;
-}
-
-
-template <typename T>
-void Signal<T>::Connection::disconnect() const
-{
-    *mConnected = false;
+    return Connection{mSlots.back().first};
 }
 
 
