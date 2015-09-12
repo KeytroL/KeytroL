@@ -13,6 +13,7 @@
 
 #pragma once
 
+#include "KL/Core/Connection.hpp"
 #include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
@@ -27,13 +28,18 @@ namespace KL
 class KeyboardLayoutViewModel : public QAbstractListModel
 {
 public:
-    KeyboardLayoutViewModel(const KeyboardLayout & model, QObject * parent = nullptr);
+    KeyboardLayoutViewModel(KeyboardLayout & model, QObject * parent = nullptr);
 
     int rowCount(const QModelIndex & index) const override;
     QVariant data(const QModelIndex & index, int role) const override;
 
 private:
-    const KeyboardLayout & mModel;
+    KeyboardLayout & mModel;
+
+    ScopedConnection mComputerKeyAboutToBeAddedConnection;
+    ScopedConnection mComputerKeyAddedConnection;
+    ScopedConnection mComputerKeyAboutToBeRemovedConnection;
+    ScopedConnection mComputerKeyRemovedConnection;
 };
 
 } // namespace KL
