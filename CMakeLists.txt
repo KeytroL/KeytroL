@@ -60,5 +60,6 @@ add_subdirectory(src/Midi)
 
 find_package(Qt5Widgets)
 if (Qt5Widgets_FOUND)
+    add_definitions(-DQT_NO_KEYWORDS)
     add_subdirectory(src/TestApp)
 endif ()

@@ -27,7 +27,22 @@ KeyboardLayout::KeyboardLayout()
 
 void KeyboardLayout::addComputerKey(const ComputerKey computerKey)
 {
+    auto index = mComputerKeys.size();
+    mComputerKeyAboutToBeAdded.emit(index);
     mComputerKeys.emplace_back(std::move(computerKey));
+    mComputerKeyAdded.emit(index);
+}
+
+
+Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAboutToBeAdded()
+{
+    return mComputerKeyAboutToBeAdded;
+}
+
+
+Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAdded()
+{
+    return mComputerKeyAdded;
 }
 
 
@@ -38,8 +53,24 @@ void KeyboardLayout::removeComputerKey(const ComputerKey & computerKey)
 
     if (foundComputerKey != mComputerKeys.end())
     {
+        auto index =
+            static_cast<SizeType>(std::distance(mComputerKeys.begin(), foundComputerKey));
+        mComputerKeyAboutToBeRemoved.emit(index);
         mComputerKeys.erase(foundComputerKey);
+        mComputerKeyRemoved.emit(index);
     }
+}
+
+
+Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAboutToBeRemoved()
+{
+    return mComputerKeyAboutToBeRemoved;
+}
+
+
+Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyRemoved()
+{
+    return mComputerKeyRemoved;
 }
 
 

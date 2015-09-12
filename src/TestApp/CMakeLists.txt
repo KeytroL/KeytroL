@@ -12,6 +12,7 @@
 #  GNU General Public License for more details.
 
 add_executable(KeytroLTestApp
+    KeyboardLayoutViewModel.cpp
     main.cpp
 )
 

@@ -13,6 +13,7 @@
 
 #pragma once
 
+#include "KL/Core/Signal.hpp"
 #include "KL/Keyboard/ComputerKey.hpp"
 
 #include <vector>
@@ -24,15 +25,27 @@ namespace KL
 class KeyboardLayout
 {
 public:
+    using SizeType = std::vector<ComputerKey>::size_type;
+
     KeyboardLayout();
 
     void addComputerKey(ComputerKey computerKey);
+    Signal<SizeType> & computerKeyAboutToBeAdded();
+    Signal<SizeType> & computerKeyAdded();
+
     void removeComputerKey(const ComputerKey & computerKey);
+    Signal<SizeType> & computerKeyAboutToBeRemoved();
+    Signal<SizeType> & computerKeyRemoved();
 
     const std::vector<ComputerKey> & computerKeys() const;
 
 private:
     std::vector<ComputerKey> mComputerKeys;
+
+    PrivateSignal<SizeType> mComputerKeyAboutToBeAdded;
+    PrivateSignal<SizeType> mComputerKeyAdded;
+    PrivateSignal<SizeType> mComputerKeyAboutToBeRemoved;
+    PrivateSignal<SizeType> mComputerKeyRemoved;
 };
 
 } // namespace KL

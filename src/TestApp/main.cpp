@@ -11,6 +11,8 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
+#include "KeyboardLayoutViewModel.hpp"
+
 #include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/ComputerKey.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
@@ -20,26 +22,23 @@
 
 KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
 KL_RESTORE_WARNINGS
 
 
 int main(int argc, char * argv[])
 {
-    QApplication application(argc, argv);
-
-    QMainWindow window;
-    window.show();
-
     const KL::MidiOut midiOut(0);
+
     qDebug() << KL::MidiOut::deviceCount() << "MIDI out device(s)";
     qDebug() << "First device:" << QString::fromStdString(KL::MidiOut::deviceName(0));
     qDebug() << "Second device:" << QString::fromStdString(KL::MidiOut::deviceName(1));
     qDebug() << "Third device:" << QString::fromStdString(KL::MidiOut::deviceName(2));
 
-    KL::KeyboardLayout keyboardLayout;
-    keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "", 0));
 
     KL::KeyMapping keyMapping;
 
@@ -56,6 +55,7 @@ int main(int argc, char * argv[])
         };
     }
 
+
     KL::Keyboard keyboard;
 
     keyboard.keyPressed().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
@@ -69,6 +69,48 @@ int main(int argc, char * argv[])
             qDebug() << "released: " << keyCode;
             keyMapping.at(keyCode, KL::Keyboard::KeyState::Released)();
         });
+
+
+    KL::KeyboardLayout keyboardLayout;
+    char offset = 0;
+
+    const auto addComputerKey = [&keyboardLayout, &offset]()
+    {
+        KL::ComputerKey computerKey{
+            2 * offset, offset, 2, 2, std::string(1, 'A' + offset), 1u + offset};
+        keyboardLayout.addComputerKey(computerKey);
+        ++offset;
+    };
+
+    addComputerKey();
+    addComputerKey();
+    addComputerKey();
+
+    KL::KeyboardLayoutViewModel viewModel(keyboardLayout);
+
+
+    QApplication application(argc, argv);
+
+    auto listView = new QListView;
+    listView->setModel(&viewModel);
+
+    QMainWindow window;
+    window.setCentralWidget(listView);
+
+    QObject::connect(
+        window.menuBar()->addAction("Add"), &QAction::triggered, addComputerKey);
+    QObject::connect(window.menuBar()->addAction("Remove"),
+        &QAction::triggered,
+        [&keyboardLayout]()
+        {
+            if (!keyboardLayout.computerKeys().empty())
+            {
+                const auto index = keyboardLayout.computerKeys().size() / 2;
+                keyboardLayout.removeComputerKey(keyboardLayout.computerKeys().at(index));
+            }
+        });
+
+    window.show();
 
     return application.exec();
 }
