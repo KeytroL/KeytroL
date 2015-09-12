@@ -26,6 +26,8 @@ class Signal;
 class Connection
 {
 public:
+    Connection() = default;
+
     bool isConnected() const;
 
     void disconnect() const;

@@ -13,28 +13,15 @@
 
 #include "KL/Core/Connection.hpp"
 
+#include "KL/Core/Warnings.hpp"
 
-namespace KL
-{
+KL_DISABLE_WARNINGS
+#include <catch.hpp>
+KL_RESTORE_WARNINGS
 
-bool Connection::isConnected() const
+
+TEST_CASE("Construct a Connection", "[Connection]")
 {
-    return mConnected && *mConnected;
+    KL::Connection connection;
+    REQUIRE_FALSE(connection.isConnected());
 }
-
-
-void Connection::disconnect() const
-{
-    if (mConnected)
-    {
-        *mConnected = false;
-    }
-}
-
-
-Connection::Connection(const std::shared_ptr<bool> connected)
-    : mConnected(std::move(connected))
-{
-}
-
-} // namespace KL
