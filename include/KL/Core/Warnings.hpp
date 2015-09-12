@@ -15,7 +15,25 @@
 
 // clang-format off
 
-#if defined(_MSC_VER)
+#if defined(__clang__)
+
+    #define KL_DISABLE_WARNINGS \
+        _Pragma("clang diagnostic push") \
+        /**/
+
+    #define KL_RESTORE_WARNINGS \
+        _Pragma("clang diagnostic pop")
+
+#elif defined(__GNUC__)
+
+    #define KL_DISABLE_WARNINGS \
+        _Pragma("GCC diagnostic push") \
+        /**/
+
+    #define KL_RESTORE_WARNINGS \
+        _Pragma("GCC diagnostic pop")
+
+#elif defined(_MSC_VER)
 
     #define KL_DISABLE_WARNINGS \
         __pragma(warning(push)) \
@@ -35,8 +53,7 @@
 
 #else
 
-    #define KL_DISABLE_WARNINGS
-    #define KL_RESTORE_WARNINGS
+    #error This compiler is not supported.
 
 #endif
 
