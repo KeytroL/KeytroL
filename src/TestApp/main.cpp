@@ -72,7 +72,7 @@ int main(int argc, char * argv[])
 
 
     KL::KeyboardLayout keyboardLayout;
-    char offset = 0;
+    unsigned char offset = 0;
 
     const auto addComputerKey = [&keyboardLayout, &offset]()
     {
