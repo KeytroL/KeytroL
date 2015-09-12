@@ -7,9 +7,13 @@ branches:
 environment:
   matrix:
     - CMAKE_GENERATOR: "Visual Studio 12 2013"
+      CMAKE_PREFIX_PATH: C:/Qt/5.3/msvc2013_opengl
     - CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
+      CMAKE_PREFIX_PATH: C:/Qt/5.3/msvc2013_64_opengl
     - CMAKE_GENERATOR: "Visual Studio 14 2015"
+      CMAKE_PREFIX_PATH: C:/Qt/5.3/msvc2013_opengl
     - CMAKE_GENERATOR: "Visual Studio 14 2015 Win64"
+      CMAKE_PREFIX_PATH: C:/Qt/5.3/msvc2013_64_opengl
 
 matrix:
   fast_finish: true
