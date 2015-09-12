@@ -17,6 +17,19 @@
 namespace KL
 {
 
+Connection::Connection(Connection && other)
+    : mConnected(std::move(other.mConnected))
+{
+}
+
+
+Connection & Connection::operator=(Connection && other)
+{
+    mConnected = std::move(other.mConnected);
+    return *this;
+}
+
+
 bool Connection::isConnected() const
 {
     return mConnected && *mConnected;
@@ -41,6 +54,25 @@ Connection::Connection(const std::shared_ptr<bool> connected)
 ScopedConnection::ScopedConnection(const Connection & other)
     : Connection(other)
 {
+}
+
+
+ScopedConnection::~ScopedConnection()
+{
+    Connection::disconnect();
+}
+
+
+ScopedConnection::ScopedConnection(ScopedConnection && other)
+    : Connection(std::move(other))
+{
+}
+
+
+ScopedConnection & ScopedConnection::operator=(ScopedConnection && other)
+{
+    Connection::operator=(std::move(other));
+    return *this;
 }
 
 

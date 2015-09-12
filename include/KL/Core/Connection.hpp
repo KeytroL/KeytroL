@@ -30,6 +30,9 @@ public:
     Connection(const Connection & other) = default;
     Connection & operator=(const Connection & other) = default;
 
+    Connection(Connection && other);
+    Connection & operator=(Connection && other);
+
     bool isConnected() const;
 
     void disconnect() const;
@@ -48,6 +51,10 @@ class ScopedConnection : public Connection
 {
 public:
     ScopedConnection() = default;
+    ~ScopedConnection();
+
+    ScopedConnection(ScopedConnection && other);
+    ScopedConnection & operator=(ScopedConnection && other);
 
     ScopedConnection(const Connection & other);
     ScopedConnection & operator=(const Connection & other);

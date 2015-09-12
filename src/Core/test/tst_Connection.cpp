@@ -54,3 +54,22 @@ TEST_CASE(
     scopedConnection = KL::ScopedConnection{};
     REQUIRE_FALSE(scopedConnection.isConnected());
 }
+
+
+TEST_CASE("Disconnect automatically with a ScopedConnection", "[Connection]")
+{
+    KL::PrivateSignal<bool> signal;
+
+    auto connection = signal.connect([](const bool)
+        {
+        });
+    REQUIRE(connection.isConnected());
+
+    {
+        KL::ScopedConnection scopedConnection = connection;
+        REQUIRE(scopedConnection.isConnected());
+        REQUIRE(connection.isConnected());
+    }
+
+    REQUIRE_FALSE(connection.isConnected());
+}
