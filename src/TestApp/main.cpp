@@ -27,19 +27,13 @@ KL_RESTORE_WARNINGS
 
 int main(int argc, char * argv[])
 {
-    QApplication application(argc, argv);
-
-    QMainWindow window;
-    window.show();
-
     const KL::MidiOut midiOut(0);
+
     qDebug() << KL::MidiOut::deviceCount() << "MIDI out device(s)";
     qDebug() << "First device:" << QString::fromStdString(KL::MidiOut::deviceName(0));
     qDebug() << "Second device:" << QString::fromStdString(KL::MidiOut::deviceName(1));
     qDebug() << "Third device:" << QString::fromStdString(KL::MidiOut::deviceName(2));
 
-    KL::KeyboardLayout keyboardLayout;
-    keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "", 0));
 
     KL::KeyMapping keyMapping;
 
@@ -56,6 +50,7 @@ int main(int argc, char * argv[])
         };
     }
 
+
     KL::Keyboard keyboard;
 
     keyboard.keyPressed().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
@@ -69,6 +64,17 @@ int main(int argc, char * argv[])
             qDebug() << "released: " << keyCode;
             keyMapping.at(keyCode, KL::Keyboard::KeyState::Released)();
         });
+
+
+    KL::KeyboardLayout keyboardLayout;
+
+    keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "", 0));
+
+
+    QApplication application(argc, argv);
+
+    QMainWindow window;
+    window.show();
 
     return application.exec();
 }
