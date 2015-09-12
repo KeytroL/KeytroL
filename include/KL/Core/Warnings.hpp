@@ -19,6 +19,14 @@
 
     #define KL_DISABLE_WARNINGS \
         _Pragma("clang diagnostic push") \
+        _Pragma("clang diagnostic ignored \"-Wcovered-switch-default\"") \
+        _Pragma("clang diagnostic ignored \"-Wdeprecated\"") \
+        _Pragma("clang diagnostic ignored \"-Wdisabled-macro-expansion\"") \
+        _Pragma("clang diagnostic ignored \"-Wdocumentation-unknown-command\"") \
+        _Pragma("clang diagnostic ignored \"-Wexit-time-destructors\"") \
+        _Pragma("clang diagnostic ignored \"-Wfloat-equal\"") \
+        _Pragma("clang diagnostic ignored \"-Wsign-conversion\"") \
+        _Pragma("clang diagnostic ignored \"-Wused-but-marked-unused\"") \
         /**/
 
     #define KL_RESTORE_WARNINGS \
