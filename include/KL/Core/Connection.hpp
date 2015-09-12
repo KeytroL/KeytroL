@@ -34,7 +34,7 @@ private:
     template <typename T>
     friend class KL::Signal;
 
-    Connection(std::shared_ptr<bool> connected);
+    explicit Connection(std::shared_ptr<bool> connected);
 
     const std::shared_ptr<bool> mConnected;
 };
