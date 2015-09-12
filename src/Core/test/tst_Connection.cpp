@@ -13,6 +13,7 @@
 
 #include "KL/Core/Connection.hpp"
 
+#include "KL/Core/Signal.hpp"
 #include "KL/Core/Warnings.hpp"
 
 KL_DISABLE_WARNINGS
@@ -20,8 +21,18 @@ KL_DISABLE_WARNINGS
 KL_RESTORE_WARNINGS
 
 
-TEST_CASE("Construct a Connection", "[Connection]")
+TEST_CASE("Construct a Connection, then assign it another Connection", "[Connection]")
 {
     KL::Connection connection;
+    REQUIRE_FALSE(connection.isConnected());
+
+    KL::PrivateSignal<bool> signal;
+
+    connection = signal.connect([](const bool)
+        {
+        });
+    REQUIRE(connection.isConnected());
+
+    connection = KL::Connection{};
     REQUIRE_FALSE(connection.isConnected());
 }

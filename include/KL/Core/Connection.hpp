@@ -27,6 +27,8 @@ class Connection
 {
 public:
     Connection() = default;
+    Connection(const Connection & other) = default;
+    Connection & operator=(const Connection & other) = default;
 
     bool isConnected() const;
 
@@ -38,7 +40,7 @@ private:
 
     explicit Connection(std::shared_ptr<bool> connected);
 
-    const std::shared_ptr<bool> mConnected;
+    std::shared_ptr<bool> mConnected;
 };
 
 } // namespace KL
