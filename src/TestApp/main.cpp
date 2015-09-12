@@ -11,6 +11,8 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
+#include "KeyboardLayoutViewModel.hpp"
+
 #include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/ComputerKey.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
@@ -21,6 +23,7 @@
 KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 KL_RESTORE_WARNINGS
 
@@ -68,12 +71,20 @@ int main(int argc, char * argv[])
 
     KL::KeyboardLayout keyboardLayout;
 
-    keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "", 0));
+    keyboardLayout.addComputerKey(KL::ComputerKey(0, 0, 2, 2, "A", 1));
+    keyboardLayout.addComputerKey(KL::ComputerKey(2, 1, 2, 2, "B", 2));
+    keyboardLayout.addComputerKey(KL::ComputerKey(4, 2, 2, 2, "C", 3));
+
+    KL::KeyboardLayoutViewModel viewModel(keyboardLayout);
 
 
     QApplication application(argc, argv);
 
+    auto listView = new QListView;
+    listView->setModel(&viewModel);
+
     QMainWindow window;
+    window.setCentralWidget(listView);
     window.show();
 
     return application.exec();
