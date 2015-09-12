@@ -11,28 +11,15 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(BaseKeytroLIO STATIC
+add_library(MacKeytroLIO STATIC
     KeyboardInput.cpp
+    KeyboardInputPlatformImpl.mm
 )
 
-target_link_libraries(BaseKeytroLIO PUBLIC
-    KeytroLCore
+target_link_libraries(MacKeytroLIO PUBLIC
+    BaseKeytroLIO
 )
 
-
-add_subdirectory(platform/default)
-
-if (APPLE)
-    add_subdirectory(platform/mac)
-    add_library(PlatformKeytroLIO ALIAS MacKeytroLIO)
-elseif (WIN32)
-    add_subdirectory(platform/win)
-    add_library(PlatformKeytroLIO ALIAS WinKeytroLIO)
-else ()
-    add_library(PlatformKeytroLIO ALIAS DefaultKeytroLIO)
-endif ()
-
-
-add_subdirectory(platform/mock)
-add_subdirectory(test)
-add_test(NAME KeytroLIO COMMAND KeytroLIOTest)
+target_link_libraries(MacKeytroLIO PRIVATE
+    "-framework AppKit"
+)
