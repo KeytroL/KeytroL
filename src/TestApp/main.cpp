@@ -12,21 +12,18 @@
 // GNU General Public License for more details.
 
 #include "KeyboardLayoutViewModel.hpp"
+#include "ViewKeyboard.hpp"
 
 #include "KL/Core/Warnings.hpp"
-#include "KL/Keyboard/ComputerKey.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
-#include "KL/Keyboard/KeyboardLayout.hpp"
 #include "KL/Keyboard/KeyMapping.hpp"
 #include "KL/Midi/MidiOut.hpp"
 
 KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QListView>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
+#include <QtGui/QGuiApplication>
+#include <QtQml/qqml.h>
+#include <QtQuick/QQuickView>
 KL_RESTORE_WARNINGS
 
 
@@ -71,46 +68,14 @@ int main(int argc, char * argv[])
         });
 
 
-    KL::KeyboardLayout keyboardLayout;
-    unsigned char offset = 0;
+    QGuiApplication application(argc, argv);
 
-    const auto addComputerKey = [&keyboardLayout, &offset]()
-    {
-        KL::ComputerKey computerKey{
-            2 * offset, offset, 2, 2, std::string(1, 'A' + offset), 1u + offset};
-        keyboardLayout.addComputerKey(computerKey);
-        ++offset;
-    };
+    qmlRegisterType<KL::ViewKeyboard>("KL.Keyboard", 1, 0, "Keyboard");
+    qmlRegisterType<KL::KeyboardLayoutViewModel>("KL.Keyboard", 1, 0, "KeyboardLayout");
 
-    addComputerKey();
-    addComputerKey();
-    addComputerKey();
-
-    KL::KeyboardLayoutViewModel viewModel(keyboardLayout);
-
-
-    QApplication application(argc, argv);
-
-    auto listView = new QListView;
-    listView->setModel(&viewModel);
-
-    QMainWindow window;
-    window.setCentralWidget(listView);
-
-    QObject::connect(
-        window.menuBar()->addAction("Add"), &QAction::triggered, addComputerKey);
-    QObject::connect(window.menuBar()->addAction("Remove"),
-        &QAction::triggered,
-        [&keyboardLayout]()
-        {
-            if (!keyboardLayout.computerKeys().empty())
-            {
-                const auto index = keyboardLayout.computerKeys().size() / 2;
-                keyboardLayout.removeComputerKey(keyboardLayout.computerKeys().at(index));
-            }
-        });
-
-    window.show();
+    QQuickView quickView;
+    quickView.setSource(QUrl::fromLocalFile(QML_MAIN));
+    quickView.show();
 
     return application.exec();
 }

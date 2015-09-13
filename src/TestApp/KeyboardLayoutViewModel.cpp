@@ -17,12 +17,10 @@
 namespace KL
 {
 
-KeyboardLayoutViewModel::KeyboardLayoutViewModel(
-    KeyboardLayout & model, QObject * const parent)
+KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * const parent)
     : QAbstractListModel(parent)
-    , mModel(model)
 {
-    mComputerKeyAboutToBeAddedConnection = model.computerKeyAboutToBeAdded().connect(
+    mComputerKeyAboutToBeAddedConnection = mModel.computerKeyAboutToBeAdded().connect(
         [this](const KL::KeyboardLayout::SizeType index)
         {
             beginInsertRows(
@@ -30,12 +28,12 @@ KeyboardLayoutViewModel::KeyboardLayoutViewModel(
         });
 
     mComputerKeyAddedConnection =
-        model.computerKeyAdded().connect([this](const KL::KeyboardLayout::SizeType)
+        mModel.computerKeyAdded().connect([this](const KL::KeyboardLayout::SizeType)
             {
                 endInsertRows();
             });
 
-    mComputerKeyAboutToBeRemovedConnection = model.computerKeyAboutToBeRemoved().connect(
+    mComputerKeyAboutToBeRemovedConnection = mModel.computerKeyAboutToBeRemoved().connect(
         [this](const KL::KeyboardLayout::SizeType index)
         {
             beginRemoveRows(
@@ -43,10 +41,33 @@ KeyboardLayoutViewModel::KeyboardLayoutViewModel(
         });
 
     mComputerKeyRemovedConnection =
-        model.computerKeyRemoved().connect([this](const KL::KeyboardLayout::SizeType)
+        mModel.computerKeyRemoved().connect([this](const KL::KeyboardLayout::SizeType)
             {
                 endRemoveRows();
             });
+}
+
+
+void KeyboardLayoutViewModel::addComputerKey(const int x,
+    const int y,
+    const unsigned int width,
+    const unsigned int height,
+    const QString & label,
+    const unsigned int keyCode)
+{
+    mModel.addComputerKey(ComputerKey(x, y, width, height, label.toStdString(), keyCode));
+}
+
+
+void KeyboardLayoutViewModel::removeComputerKey(const int x,
+    const int y,
+    const unsigned int width,
+    const unsigned int height,
+    const QString & label,
+    const unsigned int keyCode)
+{
+    mModel.removeComputerKey(
+        ComputerKey(x, y, width, height, label.toStdString(), keyCode));
 }
 
 
@@ -68,23 +89,48 @@ QVariant KeyboardLayoutViewModel::data(const QModelIndex & index, int role) cons
         return {};
     }
 
-    if (role == Qt::DisplayRole)
-    {
-        using SizeType =
-            std::remove_reference<decltype(mModel.computerKeys())>::type::size_type;
-        const auto & computerKey =
-            mModel.computerKeys().at(static_cast<SizeType>(index.row()));
+    const auto & computerKey =
+        mModel.computerKeys().at(static_cast<KeyboardLayout::SizeType>(index.row()));
 
-        return QString("%1, %2, %3, %4, %5, %6")
-            .arg(computerKey.x())
-            .arg(computerKey.y())
-            .arg(computerKey.width())
-            .arg(computerKey.height())
-            .arg(QString::fromStdString(computerKey.label()))
-            .arg(computerKey.keyCode());
+    if (role == XRole)
+    {
+        return computerKey.x();
+    }
+    else if (role == YRole)
+    {
+        return computerKey.y();
+    }
+    else if (role == WidthRole)
+    {
+        return computerKey.width();
+    }
+    else if (role == HeightRole)
+    {
+        return computerKey.height();
+    }
+    else if (role == LabelRole)
+    {
+        return QString::fromStdString(computerKey.label());
+    }
+    else if (role == KeyCodeRole)
+    {
+        return computerKey.keyCode();
     }
 
     return {};
+}
+
+
+QHash<int, QByteArray> KeyboardLayoutViewModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[XRole] = "x";
+    roles[YRole] = "y";
+    roles[WidthRole] = "width";
+    roles[HeightRole] = "height";
+    roles[LabelRole] = "label";
+    roles[KeyCodeRole] = "keyCode";
+    return roles;
 }
 
 } // namespace KL

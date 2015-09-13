@@ -19,6 +19,7 @@
 
     #define KL_DISABLE_WARNINGS \
         _Pragma("clang diagnostic push") \
+        _Pragma("clang diagnostic ignored \"-Wconversion\"") \
         _Pragma("clang diagnostic ignored \"-Wcovered-switch-default\"") \
         _Pragma("clang diagnostic ignored \"-Wdeprecated\"") \
         _Pragma("clang diagnostic ignored \"-Wdisabled-macro-expansion\"") \
@@ -47,6 +48,7 @@
         __pragma(warning(push)) \
         __pragma(warning(disable: 4061)) \
         __pragma(warning(disable: 4127)) \
+        __pragma(warning(disable: 4244)) \
         __pragma(warning(disable: 4251)) \
         __pragma(warning(disable: 4365)) \
         __pragma(warning(disable: 4371)) \

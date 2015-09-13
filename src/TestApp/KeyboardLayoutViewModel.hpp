@@ -27,14 +27,41 @@ namespace KL
 
 class KeyboardLayoutViewModel : public QAbstractListModel
 {
+    Q_OBJECT
+
 public:
-    KeyboardLayoutViewModel(KeyboardLayout & model, QObject * parent = nullptr);
+    enum ComputerKeyRoles
+    {
+        XRole = Qt::UserRole + 1,
+        YRole,
+        WidthRole,
+        HeightRole,
+        LabelRole,
+        KeyCodeRole,
+    };
+
+    KeyboardLayoutViewModel(QObject * parent = nullptr);
+
+    Q_INVOKABLE void addComputerKey(int x,
+        int y,
+        unsigned int width,
+        unsigned int height,
+        const QString & label,
+        unsigned int keyCode);
+
+    Q_INVOKABLE void removeComputerKey(int x,
+        int y,
+        unsigned int width,
+        unsigned int height,
+        const QString & label,
+        unsigned int keyCode);
 
     int rowCount(const QModelIndex & index) const override;
     QVariant data(const QModelIndex & index, int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
 private:
-    KeyboardLayout & mModel;
+    KeyboardLayout mModel;
 
     ScopedConnection mComputerKeyAboutToBeAddedConnection;
     ScopedConnection mComputerKeyAddedConnection;
