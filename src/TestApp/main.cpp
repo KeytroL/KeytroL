@@ -12,6 +12,7 @@
 // GNU General Public License for more details.
 
 #include "KeyboardLayoutViewModel.hpp"
+#include "ViewKeyboard.hpp"
 
 #include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/ComputerKey.hpp"
@@ -22,6 +23,7 @@
 
 KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
+#include <QtQml/qqml.h>
 #include <QtQml/QQmlContext>
 #include <QtQuickWidgets/QQuickWidget>
 #include <QtWidgets/QAction>
@@ -91,6 +93,8 @@ int main(int argc, char * argv[])
 
 
     QApplication application(argc, argv);
+
+    qmlRegisterType<KL::ViewKeyboard>("KL.Keyboard", 1, 0, "Keyboard");
 
     auto quickWidget = new QQuickWidget;
     quickWidget->rootContext()->setContextProperty("theKeyboardLayout", &viewModel);

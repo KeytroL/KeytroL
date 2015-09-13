@@ -14,6 +14,7 @@
 add_executable(KeytroLTestApp
     KeyboardLayoutViewModel.cpp
     main.cpp
+    ViewKeyboard.cpp
 )
 
 target_link_libraries(KeytroLTestApp PRIVATE
@@ -21,6 +22,11 @@ target_link_libraries(KeytroLTestApp PRIVATE
     KeytroLMidi
     Qt5::QuickWidgets
 )
+
+set_target_properties(KeytroLTestApp PROPERTIES AUTOMOC ON)
+set_target_properties(KeytroLTestApp PROPERTIES AUTOMOC_MOC_OPTIONS -bMocWarnings.hpp)
+
+target_include_directories(KeytroLTestApp PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
 target_compile_definitions(KeytroLTestApp PRIVATE
     QML_MAIN="${CMAKE_CURRENT_LIST_DIR}/main.qml"
