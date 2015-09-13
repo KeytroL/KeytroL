@@ -13,6 +13,10 @@ Rectangle {
         id: keyboard
     }
 
+    KeyboardLayout {
+        id: keyboardLayout
+    }
+
     Rectangle {
         anchors.fill: parent
         anchors.margins: 1
@@ -23,7 +27,7 @@ Rectangle {
             property int offset: 0
 
             onDoubleClicked: {
-                theKeyboardLayout.addComputerKey(
+                keyboardLayout.addComputerKey(
                     Math.round(mouse.x / 10), Math.round(mouse.y / 10),
                     4, 4,
                     String.fromCharCode(65 + offset),
@@ -33,7 +37,7 @@ Rectangle {
         }
 
         Repeater {
-            model: theKeyboardLayout
+            model: keyboardLayout
 
             delegate: Rectangle {
                 antialiasing: false
@@ -76,7 +80,7 @@ Rectangle {
                     anchors.fill: parent
 
                     onDoubleClicked: {
-                        theKeyboardLayout.removeComputerKey(
+                        keyboardLayout.removeComputerKey(
                             model.x, model.y,
                             model.width, model.height,
                             model.label,

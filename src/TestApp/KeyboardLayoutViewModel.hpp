@@ -40,7 +40,7 @@ public:
         KeyCodeRole,
     };
 
-    KeyboardLayoutViewModel(KeyboardLayout & model, QObject * parent = nullptr);
+    KeyboardLayoutViewModel(QObject * parent = nullptr);
 
     Q_INVOKABLE void addComputerKey(int x,
         int y,
@@ -61,7 +61,7 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    KeyboardLayout & mModel;
+    KeyboardLayout mModel;
 
     ScopedConnection mComputerKeyAboutToBeAddedConnection;
     ScopedConnection mComputerKeyAddedConnection;

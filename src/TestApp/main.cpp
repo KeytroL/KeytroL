@@ -16,14 +16,12 @@
 
 #include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
-#include "KL/Keyboard/KeyboardLayout.hpp"
 #include "KL/Keyboard/KeyMapping.hpp"
 #include "KL/Midi/MidiOut.hpp"
 
 KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
 #include <QtQml/qqml.h>
-#include <QtQml/QQmlContext>
 #include <QtQuickWidgets/QQuickWidget>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
@@ -71,16 +69,12 @@ int main(int argc, char * argv[])
         });
 
 
-    KL::KeyboardLayout keyboardLayout;
-    KL::KeyboardLayoutViewModel viewModel(keyboardLayout);
-
-
     QApplication application(argc, argv);
 
     qmlRegisterType<KL::ViewKeyboard>("KL.Keyboard", 1, 0, "Keyboard");
+    qmlRegisterType<KL::KeyboardLayoutViewModel>("KL.Keyboard", 1, 0, "KeyboardLayout");
 
     auto quickWidget = new QQuickWidget;
-    quickWidget->rootContext()->setContextProperty("theKeyboardLayout", &viewModel);
     quickWidget->setSource(QUrl::fromLocalFile(QML_MAIN));
 
     QMainWindow window;

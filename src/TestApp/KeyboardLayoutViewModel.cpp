@@ -17,10 +17,8 @@
 namespace KL
 {
 
-KeyboardLayoutViewModel::KeyboardLayoutViewModel(
-    KeyboardLayout & model, QObject * const parent)
+KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * const parent)
     : QAbstractListModel(parent)
-    , mModel(model)
 {
     mComputerKeyAboutToBeAddedConnection = mModel.computerKeyAboutToBeAdded().connect(
         [this](const KL::KeyboardLayout::SizeType index)
