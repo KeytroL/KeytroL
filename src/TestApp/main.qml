@@ -71,6 +71,18 @@ Rectangle {
                         }
                     }
                 }
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onDoubleClicked: {
+                        theKeyboardLayout.removeComputerKey(
+                            model.x, model.y,
+                            model.width, model.height,
+                            model.label,
+                            model.keyCode);
+                    }
+                }
             }
         }
     }

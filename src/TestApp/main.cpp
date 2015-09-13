@@ -25,10 +25,8 @@ KL_DISABLE_WARNINGS
 #include <QtQml/qqml.h>
 #include <QtQml/QQmlContext>
 #include <QtQuickWidgets/QQuickWidget>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 KL_RESTORE_WARNINGS
 
 
@@ -87,18 +85,6 @@ int main(int argc, char * argv[])
 
     QMainWindow window;
     window.setCentralWidget(quickWidget);
-
-    QObject::connect(window.menuBar()->addAction("Remove"),
-        &QAction::triggered,
-        [&keyboardLayout]()
-        {
-            if (!keyboardLayout.computerKeys().empty())
-            {
-                const auto index = keyboardLayout.computerKeys().size() / 2;
-                keyboardLayout.removeComputerKey(keyboardLayout.computerKeys().at(index));
-            }
-        });
-
     window.show();
 
     return application.exec();

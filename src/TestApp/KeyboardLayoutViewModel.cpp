@@ -61,6 +61,18 @@ void KeyboardLayoutViewModel::addComputerKey(const int x,
 }
 
 
+void KeyboardLayoutViewModel::removeComputerKey(const int x,
+    const int y,
+    const unsigned int width,
+    const unsigned int height,
+    const QString & label,
+    const unsigned int keyCode)
+{
+    mModel.removeComputerKey(
+        ComputerKey(x, y, width, height, label.toStdString(), keyCode));
+}
+
+
 int KeyboardLayoutViewModel::rowCount(const QModelIndex & index) const
 {
     if (index.isValid())
