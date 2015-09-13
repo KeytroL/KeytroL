@@ -70,10 +70,8 @@ QVariant KeyboardLayoutViewModel::data(const QModelIndex & index, int role) cons
 
     if (role == Qt::DisplayRole)
     {
-        using SizeType =
-            std::remove_reference<decltype(mModel.computerKeys())>::type::size_type;
         const auto & computerKey =
-            mModel.computerKeys().at(static_cast<SizeType>(index.row()));
+            mModel.computerKeys().at(static_cast<KeyboardLayout::SizeType>(index.row()));
 
         return QString("%1, %2, %3, %4, %5, %6")
             .arg(computerKey.x())
