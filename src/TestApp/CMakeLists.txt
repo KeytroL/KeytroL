@@ -20,7 +20,7 @@ add_executable(KeytroLTestApp
 target_link_libraries(KeytroLTestApp PRIVATE
     KeytroLKeyboard
     KeytroLMidi
-    Qt5::QuickWidgets
+    Qt5::Quick
 )
 
 set_target_properties(KeytroLTestApp PROPERTIES AUTOMOC ON)

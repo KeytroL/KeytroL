@@ -21,10 +21,9 @@
 
 KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
+#include <QtGui/QGuiApplication>
 #include <QtQml/qqml.h>
-#include <QtQuickWidgets/QQuickWidget>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QMainWindow>
+#include <QtQuick/QQuickView>
 KL_RESTORE_WARNINGS
 
 
@@ -69,17 +68,14 @@ int main(int argc, char * argv[])
         });
 
 
-    QApplication application(argc, argv);
+    QGuiApplication application(argc, argv);
 
     qmlRegisterType<KL::ViewKeyboard>("KL.Keyboard", 1, 0, "Keyboard");
     qmlRegisterType<KL::KeyboardLayoutViewModel>("KL.Keyboard", 1, 0, "KeyboardLayout");
 
-    auto quickWidget = new QQuickWidget;
-    quickWidget->setSource(QUrl::fromLocalFile(QML_MAIN));
-
-    QMainWindow window;
-    window.setCentralWidget(quickWidget);
-    window.show();
+    QQuickView quickView;
+    quickView.setSource(QUrl::fromLocalFile(QML_MAIN));
+    quickView.show();
 
     return application.exec();
 }
