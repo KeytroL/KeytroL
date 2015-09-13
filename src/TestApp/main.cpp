@@ -15,7 +15,6 @@
 #include "ViewKeyboard.hpp"
 
 #include "KL/Core/Warnings.hpp"
-#include "KL/Keyboard/ComputerKey.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
 #include "KL/Keyboard/KeyMapping.hpp"
@@ -75,20 +74,6 @@ int main(int argc, char * argv[])
 
 
     KL::KeyboardLayout keyboardLayout;
-    unsigned char offset = 0;
-
-    const auto addComputerKey = [&keyboardLayout, &offset]()
-    {
-        KL::ComputerKey computerKey{
-            4 * offset, offset, 4, 4, std::string(1, 'A' + offset), 1u + offset};
-        keyboardLayout.addComputerKey(computerKey);
-        ++offset;
-    };
-
-    addComputerKey();
-    addComputerKey();
-    addComputerKey();
-
     KL::KeyboardLayoutViewModel viewModel(keyboardLayout);
 
 
@@ -103,8 +88,6 @@ int main(int argc, char * argv[])
     QMainWindow window;
     window.setCentralWidget(quickWidget);
 
-    QObject::connect(
-        window.menuBar()->addAction("Add"), &QAction::triggered, addComputerKey);
     QObject::connect(window.menuBar()->addAction("Remove"),
         &QAction::triggered,
         [&keyboardLayout]()

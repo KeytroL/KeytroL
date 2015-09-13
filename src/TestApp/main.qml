@@ -17,6 +17,21 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: 1
 
+        MouseArea {
+            anchors.fill: parent
+
+            property int offset: 0
+
+            onDoubleClicked: {
+                theKeyboardLayout.addComputerKey(
+                    Math.round(mouse.x / 10), Math.round(mouse.y / 10),
+                    4, 4,
+                    String.fromCharCode(65 + offset),
+                    1 + offset);
+                ++offset;
+            }
+        }
+
         Repeater {
             model: theKeyboardLayout
 

@@ -27,6 +27,8 @@ namespace KL
 
 class KeyboardLayoutViewModel : public QAbstractListModel
 {
+    Q_OBJECT
+
 public:
     enum ComputerKeyRoles
     {
@@ -39,6 +41,13 @@ public:
     };
 
     KeyboardLayoutViewModel(KeyboardLayout & model, QObject * parent = nullptr);
+
+    Q_INVOKABLE void addComputerKey(int x,
+        int y,
+        unsigned int width,
+        unsigned int height,
+        const QString & label,
+        unsigned int keyCode);
 
     int rowCount(const QModelIndex & index) const override;
     QVariant data(const QModelIndex & index, int role) const override;
