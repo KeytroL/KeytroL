@@ -19,5 +19,9 @@ add_executable(KeytroLTestApp
 target_link_libraries(KeytroLTestApp PRIVATE
     KeytroLKeyboard
     KeytroLMidi
-    Qt5::Widgets
+    Qt5::QuickWidgets
+)
+
+target_compile_definitions(KeytroLTestApp PRIVATE
+    QML_MAIN="${CMAKE_CURRENT_LIST_DIR}/main.qml"
 )

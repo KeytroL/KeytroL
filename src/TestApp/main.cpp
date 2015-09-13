@@ -22,9 +22,10 @@
 
 KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
+#include <QtQml/QQmlContext>
+#include <QtQuickWidgets/QQuickWidget>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 KL_RESTORE_WARNINGS
@@ -77,7 +78,7 @@ int main(int argc, char * argv[])
     const auto addComputerKey = [&keyboardLayout, &offset]()
     {
         KL::ComputerKey computerKey{
-            2 * offset, offset, 2, 2, std::string(1, 'A' + offset), 1u + offset};
+            4 * offset, offset, 4, 4, std::string(1, 'A' + offset), 1u + offset};
         keyboardLayout.addComputerKey(computerKey);
         ++offset;
     };
@@ -91,11 +92,12 @@ int main(int argc, char * argv[])
 
     QApplication application(argc, argv);
 
-    auto listView = new QListView;
-    listView->setModel(&viewModel);
+    auto quickWidget = new QQuickWidget;
+    quickWidget->rootContext()->setContextProperty("theKeyboardLayout", &viewModel);
+    quickWidget->setSource(QUrl::fromLocalFile(QML_MAIN));
 
     QMainWindow window;
-    window.setCentralWidget(listView);
+    window.setCentralWidget(quickWidget);
 
     QObject::connect(
         window.menuBar()->addAction("Add"), &QAction::triggered, addComputerKey);

@@ -71,17 +71,7 @@ QVariant KeyboardLayoutViewModel::data(const QModelIndex & index, int role) cons
     const auto & computerKey =
         mModel.computerKeys().at(static_cast<KeyboardLayout::SizeType>(index.row()));
 
-    if (role == Qt::DisplayRole)
-    {
-        return QString("%1, %2, %3, %4, %5, %6")
-            .arg(computerKey.x())
-            .arg(computerKey.y())
-            .arg(computerKey.width())
-            .arg(computerKey.height())
-            .arg(QString::fromStdString(computerKey.label()))
-            .arg(computerKey.keyCode());
-    }
-    else if (role == XRole)
+    if (role == XRole)
     {
         return computerKey.x();
     }
