@@ -28,7 +28,7 @@ Rectangle {
 
             onDoubleClicked: {
                 keyboardLayout.addComputerKey(
-                    Math.round(mouse.x / 10), Math.round(mouse.y / 10),
+                    Math.round(mouse.x / 10 - 2), Math.round(mouse.y / 10 - 2),
                     4, 4,
                     String.fromCharCode(65 + newComputerKeyOffset),
                     1 + newComputerKeyOffset);
