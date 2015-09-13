@@ -8,16 +8,16 @@ matrix:
   fast_finish: true
 
   include:
+    - os: osx
+      env: ARCHITECTURE=x86_64 CMAKE_PREFIX_PATH=/usr/local/opt/qt5
+    - os: osx
+      env: ARCHITECTURE=i386
     - os: linux
       sudo: false
       addons:
         apt:
           sources: ubuntu-toolchain-r-test
           packages: g++-4.8
-    - os: osx
-      env: ARCHITECTURE=i386
-    - os: osx
-      env: ARCHITECTURE=x86_64 CMAKE_PREFIX_PATH=/usr/local/opt/qt5
 
 
 install:
