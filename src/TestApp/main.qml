@@ -1,11 +1,17 @@
 import QtQuick 2.3
 
+import KL.Keyboard 1.0
+
 
 Rectangle {
     id: root
 
     width: 640
     height: 480
+
+    Keyboard {
+        id: keyboard
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -20,6 +26,8 @@ Rectangle {
                 border.color: "black"
                 radius: 5
 
+                color: "white"
+
                 x: 10 * model.x + 1
                 y: 10 * model.y + 1
 
@@ -31,6 +39,22 @@ Rectangle {
                     anchors.margins: 5
 
                     text: model.label
+                }
+
+                Connections {
+                    target: keyboard
+
+                    onKeyPressed: {
+                        if (model.keyCode == keyCode) {
+                            color = "lightgray";
+                        }
+                    }
+
+                    onKeyReleased: {
+                        if (model.keyCode == keyCode) {
+                            color = "white";
+                        }
+                    }
                 }
             }
         }
