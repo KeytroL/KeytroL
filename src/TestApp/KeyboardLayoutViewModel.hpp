@@ -28,10 +28,21 @@ namespace KL
 class KeyboardLayoutViewModel : public QAbstractListModel
 {
 public:
+    enum ComputerKeyRoles
+    {
+        XRole = Qt::UserRole + 1,
+        YRole,
+        WidthRole,
+        HeightRole,
+        LabelRole,
+        KeyCodeRole,
+    };
+
     KeyboardLayoutViewModel(KeyboardLayout & model, QObject * parent = nullptr);
 
     int rowCount(const QModelIndex & index) const override;
     QVariant data(const QModelIndex & index, int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
 private:
     KeyboardLayout & mModel;

@@ -68,11 +68,11 @@ QVariant KeyboardLayoutViewModel::data(const QModelIndex & index, int role) cons
         return {};
     }
 
+    const auto & computerKey =
+        mModel.computerKeys().at(static_cast<KeyboardLayout::SizeType>(index.row()));
+
     if (role == Qt::DisplayRole)
     {
-        const auto & computerKey =
-            mModel.computerKeys().at(static_cast<KeyboardLayout::SizeType>(index.row()));
-
         return QString("%1, %2, %3, %4, %5, %6")
             .arg(computerKey.x())
             .arg(computerKey.y())
@@ -81,8 +81,45 @@ QVariant KeyboardLayoutViewModel::data(const QModelIndex & index, int role) cons
             .arg(QString::fromStdString(computerKey.label()))
             .arg(computerKey.keyCode());
     }
+    else if (role == XRole)
+    {
+        return computerKey.x();
+    }
+    else if (role == YRole)
+    {
+        return computerKey.y();
+    }
+    else if (role == WidthRole)
+    {
+        return computerKey.width();
+    }
+    else if (role == HeightRole)
+    {
+        return computerKey.height();
+    }
+    else if (role == LabelRole)
+    {
+        return QString::fromStdString(computerKey.label());
+    }
+    else if (role == KeyCodeRole)
+    {
+        return computerKey.keyCode();
+    }
 
     return {};
+}
+
+
+QHash<int, QByteArray> KeyboardLayoutViewModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[XRole] = "x";
+    roles[YRole] = "y";
+    roles[WidthRole] = "width";
+    roles[HeightRole] = "height";
+    roles[LabelRole] = "label";
+    roles[KeyCodeRole] = "keyCode";
+    return roles;
 }
 
 } // namespace KL
