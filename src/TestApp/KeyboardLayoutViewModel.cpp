@@ -22,7 +22,7 @@ KeyboardLayoutViewModel::KeyboardLayoutViewModel(
     : QAbstractListModel(parent)
     , mModel(model)
 {
-    mComputerKeyAboutToBeAddedConnection = model.computerKeyAboutToBeAdded().connect(
+    mComputerKeyAboutToBeAddedConnection = mModel.computerKeyAboutToBeAdded().connect(
         [this](const KL::KeyboardLayout::SizeType index)
         {
             beginInsertRows(
@@ -30,12 +30,12 @@ KeyboardLayoutViewModel::KeyboardLayoutViewModel(
         });
 
     mComputerKeyAddedConnection =
-        model.computerKeyAdded().connect([this](const KL::KeyboardLayout::SizeType)
+        mModel.computerKeyAdded().connect([this](const KL::KeyboardLayout::SizeType)
             {
                 endInsertRows();
             });
 
-    mComputerKeyAboutToBeRemovedConnection = model.computerKeyAboutToBeRemoved().connect(
+    mComputerKeyAboutToBeRemovedConnection = mModel.computerKeyAboutToBeRemoved().connect(
         [this](const KL::KeyboardLayout::SizeType index)
         {
             beginRemoveRows(
@@ -43,7 +43,7 @@ KeyboardLayoutViewModel::KeyboardLayoutViewModel(
         });
 
     mComputerKeyRemovedConnection =
-        model.computerKeyRemoved().connect([this](const KL::KeyboardLayout::SizeType)
+        mModel.computerKeyRemoved().connect([this](const KL::KeyboardLayout::SizeType)
             {
                 endRemoveRows();
             });
