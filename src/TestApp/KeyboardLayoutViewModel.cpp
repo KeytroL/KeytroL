@@ -59,15 +59,12 @@ void KeyboardLayoutViewModel::addComputerKey(const int x,
 }
 
 
-void KeyboardLayoutViewModel::removeComputerKey(const int x,
-    const int y,
-    const unsigned int width,
-    const unsigned int height,
-    const QString & label,
-    const unsigned int keyCode)
+void KeyboardLayoutViewModel::removeComputerKey(const QModelIndex & index)
 {
-    mModel.removeComputerKey(
-        ComputerKey(x, y, width, height, label.toStdString(), keyCode));
+    if (index.isValid())
+    {
+        mModel.removeComputerKey(static_cast<KeyboardLayout::SizeType>(index.row()));
+    }
 }
 
 

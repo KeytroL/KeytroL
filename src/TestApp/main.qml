@@ -45,6 +45,8 @@ Rectangle {
             model: keyboardLayout
 
             delegate: Rectangle {
+                readonly property var modelIndex: keyboardLayout.index(index, 0)
+
                 antialiasing: false
                 border.width: 1
                 border.color: "black"
@@ -85,11 +87,7 @@ Rectangle {
                     anchors.fill: parent
 
                     onDoubleClicked: {
-                        keyboardLayout.removeComputerKey(
-                            model.x, model.y,
-                            model.width, model.height,
-                            model.label,
-                            model.keyCode);
+                        keyboardLayout.removeComputerKey(modelIndex);
                     }
                 }
             }

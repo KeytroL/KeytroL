@@ -49,12 +49,7 @@ public:
         const QString & label,
         unsigned int keyCode);
 
-    Q_INVOKABLE void removeComputerKey(int x,
-        int y,
-        unsigned int width,
-        unsigned int height,
-        const QString & label,
-        unsigned int keyCode);
+    Q_INVOKABLE void removeComputerKey(const QModelIndex & index);
 
     int rowCount(const QModelIndex & index) const override;
     QVariant data(const QModelIndex & index, int role) const override;
