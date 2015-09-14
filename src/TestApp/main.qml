@@ -20,25 +20,21 @@ Rectangle {
         id: keyboardLayout
     }
 
-    Rectangle {
+    MouseArea {
         anchors.fill: parent
         anchors.margins: 1
 
-        MouseArea {
-            anchors.fill: parent
+        property int newComputerKeyOffset: 0
 
-            property int newComputerKeyOffset: 0
-
-            onDoubleClicked: {
-                keyboardLayout.addComputerKey(
-                    Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
-                    Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
-                    root.defaultKeySize,
-                    root.defaultKeySize,
-                    String.fromCharCode(65 + newComputerKeyOffset),
-                    1 + newComputerKeyOffset);
-                ++newComputerKeyOffset;
-            }
+        onDoubleClicked: {
+            keyboardLayout.addComputerKey(
+                Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
+                Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
+                root.defaultKeySize,
+                root.defaultKeySize,
+                String.fromCharCode(65 + newComputerKeyOffset),
+                1 + newComputerKeyOffset);
+            ++newComputerKeyOffset;
         }
 
         Repeater {
