@@ -9,6 +9,9 @@ Rectangle {
     width: 640
     height: 480
 
+    readonly property int scale: 10
+    readonly property int defaultKeySize: 4
+
     Keyboard {
         id: keyboard
     }
@@ -28,8 +31,10 @@ Rectangle {
 
             onDoubleClicked: {
                 keyboardLayout.addComputerKey(
-                    Math.round(mouse.x / 10 - 2), Math.round(mouse.y / 10 - 2),
-                    4, 4,
+                    Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
+                    Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
+                    root.defaultKeySize,
+                    root.defaultKeySize,
                     String.fromCharCode(65 + newComputerKeyOffset),
                     1 + newComputerKeyOffset);
                 ++newComputerKeyOffset;
@@ -47,11 +52,11 @@ Rectangle {
 
                 color: "white"
 
-                x: 10 * model.x + 1
-                y: 10 * model.y + 1
+                x: root.scale * model.x + 1
+                y: root.scale * model.y + 1
 
-                width: 10 * model.width - 2
-                height: 10 * model.height - 2
+                width: root.scale * model.width - 2
+                height: root.scale * model.height - 2
 
                 Text {
                     anchors.fill: parent
