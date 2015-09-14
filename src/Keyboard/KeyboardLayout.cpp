@@ -13,7 +13,6 @@
 
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
-#include <algorithm>
 #include <iterator>
 
 
@@ -55,22 +54,6 @@ void KeyboardLayout::removeComputerKey(const SizeType index)
         auto it = mComputerKeys.begin();
         std::advance(it, static_cast<std::vector<ComputerKey>::difference_type>(index));
         mComputerKeys.erase(it);
-        mComputerKeyRemoved.emit(index);
-    }
-}
-
-
-void KeyboardLayout::removeComputerKey(const ComputerKey & computerKey)
-{
-    auto foundComputerKey =
-        std::find(mComputerKeys.begin(), mComputerKeys.end(), computerKey);
-
-    if (foundComputerKey != mComputerKeys.end())
-    {
-        auto index =
-            static_cast<SizeType>(std::distance(mComputerKeys.begin(), foundComputerKey));
-        mComputerKeyAboutToBeRemoved.emit(index);
-        mComputerKeys.erase(foundComputerKey);
         mComputerKeyRemoved.emit(index);
     }
 }
