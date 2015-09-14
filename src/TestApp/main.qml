@@ -27,14 +27,21 @@ Rectangle {
         property int newComputerKeyOffset: 0
 
         onDoubleClicked: {
-            keyboardLayout.addComputerKey(
-                Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
-                Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
-                root.defaultKeySize,
-                root.defaultKeySize,
-                String.fromCharCode(65 + newComputerKeyOffset),
-                1 + newComputerKeyOffset);
-            ++newComputerKeyOffset;
+            var computerKey = childAt(mouse.x, mouse.y);
+
+            if (computerKey === null) {
+                keyboardLayout.addComputerKey(
+                    Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
+                    Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
+                    root.defaultKeySize,
+                    root.defaultKeySize,
+                    String.fromCharCode(65 + newComputerKeyOffset),
+                    1 + newComputerKeyOffset);
+                ++newComputerKeyOffset;
+            }
+            else {
+                keyboardLayout.removeComputerKey(computerKey.modelIndex);
+            }
         }
 
         Repeater {
@@ -76,14 +83,6 @@ Rectangle {
                         if (model.keyCode == keyCode) {
                             color = "white";
                         }
-                    }
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-
-                    onDoubleClicked: {
-                        keyboardLayout.removeComputerKey(modelIndex);
                     }
                 }
             }
