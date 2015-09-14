@@ -24,7 +24,24 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: 1
 
+        property var selectedComputerKey
         property int newComputerKeyOffset: 0
+
+        onPressed: {
+            selectedComputerKey = childAt(mouse.x, mouse.y);
+        }
+
+        onPositionChanged: {
+            if (selectedComputerKey) {
+                keyboardLayout.moveComputerKey(
+                    selectedComputerKey.modelIndex,
+                    Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
+                    Math.round(mouse.y / root.scale - root.defaultKeySize / 2)
+                );
+
+                selectedComputerKey = childAt(mouse.x, mouse.y);
+            }
+        }
 
         onDoubleClicked: {
             var computerKey = childAt(mouse.x, mouse.y);
@@ -42,6 +59,8 @@ Rectangle {
             else {
                 keyboardLayout.removeComputerKey(computerKey.modelIndex);
             }
+
+            selectedComputerKey = childAt(mouse.x, mouse.y);
         }
 
         Repeater {

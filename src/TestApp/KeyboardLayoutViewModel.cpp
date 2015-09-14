@@ -68,6 +68,22 @@ void KeyboardLayoutViewModel::removeComputerKey(const QModelIndex & index)
 }
 
 
+void KeyboardLayoutViewModel::moveComputerKey(
+    const QModelIndex & index, const int x, const int y)
+{
+    if (index.isValid())
+    {
+        const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
+        const auto & oldKey = mModel.computerKeys().at(computerKeyIndex);
+        const auto newKey = ComputerKey(
+            x, y, oldKey.width(), oldKey.height(), oldKey.label(), oldKey.keyCode());
+
+        mModel.removeComputerKey(computerKeyIndex);
+        mModel.addComputerKey(newKey);
+    }
+}
+
+
 int KeyboardLayoutViewModel::rowCount(const QModelIndex & index) const
 {
     if (index.isValid())
