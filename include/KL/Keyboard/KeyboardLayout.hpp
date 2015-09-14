@@ -33,6 +33,7 @@ public:
     Signal<SizeType> & computerKeyAboutToBeAdded();
     Signal<SizeType> & computerKeyAdded();
 
+    void removeComputerKey(SizeType index);
     void removeComputerKey(const ComputerKey & computerKey);
     Signal<SizeType> & computerKeyAboutToBeRemoved();
     Signal<SizeType> & computerKeyRemoved();

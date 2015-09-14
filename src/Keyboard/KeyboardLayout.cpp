@@ -14,6 +14,7 @@
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
 #include <algorithm>
+#include <iterator>
 
 
 namespace KL
@@ -43,6 +44,19 @@ Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAboutToBeAdded()
 Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAdded()
 {
     return mComputerKeyAdded;
+}
+
+
+void KeyboardLayout::removeComputerKey(const SizeType index)
+{
+    if (index < mComputerKeys.size())
+    {
+        mComputerKeyAboutToBeRemoved.emit(index);
+        auto it = mComputerKeys.begin();
+        std::advance(it, static_cast<std::vector<ComputerKey>::difference_type>(index));
+        mComputerKeys.erase(it);
+        mComputerKeyRemoved.emit(index);
+    }
 }
 
 
