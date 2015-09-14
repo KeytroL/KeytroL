@@ -9,6 +9,9 @@ Rectangle {
     width: 640
     height: 480
 
+    readonly property int scale: 10
+    readonly property int defaultKeySize: 4
+
     Keyboard {
         id: keyboard
     }
@@ -17,29 +20,55 @@ Rectangle {
         id: keyboardLayout
     }
 
-    Rectangle {
+    MouseArea {
         anchors.fill: parent
         anchors.margins: 1
 
-        MouseArea {
-            anchors.fill: parent
+        property var selectedComputerKey
+        property int newComputerKeyOffset: 0
 
-            property int offset: 0
+        onPressed: {
+            selectedComputerKey = childAt(mouse.x, mouse.y);
+        }
 
-            onDoubleClicked: {
-                keyboardLayout.addComputerKey(
-                    Math.round(mouse.x / 10), Math.round(mouse.y / 10),
-                    4, 4,
-                    String.fromCharCode(65 + offset),
-                    1 + offset);
-                ++offset;
+        onPositionChanged: {
+            if (selectedComputerKey) {
+                keyboardLayout.moveComputerKey(
+                    selectedComputerKey.modelIndex,
+                    Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
+                    Math.round(mouse.y / root.scale - root.defaultKeySize / 2)
+                );
+
+                selectedComputerKey = childAt(mouse.x, mouse.y);
             }
+        }
+
+        onDoubleClicked: {
+            var computerKey = childAt(mouse.x, mouse.y);
+
+            if (computerKey === null) {
+                keyboardLayout.addComputerKey(
+                    Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
+                    Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
+                    root.defaultKeySize,
+                    root.defaultKeySize,
+                    String.fromCharCode(65 + newComputerKeyOffset),
+                    1 + newComputerKeyOffset);
+                ++newComputerKeyOffset;
+            }
+            else {
+                keyboardLayout.removeComputerKey(computerKey.modelIndex);
+            }
+
+            selectedComputerKey = childAt(mouse.x, mouse.y);
         }
 
         Repeater {
             model: keyboardLayout
 
             delegate: Rectangle {
+                readonly property var modelIndex: keyboardLayout.index(index, 0)
+
                 antialiasing: false
                 border.width: 1
                 border.color: "black"
@@ -47,11 +76,11 @@ Rectangle {
 
                 color: "white"
 
-                x: 10 * model.x + 1
-                y: 10 * model.y + 1
+                x: root.scale * model.x + 1
+                y: root.scale * model.y + 1
 
-                width: 10 * model.width - 2
-                height: 10 * model.height - 2
+                width: root.scale * model.width - 2
+                height: root.scale * model.height - 2
 
                 Text {
                     anchors.fill: parent
@@ -73,18 +102,6 @@ Rectangle {
                         if (model.keyCode == keyCode) {
                             color = "white";
                         }
-                    }
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-
-                    onDoubleClicked: {
-                        keyboardLayout.removeComputerKey(
-                            model.x, model.y,
-                            model.width, model.height,
-                            model.label,
-                            model.keyCode);
                     }
                 }
             }

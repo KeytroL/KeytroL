@@ -21,27 +21,27 @@ KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * const parent)
     : QAbstractListModel(parent)
 {
     mComputerKeyAboutToBeAddedConnection = mModel.computerKeyAboutToBeAdded().connect(
-        [this](const KL::KeyboardLayout::SizeType index)
+        [this](const KeyboardLayout::SizeType index)
         {
             beginInsertRows(
                 QModelIndex(), static_cast<int>(index), static_cast<int>(index));
         });
 
     mComputerKeyAddedConnection =
-        mModel.computerKeyAdded().connect([this](const KL::KeyboardLayout::SizeType)
+        mModel.computerKeyAdded().connect([this](const KeyboardLayout::SizeType)
             {
                 endInsertRows();
             });
 
     mComputerKeyAboutToBeRemovedConnection = mModel.computerKeyAboutToBeRemoved().connect(
-        [this](const KL::KeyboardLayout::SizeType index)
+        [this](const KeyboardLayout::SizeType index)
         {
             beginRemoveRows(
                 QModelIndex(), static_cast<int>(index), static_cast<int>(index));
         });
 
     mComputerKeyRemovedConnection =
-        mModel.computerKeyRemoved().connect([this](const KL::KeyboardLayout::SizeType)
+        mModel.computerKeyRemoved().connect([this](const KeyboardLayout::SizeType)
             {
                 endRemoveRows();
             });
@@ -59,15 +59,28 @@ void KeyboardLayoutViewModel::addComputerKey(const int x,
 }
 
 
-void KeyboardLayoutViewModel::removeComputerKey(const int x,
-    const int y,
-    const unsigned int width,
-    const unsigned int height,
-    const QString & label,
-    const unsigned int keyCode)
+void KeyboardLayoutViewModel::removeComputerKey(const QModelIndex & index)
 {
-    mModel.removeComputerKey(
-        ComputerKey(x, y, width, height, label.toStdString(), keyCode));
+    if (index.isValid())
+    {
+        mModel.removeComputerKey(static_cast<KeyboardLayout::SizeType>(index.row()));
+    }
+}
+
+
+void KeyboardLayoutViewModel::moveComputerKey(
+    const QModelIndex & index, const int x, const int y)
+{
+    if (index.isValid())
+    {
+        const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
+        const auto & oldKey = mModel.computerKeys().at(computerKeyIndex);
+        const auto newKey = ComputerKey(
+            x, y, oldKey.width(), oldKey.height(), oldKey.label(), oldKey.keyCode());
+
+        mModel.removeComputerKey(computerKeyIndex);
+        mModel.addComputerKey(newKey);
+    }
 }
 
 
