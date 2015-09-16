@@ -12,10 +12,6 @@ Rectangle {
     readonly property int scale: 10
     readonly property int defaultKeySize: 4
 
-    Keyboard {
-        id: keyboard
-    }
-
     KeyboardLayout {
         id: keyboardLayout
     }
@@ -106,5 +102,9 @@ Rectangle {
                 }
             }
         }
+    }
+
+    Keyboard {
+        id: keyboard
     }
 }
