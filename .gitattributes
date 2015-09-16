@@ -2,6 +2,7 @@
 *.hpp               text diff=cpp
 *.ipp               text diff=cpp
 *.md                text
+*.qml               text
 *.txt               text
 *.yml               text
 .clang-format       text
