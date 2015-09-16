@@ -58,13 +58,11 @@ int main(int argc, char * argv[])
 
     keyboard.keyPressed().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
         {
-            qDebug() << "pressed : " << keyCode;
             keyMapping.at(keyCode, KL::Keyboard::KeyState::Pressed)();
         });
 
     keyboard.keyReleased().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
         {
-            qDebug() << "released: " << keyCode;
             keyMapping.at(keyCode, KL::Keyboard::KeyState::Released)();
         });
 
