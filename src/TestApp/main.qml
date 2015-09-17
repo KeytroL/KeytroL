@@ -125,6 +125,8 @@ ApplicationWindow {
                     anchors.margins: 5
 
                     text: model.label
+                    font.pixelSize: 9
+                    wrapMode: Text.Wrap
                 }
 
                 Connections {
