@@ -84,6 +84,12 @@ void KeyboardLayoutViewModel::moveComputerKey(
 }
 
 
+QModelIndex KeyboardLayoutViewModel::modelIndex(const int row) const
+{
+    return index(row, 0);
+}
+
+
 int KeyboardLayoutViewModel::rowCount(const QModelIndex & index) const
 {
     if (index.isValid())

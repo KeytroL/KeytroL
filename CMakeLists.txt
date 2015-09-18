@@ -58,7 +58,7 @@ add_subdirectory(src/Core)
 add_subdirectory(src/Keyboard)
 add_subdirectory(src/Midi)
 
-find_package(Qt5Quick)
+find_package(Qt5Quick 5.3)
 if (Qt5Quick_FOUND)
     add_definitions(-DQT_NO_KEYWORDS)
     add_subdirectory(src/TestApp)

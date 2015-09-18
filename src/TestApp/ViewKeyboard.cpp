@@ -20,17 +20,15 @@ namespace KL
 ViewKeyboard::ViewKeyboard(QObject * const parent)
     : QObject(parent)
 {
-    mKeyPressedConnection =
-        mKeyboard.keyPressed().connect([this](const Keyboard::KeyCode keyCode)
-            {
-                Q_EMIT keyPressed(static_cast<int>(keyCode));
-            });
+    mKeyboard.keyPressed().connect([this](const Keyboard::KeyCode keyCode)
+        {
+            Q_EMIT keyPressed(static_cast<int>(keyCode));
+        });
 
-    mKeyReleasedConnection =
-        mKeyboard.keyReleased().connect([this](const Keyboard::KeyCode keyCode)
-            {
-                Q_EMIT keyReleased(static_cast<int>(keyCode));
-            });
+    mKeyboard.keyReleased().connect([this](const Keyboard::KeyCode keyCode)
+        {
+            Q_EMIT keyReleased(static_cast<int>(keyCode));
+        });
 }
 
 } // namespace KL

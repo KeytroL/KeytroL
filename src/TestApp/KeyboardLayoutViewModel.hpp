@@ -53,6 +53,8 @@ public:
 
     Q_INVOKABLE void moveComputerKey(const QModelIndex & index, int x, int y);
 
+    Q_INVOKABLE QModelIndex modelIndex(int row) const;
+
     int rowCount(const QModelIndex & index) const override;
     QVariant data(const QModelIndex & index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;

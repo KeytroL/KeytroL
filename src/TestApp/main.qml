@@ -12,10 +12,6 @@ Rectangle {
     readonly property int scale: 10
     readonly property int defaultKeySize: 4
 
-    Keyboard {
-        id: keyboard
-    }
-
     KeyboardLayout {
         id: keyboardLayout
     }
@@ -67,7 +63,7 @@ Rectangle {
             model: keyboardLayout
 
             delegate: Rectangle {
-                readonly property var modelIndex: keyboardLayout.index(index, 0)
+                readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
                 antialiasing: false
                 border.width: 1
@@ -106,5 +102,9 @@ Rectangle {
                 }
             }
         }
+    }
+
+    Keyboard {
+        id: keyboard
     }
 }

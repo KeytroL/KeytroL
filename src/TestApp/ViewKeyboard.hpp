@@ -38,9 +38,6 @@ Q_SIGNALS:
 
 private:
     Keyboard mKeyboard;
-
-    ScopedConnection mKeyPressedConnection;
-    ScopedConnection mKeyReleasedConnection;
 };
 
 } // namespace KL
