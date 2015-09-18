@@ -63,7 +63,7 @@ Rectangle {
             model: keyboardLayout
 
             delegate: Rectangle {
-                readonly property var modelIndex: keyboardLayout.index(index, 0)
+                readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
                 antialiasing: false
                 border.width: 1
