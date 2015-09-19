@@ -41,6 +41,21 @@ Connection Signal<T>::connect(const std::function<void(T)> slot)
 
 
 template <typename T>
+PrivateSignal<T>::PrivateSignal(PrivateSignal && other)
+    : Signal<T>(std::move(other))
+{
+}
+
+
+template <typename T>
+PrivateSignal<T> & PrivateSignal<T>::operator=(PrivateSignal && other)
+{
+    Signal<T>::operator=(std::move(other));
+    return *this;
+}
+
+
+template <typename T>
 void PrivateSignal<T>::emit(const T & value) const
 {
     for (const auto & slot : PrivateSignal<T>::mSlots)

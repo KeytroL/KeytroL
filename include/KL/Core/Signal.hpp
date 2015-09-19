@@ -47,6 +47,11 @@ template <typename T>
 class PrivateSignal : public Signal<T>
 {
 public:
+    PrivateSignal() = default;
+
+    PrivateSignal(PrivateSignal && other);
+    PrivateSignal & operator=(PrivateSignal && other);
+
     void emit(const T & value) const;
 };
 
