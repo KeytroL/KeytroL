@@ -1,5 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
+import QtQuick.Dialogs 1.2
 
 import KL.Keyboard 1.0
 
@@ -13,6 +14,30 @@ ApplicationWindow {
 
     readonly property int scale: 10
     readonly property int defaultKeySize: 4
+
+    menuBar: MenuBar {
+        Menu {
+            title: "File"
+
+            MenuItem {
+                action: Action {
+                    text: "Open..."
+
+                    onTriggered: {
+                        fileDialog.open();
+                    }
+                }
+            }
+        }
+    }
+
+    FileDialog {
+        id: fileDialog
+
+        onAccepted: {
+            console.log("File path: " + fileDialog.fileUrl);
+        }
+    }
 
     KeyboardLayout {
         id: keyboardLayout
