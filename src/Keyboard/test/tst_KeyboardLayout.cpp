@@ -22,7 +22,7 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Construct a KeyboardLayout", "[KeyboardLayout]")
 {
-    const KL::KeyboardLayout keyboardLayout;
+    KL::KeyboardLayout keyboardLayout;
 
     REQUIRE(keyboardLayout.computerKeys().size() == 0u);
 }

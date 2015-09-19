@@ -19,12 +19,6 @@
 namespace KL
 {
 
-KeyboardLayout::KeyboardLayout()
-    : mComputerKeys()
-{
-}
-
-
 void KeyboardLayout::addComputerKey(const ComputerKey computerKey)
 {
     auto index = mComputerKeys.size();

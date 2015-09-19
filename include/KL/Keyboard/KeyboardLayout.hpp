@@ -27,8 +27,6 @@ class KeyboardLayout
 public:
     using SizeType = std::vector<ComputerKey>::size_type;
 
-    KeyboardLayout();
-
     void addComputerKey(ComputerKey computerKey);
     Signal<SizeType> & computerKeyAboutToBeAdded();
     Signal<SizeType> & computerKeyAdded();
