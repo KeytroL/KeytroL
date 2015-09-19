@@ -28,7 +28,7 @@ template <typename T>
 class Signal
 {
 public:
-    Signal();
+    Signal() = default;
 
     Signal(const Signal &) = delete;
     Signal & operator=(const Signal &) = delete;
