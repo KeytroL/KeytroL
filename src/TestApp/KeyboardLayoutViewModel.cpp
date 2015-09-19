@@ -20,31 +20,29 @@ namespace KL
 KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * const parent)
     : QAbstractListModel(parent)
 {
-    mComputerKeyAboutToBeAddedConnection = mModel.computerKeyAboutToBeAdded().connect(
+    mModel.computerKeyAboutToBeAdded().connect(
         [this](const KeyboardLayout::SizeType index)
         {
             beginInsertRows(
                 QModelIndex(), static_cast<int>(index), static_cast<int>(index));
         });
 
-    mComputerKeyAddedConnection =
-        mModel.computerKeyAdded().connect([this](const KeyboardLayout::SizeType)
-            {
-                endInsertRows();
-            });
+    mModel.computerKeyAdded().connect([this](const KeyboardLayout::SizeType)
+        {
+            endInsertRows();
+        });
 
-    mComputerKeyAboutToBeRemovedConnection = mModel.computerKeyAboutToBeRemoved().connect(
+    mModel.computerKeyAboutToBeRemoved().connect(
         [this](const KeyboardLayout::SizeType index)
         {
             beginRemoveRows(
                 QModelIndex(), static_cast<int>(index), static_cast<int>(index));
         });
 
-    mComputerKeyRemovedConnection =
-        mModel.computerKeyRemoved().connect([this](const KeyboardLayout::SizeType)
-            {
-                endRemoveRows();
-            });
+    mModel.computerKeyRemoved().connect([this](const KeyboardLayout::SizeType)
+        {
+            endRemoveRows();
+        });
 }
 
 
