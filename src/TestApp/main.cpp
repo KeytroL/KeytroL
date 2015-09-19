@@ -13,6 +13,7 @@
 
 #include "KeyboardLayoutViewModel.hpp"
 #include "ViewKeyboard.hpp"
+#include "XmlKeyboardLayout.hpp"
 
 #include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
@@ -72,6 +73,7 @@ int main(int argc, char * argv[])
 
     qmlRegisterType<KL::ViewKeyboard>("KL.Keyboard", 1, 0, "Keyboard");
     qmlRegisterType<KL::KeyboardLayoutViewModel>("KL.Keyboard", 1, 0, "KeyboardLayout");
+    qmlRegisterType<KL::XmlKeyboardLayout>("KL.Keyboard", 1, 0, "XmlKeyboardLayout");
 
     QQmlApplicationEngine engine(QUrl::fromLocalFile(QML_MAIN));
 

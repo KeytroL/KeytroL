@@ -35,8 +35,23 @@ ApplicationWindow {
         id: fileDialog
 
         onAccepted: {
-            console.log("File path: " + fileDialog.fileUrl);
+            console.log("Loading file: " + fileDialog.fileUrl);
+            if (!xmlKeyboardLayout.load(fileDialog.fileUrl)) {
+                cannotLoadFileDialog.open();
+            }
         }
+    }
+
+    MessageDialog {
+        id: cannotLoadFileDialog
+
+        icon: StandardIcon.Warning
+        text: "Cannot load file " + fileDialog.fileUrl
+        standardButtons: StandardButton.Ok
+    }
+
+    XmlKeyboardLayout {
+        id: xmlKeyboardLayout
     }
 
     KeyboardLayout {
