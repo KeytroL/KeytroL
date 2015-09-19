@@ -28,10 +28,13 @@ template <typename T>
 class Signal
 {
 public:
-    Signal();
+    Signal() = default;
 
     Signal(const Signal &) = delete;
     Signal & operator=(const Signal &) = delete;
+
+    Signal(Signal && other);
+    Signal & operator=(Signal && other);
 
     Connection connect(std::function<void(T)> slot);
 
@@ -44,6 +47,11 @@ template <typename T>
 class PrivateSignal : public Signal<T>
 {
 public:
+    PrivateSignal() = default;
+
+    PrivateSignal(PrivateSignal && other);
+    PrivateSignal & operator=(PrivateSignal && other);
+
     void emit(const T & value) const;
 };
 

@@ -13,7 +13,6 @@
 
 #pragma once
 
-#include "KL/Core/Connection.hpp"
 #include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
 

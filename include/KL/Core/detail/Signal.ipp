@@ -18,8 +18,17 @@ namespace KL
 {
 
 template <typename T>
-Signal<T>::Signal()
+Signal<T>::Signal(Signal && other)
+    : mSlots(std::move(other.mSlots))
 {
+}
+
+
+template <typename T>
+Signal<T> & Signal<T>::operator=(Signal && other)
+{
+    mSlots = std::move(other.mSlots);
+    return *this;
 }
 
 
@@ -28,6 +37,21 @@ Connection Signal<T>::connect(const std::function<void(T)> slot)
 {
     mSlots.emplace_back(std::make_shared<bool>(true), std::move(slot));
     return Connection{mSlots.back().first};
+}
+
+
+template <typename T>
+PrivateSignal<T>::PrivateSignal(PrivateSignal && other)
+    : Signal<T>(std::move(other))
+{
+}
+
+
+template <typename T>
+PrivateSignal<T> & PrivateSignal<T>::operator=(PrivateSignal && other)
+{
+    Signal<T>::operator=(std::move(other));
+    return *this;
 }
 
 

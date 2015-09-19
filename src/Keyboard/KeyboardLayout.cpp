@@ -19,9 +19,24 @@
 namespace KL
 {
 
-KeyboardLayout::KeyboardLayout()
-    : mComputerKeys()
+KeyboardLayout::KeyboardLayout(KeyboardLayout && other)
+    : mComputerKeys(std::move(other.mComputerKeys))
+    , mComputerKeyAboutToBeAdded(std::move(other.mComputerKeyAboutToBeAdded))
+    , mComputerKeyAdded(std::move(other.mComputerKeyAdded))
+    , mComputerKeyAboutToBeRemoved(std::move(other.mComputerKeyAboutToBeRemoved))
+    , mComputerKeyRemoved(std::move(other.mComputerKeyRemoved))
 {
+}
+
+
+KeyboardLayout & KeyboardLayout::operator=(KeyboardLayout && other)
+{
+    mComputerKeys = std::move(other.mComputerKeys);
+    mComputerKeyAboutToBeAdded = std::move(other.mComputerKeyAboutToBeAdded);
+    mComputerKeyAdded = std::move(other.mComputerKeyAdded);
+    mComputerKeyAboutToBeRemoved = std::move(other.mComputerKeyAboutToBeRemoved);
+    mComputerKeyRemoved = std::move(other.mComputerKeyRemoved);
+    return *this;
 }
 
 
