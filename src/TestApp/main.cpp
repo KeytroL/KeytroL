@@ -23,7 +23,7 @@ KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
 #include <QtGui/QGuiApplication>
 #include <QtQml/qqml.h>
-#include <QtQuick/QQuickView>
+#include <QtQml/QQmlApplicationEngine>
 KL_RESTORE_WARNINGS
 
 
@@ -73,9 +73,7 @@ int main(int argc, char * argv[])
     qmlRegisterType<KL::ViewKeyboard>("KL.Keyboard", 1, 0, "Keyboard");
     qmlRegisterType<KL::KeyboardLayoutViewModel>("KL.Keyboard", 1, 0, "KeyboardLayout");
 
-    QQuickView quickView;
-    quickView.setSource(QUrl::fromLocalFile(QML_MAIN));
-    quickView.show();
+    QQmlApplicationEngine engine(QUrl::fromLocalFile(QML_MAIN));
 
     return application.exec();
 }
