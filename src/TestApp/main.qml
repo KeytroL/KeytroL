@@ -36,7 +36,7 @@ ApplicationWindow {
 
         onAccepted: {
             console.log("Loading file: " + fileDialog.fileUrl);
-            if (!xmlKeyboardLayout.load(fileDialog.fileUrl)) {
+            if (!xmlKeyboardLayout.load(fileDialog.fileUrl, keyboardLayout)) {
                 cannotLoadFileDialog.open();
             }
         }

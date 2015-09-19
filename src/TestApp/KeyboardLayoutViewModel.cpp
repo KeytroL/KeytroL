@@ -20,6 +20,16 @@ namespace KL
 KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * const parent)
     : QAbstractListModel(parent)
 {
+    setModel(KeyboardLayout());
+}
+
+
+void KeyboardLayoutViewModel::setModel(KeyboardLayout model)
+{
+    beginResetModel();
+    mModel = std::move(model);
+    endResetModel();
+
     mModel.computerKeyAboutToBeAdded().connect(
         [this](const KeyboardLayout::SizeType index)
         {

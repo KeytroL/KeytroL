@@ -13,10 +13,14 @@
 
 #include "XmlKeyboardLayout.hpp"
 
+#include "KeyboardLayoutViewModel.hpp"
+
 #include "KL/Core/Warnings.hpp"
+#include "KL/Keyboard/KeyboardLayout.hpp"
 
 KL_DISABLE_WARNINGS
 #include <QtCore/QFile>
+#include <QtCore/QXmlStreamReader>
 KL_RESTORE_WARNINGS
 
 
@@ -29,13 +33,47 @@ XmlKeyboardLayout::XmlKeyboardLayout(QObject * const parent)
 }
 
 
-bool XmlKeyboardLayout::load(const QUrl & fileUrl)
+bool XmlKeyboardLayout::load(
+    const QUrl & fileUrl, KeyboardLayoutViewModel * const keyboardLayoutViewModel)
 {
+    if (!keyboardLayoutViewModel)
+    {
+        return false;
+    }
+
     QFile file{fileUrl.toLocalFile()};
 
     if (file.open(QFile::ReadOnly | QFile::Text))
     {
-        return true;
+        QXmlStreamReader xml{&file};
+        KeyboardLayout keyboardLayout;
+
+        if (xml.readNextStartElement() && xml.name() == "KeyboardLayout")
+        {
+            while (!xml.atEnd())
+            {
+                if (xml.readNext() == QXmlStreamReader::StartElement
+                    && xml.name() == "ComputerKey")
+                {
+                    const auto & attributes = xml.attributes();
+                    const auto x = attributes.value("x").toInt();
+                    const auto y = attributes.value("y").toInt();
+                    const auto width = attributes.value("width").toUInt();
+                    const auto height = attributes.value("height").toUInt();
+                    const auto label = attributes.value("label").toString().toStdString();
+                    const auto keyCode = attributes.value("keyCode").toUInt();
+
+                    keyboardLayout.addComputerKey(
+                        ComputerKey(x, y, width, height, label, keyCode));
+                }
+            }
+        }
+
+        if (!xml.hasError())
+        {
+            keyboardLayoutViewModel->setModel(std::move(keyboardLayout));
+            return true;
+        }
     }
 
     return false;
