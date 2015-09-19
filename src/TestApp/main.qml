@@ -1,16 +1,58 @@
 import QtQuick 2.3
+import QtQuick.Controls 1.2
+import QtQuick.Dialogs 1.2
 
 import KL.Keyboard 1.0
 
 
-Rectangle {
+ApplicationWindow {
     id: root
 
+    visible: true
     width: 640
     height: 480
 
     readonly property int scale: 10
     readonly property int defaultKeySize: 4
+
+    menuBar: MenuBar {
+        Menu {
+            title: "File"
+
+            MenuItem {
+                action: Action {
+                    text: "Open..."
+
+                    onTriggered: {
+                        fileDialog.open();
+                    }
+                }
+            }
+        }
+    }
+
+    FileDialog {
+        id: fileDialog
+
+        onAccepted: {
+            console.log("Loading file: " + fileDialog.fileUrl);
+            if (!xmlKeyboardLayout.load(fileDialog.fileUrl, keyboardLayout)) {
+                cannotLoadFileDialog.open();
+            }
+        }
+    }
+
+    MessageDialog {
+        id: cannotLoadFileDialog
+
+        icon: StandardIcon.Warning
+        text: "Cannot load file " + fileDialog.fileUrl
+        standardButtons: StandardButton.Ok
+    }
+
+    XmlKeyboardLayout {
+        id: xmlKeyboardLayout
+    }
 
     KeyboardLayout {
         id: keyboardLayout
@@ -83,6 +125,8 @@ Rectangle {
                     anchors.margins: 5
 
                     text: model.label
+                    font.pixelSize: 9
+                    wrapMode: Text.Wrap
                 }
 
                 Connections {

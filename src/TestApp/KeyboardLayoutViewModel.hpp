@@ -13,7 +13,6 @@
 
 #pragma once
 
-#include "KL/Core/Connection.hpp"
 #include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
@@ -42,6 +41,8 @@ public:
 
     KeyboardLayoutViewModel(QObject * parent = nullptr);
 
+    void setModel(KeyboardLayout model);
+
     Q_INVOKABLE void addComputerKey(int x,
         int y,
         unsigned int width,
@@ -61,11 +62,6 @@ public:
 
 private:
     KeyboardLayout mModel;
-
-    ScopedConnection mComputerKeyAboutToBeAddedConnection;
-    ScopedConnection mComputerKeyAddedConnection;
-    ScopedConnection mComputerKeyAboutToBeRemovedConnection;
-    ScopedConnection mComputerKeyRemovedConnection;
 };
 
 } // namespace KL

@@ -13,6 +13,7 @@
 
 #include "KeyboardLayoutViewModel.hpp"
 #include "ViewKeyboard.hpp"
+#include "XmlKeyboardLayout.hpp"
 
 #include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/Keyboard.hpp"
@@ -23,7 +24,7 @@ KL_DISABLE_WARNINGS
 #include <QtCore/QDebug>
 #include <QtGui/QGuiApplication>
 #include <QtQml/qqml.h>
-#include <QtQuick/QQuickView>
+#include <QtQml/QQmlApplicationEngine>
 KL_RESTORE_WARNINGS
 
 
@@ -57,13 +58,11 @@ int main(int argc, char * argv[])
 
     keyboard.keyPressed().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
         {
-            qDebug() << "pressed : " << keyCode;
             keyMapping.at(keyCode, KL::Keyboard::KeyState::Pressed)();
         });
 
     keyboard.keyReleased().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
         {
-            qDebug() << "released: " << keyCode;
             keyMapping.at(keyCode, KL::Keyboard::KeyState::Released)();
         });
 
@@ -72,10 +71,9 @@ int main(int argc, char * argv[])
 
     qmlRegisterType<KL::ViewKeyboard>("KL.Keyboard", 1, 0, "Keyboard");
     qmlRegisterType<KL::KeyboardLayoutViewModel>("KL.Keyboard", 1, 0, "KeyboardLayout");
+    qmlRegisterType<KL::XmlKeyboardLayout>("KL.Keyboard", 1, 0, "XmlKeyboardLayout");
 
-    QQuickView quickView;
-    quickView.setSource(QUrl::fromLocalFile(QML_MAIN));
-    quickView.show();
+    QQmlApplicationEngine engine(QUrl::fromLocalFile(QML_MAIN));
 
     return application.exec();
 }

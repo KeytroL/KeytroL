@@ -4,6 +4,7 @@
 *.md                text
 *.qml               text
 *.txt               text
+*.xml               text
 *.yml               text
 .clang-format       text
 .gitattributes      text

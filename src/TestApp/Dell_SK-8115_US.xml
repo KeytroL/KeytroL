@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<KeyboardLayout>
+    <ComputerKey x="0" y="0" width="4" height="4" label="Esc" keyCode="1"/>
+    <ComputerKey x="8" y="0" width="4" height="4" label="F1" keyCode="59"/>
+    <ComputerKey x="12" y="0" width="4" height="4" label="F2" keyCode="60"/>
+    <ComputerKey x="16" y="0" width="4" height="4" label="F3" keyCode="61"/>
+    <ComputerKey x="20" y="0" width="4" height="4" label="F4" keyCode="62"/>
+    <ComputerKey x="26" y="0" width="4" height="4" label="F5" keyCode="63"/>
+    <ComputerKey x="30" y="0" width="4" height="4" label="F6" keyCode="64"/>
+    <ComputerKey x="34" y="0" width="4" height="4" label="F7" keyCode="65"/>
+    <ComputerKey x="38" y="0" width="4" height="4" label="F8" keyCode="66"/>
+    <ComputerKey x="44" y="0" width="4" height="4" label="F9" keyCode="67"/>
+    <ComputerKey x="48" y="0" width="4" height="4" label="F10" keyCode="68"/>
+    <ComputerKey x="52" y="0" width="4" height="4" label="F11" keyCode="87"/>
+    <ComputerKey x="56" y="0" width="4" height="4" label="F12" keyCode="88"/>
+    <ComputerKey x="62" y="0" width="4" height="4" label="Print Screen" keyCode="99"/>
+    <ComputerKey x="66" y="0" width="4" height="4" label="Scroll Lock" keyCode="70"/>
+    <ComputerKey x="70" y="0" width="4" height="4" label="Pause Break" keyCode="119"/>
+    <ComputerKey x="0" y="6" width="4" height="4" label="~      `" keyCode="41"/>
+    <ComputerKey x="4" y="6" width="4" height="4" label="!        1" keyCode="2"/>
+    <ComputerKey x="8" y="6" width="4" height="4" label="@      2" keyCode="3"/>
+    <ComputerKey x="12" y="6" width="4" height="4" label="#      3" keyCode="4"/>
+    <ComputerKey x="16" y="6" width="4" height="4" label="$       4" keyCode="5"/>
+    <ComputerKey x="20" y="6" width="4" height="4" label="%      5" keyCode="6"/>
+    <ComputerKey x="24" y="6" width="4" height="4" label="^       6" keyCode="7"/>
+    <ComputerKey x="28" y="6" width="4" height="4" label="&amp;       7" keyCode="8"/>
+    <ComputerKey x="32" y="6" width="4" height="4" label="*       8" keyCode="9"/>
+    <ComputerKey x="36" y="6" width="4" height="4" label="(       9" keyCode="10"/>
+    <ComputerKey x="40" y="6" width="4" height="4" label=")       0" keyCode="11"/>
+    <ComputerKey x="44" y="6" width="4" height="4" label="_        -" keyCode="12"/>
+    <ComputerKey x="48" y="6" width="4" height="4" label="+      =" keyCode="13"/>
+    <ComputerKey x="52" y="6" width="8" height="4" label="Backspace" keyCode="14"/>
+    <ComputerKey x="62" y="6" width="4" height="4" label="Insert" keyCode="110"/>
+    <ComputerKey x="66" y="6" width="4" height="4" label="Home" keyCode="102"/>
+    <ComputerKey x="70" y="6" width="4" height="4" label="Page Up" keyCode="104"/>
+    <ComputerKey x="76" y="6" width="4" height="4" label="Num Lock" keyCode="69"/>
+    <ComputerKey x="80" y="6" width="4" height="4" label="/" keyCode="98"/>
+    <ComputerKey x="84" y="6" width="4" height="4" label="*" keyCode="55"/>
+    <ComputerKey x="88" y="6" width="4" height="4" label="-" keyCode="74"/>
+    <ComputerKey x="0" y="10" width="6" height="4" label="Tab" keyCode="15"/>
+    <ComputerKey x="6" y="10" width="4" height="4" label="Q" keyCode="16"/>
+    <ComputerKey x="10" y="10" width="4" height="4" label="W" keyCode="17"/>
+    <ComputerKey x="14" y="10" width="4" height="4" label="E" keyCode="18"/>
+    <ComputerKey x="18" y="10" width="4" height="4" label="R" keyCode="19"/>
+    <ComputerKey x="22" y="10" width="4" height="4" label="T" keyCode="20"/>
+    <ComputerKey x="26" y="10" width="4" height="4" label="Y" keyCode="21"/>
+    <ComputerKey x="30" y="10" width="4" height="4" label="U" keyCode="22"/>
+    <ComputerKey x="34" y="10" width="4" height="4" label="I" keyCode="23"/>
+    <ComputerKey x="38" y="10" width="4" height="4" label="O" keyCode="24"/>
+    <ComputerKey x="42" y="10" width="4" height="4" label="P" keyCode="25"/>
+    <ComputerKey x="46" y="10" width="4" height="4" label="{        [" keyCode="26"/>
+    <ComputerKey x="50" y="10" width="4" height="4" label="}        ]" keyCode="27"/>
+    <ComputerKey x="54" y="10" width="6" height="4" label="|               \" keyCode="43"/>
+    <ComputerKey x="62" y="10" width="4" height="4" label="Delete" keyCode="111"/>
+    <ComputerKey x="66" y="10" width="4" height="4" label="End" keyCode="107"/>
+    <ComputerKey x="70" y="10" width="4" height="4" label="Page Down" keyCode="109"/>
+    <ComputerKey x="76" y="10" width="4" height="4" label="7  Home" keyCode="71"/>
+    <ComputerKey x="80" y="10" width="4" height="4" label="8" keyCode="72"/>
+    <ComputerKey x="84" y="10" width="4" height="4" label="9  PgUp" keyCode="73"/>
+    <ComputerKey x="88" y="10" width="4" height="8" label="+" keyCode="78"/>
+    <ComputerKey x="0" y="14" width="7" height="4" label="Caps Lock" keyCode="58"/>
+    <ComputerKey x="7" y="14" width="4" height="4" label="A" keyCode="30"/>
+    <ComputerKey x="11" y="14" width="4" height="4" label="S" keyCode="31"/>
+    <ComputerKey x="15" y="14" width="4" height="4" label="D" keyCode="32"/>
+    <ComputerKey x="19" y="14" width="4" height="4" label="F" keyCode="33"/>
+    <ComputerKey x="23" y="14" width="4" height="4" label="G" keyCode="34"/>
+    <ComputerKey x="27" y="14" width="4" height="4" label="H" keyCode="35"/>
+    <ComputerKey x="31" y="14" width="4" height="4" label="J" keyCode="36"/>
+    <ComputerKey x="35" y="14" width="4" height="4" label="K" keyCode="37"/>
+    <ComputerKey x="39" y="14" width="4" height="4" label="L" keyCode="38"/>
+    <ComputerKey x="43" y="14" width="4" height="4" label=":        ;" keyCode="39"/>
+    <ComputerKey x="47" y="14" width="4" height="4" label="&quot;         '" keyCode="40"/>
+    <ComputerKey x="51" y="14" width="9" height="4" label="Enter" keyCode="28"/>
+    <ComputerKey x="76" y="14" width="4" height="4" label="4" keyCode="75"/>
+    <ComputerKey x="80" y="14" width="4" height="4" label="5" keyCode="76"/>
+    <ComputerKey x="84" y="14" width="4" height="4" label="6" keyCode="77"/>
+    <ComputerKey x="0" y="18" width="9" height="4" label="Shift" keyCode="42"/>
+    <ComputerKey x="9" y="18" width="4" height="4" label="Z" keyCode="44"/>
+    <ComputerKey x="13" y="18" width="4" height="4" label="X" keyCode="45"/>
+    <ComputerKey x="17" y="18" width="4" height="4" label="C" keyCode="46"/>
+    <ComputerKey x="21" y="18" width="4" height="4" label="V" keyCode="47"/>
+    <ComputerKey x="25" y="18" width="4" height="4" label="B" keyCode="48"/>
+    <ComputerKey x="29" y="18" width="4" height="4" label="N" keyCode="49"/>
+    <ComputerKey x="33" y="18" width="4" height="4" label="M" keyCode="50"/>
+    <ComputerKey x="37" y="18" width="4" height="4" label="&lt;       ," keyCode="51"/>
+    <ComputerKey x="41" y="18" width="4" height="4" label="&gt;       ." keyCode="52"/>
+    <ComputerKey x="45" y="18" width="4" height="4" label="?        /" keyCode="53"/>
+    <ComputerKey x="49" y="18" width="11" height="4" label="SHIFT" keyCode="54"/>
+    <ComputerKey x="66" y="18" width="4" height="4" keyCode="103"/>
+    <ComputerKey x="76" y="18" width="4" height="4" label="1   End" keyCode="79"/>
+    <ComputerKey x="80" y="18" width="4" height="4" label="2" keyCode="80"/>
+    <ComputerKey x="84" y="18" width="4" height="4" label="3 PgDn" keyCode="81"/>
+    <ComputerKey x="88" y="18" width="4" height="8" label="Enter" keyCode="96"/>
+    <ComputerKey x="0" y="22" width="5" height="4" label="Ctrl" keyCode="29"/>
+    <ComputerKey x="5" y="22" width="5" height="4" label="WIN" keyCode="125"/>
+    <ComputerKey x="10" y="22" width="5" height="4" label="Alt" keyCode="56"/>
+    <ComputerKey x="15" y="22" width="25" height="4" keyCode="57"/>
+    <ComputerKey x="40" y="22" width="5" height="4" label="Alt Gr" keyCode="100"/>
+    <ComputerKey x="45" y="22" width="5" height="4" label="WIN" keyCode="126"/>
+    <ComputerKey x="50" y="22" width="5" height="4" label="MENU" keyCode="127"/>
+    <ComputerKey x="55" y="22" width="5" height="4" label="Ctrl" keyCode="97"/>
+    <ComputerKey x="62" y="22" width="4" height="4" keyCode="105"/>
+    <ComputerKey x="66" y="22" width="4" height="4" keyCode="108"/>
+    <ComputerKey x="70" y="22" width="4" height="4" keyCode="106"/>
+    <ComputerKey x="76" y="22" width="8" height="4" label="0                   Ins" keyCode="82"/>
+    <ComputerKey x="84" y="22" width="4" height="4" label=".     Del" keyCode="83"/>
+</KeyboardLayout>
+
