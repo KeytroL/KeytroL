@@ -33,6 +33,9 @@ public:
     Signal(const Signal &) = delete;
     Signal & operator=(const Signal &) = delete;
 
+    Signal(Signal && other);
+    Signal & operator=(Signal && other);
+
     Connection connect(std::function<void(T)> slot);
 
 protected:
