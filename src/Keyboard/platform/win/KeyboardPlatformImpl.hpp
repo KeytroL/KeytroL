@@ -30,8 +30,8 @@ public:
     static PlatformImpl & instance();
     ~PlatformImpl();
 
-    void addKeyboard(const Keyboard * const keyboard);
-    void removeKeyboard(const Keyboard * const keyboard);
+    void addKeyboard(const Keyboard * keyboard);
+    void removeKeyboard(const Keyboard * keyboard);
 
 private:
     PlatformImpl();

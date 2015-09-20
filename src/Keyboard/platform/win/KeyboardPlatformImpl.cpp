@@ -24,13 +24,13 @@ Keyboard::PlatformImpl & Keyboard::PlatformImpl::instance()
 }
 
 
-void Keyboard::PlatformImpl::addKeyboard(const Keyboard * const keyboard)
+void Keyboard::PlatformImpl::addKeyboard(const Keyboard * keyboard)
 {
     mKeyboards.insert(keyboard);
 }
 
 
-void Keyboard::PlatformImpl::removeKeyboard(const Keyboard * const keyboard)
+void Keyboard::PlatformImpl::removeKeyboard(const Keyboard * keyboard)
 {
     mKeyboards.erase(keyboard);
 }
@@ -38,8 +38,8 @@ void Keyboard::PlatformImpl::removeKeyboard(const Keyboard * const keyboard)
 
 Keyboard::PlatformImpl::PlatformImpl()
 {
-    const auto lowLevelKeyboardProc =
-        [](const int nCode, const WPARAM wParam, const LPARAM lParam) -> LRESULT
+    const auto lowLevelKeyboardProc = [](int nCode, WPARAM wParam, LPARAM lParam)
+                                          -> LRESULT
     {
         if (nCode == HC_ACTION)
         {
@@ -70,18 +70,18 @@ Keyboard::PlatformImpl::~PlatformImpl()
 }
 
 
-void Keyboard::PlatformImpl::pressKey(const Keyboard::KeyCode keyCode) const
+void Keyboard::PlatformImpl::pressKey(Keyboard::KeyCode keyCode) const
 {
-    for (const auto * const keyboard : mKeyboards)
+    for (const auto * keyboard : mKeyboards)
     {
         keyboard->pressKey(keyCode);
     }
 }
 
 
-void Keyboard::PlatformImpl::releaseKey(const Keyboard::KeyCode keyCode) const
+void Keyboard::PlatformImpl::releaseKey(Keyboard::KeyCode keyCode) const
 {
-    for (const auto * const keyboard : mKeyboards)
+    for (const auto * keyboard : mKeyboards)
     {
         keyboard->releaseKey(keyCode);
     }

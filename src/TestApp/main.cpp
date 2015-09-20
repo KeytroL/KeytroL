@@ -56,12 +56,12 @@ int main(int argc, char * argv[])
 
     KL::Keyboard keyboard;
 
-    keyboard.keyPressed().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
+    keyboard.keyPressed().connect([&keyMapping](KL::Keyboard::KeyCode keyCode)
         {
             keyMapping.at(keyCode, KL::Keyboard::KeyState::Pressed)();
         });
 
-    keyboard.keyReleased().connect([&keyMapping](const KL::Keyboard::KeyCode keyCode)
+    keyboard.keyReleased().connect([&keyMapping](KL::Keyboard::KeyCode keyCode)
         {
             keyMapping.at(keyCode, KL::Keyboard::KeyState::Released)();
         });

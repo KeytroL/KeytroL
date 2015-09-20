@@ -22,17 +22,17 @@ namespace KL
 
 Keyboard::Keyboard()
 {
-    auto keyPressConnection = testing::TestKeyboard::instance().mKeyPressed.connect(
-        [this](const KeyCode keyCode)
-        {
-            pressKey(keyCode);
-        });
+    auto keyPressConnection =
+        testing::TestKeyboard::instance().mKeyPressed.connect([this](KeyCode keyCode)
+            {
+                pressKey(keyCode);
+            });
 
-    auto keyReleaseConnection = testing::TestKeyboard::instance().mKeyReleased.connect(
-        [this](const KeyCode keyCode)
-        {
-            releaseKey(keyCode);
-        });
+    auto keyReleaseConnection =
+        testing::TestKeyboard::instance().mKeyReleased.connect([this](KeyCode keyCode)
+            {
+                releaseKey(keyCode);
+            });
 
     mPlatformImpl = std::unique_ptr<PlatformImpl>(
         new PlatformImpl{keyPressConnection, keyReleaseConnection});

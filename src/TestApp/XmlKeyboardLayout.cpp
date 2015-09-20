@@ -28,14 +28,14 @@ KL_RESTORE_WARNINGS
 namespace KL
 {
 
-XmlKeyboardLayout::XmlKeyboardLayout(QObject * const parent)
+XmlKeyboardLayout::XmlKeyboardLayout(QObject * parent)
     : QObject(parent)
 {
 }
 
 
 bool XmlKeyboardLayout::load(
-    const QUrl & fileUrl, KeyboardLayoutViewModel * const keyboardLayoutViewModel)
+    const QUrl & fileUrl, KeyboardLayoutViewModel * keyboardLayoutViewModel)
 {
     if (!keyboardLayoutViewModel)
     {
@@ -57,15 +57,14 @@ bool XmlKeyboardLayout::load(
                     && xml.name() == "ComputerKey")
                 {
                     const auto & attributes = xml.attributes();
-                    const auto x = attributes.value("x").toInt();
-                    const auto y = attributes.value("y").toInt();
-                    const auto width = attributes.value("width").toUInt();
-                    const auto height = attributes.value("height").toUInt();
-                    const auto label = attributes.value("label").toString().toStdString();
-                    const auto keyCode = attributes.value("keyCode").toUInt();
 
                     keyboardLayout.addComputerKey(
-                        ComputerKey(x, y, width, height, label, keyCode));
+                        ComputerKey(attributes.value("x").toInt(),
+                            attributes.value("y").toInt(),
+                            attributes.value("width").toUInt(),
+                            attributes.value("height").toUInt(),
+                            attributes.value("label").toString().toStdString(),
+                            attributes.value("keyCode").toUInt()));
                 }
             }
         }
@@ -82,7 +81,7 @@ bool XmlKeyboardLayout::load(
 
 
 bool XmlKeyboardLayout::save(
-    const QUrl & fileUrl, KeyboardLayoutViewModel * const keyboardLayoutViewModel)
+    const QUrl & fileUrl, KeyboardLayoutViewModel * keyboardLayoutViewModel)
 {
     if (!keyboardLayoutViewModel)
     {

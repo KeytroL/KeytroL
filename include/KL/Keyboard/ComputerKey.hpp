@@ -31,15 +31,18 @@ public:
         std::string label,
         Keyboard::KeyCode keyCode);
 
-    const int & x() const;
-    const int & y() const;
+    ComputerKey(ComputerKey && other);
+    ComputerKey & operator=(ComputerKey && other);
 
-    const unsigned int & width() const;
-    const unsigned int & height() const;
+    int x() const;
+    int y() const;
+
+    unsigned int width() const;
+    unsigned int height() const;
 
     const std::string & label() const;
 
-    const Keyboard::KeyCode & keyCode() const;
+    Keyboard::KeyCode keyCode() const;
 
     bool operator==(const ComputerKey & other) const;
 

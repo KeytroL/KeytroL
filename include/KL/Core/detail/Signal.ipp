@@ -33,7 +33,7 @@ Signal<T> & Signal<T>::operator=(Signal && other)
 
 
 template <typename T>
-Connection Signal<T>::connect(const std::function<void(T)> slot)
+Connection Signal<T>::connect(std::function<void(T)> slot)
 {
     mSlots.emplace_back(std::make_shared<bool>(true), std::move(slot));
     return Connection{mSlots.back().first};

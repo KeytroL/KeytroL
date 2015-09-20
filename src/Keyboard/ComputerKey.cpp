@@ -17,12 +17,12 @@
 namespace KL
 {
 
-ComputerKey::ComputerKey(const int x,
-    const int y,
-    const unsigned int width,
-    const unsigned int height,
-    const std::string label,
-    const Keyboard::KeyCode keyCode)
+ComputerKey::ComputerKey(int x,
+    int y,
+    unsigned int width,
+    unsigned int height,
+    std::string label,
+    Keyboard::KeyCode keyCode)
     : mX(x)
     , mY(y)
     , mWidth(width)
@@ -33,25 +33,48 @@ ComputerKey::ComputerKey(const int x,
 }
 
 
-const int & ComputerKey::x() const
+ComputerKey::ComputerKey(ComputerKey && other)
+    : mX(std::move(other.mX))
+    , mY(std::move(other.mY))
+    , mWidth(std::move(other.mWidth))
+    , mHeight(std::move(other.mHeight))
+    , mLabel(std::move(other.mLabel))
+    , mKeyCode(std::move(other.mKeyCode))
+{
+}
+
+
+ComputerKey & ComputerKey::operator=(ComputerKey && other)
+{
+    mX = std::move(other.mX);
+    mY = std::move(other.mY);
+    mWidth = std::move(other.mWidth);
+    mHeight = std::move(other.mHeight);
+    mLabel = std::move(other.mLabel);
+    mKeyCode = std::move(other.mKeyCode);
+    return *this;
+}
+
+
+int ComputerKey::x() const
 {
     return mX;
 }
 
 
-const int & ComputerKey::y() const
+int ComputerKey::y() const
 {
     return mY;
 }
 
 
-const unsigned int & ComputerKey::width() const
+unsigned int ComputerKey::width() const
 {
     return mWidth;
 }
 
 
-const unsigned int & ComputerKey::height() const
+unsigned int ComputerKey::height() const
 {
     return mHeight;
 }
@@ -63,7 +86,7 @@ const std::string & ComputerKey::label() const
 }
 
 
-const Keyboard::KeyCode & ComputerKey::keyCode() const
+Keyboard::KeyCode ComputerKey::keyCode() const
 {
     return mKeyCode;
 }

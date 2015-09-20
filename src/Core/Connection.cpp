@@ -45,7 +45,7 @@ void Connection::disconnect() const
 }
 
 
-Connection::Connection(const std::shared_ptr<bool> connected)
+Connection::Connection(std::shared_ptr<bool> connected)
     : mConnected(std::move(connected))
 {
 }

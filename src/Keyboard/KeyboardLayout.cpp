@@ -40,7 +40,7 @@ KeyboardLayout & KeyboardLayout::operator=(KeyboardLayout && other)
 }
 
 
-void KeyboardLayout::addComputerKey(const ComputerKey computerKey)
+void KeyboardLayout::addComputerKey(ComputerKey computerKey)
 {
     auto index = mComputerKeys.size();
     mComputerKeyAboutToBeAdded.emit(index);
@@ -61,7 +61,7 @@ Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAdded()
 }
 
 
-void KeyboardLayout::removeComputerKey(const SizeType index)
+void KeyboardLayout::removeComputerKey(SizeType index)
 {
     if (index < mComputerKeys.size())
     {

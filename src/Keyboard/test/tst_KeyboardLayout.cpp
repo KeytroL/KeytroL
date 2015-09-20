@@ -48,14 +48,13 @@ TEST_CASE("React to adding a ComputerKey to a KeyboardLayout", "[KeyboardLayout]
     KL::KeyboardLayout::SizeType added = 0u;
 
     keyboardLayout.computerKeyAboutToBeAdded().connect(
-        [&aboutToBeAdded](const KL::KeyboardLayout::SizeType index)
+        [&aboutToBeAdded](KL::KeyboardLayout::SizeType index)
         {
             aboutToBeAdded = index;
         });
     REQUIRE(aboutToBeAdded == 0u);
 
-    keyboardLayout.computerKeyAdded().connect(
-        [&added](const KL::KeyboardLayout::SizeType index)
+    keyboardLayout.computerKeyAdded().connect([&added](KL::KeyboardLayout::SizeType index)
         {
             added = index;
         });
@@ -90,14 +89,14 @@ TEST_CASE("React to removing a ComputerKey from a KeyboardLayout", "[KeyboardLay
     KL::KeyboardLayout::SizeType removed = 0u;
 
     keyboardLayout.computerKeyAboutToBeRemoved().connect(
-        [&aboutToBeRemoved](const KL::KeyboardLayout::SizeType index)
+        [&aboutToBeRemoved](KL::KeyboardLayout::SizeType index)
         {
             aboutToBeRemoved = index;
         });
     REQUIRE(aboutToBeRemoved == 0u);
 
     keyboardLayout.computerKeyRemoved().connect(
-        [&removed](const KL::KeyboardLayout::SizeType index)
+        [&removed](KL::KeyboardLayout::SizeType index)
         {
             removed = index;
         });
