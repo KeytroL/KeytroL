@@ -41,6 +41,7 @@ public:
 
     KeyboardLayoutViewModel(QObject * parent = nullptr);
 
+    const KeyboardLayout & model() const;
     void setModel(KeyboardLayout model);
 
     Q_INVOKABLE void addComputerKey(int x,

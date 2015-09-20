@@ -36,7 +36,7 @@ ApplicationWindow {
                     onTriggered: {
                         if (fileDialog.fileUrl.toString() !== "") {
                             console.log("Saving file: " + fileDialog.fileUrl);
-                            if (!xmlKeyboardLayout.save(fileDialog.fileUrl)) {
+                            if (!xmlKeyboardLayout.save(fileDialog.fileUrl, keyboardLayout)) {
                                 cannotSaveFileDialog.open();
                             }
                         }
