@@ -106,6 +106,8 @@ ApplicationWindow {
     }
 
     MouseArea {
+        id: mouseArea
+
         anchors.fill: parent
         anchors.margins: 1
 
@@ -113,18 +115,18 @@ ApplicationWindow {
         property int newComputerKeyOffset: 0
 
         onPressed: {
-            selectedComputerKey = childAt(mouse.x, mouse.y);
+            mouseArea.selectedComputerKey = childAt(mouse.x, mouse.y);
         }
 
         onPositionChanged: {
-            if (selectedComputerKey) {
+            if (mouseArea.selectedComputerKey) {
                 keyboardLayout.moveComputerKey(
-                    selectedComputerKey.modelIndex,
+                    mouseArea.selectedComputerKey.modelIndex,
                     Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
                     Math.round(mouse.y / root.scale - root.defaultKeySize / 2)
                 );
 
-                selectedComputerKey = childAt(mouse.x, mouse.y);
+                mouseArea.selectedComputerKey = childAt(mouse.x, mouse.y);
             }
         }
 
@@ -137,15 +139,15 @@ ApplicationWindow {
                     Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
                     root.defaultKeySize,
                     root.defaultKeySize,
-                    String.fromCharCode(65 + newComputerKeyOffset),
-                    1 + newComputerKeyOffset);
-                ++newComputerKeyOffset;
+                    String.fromCharCode(65 + mouseArea.newComputerKeyOffset),
+                    1 + mouseArea.newComputerKeyOffset);
+                ++mouseArea.newComputerKeyOffset;
             }
             else {
                 keyboardLayout.removeComputerKey(computerKey.modelIndex);
             }
 
-            selectedComputerKey = childAt(mouse.x, mouse.y);
+            mouseArea.selectedComputerKey = childAt(mouse.x, mouse.y);
         }
 
         Repeater {
