@@ -28,7 +28,7 @@ TEST_CASE("Construct a Connection, then assign it another Connection", "[Connect
 
     KL::PrivateSignal<bool> signal;
 
-    connection = signal.connect([](const bool)
+    connection = signal.connect([](bool)
         {
         });
     REQUIRE(connection.isConnected());
@@ -46,7 +46,7 @@ TEST_CASE(
 
     KL::PrivateSignal<bool> signal;
 
-    scopedConnection = signal.connect([](const bool)
+    scopedConnection = signal.connect([](bool)
         {
         });
     REQUIRE(scopedConnection.isConnected());
@@ -60,7 +60,7 @@ TEST_CASE("Disconnect automatically with a ScopedConnection", "[Connection]")
 {
     KL::PrivateSignal<bool> signal;
 
-    auto connection = signal.connect([](const bool)
+    auto connection = signal.connect([](bool)
         {
         });
     REQUIRE(connection.isConnected());

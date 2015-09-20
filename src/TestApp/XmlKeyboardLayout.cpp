@@ -28,14 +28,14 @@ KL_RESTORE_WARNINGS
 namespace KL
 {
 
-XmlKeyboardLayout::XmlKeyboardLayout(QObject * const parent)
+XmlKeyboardLayout::XmlKeyboardLayout(QObject * parent)
     : QObject(parent)
 {
 }
 
 
 bool XmlKeyboardLayout::load(
-    const QUrl & fileUrl, KeyboardLayoutViewModel * const keyboardLayoutViewModel)
+    const QUrl & fileUrl, KeyboardLayoutViewModel * keyboardLayoutViewModel)
 {
     if (!keyboardLayoutViewModel)
     {
@@ -81,7 +81,7 @@ bool XmlKeyboardLayout::load(
 
 
 bool XmlKeyboardLayout::save(
-    const QUrl & fileUrl, KeyboardLayoutViewModel * const keyboardLayoutViewModel)
+    const QUrl & fileUrl, KeyboardLayoutViewModel * keyboardLayoutViewModel)
 {
     if (!keyboardLayoutViewModel)
     {

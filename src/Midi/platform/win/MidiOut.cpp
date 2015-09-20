@@ -43,7 +43,7 @@ unsigned int MidiOut::deviceCount()
 }
 
 
-std::string MidiOut::deviceName(const unsigned int deviceIndex)
+std::string MidiOut::deviceName(unsigned int deviceIndex)
 {
     MIDIOUTCAPS midiOutCaps;
     if (MMSYSERR_NOERROR
@@ -55,7 +55,7 @@ std::string MidiOut::deviceName(const unsigned int deviceIndex)
 }
 
 
-MidiOut::MidiOut(const unsigned int deviceIndex)
+MidiOut::MidiOut(unsigned int deviceIndex)
     : mPlatformImpl(std::unique_ptr<PlatformImpl>(new PlatformImpl))
 {
     midiOutOpen(&mPlatformImpl->mMidiOutHandle, deviceIndex, 0, 0, CALLBACK_NULL);
@@ -69,8 +69,7 @@ MidiOut::~MidiOut()
 }
 
 
-void MidiOut::sendMessage(
-    const Byte statusByte, const Byte dataByte1, const Byte dataByte2) const
+void MidiOut::sendMessage(Byte statusByte, Byte dataByte1, Byte dataByte2) const
 {
     const PlatformImpl::MidiMessage message = {statusByte, dataByte1, dataByte2, 0};
 

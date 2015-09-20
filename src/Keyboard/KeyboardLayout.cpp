@@ -61,7 +61,7 @@ Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAdded()
 }
 
 
-void KeyboardLayout::removeComputerKey(const SizeType index)
+void KeyboardLayout::removeComputerKey(SizeType index)
 {
     if (index < mComputerKeys.size())
     {

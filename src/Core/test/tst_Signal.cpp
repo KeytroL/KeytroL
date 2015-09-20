@@ -24,7 +24,7 @@ TEST_CASE("Connect to a Signal", "[Signal]")
 {
     KL::Signal<bool> signal;
 
-    auto connection = signal.connect([](const bool)
+    auto connection = signal.connect([](bool)
         {
         });
 
@@ -37,7 +37,7 @@ TEST_CASE("Emit a Signal", "[Signal]")
     KL::PrivateSignal<bool> signal;
     auto count = 0;
 
-    signal.connect([&count](const bool value)
+    signal.connect([&count](bool value)
         {
             if (value)
             {
@@ -59,7 +59,7 @@ TEST_CASE("Disconnect from a Signal", "[Signal]")
     KL::PrivateSignal<bool> signal;
     auto count = 0;
 
-    auto connection = signal.connect([&count](const bool)
+    auto connection = signal.connect([&count](bool)
         {
             ++count;
         });

@@ -26,13 +26,13 @@ TestKeyboard & TestKeyboard::instance()
 }
 
 
-void TestKeyboard::pressKey(const Keyboard::KeyCode keyCode) const
+void TestKeyboard::pressKey(Keyboard::KeyCode keyCode) const
 {
     mKeyPressed.emit(keyCode);
 }
 
 
-void TestKeyboard::releaseKey(const Keyboard::KeyCode keyCode) const
+void TestKeyboard::releaseKey(Keyboard::KeyCode keyCode) const
 {
     mKeyReleased.emit(keyCode);
 }

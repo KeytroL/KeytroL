@@ -17,7 +17,7 @@
 namespace KL
 {
 
-KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * const parent)
+KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * parent)
     : QAbstractListModel(parent)
 {
     setModel(KeyboardLayout());
@@ -36,38 +36,36 @@ void KeyboardLayoutViewModel::setModel(KeyboardLayout model)
     mModel = std::move(model);
     endResetModel();
 
-    mModel.computerKeyAboutToBeAdded().connect(
-        [this](const KeyboardLayout::SizeType index)
+    mModel.computerKeyAboutToBeAdded().connect([this](KeyboardLayout::SizeType index)
         {
             beginInsertRows(
                 QModelIndex(), static_cast<int>(index), static_cast<int>(index));
         });
 
-    mModel.computerKeyAdded().connect([this](const KeyboardLayout::SizeType)
+    mModel.computerKeyAdded().connect([this](KeyboardLayout::SizeType)
         {
             endInsertRows();
         });
 
-    mModel.computerKeyAboutToBeRemoved().connect(
-        [this](const KeyboardLayout::SizeType index)
+    mModel.computerKeyAboutToBeRemoved().connect([this](KeyboardLayout::SizeType index)
         {
             beginRemoveRows(
                 QModelIndex(), static_cast<int>(index), static_cast<int>(index));
         });
 
-    mModel.computerKeyRemoved().connect([this](const KeyboardLayout::SizeType)
+    mModel.computerKeyRemoved().connect([this](KeyboardLayout::SizeType)
         {
             endRemoveRows();
         });
 }
 
 
-void KeyboardLayoutViewModel::addComputerKey(const int x,
-    const int y,
-    const unsigned int width,
-    const unsigned int height,
+void KeyboardLayoutViewModel::addComputerKey(int x,
+    int y,
+    unsigned int width,
+    unsigned int height,
     const QString & label,
-    const unsigned int keyCode)
+    unsigned int keyCode)
 {
     mModel.addComputerKey(ComputerKey(x, y, width, height, label.toStdString(), keyCode));
 }
@@ -82,8 +80,7 @@ void KeyboardLayoutViewModel::removeComputerKey(const QModelIndex & index)
 }
 
 
-void KeyboardLayoutViewModel::moveComputerKey(
-    const QModelIndex & index, const int x, const int y)
+void KeyboardLayoutViewModel::moveComputerKey(const QModelIndex & index, int x, int y)
 {
     if (index.isValid())
     {
@@ -98,7 +95,7 @@ void KeyboardLayoutViewModel::moveComputerKey(
 }
 
 
-QModelIndex KeyboardLayoutViewModel::modelIndex(const int row) const
+QModelIndex KeyboardLayoutViewModel::modelIndex(int row) const
 {
     return index(row, 0);
 }

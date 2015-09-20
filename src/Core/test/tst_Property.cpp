@@ -33,7 +33,7 @@ TEST_CASE("Modify a char Property", "[Property]")
     KL::Property<char> property('a');
     auto sentinel = 'b';
 
-    property.valueChanged().connect([&sentinel](const char value)
+    property.valueChanged().connect([&sentinel](char value)
         {
             sentinel = value;
         });
