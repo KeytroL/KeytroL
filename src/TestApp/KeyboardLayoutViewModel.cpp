@@ -89,11 +89,11 @@ void KeyboardLayoutViewModel::moveComputerKey(
     {
         const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
         const auto & oldKey = mModel.computerKeys().at(computerKeyIndex);
-        const auto newKey = ComputerKey(
+        auto newKey = ComputerKey(
             x, y, oldKey.width(), oldKey.height(), oldKey.label(), oldKey.keyCode());
 
         mModel.removeComputerKey(computerKeyIndex);
-        mModel.addComputerKey(newKey);
+        mModel.addComputerKey(std::move(newKey));
     }
 }
 

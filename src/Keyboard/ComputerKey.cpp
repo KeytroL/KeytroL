@@ -33,6 +33,29 @@ ComputerKey::ComputerKey(const int x,
 }
 
 
+ComputerKey::ComputerKey(ComputerKey && other)
+    : mX(std::move(other.mX))
+    , mY(std::move(other.mY))
+    , mWidth(std::move(other.mWidth))
+    , mHeight(std::move(other.mHeight))
+    , mLabel(std::move(other.mLabel))
+    , mKeyCode(std::move(other.mKeyCode))
+{
+}
+
+
+ComputerKey & ComputerKey::operator=(ComputerKey && other)
+{
+    mX = std::move(other.mX);
+    mY = std::move(other.mY);
+    mWidth = std::move(other.mWidth);
+    mHeight = std::move(other.mHeight);
+    mLabel = std::move(other.mLabel);
+    mKeyCode = std::move(other.mKeyCode);
+    return *this;
+}
+
+
 int ComputerKey::x() const
 {
     return mX;
