@@ -43,12 +43,17 @@ ApplicationWindow {
                                 cannotSaveFileDialog.open();
                             }
                         }
+                        else {
+                            saveAsAction.trigger();
+                        }
                     }
                 }
             }
 
             MenuItem {
                 action: Action {
+                    id: saveAsAction
+
                     text: "Save As..."
 
                     onTriggered: {
