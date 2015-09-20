@@ -32,6 +32,8 @@ ApplicationWindow {
 
             MenuItem {
                 action: Action {
+                    id: saveAction
+
                     text: "Save"
 
                     onTriggered: {
@@ -41,6 +43,17 @@ ApplicationWindow {
                                 cannotSaveFileDialog.open();
                             }
                         }
+                    }
+                }
+            }
+
+            MenuItem {
+                action: Action {
+                    text: "Save As..."
+
+                    onTriggered: {
+                        fileDialog.selectExisting = false;
+                        fileDialog.open();
                     }
                 }
             }
@@ -56,6 +69,9 @@ ApplicationWindow {
                 if (!xmlKeyboardLayout.load(fileDialog.fileUrl, keyboardLayout)) {
                     cannotLoadFileDialog.open();
                 }
+            }
+            else {
+                saveAction.trigger();
             }
         }
     }
