@@ -40,7 +40,7 @@ KeyboardLayout & KeyboardLayout::operator=(KeyboardLayout && other)
 }
 
 
-void KeyboardLayout::addComputerKey(const ComputerKey computerKey)
+void KeyboardLayout::addComputerKey(ComputerKey computerKey)
 {
     auto index = mComputerKeys.size();
     mComputerKeyAboutToBeAdded.emit(index);

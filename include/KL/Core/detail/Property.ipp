@@ -20,7 +20,7 @@ namespace KL
 {
 
 template <typename T>
-Property<T>::Property(const T value)
+Property<T>::Property(T value)
     : mValue(std::move(value))
 {
 }

@@ -21,7 +21,7 @@ ComputerKey::ComputerKey(const int x,
     const int y,
     const unsigned int width,
     const unsigned int height,
-    const std::string label,
+    std::string label,
     const Keyboard::KeyCode keyCode)
     : mX(x)
     , mY(y)
