@@ -86,7 +86,7 @@
     <ComputerKey x="41" y="18" width="4" height="4" label="&gt;       ." keyCode="52"/>
     <ComputerKey x="45" y="18" width="4" height="4" label="?        /" keyCode="53"/>
     <ComputerKey x="49" y="18" width="11" height="4" label="SHIFT" keyCode="54"/>
-    <ComputerKey x="66" y="18" width="4" height="4" keyCode="103"/>
+    <ComputerKey x="66" y="18" width="4" height="4" label="" keyCode="103"/>
     <ComputerKey x="76" y="18" width="4" height="4" label="1   End" keyCode="79"/>
     <ComputerKey x="80" y="18" width="4" height="4" label="2" keyCode="80"/>
     <ComputerKey x="84" y="18" width="4" height="4" label="3 PgDn" keyCode="81"/>
@@ -94,15 +94,14 @@
     <ComputerKey x="0" y="22" width="5" height="4" label="Ctrl" keyCode="29"/>
     <ComputerKey x="5" y="22" width="5" height="4" label="WIN" keyCode="125"/>
     <ComputerKey x="10" y="22" width="5" height="4" label="Alt" keyCode="56"/>
-    <ComputerKey x="15" y="22" width="25" height="4" keyCode="57"/>
+    <ComputerKey x="15" y="22" width="25" height="4" label="" keyCode="57"/>
     <ComputerKey x="40" y="22" width="5" height="4" label="Alt Gr" keyCode="100"/>
     <ComputerKey x="45" y="22" width="5" height="4" label="WIN" keyCode="126"/>
     <ComputerKey x="50" y="22" width="5" height="4" label="MENU" keyCode="127"/>
     <ComputerKey x="55" y="22" width="5" height="4" label="Ctrl" keyCode="97"/>
-    <ComputerKey x="62" y="22" width="4" height="4" keyCode="105"/>
-    <ComputerKey x="66" y="22" width="4" height="4" keyCode="108"/>
-    <ComputerKey x="70" y="22" width="4" height="4" keyCode="106"/>
+    <ComputerKey x="62" y="22" width="4" height="4" label="" keyCode="105"/>
+    <ComputerKey x="66" y="22" width="4" height="4" label="" keyCode="108"/>
+    <ComputerKey x="70" y="22" width="4" height="4" label="" keyCode="106"/>
     <ComputerKey x="76" y="22" width="8" height="4" label="0                   Ins" keyCode="82"/>
     <ComputerKey x="84" y="22" width="4" height="4" label=".     Del" keyCode="83"/>
 </KeyboardLayout>
-
