@@ -24,6 +24,7 @@ ApplicationWindow {
                     text: "Open..."
 
                     onTriggered: {
+                        fileDialog.selectExisting = true;
                         fileDialog.open();
                     }
                 }
@@ -50,9 +51,11 @@ ApplicationWindow {
         id: fileDialog
 
         onAccepted: {
-            console.log("Loading file: " + fileDialog.fileUrl);
-            if (!xmlKeyboardLayout.load(fileDialog.fileUrl, keyboardLayout)) {
-                cannotLoadFileDialog.open();
+            if (fileDialog.selectExisting) {
+                console.log("Loading file: " + fileDialog.fileUrl);
+                if (!xmlKeyboardLayout.load(fileDialog.fileUrl, keyboardLayout)) {
+                    cannotLoadFileDialog.open();
+                }
             }
         }
     }
