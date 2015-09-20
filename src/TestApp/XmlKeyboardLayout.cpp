@@ -79,4 +79,17 @@ bool XmlKeyboardLayout::load(
     return false;
 }
 
+
+bool XmlKeyboardLayout::save(const QUrl & fileUrl)
+{
+    QFile file{fileUrl.toLocalFile()};
+
+    if (file.open(QFile::WriteOnly | QFile::Text))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 } // namespace KL

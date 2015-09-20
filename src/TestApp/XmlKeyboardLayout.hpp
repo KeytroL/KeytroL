@@ -36,6 +36,8 @@ public:
 
     Q_INVOKABLE bool load(
         const QUrl & fileUrl, KL::KeyboardLayoutViewModel * keyboardLayoutViewModel);
+
+    Q_INVOKABLE bool save(const QUrl & fileUrl);
 };
 
 } // namespace KL

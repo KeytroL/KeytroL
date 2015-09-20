@@ -28,6 +28,21 @@ ApplicationWindow {
                     }
                 }
             }
+
+            MenuItem {
+                action: Action {
+                    text: "Save"
+
+                    onTriggered: {
+                        if (fileDialog.fileUrl.toString() !== "") {
+                            console.log("Saving file: " + fileDialog.fileUrl);
+                            if (!xmlKeyboardLayout.save(fileDialog.fileUrl)) {
+                                cannotSaveFileDialog.open();
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -47,6 +62,14 @@ ApplicationWindow {
 
         icon: StandardIcon.Warning
         text: "Cannot load file " + fileDialog.fileUrl
+        standardButtons: StandardButton.Ok
+    }
+
+    MessageDialog {
+        id: cannotSaveFileDialog
+
+        icon: StandardIcon.Warning
+        text: "Cannot save file " + fileDialog.fileUrl
         standardButtons: StandardButton.Ok
     }
 
