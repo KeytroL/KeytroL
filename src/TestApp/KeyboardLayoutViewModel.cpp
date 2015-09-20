@@ -24,6 +24,12 @@ KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * const parent)
 }
 
 
+const KeyboardLayout & KeyboardLayoutViewModel::model() const
+{
+    return mModel;
+}
+
+
 void KeyboardLayoutViewModel::setModel(KeyboardLayout model)
 {
     beginResetModel();

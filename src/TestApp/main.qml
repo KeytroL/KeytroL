@@ -24,6 +24,40 @@ ApplicationWindow {
                     text: "Open..."
 
                     onTriggered: {
+                        fileDialog.selectExisting = true;
+                        fileDialog.open();
+                    }
+                }
+            }
+
+            MenuItem {
+                action: Action {
+                    id: saveAction
+
+                    text: "Save"
+
+                    onTriggered: {
+                        if (fileDialog.fileUrl.toString() !== "") {
+                            console.log("Saving file: " + fileDialog.fileUrl);
+                            if (!xmlKeyboardLayout.save(fileDialog.fileUrl, keyboardLayout)) {
+                                cannotSaveFileDialog.open();
+                            }
+                        }
+                        else {
+                            saveAsAction.trigger();
+                        }
+                    }
+                }
+            }
+
+            MenuItem {
+                action: Action {
+                    id: saveAsAction
+
+                    text: "Save As..."
+
+                    onTriggered: {
+                        fileDialog.selectExisting = false;
                         fileDialog.open();
                     }
                 }
@@ -35,9 +69,14 @@ ApplicationWindow {
         id: fileDialog
 
         onAccepted: {
-            console.log("Loading file: " + fileDialog.fileUrl);
-            if (!xmlKeyboardLayout.load(fileDialog.fileUrl, keyboardLayout)) {
-                cannotLoadFileDialog.open();
+            if (fileDialog.selectExisting) {
+                console.log("Loading file: " + fileDialog.fileUrl);
+                if (!xmlKeyboardLayout.load(fileDialog.fileUrl, keyboardLayout)) {
+                    cannotLoadFileDialog.open();
+                }
+            }
+            else {
+                saveAction.trigger();
             }
         }
     }
@@ -47,6 +86,14 @@ ApplicationWindow {
 
         icon: StandardIcon.Warning
         text: "Cannot load file " + fileDialog.fileUrl
+        standardButtons: StandardButton.Ok
+    }
+
+    MessageDialog {
+        id: cannotSaveFileDialog
+
+        icon: StandardIcon.Warning
+        text: "Cannot save file " + fileDialog.fileUrl
         standardButtons: StandardButton.Ok
     }
 

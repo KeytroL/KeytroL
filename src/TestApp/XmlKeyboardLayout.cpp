@@ -21,6 +21,7 @@
 KL_DISABLE_WARNINGS
 #include <QtCore/QFile>
 #include <QtCore/QXmlStreamReader>
+#include <QtCore/QXmlStreamWriter>
 KL_RESTORE_WARNINGS
 
 
@@ -72,6 +73,49 @@ bool XmlKeyboardLayout::load(
         if (!xml.hasError())
         {
             keyboardLayoutViewModel->setModel(std::move(keyboardLayout));
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+bool XmlKeyboardLayout::save(
+    const QUrl & fileUrl, KeyboardLayoutViewModel * const keyboardLayoutViewModel)
+{
+    if (!keyboardLayoutViewModel)
+    {
+        return false;
+    }
+
+    QFile file{fileUrl.toLocalFile()};
+
+    if (file.open(QFile::WriteOnly | QFile::Text))
+    {
+        QXmlStreamWriter xml{&file};
+        xml.setAutoFormatting(true);
+
+        xml.writeStartDocument();
+        xml.writeStartElement("KeyboardLayout");
+
+        for (const auto & computerKey : keyboardLayoutViewModel->model().computerKeys())
+        {
+            xml.writeStartElement("ComputerKey");
+            xml.writeAttribute("x", QString::number(computerKey.x()));
+            xml.writeAttribute("y", QString::number(computerKey.y()));
+            xml.writeAttribute("width", QString::number(computerKey.width()));
+            xml.writeAttribute("height", QString::number(computerKey.height()));
+            xml.writeAttribute("label", QString::fromStdString(computerKey.label()));
+            xml.writeAttribute("keyCode", QString::number(computerKey.keyCode()));
+            xml.writeEndElement();
+        }
+
+        xml.writeEndElement();
+        xml.writeEndDocument();
+
+        if (!xml.hasError())
+        {
             return true;
         }
     }
