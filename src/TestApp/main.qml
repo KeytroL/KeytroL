@@ -106,57 +106,66 @@ ApplicationWindow {
     }
 
     MouseArea {
+        id: mouseArea
+
         anchors.fill: parent
         anchors.margins: 1
 
         property var selectedComputerKey
         property int newComputerKeyOffset: 0
 
+        function updateSelectedComputerKey(x, y) {
+            var computerKey = childAt(x, y);
+            if (computerKey === null) {
+                forceActiveFocus();
+            }
+            else {
+                computerKey.forceActiveFocus();
+            }
+            mouseArea.selectedComputerKey = computerKey;
+        }
+
         onPressed: {
-            selectedComputerKey = childAt(mouse.x, mouse.y);
+            updateSelectedComputerKey(mouse.x, mouse.y);
         }
 
         onPositionChanged: {
-            if (selectedComputerKey) {
+            if (mouseArea.selectedComputerKey) {
                 keyboardLayout.moveComputerKey(
-                    selectedComputerKey.modelIndex,
+                    mouseArea.selectedComputerKey.modelIndex,
                     Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
                     Math.round(mouse.y / root.scale - root.defaultKeySize / 2)
                 );
 
-                selectedComputerKey = childAt(mouse.x, mouse.y);
+                updateSelectedComputerKey(mouse.x, mouse.y);
             }
         }
 
         onDoubleClicked: {
-            var computerKey = childAt(mouse.x, mouse.y);
-
-            if (computerKey === null) {
+            if (mouseArea.selectedComputerKey === null) {
                 keyboardLayout.addComputerKey(
                     Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
                     Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
                     root.defaultKeySize,
                     root.defaultKeySize,
-                    String.fromCharCode(65 + newComputerKeyOffset),
-                    1 + newComputerKeyOffset);
-                ++newComputerKeyOffset;
+                    "",
+                    1 + mouseArea.newComputerKeyOffset);
+                ++mouseArea.newComputerKeyOffset;
             }
             else {
-                keyboardLayout.removeComputerKey(computerKey.modelIndex);
+                keyboardLayout.removeComputerKey(mouseArea.selectedComputerKey.modelIndex);
             }
 
-            selectedComputerKey = childAt(mouse.x, mouse.y);
+            updateSelectedComputerKey(mouse.x, mouse.y);
         }
 
         Repeater {
             model: keyboardLayout
 
             delegate: Rectangle {
-                readonly property var modelIndex: keyboardLayout.modelIndex(index)
-
                 antialiasing: false
                 border.width: 1
-                border.color: "black"
+                border.color: selected ? "lightgray" : "black"
                 radius: 5
 
                 color: "white"
@@ -167,13 +176,46 @@ ApplicationWindow {
                 width: root.scale * model.width - 2
                 height: root.scale * model.height - 2
 
+                readonly property var modelIndex: keyboardLayout.modelIndex(index)
+
+                readonly property bool selected: mouseArea.selectedComputerKey !== null
+                    && mouseArea.selectedComputerKey.modelIndex === modelIndex
+
+                Keys.onPressed: {
+                    if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
+                        computerKeyLabelInput.visible = true;
+                        computerKeyLabelInput.forceActiveFocus();
+                    }
+                }
+
                 Text {
+                    id: computerKeyLabel
+
                     anchors.fill: parent
                     anchors.margins: 5
+                    visible: !computerKeyLabelInput.visible
 
                     text: model.label
                     font.pixelSize: 9
                     wrapMode: Text.Wrap
+                }
+
+                TextInput {
+                    id: computerKeyLabelInput
+
+                    visible: false
+
+                    anchors.fill: computerKeyLabel.anchors.fill
+                    anchors.margins: computerKeyLabel.anchors.margins
+                    font: computerKeyLabel.font
+                    text: computerKeyLabel.text
+                    wrapMode: computerKeyLabel.wrapMode
+
+                    onEditingFinished: {
+                        computerKeyLabelInput.visible = false;
+                        keyboardLayout.renameComputerKey(
+                            modelIndex, computerKeyLabelInput.text);
+                    }
                 }
 
                 Connections {

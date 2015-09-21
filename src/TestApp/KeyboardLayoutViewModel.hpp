@@ -55,6 +55,8 @@ public:
 
     Q_INVOKABLE void moveComputerKey(const QModelIndex & index, int x, int y);
 
+    Q_INVOKABLE void renameComputerKey(const QModelIndex & index, const QString & label);
+
     Q_INVOKABLE QModelIndex modelIndex(int row) const;
 
     int rowCount(const QModelIndex & index) const override;
