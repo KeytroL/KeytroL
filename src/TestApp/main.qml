@@ -131,9 +131,7 @@ ApplicationWindow {
         }
 
         onDoubleClicked: {
-            var computerKey = childAt(mouse.x, mouse.y);
-
-            if (computerKey === null) {
+            if (mouseArea.selectedComputerKey === null) {
                 keyboardLayout.addComputerKey(
                     Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
                     Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
@@ -144,7 +142,7 @@ ApplicationWindow {
                 ++mouseArea.newComputerKeyOffset;
             }
             else {
-                keyboardLayout.removeComputerKey(computerKey.modelIndex);
+                keyboardLayout.removeComputerKey(mouseArea.selectedComputerKey.modelIndex);
             }
 
             mouseArea.selectedComputerKey = childAt(mouse.x, mouse.y);
