@@ -181,13 +181,41 @@ ApplicationWindow {
                 readonly property bool selected: mouseArea.selectedComputerKey !== null
                     && mouseArea.selectedComputerKey.modelIndex === modelIndex
 
+                Keys.onPressed: {
+                    if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
+                        computerKeyLabelInput.visible = true;
+                        computerKeyLabelInput.forceActiveFocus();
+                    }
+                }
+
                 Text {
+                    id: computerKeyLabel
+
                     anchors.fill: parent
                     anchors.margins: 5
+                    visible: !computerKeyLabelInput.visible
 
                     text: model.label
                     font.pixelSize: 9
                     wrapMode: Text.Wrap
+                }
+
+                TextInput {
+                    id: computerKeyLabelInput
+
+                    visible: false
+
+                    anchors.fill: computerKeyLabel.anchors.fill
+                    anchors.margins: computerKeyLabel.anchors.margins
+                    font: computerKeyLabel.font
+                    text: computerKeyLabel.text
+                    wrapMode: computerKeyLabel.wrapMode
+
+                    onEditingFinished: {
+                        computerKeyLabelInput.visible = false;
+                        keyboardLayout.renameComputerKey(
+                            modelIndex, computerKeyLabelInput.text);
+                    }
                 }
 
                 Connections {
