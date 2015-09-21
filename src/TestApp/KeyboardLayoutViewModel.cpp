@@ -93,6 +93,21 @@ void KeyboardLayoutViewModel::moveComputerKey(const QModelIndex & index, int x, 
 }
 
 
+void KeyboardLayoutViewModel::renameComputerKey(
+    const QModelIndex & index, const QString & label)
+{
+    if (index.isValid())
+    {
+        const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
+        auto computerKey =
+            ComputerKey(mModel.computerKeys().at(computerKeyIndex), label.toStdString());
+
+        mModel.removeComputerKey(computerKeyIndex);
+        mModel.addComputerKey(std::move(computerKey));
+    }
+}
+
+
 QModelIndex KeyboardLayoutViewModel::modelIndex(int row) const
 {
     return index(row, 0);
