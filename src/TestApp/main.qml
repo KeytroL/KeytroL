@@ -148,7 +148,7 @@ ApplicationWindow {
                     Math.round(mouse.y / root.scale - root.defaultKeySize / 2),
                     root.defaultKeySize,
                     root.defaultKeySize,
-                    String.fromCharCode(65 + mouseArea.newComputerKeyOffset),
+                    "",
                     1 + mouseArea.newComputerKeyOffset);
                 ++mouseArea.newComputerKeyOffset;
             }
