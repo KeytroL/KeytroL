@@ -154,7 +154,7 @@ ApplicationWindow {
             delegate: Rectangle {
                 antialiasing: false
                 border.width: 1
-                border.color: "black"
+                border.color: selected ? "lightgray" : "black"
                 radius: 5
 
                 color: "white"
@@ -166,6 +166,9 @@ ApplicationWindow {
                 height: root.scale * model.height - 2
 
                 readonly property var modelIndex: keyboardLayout.modelIndex(index)
+
+                readonly property bool selected: mouseArea.selectedComputerKey !== null
+                    && mouseArea.selectedComputerKey.modelIndex === modelIndex
 
                 Text {
                     anchors.fill: parent
