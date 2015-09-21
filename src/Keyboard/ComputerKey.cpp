@@ -33,6 +33,14 @@ ComputerKey::ComputerKey(int x,
 }
 
 
+ComputerKey::ComputerKey(const ComputerKey & other, int x, int y)
+    : ComputerKey(other)
+{
+    mX = x;
+    mY = y;
+}
+
+
 ComputerKey::ComputerKey(ComputerKey && other)
     : mX(std::move(other.mX))
     , mY(std::move(other.mY))

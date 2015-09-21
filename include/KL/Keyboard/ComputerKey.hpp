@@ -31,6 +31,9 @@ public:
         std::string label,
         Keyboard::KeyCode keyCode);
 
+    ComputerKey(const ComputerKey & other) = default;
+    ComputerKey(const ComputerKey & other, int x, int y);
+
     ComputerKey(ComputerKey && other);
     ComputerKey & operator=(ComputerKey && other);
 

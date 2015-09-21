@@ -85,12 +85,10 @@ void KeyboardLayoutViewModel::moveComputerKey(const QModelIndex & index, int x, 
     if (index.isValid())
     {
         const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
-        const auto & oldKey = mModel.computerKeys().at(computerKeyIndex);
-        auto newKey = ComputerKey(
-            x, y, oldKey.width(), oldKey.height(), oldKey.label(), oldKey.keyCode());
+        auto computerKey = ComputerKey(mModel.computerKeys().at(computerKeyIndex), x, y);
 
         mModel.removeComputerKey(computerKeyIndex);
-        mModel.addComputerKey(std::move(newKey));
+        mModel.addComputerKey(std::move(computerKey));
     }
 }
 
