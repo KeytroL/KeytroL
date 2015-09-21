@@ -119,7 +119,7 @@ ApplicationWindow {
             if (computerKey === null) {
                 forceActiveFocus();
             }
-            else {
+            else if (mouseArea.selectedComputerKey !== computerKey) {
                 computerKey.forceActiveFocus();
             }
             mouseArea.selectedComputerKey = computerKey;
