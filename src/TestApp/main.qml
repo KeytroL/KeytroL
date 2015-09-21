@@ -152,8 +152,6 @@ ApplicationWindow {
             model: keyboardLayout
 
             delegate: Rectangle {
-                readonly property var modelIndex: keyboardLayout.modelIndex(index)
-
                 antialiasing: false
                 border.width: 1
                 border.color: "black"
@@ -166,6 +164,8 @@ ApplicationWindow {
 
                 width: root.scale * model.width - 2
                 height: root.scale * model.height - 2
+
+                readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
                 Text {
                     anchors.fill: parent
