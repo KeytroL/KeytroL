@@ -111,7 +111,7 @@ ApplicationWindow {
         anchors.fill: parent
         anchors.margins: 1
 
-        property var selectedComputerKey
+        property var selectedComputerKey: null
         property int newComputerKeyOffset: 0
 
         function updateSelectedComputerKey(x, y) {
