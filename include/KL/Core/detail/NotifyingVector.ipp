@@ -22,6 +22,8 @@ namespace KL
 template <typename T>
 NotifyingVector<T>::NotifyingVector(NotifyingVector<T> && other)
     : mVector(std::move(other.mVector))
+    , mBeforeReplace(std::move(other.mBeforeReplace))
+    , mAfterReplace(std::move(other.mAfterReplace))
 {
 }
 
@@ -30,6 +32,8 @@ template <typename T>
 NotifyingVector<T> & NotifyingVector<T>::operator=(NotifyingVector<T> && other)
 {
     mVector = std::move(other.mVector);
+    mBeforeReplace = std::move(other.mBeforeReplace);
+    mAfterReplace = std::move(other.mAfterReplace);
     return *this;
 }
 
@@ -57,6 +61,9 @@ void NotifyingVector<T>::replace(
         throw std::invalid_argument("invalid argument: first or last");
     }
 
+    Notification notification = {first, last, replacement.size()};
+    mBeforeReplace.emit(notification);
+
     if (first != last)
     {
         mVector.erase(
@@ -71,6 +78,24 @@ void NotifyingVector<T>::replace(
             replacement.begin(),
             replacement.end());
     }
+
+    mAfterReplace.emit(notification);
+}
+
+
+template <typename T>
+Signal<const typename NotifyingVector<T>::Notification &> &
+NotifyingVector<T>::beforeReplace()
+{
+    return mBeforeReplace;
+}
+
+
+template <typename T>
+Signal<const typename NotifyingVector<T>::Notification &> &
+NotifyingVector<T>::afterReplace()
+{
+    return mAfterReplace;
 }
 
 } // namespace KL

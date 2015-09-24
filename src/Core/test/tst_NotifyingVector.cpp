@@ -122,3 +122,24 @@ TEST_CASE("Keep same number of elements in a NotifyingVector", "[NotifyingVector
         REQUIRE(ints.vector() == std::vector<int>({1, 4, 5}));
     }
 }
+
+
+TEST_CASE("Observe replacements in a NotifyingVector", "[NotifyingVector]")
+{
+    KL::NotifyingVector<int> ints({1, 2, 3});
+
+    auto testNotification =
+        [](const KL::NotifyingVector<int>::Notification & notification)
+    {
+        REQUIRE(notification.first == 0u);
+        REQUIRE(notification.last == 1u);
+        REQUIRE(notification.replacementSize == 2u);
+    };
+
+    ints.beforeReplace().connect(testNotification);
+    ints.afterReplace().connect(testNotification);
+
+    ints.replace(0, 1, {4, 2});
+
+    REQUIRE(ints.vector() == std::vector<int>({4, 2, 2, 3}));
+}

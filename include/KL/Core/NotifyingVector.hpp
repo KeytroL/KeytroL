@@ -13,6 +13,8 @@
 
 #pragma once
 
+#include "KL/Core/Signal.hpp"
+
 #include <vector>
 
 
@@ -26,6 +28,13 @@ public:
     using SizeType = typename std::vector<T>::size_type;
     using Vector = typename std::vector<T>;
 
+    struct Notification
+    {
+        SizeType first;
+        SizeType last;
+        SizeType replacementSize;
+    };
+
     NotifyingVector() = default;
 
     NotifyingVector(NotifyingVector && other);
@@ -37,8 +46,14 @@ public:
 
     void replace(SizeType first, SizeType last, const Vector & replacement);
 
+    Signal<const Notification &> & beforeReplace();
+    Signal<const Notification &> & afterReplace();
+
 private:
     Vector mVector;
+
+    PrivateSignal<const Notification &> mBeforeReplace;
+    PrivateSignal<const Notification &> mAfterReplace;
 };
 
 } // namespace KL
