@@ -13,10 +13,9 @@
 
 #pragma once
 
+#include "KL/Core/NotifyingVector.hpp"
 #include "KL/Core/Signal.hpp"
 #include "KL/Keyboard/ComputerKey.hpp"
-
-#include <vector>
 
 
 namespace KL
@@ -25,7 +24,7 @@ namespace KL
 class KeyboardLayout
 {
 public:
-    using SizeType = std::vector<ComputerKey>::size_type;
+    using SizeType = NotifyingVector<ComputerKey>::SizeType;
 
     KeyboardLayout() = default;
 
@@ -33,22 +32,19 @@ public:
     KeyboardLayout & operator=(KeyboardLayout && other);
 
     void addComputerKey(ComputerKey computerKey);
-    Signal<SizeType> & computerKeyAboutToBeAdded();
-    Signal<SizeType> & computerKeyAdded();
-
     void removeComputerKey(SizeType index);
-    Signal<SizeType> & computerKeyAboutToBeRemoved();
-    Signal<SizeType> & computerKeyRemoved();
 
-    const std::vector<ComputerKey> & computerKeys() const;
+    const NotifyingVector<ComputerKey>::Vector & computerKeys() const;
+
+    void replace(SizeType first,
+        SizeType last,
+        const NotifyingVector<ComputerKey>::Vector & replacement);
+
+    Signal<const NotifyingVector<ComputerKey>::Notification &> & beforeReplace();
+    Signal<const NotifyingVector<ComputerKey>::Notification &> & afterReplace();
 
 private:
-    std::vector<ComputerKey> mComputerKeys;
-
-    PrivateSignal<SizeType> mComputerKeyAboutToBeAdded;
-    PrivateSignal<SizeType> mComputerKeyAdded;
-    PrivateSignal<SizeType> mComputerKeyAboutToBeRemoved;
-    PrivateSignal<SizeType> mComputerKeyRemoved;
+    NotifyingVector<ComputerKey> mComputerKeys;
 };
 
 } // namespace KL

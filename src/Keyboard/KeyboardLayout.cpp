@@ -21,10 +21,6 @@ namespace KL
 
 KeyboardLayout::KeyboardLayout(KeyboardLayout && other)
     : mComputerKeys(std::move(other.mComputerKeys))
-    , mComputerKeyAboutToBeAdded(std::move(other.mComputerKeyAboutToBeAdded))
-    , mComputerKeyAdded(std::move(other.mComputerKeyAdded))
-    , mComputerKeyAboutToBeRemoved(std::move(other.mComputerKeyAboutToBeRemoved))
-    , mComputerKeyRemoved(std::move(other.mComputerKeyRemoved))
 {
 }
 
@@ -32,63 +28,51 @@ KeyboardLayout::KeyboardLayout(KeyboardLayout && other)
 KeyboardLayout & KeyboardLayout::operator=(KeyboardLayout && other)
 {
     mComputerKeys = std::move(other.mComputerKeys);
-    mComputerKeyAboutToBeAdded = std::move(other.mComputerKeyAboutToBeAdded);
-    mComputerKeyAdded = std::move(other.mComputerKeyAdded);
-    mComputerKeyAboutToBeRemoved = std::move(other.mComputerKeyAboutToBeRemoved);
-    mComputerKeyRemoved = std::move(other.mComputerKeyRemoved);
     return *this;
 }
 
 
 void KeyboardLayout::addComputerKey(ComputerKey computerKey)
 {
-    auto index = mComputerKeys.size();
-    mComputerKeyAboutToBeAdded.emit(index);
-    mComputerKeys.emplace_back(std::move(computerKey));
-    mComputerKeyAdded.emit(index);
-}
-
-
-Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAboutToBeAdded()
-{
-    return mComputerKeyAboutToBeAdded;
-}
-
-
-Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAdded()
-{
-    return mComputerKeyAdded;
+    auto index = mComputerKeys.vector().size();
+    mComputerKeys.replace(index, index, {std::move(computerKey)});
 }
 
 
 void KeyboardLayout::removeComputerKey(SizeType index)
 {
-    if (index < mComputerKeys.size())
+    if (index < mComputerKeys.vector().size())
     {
-        mComputerKeyAboutToBeRemoved.emit(index);
-        auto it = mComputerKeys.begin();
-        std::advance(it, static_cast<std::vector<ComputerKey>::difference_type>(index));
-        mComputerKeys.erase(it);
-        mComputerKeyRemoved.emit(index);
+        mComputerKeys.replace(index, index + 1, {});
     }
 }
 
 
-Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAboutToBeRemoved()
+const NotifyingVector<ComputerKey>::Vector & KeyboardLayout::computerKeys() const
 {
-    return mComputerKeyAboutToBeRemoved;
+    return mComputerKeys.vector();
 }
 
 
-Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyRemoved()
+void KeyboardLayout::replace(SizeType first,
+    SizeType last,
+    const NotifyingVector<ComputerKey>::Vector & replacement)
 {
-    return mComputerKeyRemoved;
+    mComputerKeys.replace(first, last, replacement);
 }
 
 
-const std::vector<ComputerKey> & KeyboardLayout::computerKeys() const
+Signal<const NotifyingVector<ComputerKey>::Notification &> &
+KeyboardLayout::beforeReplace()
 {
-    return mComputerKeys;
+    return mComputerKeys.beforeReplace();
+}
+
+
+Signal<const NotifyingVector<ComputerKey>::Notification &> &
+KeyboardLayout::afterReplace()
+{
+    return mComputerKeys.afterReplace();
 }
 
 } // namespace KL

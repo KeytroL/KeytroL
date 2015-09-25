@@ -13,6 +13,7 @@
 
 add_executable(KeytroLCoreTest
     tst_Connection.cpp
+    tst_NotifyingVector.cpp
     tst_Property.cpp
     tst_Signal.cpp
 )

@@ -36,26 +36,16 @@ void KeyboardLayoutViewModel::setModel(KeyboardLayout model)
     mModel = std::move(model);
     endResetModel();
 
-    mModel.computerKeyAboutToBeAdded().connect([this](KeyboardLayout::SizeType index)
+    mModel.beforeReplace().connect(
+        [this](const NotifyingVector<ComputerKey>::Notification & notification)
         {
-            beginInsertRows(
-                QModelIndex(), static_cast<int>(index), static_cast<int>(index));
+            beforeModelReplace(notification);
         });
 
-    mModel.computerKeyAdded().connect([this](KeyboardLayout::SizeType)
+    mModel.afterReplace().connect(
+        [this](const NotifyingVector<ComputerKey>::Notification & notification)
         {
-            endInsertRows();
-        });
-
-    mModel.computerKeyAboutToBeRemoved().connect([this](KeyboardLayout::SizeType index)
-        {
-            beginRemoveRows(
-                QModelIndex(), static_cast<int>(index), static_cast<int>(index));
-        });
-
-    mModel.computerKeyRemoved().connect([this](KeyboardLayout::SizeType)
-        {
-            endRemoveRows();
+            afterModelReplace(notification);
         });
 }
 
@@ -99,11 +89,10 @@ void KeyboardLayoutViewModel::renameComputerKey(
     if (index.isValid())
     {
         const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
-        auto computerKey =
-            ComputerKey(mModel.computerKeys().at(computerKeyIndex), label.toStdString());
-
-        mModel.removeComputerKey(computerKeyIndex);
-        mModel.addComputerKey(std::move(computerKey));
+        mModel.replace(computerKeyIndex,
+            computerKeyIndex + 1,
+            {ComputerKey(
+                mModel.computerKeys().at(computerKeyIndex), label.toStdString())});
     }
 }
 
@@ -174,6 +163,48 @@ QHash<int, QByteArray> KeyboardLayoutViewModel::roleNames() const
     roles[LabelRole] = "label";
     roles[KeyCodeRole] = "keyCode";
     return roles;
+}
+
+
+void KeyboardLayoutViewModel::beforeModelReplace(
+    const NotifyingVector<ComputerKey>::Notification & notification)
+{
+    const auto newLast = notification.first + notification.replacementSize;
+
+    if (newLast > notification.last)
+    {
+        beginInsertRows(QModelIndex(),
+            static_cast<int>(notification.last),
+            static_cast<int>(newLast - 1));
+    }
+    else if (newLast < notification.last)
+    {
+        beginRemoveRows(QModelIndex(),
+            static_cast<int>(newLast),
+            static_cast<int>(notification.last - 1));
+    }
+}
+
+
+void KeyboardLayoutViewModel::afterModelReplace(
+    const NotifyingVector<ComputerKey>::Notification & notification)
+{
+    const auto newLast = notification.first + notification.replacementSize;
+
+    if (newLast > notification.last)
+    {
+        endInsertRows();
+    }
+    else if (newLast < notification.last)
+    {
+        endRemoveRows();
+    }
+
+    if ((notification.first != notification.last) && notification.replacementSize != 0)
+    {
+        dataChanged(modelIndex(static_cast<int>(notification.first)),
+            modelIndex(static_cast<int>(std::min(notification.last, newLast) - 1)));
+    }
 }
 
 } // namespace KL
