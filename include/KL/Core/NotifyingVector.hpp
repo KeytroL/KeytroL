@@ -28,6 +28,9 @@ public:
 
     NotifyingVector() = default;
 
+    NotifyingVector(NotifyingVector && other);
+    NotifyingVector & operator=(NotifyingVector && other);
+
     NotifyingVector(Vector && vector);
 
     const Vector & vector() const;

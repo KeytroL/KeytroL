@@ -20,6 +20,21 @@ namespace KL
 {
 
 template <typename T>
+NotifyingVector<T>::NotifyingVector(NotifyingVector<T> && other)
+    : mVector(std::move(other.mVector))
+{
+}
+
+
+template <typename T>
+NotifyingVector<T> & NotifyingVector<T>::operator=(NotifyingVector<T> && other)
+{
+    mVector = std::move(other.mVector);
+    return *this;
+}
+
+
+template <typename T>
 NotifyingVector<T>::NotifyingVector(Vector && vector)
     : mVector(std::move(vector))
 {

@@ -13,10 +13,9 @@
 
 #pragma once
 
+#include "KL/Core/NotifyingVector.hpp"
 #include "KL/Core/Signal.hpp"
 #include "KL/Keyboard/ComputerKey.hpp"
-
-#include <vector>
 
 
 namespace KL
@@ -25,7 +24,7 @@ namespace KL
 class KeyboardLayout
 {
 public:
-    using SizeType = std::vector<ComputerKey>::size_type;
+    using SizeType = NotifyingVector<ComputerKey>::SizeType;
 
     KeyboardLayout() = default;
 
@@ -40,10 +39,10 @@ public:
     Signal<SizeType> & computerKeyAboutToBeRemoved();
     Signal<SizeType> & computerKeyRemoved();
 
-    const std::vector<ComputerKey> & computerKeys() const;
+    const NotifyingVector<ComputerKey>::Vector & computerKeys() const;
 
 private:
-    std::vector<ComputerKey> mComputerKeys;
+    NotifyingVector<ComputerKey> mComputerKeys;
 
     PrivateSignal<SizeType> mComputerKeyAboutToBeAdded;
     PrivateSignal<SizeType> mComputerKeyAdded;

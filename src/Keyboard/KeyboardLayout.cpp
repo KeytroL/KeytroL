@@ -42,9 +42,9 @@ KeyboardLayout & KeyboardLayout::operator=(KeyboardLayout && other)
 
 void KeyboardLayout::addComputerKey(ComputerKey computerKey)
 {
-    auto index = mComputerKeys.size();
+    auto index = mComputerKeys.vector().size();
     mComputerKeyAboutToBeAdded.emit(index);
-    mComputerKeys.emplace_back(std::move(computerKey));
+    mComputerKeys.replace(index, index, {std::move(computerKey)});
     mComputerKeyAdded.emit(index);
 }
 
@@ -63,12 +63,10 @@ Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAdded()
 
 void KeyboardLayout::removeComputerKey(SizeType index)
 {
-    if (index < mComputerKeys.size())
+    if (index < mComputerKeys.vector().size())
     {
         mComputerKeyAboutToBeRemoved.emit(index);
-        auto it = mComputerKeys.begin();
-        std::advance(it, static_cast<std::vector<ComputerKey>::difference_type>(index));
-        mComputerKeys.erase(it);
+        mComputerKeys.replace(index, index + 1, {});
         mComputerKeyRemoved.emit(index);
     }
 }
@@ -86,9 +84,9 @@ Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyRemoved()
 }
 
 
-const std::vector<ComputerKey> & KeyboardLayout::computerKeys() const
+const NotifyingVector<ComputerKey>::Vector & KeyboardLayout::computerKeys() const
 {
-    return mComputerKeys;
+    return mComputerKeys.vector();
 }
 
 } // namespace KL
