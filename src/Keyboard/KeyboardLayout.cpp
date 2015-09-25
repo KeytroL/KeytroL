@@ -21,10 +21,6 @@ namespace KL
 
 KeyboardLayout::KeyboardLayout(KeyboardLayout && other)
     : mComputerKeys(std::move(other.mComputerKeys))
-    , mComputerKeyAboutToBeAdded(std::move(other.mComputerKeyAboutToBeAdded))
-    , mComputerKeyAdded(std::move(other.mComputerKeyAdded))
-    , mComputerKeyAboutToBeRemoved(std::move(other.mComputerKeyAboutToBeRemoved))
-    , mComputerKeyRemoved(std::move(other.mComputerKeyRemoved))
 {
 }
 
@@ -32,10 +28,6 @@ KeyboardLayout::KeyboardLayout(KeyboardLayout && other)
 KeyboardLayout & KeyboardLayout::operator=(KeyboardLayout && other)
 {
     mComputerKeys = std::move(other.mComputerKeys);
-    mComputerKeyAboutToBeAdded = std::move(other.mComputerKeyAboutToBeAdded);
-    mComputerKeyAdded = std::move(other.mComputerKeyAdded);
-    mComputerKeyAboutToBeRemoved = std::move(other.mComputerKeyAboutToBeRemoved);
-    mComputerKeyRemoved = std::move(other.mComputerKeyRemoved);
     return *this;
 }
 
@@ -43,21 +35,7 @@ KeyboardLayout & KeyboardLayout::operator=(KeyboardLayout && other)
 void KeyboardLayout::addComputerKey(ComputerKey computerKey)
 {
     auto index = mComputerKeys.vector().size();
-    mComputerKeyAboutToBeAdded.emit(index);
     mComputerKeys.replace(index, index, {std::move(computerKey)});
-    mComputerKeyAdded.emit(index);
-}
-
-
-Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAboutToBeAdded()
-{
-    return mComputerKeyAboutToBeAdded;
-}
-
-
-Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAdded()
-{
-    return mComputerKeyAdded;
 }
 
 
@@ -65,22 +43,8 @@ void KeyboardLayout::removeComputerKey(SizeType index)
 {
     if (index < mComputerKeys.vector().size())
     {
-        mComputerKeyAboutToBeRemoved.emit(index);
         mComputerKeys.replace(index, index + 1, {});
-        mComputerKeyRemoved.emit(index);
     }
-}
-
-
-Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyAboutToBeRemoved()
-{
-    return mComputerKeyAboutToBeRemoved;
-}
-
-
-Signal<KeyboardLayout::SizeType> & KeyboardLayout::computerKeyRemoved()
-{
-    return mComputerKeyRemoved;
 }
 
 

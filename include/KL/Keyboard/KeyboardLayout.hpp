@@ -32,12 +32,7 @@ public:
     KeyboardLayout & operator=(KeyboardLayout && other);
 
     void addComputerKey(ComputerKey computerKey);
-    Signal<SizeType> & computerKeyAboutToBeAdded();
-    Signal<SizeType> & computerKeyAdded();
-
     void removeComputerKey(SizeType index);
-    Signal<SizeType> & computerKeyAboutToBeRemoved();
-    Signal<SizeType> & computerKeyRemoved();
 
     const NotifyingVector<ComputerKey>::Vector & computerKeys() const;
 
@@ -46,11 +41,6 @@ public:
 
 private:
     NotifyingVector<ComputerKey> mComputerKeys;
-
-    PrivateSignal<SizeType> mComputerKeyAboutToBeAdded;
-    PrivateSignal<SizeType> mComputerKeyAdded;
-    PrivateSignal<SizeType> mComputerKeyAboutToBeRemoved;
-    PrivateSignal<SizeType> mComputerKeyRemoved;
 };
 
 } // namespace KL
