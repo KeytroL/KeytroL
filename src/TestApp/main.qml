@@ -165,7 +165,7 @@ ApplicationWindow {
             delegate: Rectangle {
                 antialiasing: false
                 border.width: 1
-                border.color: selected ? "lightgray" : "black"
+                border.color: selected ? "black" : "lightgray"
                 radius: 5
 
                 color: "white"
