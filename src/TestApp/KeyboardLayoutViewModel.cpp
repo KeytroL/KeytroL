@@ -89,11 +89,10 @@ void KeyboardLayoutViewModel::renameComputerKey(
     if (index.isValid())
     {
         const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
-        auto computerKey =
-            ComputerKey(mModel.computerKeys().at(computerKeyIndex), label.toStdString());
-
-        mModel.removeComputerKey(computerKeyIndex);
-        mModel.addComputerKey(std::move(computerKey));
+        mModel.replace(computerKeyIndex,
+            computerKeyIndex + 1,
+            {ComputerKey(
+                mModel.computerKeys().at(computerKeyIndex), label.toStdString())});
     }
 }
 
