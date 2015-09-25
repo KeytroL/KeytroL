@@ -165,7 +165,7 @@ ApplicationWindow {
             delegate: Rectangle {
                 antialiasing: false
                 border.width: 1
-                border.color: selected ? "lightgray" : "black"
+                border.color: selected ? "black" : "lightgray"
                 radius: 5
 
                 color: "white"
@@ -183,8 +183,12 @@ ApplicationWindow {
 
                 Keys.onPressed: {
                     if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
-                        computerKeyLabelInput.visible = true;
-                        computerKeyLabelInput.forceActiveFocus();
+                        if (activeFocus) {
+                            computerKeyLabelInput.forceActiveFocus();
+                        }
+                        else {
+                            forceActiveFocus();
+                        }
                     }
                 }
 
@@ -203,7 +207,7 @@ ApplicationWindow {
                 TextInput {
                     id: computerKeyLabelInput
 
-                    visible: false
+                    visible: computerKeyLabelInput.activeFocus
 
                     anchors.fill: computerKeyLabel.anchors.fill
                     anchors.margins: computerKeyLabel.anchors.margins
@@ -212,7 +216,6 @@ ApplicationWindow {
                     wrapMode: computerKeyLabel.wrapMode
 
                     onEditingFinished: {
-                        computerKeyLabelInput.visible = false;
                         keyboardLayout.renameComputerKey(
                             modelIndex, computerKeyLabelInput.text);
                     }
