@@ -36,6 +36,10 @@ public:
 
     const NotifyingVector<ComputerKey>::Vector & computerKeys() const;
 
+    void replace(SizeType first,
+        SizeType last,
+        const NotifyingVector<ComputerKey>::Vector & replacement);
+
     Signal<const NotifyingVector<ComputerKey>::Notification &> & beforeReplace();
     Signal<const NotifyingVector<ComputerKey>::Notification &> & afterReplace();
 

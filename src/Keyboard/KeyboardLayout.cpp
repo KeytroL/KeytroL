@@ -54,6 +54,14 @@ const NotifyingVector<ComputerKey>::Vector & KeyboardLayout::computerKeys() cons
 }
 
 
+void KeyboardLayout::replace(SizeType first,
+    SizeType last,
+    const NotifyingVector<ComputerKey>::Vector & replacement)
+{
+    mComputerKeys.replace(first, last, replacement);
+}
+
+
 Signal<const NotifyingVector<ComputerKey>::Notification &> &
 KeyboardLayout::beforeReplace()
 {
