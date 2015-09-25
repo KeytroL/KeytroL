@@ -41,6 +41,9 @@ public:
 
     const NotifyingVector<ComputerKey>::Vector & computerKeys() const;
 
+    Signal<const NotifyingVector<ComputerKey>::Notification &> & beforeReplace();
+    Signal<const NotifyingVector<ComputerKey>::Notification &> & afterReplace();
+
 private:
     NotifyingVector<ComputerKey> mComputerKeys;
 

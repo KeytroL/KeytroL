@@ -89,4 +89,18 @@ const NotifyingVector<ComputerKey>::Vector & KeyboardLayout::computerKeys() cons
     return mComputerKeys.vector();
 }
 
+
+Signal<const NotifyingVector<ComputerKey>::Notification &> &
+KeyboardLayout::beforeReplace()
+{
+    return mComputerKeys.beforeReplace();
+}
+
+
+Signal<const NotifyingVector<ComputerKey>::Notification &> &
+KeyboardLayout::afterReplace()
+{
+    return mComputerKeys.afterReplace();
+}
+
 } // namespace KL
