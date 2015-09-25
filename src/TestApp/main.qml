@@ -183,7 +183,6 @@ ApplicationWindow {
 
                 Keys.onPressed: {
                     if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
-                        computerKeyLabelInput.visible = true;
                         computerKeyLabelInput.forceActiveFocus();
                     }
                 }
@@ -203,7 +202,7 @@ ApplicationWindow {
                 TextInput {
                     id: computerKeyLabelInput
 
-                    visible: false
+                    visible: computerKeyLabelInput.activeFocus
 
                     anchors.fill: computerKeyLabel.anchors.fill
                     anchors.margins: computerKeyLabel.anchors.margins
@@ -212,7 +211,6 @@ ApplicationWindow {
                     wrapMode: computerKeyLabel.wrapMode
 
                     onEditingFinished: {
-                        computerKeyLabelInput.visible = false;
                         keyboardLayout.renameComputerKey(
                             modelIndex, computerKeyLabelInput.text);
                     }
