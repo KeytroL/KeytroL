@@ -13,6 +13,8 @@
 
 #pragma once
 
+#include <stdexcept>
+
 
 namespace KL
 {
@@ -28,6 +30,32 @@ template <typename T>
 const typename NotifyingVector<T>::Vector & NotifyingVector<T>::vector() const
 {
     return mVector;
+}
+
+
+template <typename T>
+void NotifyingVector<T>::replace(
+    SizeType first, SizeType last, const Vector & replacement)
+{
+    if (first > last || last > mVector.size())
+    {
+        throw std::invalid_argument("invalid argument: first or last");
+    }
+
+    if (first != last)
+    {
+        mVector.erase(
+            mVector.begin() + static_cast<typename Vector::difference_type>(first),
+            mVector.begin() + static_cast<typename Vector::difference_type>(last));
+    }
+
+    if (replacement.size() > 0)
+    {
+        mVector.insert(
+            mVector.begin() + static_cast<typename Vector::difference_type>(first),
+            replacement.begin(),
+            replacement.end());
+    }
 }
 
 } // namespace KL

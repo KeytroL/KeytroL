@@ -34,3 +34,91 @@ TEST_CASE("Construct a NotifyingVector of integers", "[NotifyingVector]")
         REQUIRE(ints.vector().size() == 3u);
     }
 }
+
+
+TEST_CASE("Fail to replace elements in a NotifyingVector", "[NotifyingVector]")
+{
+    KL::NotifyingVector<int> ints({1, 2, 3});
+
+    SECTION("When first > last")
+    {
+        REQUIRE_THROWS_AS(ints.replace(2, 1, {}), std::invalid_argument);
+    }
+
+    SECTION("When last > size")
+    {
+        REQUIRE_THROWS_AS(ints.replace(2, 4, {}), std::invalid_argument);
+    }
+}
+
+
+TEST_CASE("Increase number of elements in a NotifyingVector", "[NotifyingVector]")
+{
+    KL::NotifyingVector<int> ints({1, 2, 3});
+
+    SECTION("By inserting one new element")
+    {
+        ints.replace(1, 1, {4});
+        REQUIRE(ints.vector() == std::vector<int>({1, 4, 2, 3}));
+    }
+
+    SECTION("By inserting several new elements")
+    {
+        ints.replace(3, 3, {4, 5});
+        REQUIRE(ints.vector() == std::vector<int>({1, 2, 3, 4, 5}));
+    }
+
+    SECTION("By inserting new elements and replacing elements")
+    {
+        ints.replace(2, 3, {4, 5});
+        REQUIRE(ints.vector() == std::vector<int>({1, 2, 4, 5}));
+    }
+}
+
+
+TEST_CASE("Decrease number of elements in a NotifyingVector", "[NotifyingVector]")
+{
+    KL::NotifyingVector<int> ints({1, 2, 3});
+
+    SECTION("By clearing the container")
+    {
+        ints.replace(0, 3, {});
+        REQUIRE(ints.vector().size() == 0u);
+    }
+
+    SECTION("By erasing one element")
+    {
+        ints.replace(1, 2, {});
+        REQUIRE(ints.vector() == std::vector<int>({1, 3}));
+    }
+
+    SECTION("By erasing and replacing elements")
+    {
+        ints.replace(0, 2, {4});
+        REQUIRE(ints.vector() == std::vector<int>({4, 3}));
+    }
+}
+
+
+TEST_CASE("Keep same number of elements in a NotifyingVector", "[NotifyingVector]")
+{
+    KL::NotifyingVector<int> ints({1, 2, 3});
+
+    SECTION("By replacing no elements")
+    {
+        ints.replace(2, 2, {});
+        REQUIRE(ints.vector() == std::vector<int>({1, 2, 3}));
+    }
+
+    SECTION("By replacing one element")
+    {
+        ints.replace(0, 1, {4});
+        REQUIRE(ints.vector() == std::vector<int>({4, 2, 3}));
+    }
+
+    SECTION("By replacing several elements")
+    {
+        ints.replace(1, 3, {4, 5});
+        REQUIRE(ints.vector() == std::vector<int>({1, 4, 5}));
+    }
+}

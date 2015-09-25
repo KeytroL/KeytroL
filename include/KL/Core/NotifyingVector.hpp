@@ -23,6 +23,7 @@ template <typename T>
 class NotifyingVector
 {
 public:
+    using SizeType = typename std::vector<T>::size_type;
     using Vector = typename std::vector<T>;
 
     NotifyingVector() = default;
@@ -30,6 +31,8 @@ public:
     NotifyingVector(Vector && vector);
 
     const Vector & vector() const;
+
+    void replace(SizeType first, SizeType last, const Vector & replacement);
 
 private:
     Vector mVector;
