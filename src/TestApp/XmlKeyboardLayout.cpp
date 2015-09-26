@@ -15,7 +15,7 @@
 
 #include "KeyboardLayoutViewModel.hpp"
 
-#include "KL/Keyboard/KeyboardLayout.hpp"
+#include "KL/Model/KeyboardLayout.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS

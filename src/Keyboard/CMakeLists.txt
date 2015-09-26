@@ -12,10 +12,7 @@
 #  GNU General Public License for more details.
 
 add_library(BaseKeytroLKeyboard STATIC
-    ComputerKey.cpp
     KeyboardInput.cpp
-    KeyboardLayout.cpp
-    KeyMapping.cpp
 )
 
 target_link_libraries(BaseKeytroLKeyboard PUBLIC

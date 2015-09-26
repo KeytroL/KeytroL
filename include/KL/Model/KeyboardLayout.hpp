@@ -15,7 +15,7 @@
 
 #include "KL/Core/NotifyingVector.hpp"
 #include "KL/Core/Signal.hpp"
-#include "KL/Keyboard/ComputerKey.hpp"
+#include "KL/Model/ComputerKey.hpp"
 
 
 namespace KL

@@ -11,22 +11,21 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard/ComputerKey.hpp"
-
-#include "KL/Warnings.hpp"
-KL_DISABLE_WARNINGS
-#include <catch.hpp>
-KL_RESTORE_WARNINGS
+#include "KL/Model/KeyMapping.hpp"
 
 
-TEST_CASE("Construct a ComputerKey", "[ComputerKey]")
+namespace KL
 {
-    const KL::ComputerKey computerKey(23, 42, 8, 7, "A", 2);
 
-    REQUIRE(computerKey.x() == 23);
-    REQUIRE(computerKey.y() == 42);
-    REQUIRE(computerKey.width() == 8);
-    REQUIRE(computerKey.height() == 7);
-    REQUIRE(computerKey.label() == "A");
-    REQUIRE(computerKey.keyCode() == 2);
+std::function<void()> & KeyMapping::at(Code keyCode, State keyState)
+{
+    return mKeyToFunction[std::make_pair(keyCode, keyState)];
 }
+
+
+const std::function<void()> & KeyMapping::at(Code keyCode, State keyState) const
+{
+    return mKeyToFunction.at(std::make_pair(keyCode, keyState));
+}
+
+} // namespace KL
