@@ -27,6 +27,7 @@
         _Pragma("clang diagnostic ignored \"-Wexit-time-destructors\"") \
         _Pragma("clang diagnostic ignored \"-Wfloat-equal\"") \
         _Pragma("clang diagnostic ignored \"-Wsign-conversion\"") \
+        _Pragma("clang diagnostic ignored \"-Wundefined-reinterpret-cast\"") \
         _Pragma("clang diagnostic ignored \"-Wused-but-marked-unused\"") \
         /**/
 

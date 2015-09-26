@@ -3,6 +3,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 
 import KL.Keyboard 1.0
+import KL.Midi 1.0
 
 
 ApplicationWindow {
@@ -61,6 +62,33 @@ ApplicationWindow {
                         fileDialog.open();
                     }
                 }
+            }
+        }
+
+        Menu {
+            id: midiOutMenu
+
+            title: "MIDI Out"
+
+            ExclusiveGroup {
+                id: midiOutDevicesGroup
+            }
+
+            Instantiator {
+                model: MidiOutDevices.count()
+
+                delegate: MenuItem {
+                    action: Action {
+                        property int deviceIndex: index
+
+                        checkable: true
+                        exclusiveGroup: midiOutDevicesGroup
+                        text: MidiOutDevices.name(deviceIndex)
+                    }
+                }
+
+                onObjectAdded: midiOutMenu.insertItem(index, object)
+                onObjectRemoved: midiOutMenu.removeItem(object)
             }
         }
     }
@@ -260,5 +288,25 @@ ApplicationWindow {
 
     Keyboard {
         id: keyboard
+    }
+
+    MidiOut {
+        id: midiOut
+
+        deviceIndex: midiOutDevicesGroup.current !== null
+            ? midiOutDevicesGroup.current.deviceIndex
+            : -1
+    }
+
+    Connections {
+        target: keyboard
+
+        onKeyPressed: {
+            midiOut.sendMessage(0x90, keyCode, 100);
+        }
+
+        onKeyReleased: {
+            midiOut.sendMessage(0x80, keyCode, 0);
+        }
     }
 }

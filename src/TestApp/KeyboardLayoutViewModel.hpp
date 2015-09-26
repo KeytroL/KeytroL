@@ -66,12 +66,12 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    KeyboardLayout mModel;
-
     void beforeModelReplace(
         const NotifyingVector<ComputerKey>::Notification & notification);
     void afterModelReplace(
         const NotifyingVector<ComputerKey>::Notification & notification);
+
+    KeyboardLayout mModel;
 };
 
 } // namespace KL

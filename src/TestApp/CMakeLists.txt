@@ -15,6 +15,8 @@ add_executable(KeytroLTestApp
     KeyboardLayoutViewModel.cpp
     main.cpp
     ViewKeyboard.cpp
+    ViewMidiOut.cpp
+    ViewMidiOutDevices.cpp
     XmlKeyboardLayout.cpp
 )
 
