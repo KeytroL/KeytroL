@@ -13,11 +13,15 @@
 
 #pragma once
 
+#include "KL/Core/NotifyingVector.hpp"
+#include "KL/Keyboard/ComputerKey.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QModelIndex>
+#include <QtCore/QString>
 KL_RESTORE_WARNINGS
 
 
