@@ -71,9 +71,8 @@ public:
 
 private:
     void beforeModelReplace(
-        const NotifyingVector<ComputerKey>::Notification & notification);
-    void afterModelReplace(
-        const NotifyingVector<ComputerKey>::Notification & notification);
+        const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff);
+    void afterModelReplace(const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff);
 
     KeyboardLayout mModel;
 };

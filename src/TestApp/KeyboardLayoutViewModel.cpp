@@ -37,15 +37,15 @@ void KeyboardLayoutViewModel::setModel(KeyboardLayout model)
     endResetModel();
 
     mModel.beforeReplace().connect(
-        [this](const NotifyingVector<ComputerKey>::Notification & notification)
+        [this](const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff)
         {
-            beforeModelReplace(notification);
+            beforeModelReplace(replaceDiff);
         });
 
     mModel.afterReplace().connect(
-        [this](const NotifyingVector<ComputerKey>::Notification & notification)
+        [this](const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff)
         {
-            afterModelReplace(notification);
+            afterModelReplace(replaceDiff);
         });
 }
 
@@ -180,43 +180,43 @@ QHash<int, QByteArray> KeyboardLayoutViewModel::roleNames() const
 
 
 void KeyboardLayoutViewModel::beforeModelReplace(
-    const NotifyingVector<ComputerKey>::Notification & notification)
+    const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff)
 {
-    const auto newLast = notification.first + notification.replacementSize;
+    const auto newLast = replaceDiff.first + replaceDiff.replacementSize;
 
-    if (newLast > notification.last)
+    if (newLast > replaceDiff.last)
     {
         beginInsertRows(QModelIndex(),
-            static_cast<int>(notification.last),
+            static_cast<int>(replaceDiff.last),
             static_cast<int>(newLast - 1));
     }
-    else if (newLast < notification.last)
+    else if (newLast < replaceDiff.last)
     {
         beginRemoveRows(QModelIndex(),
             static_cast<int>(newLast),
-            static_cast<int>(notification.last - 1));
+            static_cast<int>(replaceDiff.last - 1));
     }
 }
 
 
 void KeyboardLayoutViewModel::afterModelReplace(
-    const NotifyingVector<ComputerKey>::Notification & notification)
+    const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff)
 {
-    const auto newLast = notification.first + notification.replacementSize;
+    const auto newLast = replaceDiff.first + replaceDiff.replacementSize;
 
-    if (newLast > notification.last)
+    if (newLast > replaceDiff.last)
     {
         endInsertRows();
     }
-    else if (newLast < notification.last)
+    else if (newLast < replaceDiff.last)
     {
         endRemoveRows();
     }
 
-    if ((notification.first != notification.last) && notification.replacementSize != 0)
+    if ((replaceDiff.first != replaceDiff.last) && replaceDiff.replacementSize != 0)
     {
-        dataChanged(modelIndex(static_cast<int>(notification.first)),
-            modelIndex(static_cast<int>(std::min(notification.last, newLast) - 1)));
+        dataChanged(modelIndex(static_cast<int>(replaceDiff.first)),
+            modelIndex(static_cast<int>(std::min(replaceDiff.last, newLast) - 1)));
     }
 }
 

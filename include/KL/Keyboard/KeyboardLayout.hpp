@@ -40,8 +40,8 @@ public:
         SizeType last,
         const NotifyingVector<ComputerKey>::Vector & replacement);
 
-    Signal<const NotifyingVector<ComputerKey>::Notification &> & beforeReplace();
-    Signal<const NotifyingVector<ComputerKey>::Notification &> & afterReplace();
+    Signal<const NotifyingVector<ComputerKey>::ReplaceDiff &> & beforeReplace();
+    Signal<const NotifyingVector<ComputerKey>::ReplaceDiff &> & afterReplace();
 
 private:
     NotifyingVector<ComputerKey> mComputerKeys;
