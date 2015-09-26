@@ -22,7 +22,6 @@
 #include "KL/Midi/MidiOut.hpp"
 
 KL_DISABLE_WARNINGS
-#include <QtCore/QDebug>
 #include <QtGui/QGuiApplication>
 #include <QtQml/qqml.h>
 #include <QtQml/QQmlApplicationEngine>
@@ -32,12 +31,6 @@ KL_RESTORE_WARNINGS
 int main(int argc, char * argv[])
 {
     const KL::MidiOut midiOut(0);
-
-    qDebug() << KL::MidiOut::deviceCount() << "MIDI out device(s)";
-    qDebug() << "First device:" << QString::fromStdString(KL::MidiOut::deviceName(0));
-    qDebug() << "Second device:" << QString::fromStdString(KL::MidiOut::deviceName(1));
-    qDebug() << "Third device:" << QString::fromStdString(KL::MidiOut::deviceName(2));
-
 
     KL::KeyMapping keyMapping;
 
