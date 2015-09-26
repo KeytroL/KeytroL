@@ -3,6 +3,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 
 import KL.Keyboard 1.0
+import KL.Midi 1.0
 
 
 ApplicationWindow {
@@ -61,6 +62,27 @@ ApplicationWindow {
                         fileDialog.open();
                     }
                 }
+            }
+        }
+
+        Menu {
+            id: midiOutMenu
+
+            title: "MIDI Out"
+
+            Instantiator {
+                model: MidiOutDevices.count()
+
+                delegate: MenuItem {
+                    action: Action {
+                        property int deviceIndex: index
+
+                        text: MidiOutDevices.name(deviceIndex)
+                    }
+                }
+
+                onObjectAdded: midiOutMenu.insertItem(index, object)
+                onObjectRemoved: midiOutMenu.removeItem(object)
             }
         }
     }
