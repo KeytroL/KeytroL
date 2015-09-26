@@ -283,4 +283,22 @@ ApplicationWindow {
     Keyboard {
         id: keyboard
     }
+
+    MidiOut {
+        id: midiOut
+
+        deviceIndex: 0
+    }
+
+    Connections {
+        target: keyboard
+
+        onKeyPressed: {
+            midiOut.sendMessage(0x90, keyCode, 100);
+        }
+
+        onKeyReleased: {
+            midiOut.sendMessage(0x80, keyCode, 0);
+        }
+    }
 }

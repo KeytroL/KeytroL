@@ -38,6 +38,9 @@ public:
     ViewMidiOut(QObject * parent = nullptr);
     ~ViewMidiOut();
 
+    Q_INVOKABLE void sendMessage(
+        unsigned char statusByte, unsigned char dataByte1, unsigned char dataByte2) const;
+
 Q_SIGNALS:
     void deviceIndexChanged();
 

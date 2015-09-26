@@ -32,6 +32,16 @@ ViewMidiOut::ViewMidiOut(QObject * parent)
 ViewMidiOut::~ViewMidiOut() = default;
 
 
+void ViewMidiOut::sendMessage(
+    unsigned char statusByte, unsigned char dataByte1, unsigned char dataByte2) const
+{
+    if (mDevice)
+    {
+        mDevice->sendMessage(statusByte, dataByte1, dataByte2);
+    }
+}
+
+
 int ViewMidiOut::deviceIndex() const
 {
     return mDeviceIndex;
