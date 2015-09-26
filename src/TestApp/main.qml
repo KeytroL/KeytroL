@@ -114,8 +114,8 @@ ApplicationWindow {
         property Rectangle selectedComputerKey: null
         property int newComputerKeyOffset: 0
 
-        function updateSelectedComputerKey(x, y) {
-            var computerKey = childAt(x, y);
+        function updateSelectedComputerKey(mouseEvent) {
+            var computerKey = childAt(mouseEvent.x, mouseEvent.y);
             if (computerKey === null) {
                 forceActiveFocus();
             }
@@ -126,7 +126,7 @@ ApplicationWindow {
         }
 
         onPressed: {
-            updateSelectedComputerKey(mouse.x, mouse.y);
+            updateSelectedComputerKey(mouse);
         }
 
         onPositionChanged: {
@@ -137,7 +137,7 @@ ApplicationWindow {
                     Math.round(mouse.y / root.scale - root.defaultKeySize / 2)
                 );
 
-                updateSelectedComputerKey(mouse.x, mouse.y);
+                updateSelectedComputerKey(mouse);
             }
         }
 
@@ -156,7 +156,7 @@ ApplicationWindow {
                 keyboardLayout.removeComputerKey(mouseArea.selectedComputerKey.modelIndex);
             }
 
-            updateSelectedComputerKey(mouse.x, mouse.y);
+            updateSelectedComputerKey(mouse);
         }
 
         Repeater {
