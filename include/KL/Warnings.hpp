@@ -51,6 +51,7 @@
         __pragma(warning(disable: 4127)) \
         __pragma(warning(disable: 4244)) \
         __pragma(warning(disable: 4251)) \
+        __pragma(warning(disable: 4267)) \
         __pragma(warning(disable: 4365)) \
         __pragma(warning(disable: 4371)) \
         __pragma(warning(disable: 4619)) \

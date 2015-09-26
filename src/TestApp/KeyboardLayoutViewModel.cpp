@@ -166,14 +166,12 @@ QVariant KeyboardLayoutViewModel::data(const QModelIndex & index, int role) cons
 
 QHash<int, QByteArray> KeyboardLayoutViewModel::roleNames() const
 {
-    QHash<int, QByteArray> roles;
-    roles[XRole] = "x";
-    roles[YRole] = "y";
-    roles[WidthRole] = "width";
-    roles[HeightRole] = "height";
-    roles[LabelRole] = "label";
-    roles[KeyCodeRole] = "keyCode";
-    return roles;
+    return {{XRole, "x"},
+        {YRole, "y"},
+        {WidthRole, "width"},
+        {HeightRole, "height"},
+        {LabelRole, "label"},
+        {KeyCodeRole, "keyCode"}};
 }
 
 
