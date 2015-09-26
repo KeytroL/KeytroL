@@ -13,6 +13,7 @@
 
 #include "KeyboardLayoutViewModel.hpp"
 #include "ViewKeyboard.hpp"
+#include "ViewMidiOut.hpp"
 #include "ViewMidiOutDevices.hpp"
 #include "XmlKeyboardLayout.hpp"
 
@@ -74,6 +75,7 @@ int main(int argc, char * argv[])
 
     qmlRegisterSingletonType<KL::ViewMidiOutDevices>(
         "KL.Midi", 1, 0, "MidiOutDevices", midiOutDevicesSingletonProvider);
+    qmlRegisterType<KL::ViewMidiOut>("KL.Midi", 1, 0, "MidiOut");
 
     QQmlApplicationEngine engine(QUrl::fromLocalFile(QML_MAIN));
 
