@@ -70,6 +70,10 @@ ApplicationWindow {
 
             title: "MIDI Out"
 
+            ExclusiveGroup {
+                id: midiOutDevicesGroup
+            }
+
             Instantiator {
                 model: MidiOutDevices.count()
 
@@ -77,6 +81,8 @@ ApplicationWindow {
                     action: Action {
                         property int deviceIndex: index
 
+                        checkable: true
+                        exclusiveGroup: midiOutDevicesGroup
                         text: MidiOutDevices.name(deviceIndex)
                     }
                 }
@@ -287,7 +293,9 @@ ApplicationWindow {
     MidiOut {
         id: midiOut
 
-        deviceIndex: 0
+        deviceIndex: midiOutDevicesGroup.current !== null
+            ? midiOutDevicesGroup.current.deviceIndex
+            : -1
     }
 
     Connections {
