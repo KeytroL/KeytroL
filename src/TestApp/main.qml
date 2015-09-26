@@ -2,8 +2,8 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 
-import KL.Keyboard 1.0
-import KL.Midi 1.0
+import KeytroL.Keyboard 1.0
+import KeytroL.Midi 1.0
 
 
 ApplicationWindow {
