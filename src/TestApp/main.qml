@@ -114,6 +114,7 @@ ApplicationWindow {
         acceptedButtons: Qt.LeftButton | Qt.RightButton
 
         property Rectangle selectedComputerKey: null
+        property bool bindToKeyCode: false
         property int newComputerKeyOffset: 0
 
         function updateSelectedComputerKey(mouseEvent) {
@@ -125,6 +126,7 @@ ApplicationWindow {
                 forceActiveFocus();
             }
             mouseArea.selectedComputerKey = computerKey;
+            mouseArea.bindToKeyCode = mouseEvent.buttons === Qt.RightButton;
         }
 
         onPressed: {
@@ -161,6 +163,18 @@ ApplicationWindow {
             updateSelectedComputerKey(mouse);
         }
 
+        Connections {
+            target: keyboard
+
+            onKeyPressed: {
+                if (mouseArea.bindToKeyCode && mouseArea.selectedComputerKey !== null) {
+                    keyboardLayout.bindComputerKey(
+                        mouseArea.selectedComputerKey.modelIndex, keyCode);
+                    mouseArea.bindToKeyCode = false;
+                }
+            }
+        }
+
         Repeater {
             model: keyboardLayout
 
@@ -169,7 +183,9 @@ ApplicationWindow {
                 border.width: 1
                 border.color: activeFocus || computerKeyLabelInput.activeFocus
                     ? "black"
-                    : "lightgray"
+                    : selected && mouseArea.bindToKeyCode
+                        ? "red"
+                        : "lightgray"
                 radius: 5
 
                 color: "white"
