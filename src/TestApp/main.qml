@@ -111,33 +111,36 @@ ApplicationWindow {
         anchors.fill: parent
         anchors.margins: 1
 
-        property var selectedComputerKey: null
-        property int newComputerKeyOffset: 0
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-        function updateSelectedComputerKey(x, y) {
-            var computerKey = childAt(x, y);
-            if (computerKey === null) {
-                forceActiveFocus();
-            }
-            else {
+        property Rectangle selectedComputerKey: null
+        property bool bindToKeyCode: false
+
+        function updateSelectedComputerKey(mouseEvent) {
+            var computerKey = childAt(mouseEvent.x, mouseEvent.y);
+            if (computerKey !== null && mouseEvent.buttons === Qt.LeftButton) {
                 computerKey.forceActiveFocus();
             }
+            else {
+                forceActiveFocus();
+            }
             mouseArea.selectedComputerKey = computerKey;
+            mouseArea.bindToKeyCode = mouseEvent.buttons === Qt.RightButton;
         }
 
         onPressed: {
-            updateSelectedComputerKey(mouse.x, mouse.y);
+            updateSelectedComputerKey(mouse);
         }
 
         onPositionChanged: {
-            if (mouseArea.selectedComputerKey) {
+            if (mouseArea.selectedComputerKey !== null) {
                 keyboardLayout.moveComputerKey(
                     mouseArea.selectedComputerKey.modelIndex,
                     Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
                     Math.round(mouse.y / root.scale - root.defaultKeySize / 2)
                 );
 
-                updateSelectedComputerKey(mouse.x, mouse.y);
+                updateSelectedComputerKey(mouse);
             }
         }
 
@@ -149,14 +152,25 @@ ApplicationWindow {
                     root.defaultKeySize,
                     root.defaultKeySize,
                     "",
-                    1 + mouseArea.newComputerKeyOffset);
-                ++mouseArea.newComputerKeyOffset;
+                    0);
             }
             else {
                 keyboardLayout.removeComputerKey(mouseArea.selectedComputerKey.modelIndex);
             }
 
-            updateSelectedComputerKey(mouse.x, mouse.y);
+            updateSelectedComputerKey(mouse);
+        }
+
+        Connections {
+            target: keyboard
+
+            onKeyPressed: {
+                if (mouseArea.bindToKeyCode && mouseArea.selectedComputerKey !== null) {
+                    keyboardLayout.bindComputerKey(
+                        mouseArea.selectedComputerKey.modelIndex, keyCode);
+                    mouseArea.bindToKeyCode = false;
+                }
+            }
         }
 
         Repeater {
@@ -165,7 +179,11 @@ ApplicationWindow {
             delegate: Rectangle {
                 antialiasing: false
                 border.width: 1
-                border.color: selected ? "black" : "lightgray"
+                border.color: activeFocus || computerKeyLabelInput.activeFocus
+                    ? "black"
+                    : selected && mouseArea.bindToKeyCode
+                        ? "red"
+                        : "lightgray"
                 radius: 5
 
                 color: "white"

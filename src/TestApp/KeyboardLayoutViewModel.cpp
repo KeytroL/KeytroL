@@ -97,6 +97,19 @@ void KeyboardLayoutViewModel::renameComputerKey(
 }
 
 
+void KeyboardLayoutViewModel::bindComputerKey(
+    const QModelIndex & index, Keyboard::KeyCode keyCode)
+{
+    if (index.isValid())
+    {
+        const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
+        mModel.replace(computerKeyIndex,
+            computerKeyIndex + 1,
+            {ComputerKey(mModel.computerKeys().at(computerKeyIndex), keyCode)});
+    }
+}
+
+
 QModelIndex KeyboardLayoutViewModel::modelIndex(int row) const
 {
     return index(row, 0);

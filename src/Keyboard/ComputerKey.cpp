@@ -48,6 +48,13 @@ ComputerKey::ComputerKey(const ComputerKey & other, std::string label)
 }
 
 
+ComputerKey::ComputerKey(const ComputerKey & other, Keyboard::KeyCode keyCode)
+    : ComputerKey(other)
+{
+    mKeyCode = keyCode;
+}
+
+
 ComputerKey::ComputerKey(ComputerKey && other)
     : mX(std::move(other.mX))
     , mY(std::move(other.mY))
