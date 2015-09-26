@@ -84,16 +84,14 @@ void NotifyingVector<T>::replace(
 
 
 template <typename T>
-Signal<const typename NotifyingVector<T>::ReplaceDiff &> &
-NotifyingVector<T>::beforeReplace()
+typename NotifyingVector<T>::Notification & NotifyingVector<T>::beforeReplace()
 {
     return mBeforeReplace;
 }
 
 
 template <typename T>
-Signal<const typename NotifyingVector<T>::ReplaceDiff &> &
-NotifyingVector<T>::afterReplace()
+typename NotifyingVector<T>::Notification & NotifyingVector<T>::afterReplace()
 {
     return mAfterReplace;
 }

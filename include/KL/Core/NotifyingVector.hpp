@@ -35,6 +35,8 @@ public:
         SizeType replacementSize;
     };
 
+    using Notification = Signal<const ReplaceDiff &>;
+
     NotifyingVector() = default;
 
     NotifyingVector(NotifyingVector && other);
@@ -46,8 +48,8 @@ public:
 
     void replace(SizeType first, SizeType last, const Vector & replacement);
 
-    Signal<const ReplaceDiff &> & beforeReplace();
-    Signal<const ReplaceDiff &> & afterReplace();
+    Notification & beforeReplace();
+    Notification & afterReplace();
 
 private:
     Vector mVector;

@@ -62,14 +62,13 @@ void KeyboardLayout::replace(SizeType first,
 }
 
 
-Signal<const NotifyingVector<ComputerKey>::ReplaceDiff &> &
-KeyboardLayout::beforeReplace()
+NotifyingVector<ComputerKey>::Notification & KeyboardLayout::beforeReplace()
 {
     return mComputerKeys.beforeReplace();
 }
 
 
-Signal<const NotifyingVector<ComputerKey>::ReplaceDiff &> & KeyboardLayout::afterReplace()
+NotifyingVector<ComputerKey>::Notification & KeyboardLayout::afterReplace()
 {
     return mComputerKeys.afterReplace();
 }
