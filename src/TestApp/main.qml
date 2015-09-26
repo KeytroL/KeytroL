@@ -130,7 +130,7 @@ ApplicationWindow {
         }
 
         onPositionChanged: {
-            if (mouseArea.selectedComputerKey) {
+            if (mouseArea.selectedComputerKey !== null) {
                 keyboardLayout.moveComputerKey(
                     mouseArea.selectedComputerKey.modelIndex,
                     Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
