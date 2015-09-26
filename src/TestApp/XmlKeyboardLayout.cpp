@@ -15,9 +15,9 @@
 
 #include "KeyboardLayoutViewModel.hpp"
 
-#include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <QtCore/QFile>
 #include <QtCore/QXmlStreamReader>

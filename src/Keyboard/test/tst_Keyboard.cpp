@@ -15,8 +15,7 @@
 
 #include "TestKeyboard.hpp"
 
-#include "KL/Core/Warnings.hpp"
-
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <catch.hpp>
 KL_RESTORE_WARNINGS

@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "KL/Core/Warnings.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <QtCore/QAbstractListModel>
 KL_RESTORE_WARNINGS

@@ -17,8 +17,7 @@
 #include "ViewMidiOutDevices.hpp"
 #include "XmlKeyboardLayout.hpp"
 
-#include "KL/Core/Warnings.hpp"
-
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <QtGui/QGuiApplication>
 #include <QtQml/qqml.h>
