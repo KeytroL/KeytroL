@@ -111,16 +111,18 @@ ApplicationWindow {
         anchors.fill: parent
         anchors.margins: 1
 
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+
         property Rectangle selectedComputerKey: null
         property int newComputerKeyOffset: 0
 
         function updateSelectedComputerKey(mouseEvent) {
             var computerKey = childAt(mouseEvent.x, mouseEvent.y);
-            if (computerKey === null) {
-                forceActiveFocus();
+            if (computerKey !== null && mouseEvent.buttons === Qt.LeftButton) {
+                computerKey.forceActiveFocus();
             }
             else {
-                computerKey.forceActiveFocus();
+                forceActiveFocus();
             }
             mouseArea.selectedComputerKey = computerKey;
         }
@@ -165,7 +167,9 @@ ApplicationWindow {
             delegate: Rectangle {
                 antialiasing: false
                 border.width: 1
-                border.color: selected ? "black" : "lightgray"
+                border.color: activeFocus || computerKeyLabelInput.activeFocus
+                    ? "black"
+                    : "lightgray"
                 radius: 5
 
                 color: "white"
