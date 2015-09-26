@@ -115,7 +115,6 @@ ApplicationWindow {
 
         property Rectangle selectedComputerKey: null
         property bool bindToKeyCode: false
-        property int newComputerKeyOffset: 0
 
         function updateSelectedComputerKey(mouseEvent) {
             var computerKey = childAt(mouseEvent.x, mouseEvent.y);
@@ -153,8 +152,7 @@ ApplicationWindow {
                     root.defaultKeySize,
                     root.defaultKeySize,
                     "",
-                    1 + mouseArea.newComputerKeyOffset);
-                ++mouseArea.newComputerKeyOffset;
+                    0);
             }
             else {
                 keyboardLayout.removeComputerKey(mouseArea.selectedComputerKey.modelIndex);
