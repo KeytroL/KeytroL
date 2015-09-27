@@ -36,14 +36,12 @@ void KeyboardLayoutViewModel::setModel(KeyboardLayout model)
     mModel = std::move(model);
     endResetModel();
 
-    mModel.beforeReplace().connect(
-        [this](const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff)
+    mModel.beforeReplace().connect([this](const ReplaceDiff & replaceDiff)
         {
             beforeModelReplace(replaceDiff);
         });
 
-    mModel.afterReplace().connect(
-        [this](const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff)
+    mModel.afterReplace().connect([this](const ReplaceDiff & replaceDiff)
         {
             afterModelReplace(replaceDiff);
         });
@@ -179,8 +177,7 @@ QHash<int, QByteArray> KeyboardLayoutViewModel::roleNames() const
 }
 
 
-void KeyboardLayoutViewModel::beforeModelReplace(
-    const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff)
+void KeyboardLayoutViewModel::beforeModelReplace(const ReplaceDiff & replaceDiff)
 {
     const auto newLast = replaceDiff.first + replaceDiff.replacementSize;
 
@@ -199,8 +196,7 @@ void KeyboardLayoutViewModel::beforeModelReplace(
 }
 
 
-void KeyboardLayoutViewModel::afterModelReplace(
-    const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff)
+void KeyboardLayoutViewModel::afterModelReplace(const ReplaceDiff & replaceDiff)
 {
     const auto newLast = replaceDiff.first + replaceDiff.replacementSize;
 

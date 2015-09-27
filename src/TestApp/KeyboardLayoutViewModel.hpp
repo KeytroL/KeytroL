@@ -70,9 +70,10 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    void beforeModelReplace(
-        const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff);
-    void afterModelReplace(const NotifyingVector<ComputerKey>::ReplaceDiff & replaceDiff);
+    using ReplaceDiff = NotifyingVector<ComputerKey>::ReplaceDiff;
+
+    void beforeModelReplace(const ReplaceDiff & replaceDiff);
+    void afterModelReplace(const ReplaceDiff & replaceDiff);
 
     KeyboardLayout mModel;
 };
