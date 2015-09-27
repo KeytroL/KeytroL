@@ -23,8 +23,8 @@ class Keyboard::PlatformImpl
 public:
     PlatformImpl(Connection keyPressConnection, Connection keyReleaseConnection);
 
-    Connection mKeyPressConnection;
-    Connection mKeyReleaseConnection;
+    ScopedConnection mKeyPressConnection;
+    ScopedConnection mKeyReleaseConnection;
 };
 
 } // namespace KL

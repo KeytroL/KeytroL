@@ -39,10 +39,6 @@ Keyboard::Keyboard()
 }
 
 
-Keyboard::~Keyboard()
-{
-    mPlatformImpl->mKeyPressConnection.disconnect();
-    mPlatformImpl->mKeyReleaseConnection.disconnect();
-}
+Keyboard::~Keyboard() = default;
 
 } // namespace KL
