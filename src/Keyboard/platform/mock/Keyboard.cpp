@@ -35,7 +35,7 @@ Keyboard::Keyboard()
             });
 
     mPlatformImpl = std::unique_ptr<PlatformImpl>(
-        new PlatformImpl{keyPressConnection, keyReleaseConnection});
+        new PlatformImpl{std::move(keyPressConnection), std::move(keyReleaseConnection)});
 }
 
 
