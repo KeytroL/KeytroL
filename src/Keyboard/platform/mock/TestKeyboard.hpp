@@ -16,8 +16,6 @@
 
 namespace KL
 {
-namespace testing
-{
 
 class TestKeyboard
 {
@@ -36,5 +34,4 @@ private:
     PrivateSignal<Keyboard::KeyCode> mKeyReleased;
 };
 
-} // namespace testing
 } // namespace KL

@@ -23,13 +23,13 @@ namespace KL
 Keyboard::Keyboard()
 {
     auto keyPressConnection =
-        testing::TestKeyboard::instance().mKeyPressed.connect([this](KeyCode keyCode)
+        TestKeyboard::instance().mKeyPressed.connect([this](KeyCode keyCode)
             {
                 pressKey(keyCode);
             });
 
     auto keyReleaseConnection =
-        testing::TestKeyboard::instance().mKeyReleased.connect([this](KeyCode keyCode)
+        TestKeyboard::instance().mKeyReleased.connect([this](KeyCode keyCode)
             {
                 releaseKey(keyCode);
             });
