@@ -13,11 +13,15 @@
 
 #pragma once
 
-#include "KL/Core/Warnings.hpp"
+#include "KL/Core/NotifyingVector.hpp"
+#include "KL/Keyboard/ComputerKey.hpp"
 #include "KL/Keyboard/KeyboardLayout.hpp"
 
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QModelIndex>
+#include <QtCore/QString>
 KL_RESTORE_WARNINGS
 
 
@@ -66,10 +70,10 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    void beforeModelReplace(
-        const NotifyingVector<ComputerKey>::Notification & notification);
-    void afterModelReplace(
-        const NotifyingVector<ComputerKey>::Notification & notification);
+    using ReplaceDiff = NotifyingVector<ComputerKey>::ReplaceDiff;
+
+    void beforeModelReplace(const ReplaceDiff & replaceDiff);
+    void afterModelReplace(const ReplaceDiff & replaceDiff);
 
     KeyboardLayout mModel;
 };

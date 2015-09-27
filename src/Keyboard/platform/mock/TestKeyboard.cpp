@@ -16,8 +16,6 @@
 
 namespace KL
 {
-namespace testing
-{
 
 TestKeyboard & TestKeyboard::instance()
 {
@@ -37,5 +35,4 @@ void TestKeyboard::releaseKey(Keyboard::KeyCode keyCode) const
     mKeyReleased.emit(keyCode);
 }
 
-} // namespace testing
 } // namespace KL

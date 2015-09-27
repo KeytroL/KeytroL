@@ -28,12 +28,14 @@ public:
     using SizeType = typename std::vector<T>::size_type;
     using Vector = typename std::vector<T>;
 
-    struct Notification
+    struct ReplaceDiff
     {
         SizeType first;
         SizeType last;
         SizeType replacementSize;
     };
+
+    using Notification = Signal<const ReplaceDiff &>;
 
     NotifyingVector() = default;
 
@@ -46,14 +48,14 @@ public:
 
     void replace(SizeType first, SizeType last, const Vector & replacement);
 
-    Signal<const Notification &> & beforeReplace();
-    Signal<const Notification &> & afterReplace();
+    Notification & beforeReplace();
+    Notification & afterReplace();
 
 private:
     Vector mVector;
 
-    PrivateSignal<const Notification &> mBeforeReplace;
-    PrivateSignal<const Notification &> mAfterReplace;
+    PrivateSignal<const ReplaceDiff &> mBeforeReplace;
+    PrivateSignal<const ReplaceDiff &> mAfterReplace;
 };
 
 } // namespace KL

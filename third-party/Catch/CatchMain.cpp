@@ -11,10 +11,9 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Warnings.hpp"
-
 #define CATCH_CONFIG_MAIN
 
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <catch.hpp>
 KL_RESTORE_WARNINGS

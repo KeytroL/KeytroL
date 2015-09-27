@@ -17,8 +17,7 @@
 #include "ViewMidiOutDevices.hpp"
 #include "XmlKeyboardLayout.hpp"
 
-#include "KL/Core/Warnings.hpp"
-
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <QtGui/QGuiApplication>
 #include <QtQml/qqml.h>
@@ -30,9 +29,10 @@ int main(int argc, char * argv[])
 {
     QGuiApplication application(argc, argv);
 
-    qmlRegisterType<KL::ViewKeyboard>("KL.Keyboard", 1, 0, "Keyboard");
-    qmlRegisterType<KL::KeyboardLayoutViewModel>("KL.Keyboard", 1, 0, "KeyboardLayout");
-    qmlRegisterType<KL::XmlKeyboardLayout>("KL.Keyboard", 1, 0, "XmlKeyboardLayout");
+    qmlRegisterType<KL::ViewKeyboard>("KeytroL.Keyboard", 1, 0, "Keyboard");
+    qmlRegisterType<KL::KeyboardLayoutViewModel>(
+        "KeytroL.Keyboard", 1, 0, "KeyboardLayout");
+    qmlRegisterType<KL::XmlKeyboardLayout>("KeytroL.Keyboard", 1, 0, "XmlKeyboardLayout");
 
     auto midiOutDevicesSingletonProvider = [](QQmlEngine *, QJSEngine *) -> QObject *
     {
@@ -40,8 +40,8 @@ int main(int argc, char * argv[])
     };
 
     qmlRegisterSingletonType<KL::ViewMidiOutDevices>(
-        "KL.Midi", 1, 0, "MidiOutDevices", midiOutDevicesSingletonProvider);
-    qmlRegisterType<KL::ViewMidiOut>("KL.Midi", 1, 0, "MidiOut");
+        "KeytroL.Midi", 1, 0, "MidiOutDevices", midiOutDevicesSingletonProvider);
+    qmlRegisterType<KL::ViewMidiOut>("KeytroL.Midi", 1, 0, "MidiOut");
 
     QQmlApplicationEngine engine(QUrl::fromLocalFile(QML_MAIN));
 

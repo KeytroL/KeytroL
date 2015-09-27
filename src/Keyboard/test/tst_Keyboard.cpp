@@ -15,8 +15,7 @@
 
 #include "TestKeyboard.hpp"
 
-#include "KL/Core/Warnings.hpp"
-
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <catch.hpp>
 KL_RESTORE_WARNINGS
@@ -36,7 +35,7 @@ TEST_CASE("Press a key", "[Keyboard]")
         });
     REQUIRE(count == 0);
 
-    KL::testing::TestKeyboard::instance().pressKey(42);
+    KL::TestKeyboard::instance().pressKey(42);
     REQUIRE(count == 1);
 }
 
@@ -55,6 +54,6 @@ TEST_CASE("Release a key", "[Keyboard]")
         });
     REQUIRE(count == 0);
 
-    KL::testing::TestKeyboard::instance().releaseKey(23);
+    KL::TestKeyboard::instance().releaseKey(23);
     REQUIRE(count == 1);
 }

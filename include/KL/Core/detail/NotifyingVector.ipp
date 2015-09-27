@@ -61,8 +61,8 @@ void NotifyingVector<T>::replace(
         throw std::invalid_argument("invalid argument: first or last");
     }
 
-    Notification notification = {first, last, replacement.size()};
-    mBeforeReplace.emit(notification);
+    ReplaceDiff replaceDiff = {first, last, replacement.size()};
+    mBeforeReplace.emit(replaceDiff);
 
     if (first != last)
     {
@@ -79,21 +79,19 @@ void NotifyingVector<T>::replace(
             replacement.end());
     }
 
-    mAfterReplace.emit(notification);
+    mAfterReplace.emit(replaceDiff);
 }
 
 
 template <typename T>
-Signal<const typename NotifyingVector<T>::Notification &> &
-NotifyingVector<T>::beforeReplace()
+typename NotifyingVector<T>::Notification & NotifyingVector<T>::beforeReplace()
 {
     return mBeforeReplace;
 }
 
 
 template <typename T>
-Signal<const typename NotifyingVector<T>::Notification &> &
-NotifyingVector<T>::afterReplace()
+typename NotifyingVector<T>::Notification & NotifyingVector<T>::afterReplace()
 {
     return mAfterReplace;
 }

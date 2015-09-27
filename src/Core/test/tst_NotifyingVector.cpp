@@ -13,8 +13,7 @@
 
 #include "KL/Core/NotifyingVector.hpp"
 
-#include "KL/Core/Warnings.hpp"
-
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <catch.hpp>
 KL_RESTORE_WARNINGS
@@ -128,12 +127,11 @@ TEST_CASE("Observe replacements in a NotifyingVector", "[NotifyingVector]")
 {
     KL::NotifyingVector<int> ints({1, 2, 3});
 
-    auto testNotification =
-        [](const KL::NotifyingVector<int>::Notification & notification)
+    auto testNotification = [](const KL::NotifyingVector<int>::ReplaceDiff & replaceDiff)
     {
-        REQUIRE(notification.first == 0u);
-        REQUIRE(notification.last == 1u);
-        REQUIRE(notification.replacementSize == 2u);
+        REQUIRE(replaceDiff.first == 0u);
+        REQUIRE(replaceDiff.last == 1u);
+        REQUIRE(replaceDiff.replacementSize == 2u);
     };
 
     ints.beforeReplace().connect(testNotification);

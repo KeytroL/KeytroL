@@ -13,8 +13,7 @@
 
 #pragma once
 
-#include "KL/Core/Warnings.hpp"
-
+#include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
