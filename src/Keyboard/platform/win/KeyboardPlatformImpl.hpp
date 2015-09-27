@@ -36,8 +36,8 @@ public:
 private:
     PlatformImpl();
 
-    void pressKey(Keyboard::KeyCode keyCode) const;
-    void releaseKey(Keyboard::KeyCode keyCode) const;
+    void pressKey(KeyCode keyCode) const;
+    void releaseKey(KeyCode keyCode) const;
 
     std::set<const Keyboard *> mKeyboards;
 
