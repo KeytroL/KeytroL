@@ -22,10 +22,7 @@ class Keyboard::PlatformImpl
 };
 
 
-Keyboard::Keyboard()
-    : mPlatformImpl(nullptr)
-{
-}
+Keyboard::Keyboard() = default;
 
 
 Keyboard::~Keyboard() = default;
