@@ -35,14 +35,10 @@ Keyboard::Keyboard()
             });
 
     mPlatformImpl = std::unique_ptr<PlatformImpl>(
-        new PlatformImpl{keyPressConnection, keyReleaseConnection});
+        new PlatformImpl{std::move(keyPressConnection), std::move(keyReleaseConnection)});
 }
 
 
-Keyboard::~Keyboard()
-{
-    mPlatformImpl->mKeyPressConnection.disconnect();
-    mPlatformImpl->mKeyReleaseConnection.disconnect();
-}
+Keyboard::~Keyboard() = default;
 
 } // namespace KL

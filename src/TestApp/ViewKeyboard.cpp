@@ -22,12 +22,12 @@ ViewKeyboard::ViewKeyboard(QObject * parent)
 {
     mKeyboard.keyPressed().connect([this](Keyboard::KeyCode keyCode)
         {
-            Q_EMIT keyPressed(static_cast<int>(keyCode));
+            Q_EMIT keyPressed(keyCode);
         });
 
     mKeyboard.keyReleased().connect([this](Keyboard::KeyCode keyCode)
         {
-            Q_EMIT keyReleased(static_cast<int>(keyCode));
+            Q_EMIT keyReleased(keyCode);
         });
 }
 

@@ -32,8 +32,8 @@ public:
     ViewKeyboard(QObject * parent = nullptr);
 
 Q_SIGNALS:
-    void keyPressed(int keyCode);
-    void keyReleased(int keyCode);
+    void keyPressed(unsigned int keyCode);
+    void keyReleased(unsigned int keyCode);
 
 private:
     Keyboard mKeyboard;

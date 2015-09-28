@@ -29,13 +29,13 @@ Signal<Keyboard::KeyCode> & Keyboard::keyReleased()
 }
 
 
-void Keyboard::pressKey(Keyboard::KeyCode keyCode) const
+void Keyboard::pressKey(KeyCode keyCode) const
 {
     mKeyPressed.emit(keyCode);
 }
 
 
-void Keyboard::releaseKey(Keyboard::KeyCode keyCode) const
+void Keyboard::releaseKey(KeyCode keyCode) const
 {
     mKeyReleased.emit(keyCode);
 }

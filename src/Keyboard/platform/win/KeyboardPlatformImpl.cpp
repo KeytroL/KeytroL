@@ -70,7 +70,7 @@ Keyboard::PlatformImpl::~PlatformImpl()
 }
 
 
-void Keyboard::PlatformImpl::pressKey(Keyboard::KeyCode keyCode) const
+void Keyboard::PlatformImpl::pressKey(KeyCode keyCode) const
 {
     for (const auto * keyboard : mKeyboards)
     {
@@ -79,7 +79,7 @@ void Keyboard::PlatformImpl::pressKey(Keyboard::KeyCode keyCode) const
 }
 
 
-void Keyboard::PlatformImpl::releaseKey(Keyboard::KeyCode keyCode) const
+void Keyboard::PlatformImpl::releaseKey(KeyCode keyCode) const
 {
     for (const auto * keyboard : mKeyboards)
     {
