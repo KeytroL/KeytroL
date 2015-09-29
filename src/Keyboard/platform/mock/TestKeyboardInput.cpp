@@ -11,20 +11,28 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Connection.hpp"
-#include "KL/Keyboard/Keyboard.hpp"
+#include "TestKeyboardInput.hpp"
 
 
 namespace KL
 {
 
-class Keyboard::PlatformImpl
+TestKeyboardInput & TestKeyboardInput::instance()
 {
-public:
-    PlatformImpl(Connection keyPressConnection, Connection keyReleaseConnection);
+    static TestKeyboardInput testKeyboardInput;
+    return testKeyboardInput;
+}
 
-    ScopedConnection mKeyPressConnection;
-    ScopedConnection mKeyReleaseConnection;
-};
+
+void TestKeyboardInput::pressKey(KeyboardInput::KeyCode keyCode) const
+{
+    mKeyPressed.emit(keyCode);
+}
+
+
+void TestKeyboardInput::releaseKey(KeyboardInput::KeyCode keyCode) const
+{
+    mKeyReleased.emit(keyCode);
+}
 
 } // namespace KL

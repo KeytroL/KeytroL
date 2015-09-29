@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "KL/Keyboard/Keyboard.hpp"
+#include "KL/Keyboard/KeyboardInput.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
@@ -36,7 +36,7 @@ Q_SIGNALS:
     void keyReleased(unsigned int keyCode);
 
 private:
-    Keyboard mKeyboard;
+    KeyboardInput mKeyboardInput;
 };
 
 } // namespace KL

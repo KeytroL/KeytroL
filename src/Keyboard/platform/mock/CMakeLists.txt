@@ -12,9 +12,9 @@
 #  GNU General Public License for more details.
 
 add_library(MockKeytroLKeyboard STATIC
-    Keyboard.cpp
-    KeyboardPlatformImpl.cpp
-    TestKeyboard.cpp
+    KeyboardInput.cpp
+    KeyboardInputPlatformImpl.cpp
+    TestKeyboardInput.cpp
 )
 
 target_include_directories(MockKeytroLKeyboard PUBLIC ${CMAKE_CURRENT_LIST_DIR})

@@ -13,7 +13,7 @@
 
 add_executable(KeytroLKeyboardTest
     tst_ComputerKey.cpp
-    tst_Keyboard.cpp
+    tst_KeyboardInput.cpp
     tst_KeyboardLayout.cpp
     tst_KeyMapping.cpp
 )

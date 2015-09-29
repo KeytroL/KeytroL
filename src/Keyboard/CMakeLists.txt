@@ -13,7 +13,7 @@
 
 add_library(BaseKeytroLKeyboard STATIC
     ComputerKey.cpp
-    Keyboard.cpp
+    KeyboardInput.cpp
     KeyboardLayout.cpp
     KeyMapping.cpp
 )

@@ -11,24 +11,33 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard/Keyboard.hpp"
-
-#include "KeyboardPlatformImpl.hpp"
+#include "KL/Keyboard/KeyboardInput.hpp"
 
 
 namespace KL
 {
 
-Keyboard::Keyboard()
-    : mPlatformImpl(nullptr)
+Signal<KeyboardInput::KeyCode> & KeyboardInput::keyPressed()
 {
-    PlatformImpl::instance().addKeyboard(this);
+    return mKeyPressed;
 }
 
 
-Keyboard::~Keyboard()
+Signal<KeyboardInput::KeyCode> & KeyboardInput::keyReleased()
 {
-    PlatformImpl::instance().removeKeyboard(this);
+    return mKeyReleased;
+}
+
+
+void KeyboardInput::pressKey(KeyCode keyCode) const
+{
+    mKeyPressed.emit(keyCode);
+}
+
+
+void KeyboardInput::releaseKey(KeyCode keyCode) const
+{
+    mKeyReleased.emit(keyCode);
 }
 
 } // namespace KL

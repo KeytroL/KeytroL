@@ -11,37 +11,43 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard/Keyboard.hpp"
+#pragma once
 
-#include "KL/Warnings.hpp"
-KL_DISABLE_WARNINGS
-#include <Windows.h>
-KL_RESTORE_WARNINGS
+#include "KL/Core/Signal.hpp"
 
-#include <set>
+#include <memory>
 
 
 namespace KL
 {
 
-class Keyboard::PlatformImpl
+class KeyboardInput
 {
 public:
-    static PlatformImpl & instance();
-    ~PlatformImpl();
+    using KeyCode = unsigned int;
 
-    void addKeyboard(const Keyboard * keyboard);
-    void removeKeyboard(const Keyboard * keyboard);
+    enum class KeyState : bool
+    {
+        Pressed,
+        Released,
+    };
 
-private:
-    PlatformImpl();
+    KeyboardInput();
+    ~KeyboardInput();
 
+    Signal<KeyCode> & keyPressed();
+    Signal<KeyCode> & keyReleased();
+
+protected:
     void pressKey(KeyCode keyCode) const;
     void releaseKey(KeyCode keyCode) const;
 
-    std::set<const Keyboard *> mKeyboards;
+private:
+    PrivateSignal<KeyCode> mKeyPressed;
+    PrivateSignal<KeyCode> mKeyReleased;
 
-    HHOOK mLowLevelKeyboardHookHandle = nullptr;
+    class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
 } // namespace KL

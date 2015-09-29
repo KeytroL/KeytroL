@@ -20,12 +20,12 @@ namespace KL
 ViewKeyboard::ViewKeyboard(QObject * parent)
     : QObject(parent)
 {
-    mKeyboard.keyPressed().connect([this](Keyboard::KeyCode keyCode)
+    mKeyboardInput.keyPressed().connect([this](KeyboardInput::KeyCode keyCode)
         {
             Q_EMIT keyPressed(keyCode);
         });
 
-    mKeyboard.keyReleased().connect([this](Keyboard::KeyCode keyCode)
+    mKeyboardInput.keyReleased().connect([this](KeyboardInput::KeyCode keyCode)
         {
             Q_EMIT keyReleased(keyCode);
         });

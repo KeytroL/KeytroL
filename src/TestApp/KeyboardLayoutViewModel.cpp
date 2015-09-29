@@ -96,7 +96,7 @@ void KeyboardLayoutViewModel::renameComputerKey(
 
 
 void KeyboardLayoutViewModel::bindComputerKey(
-    const QModelIndex & index, Keyboard::KeyCode keyCode)
+    const QModelIndex & index, KeyboardInput::KeyCode keyCode)
 {
     if (index.isValid())
     {

@@ -11,25 +11,25 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard/Keyboard.hpp"
+#include "KL/Keyboard/KeyboardInput.hpp"
 
-#include "KeyboardPlatformImpl.hpp"
-#include "TestKeyboard.hpp"
+#include "KeyboardInputPlatformImpl.hpp"
+#include "TestKeyboardInput.hpp"
 
 
 namespace KL
 {
 
-Keyboard::Keyboard()
+KeyboardInput::KeyboardInput()
 {
     auto keyPressConnection =
-        TestKeyboard::instance().mKeyPressed.connect([this](KeyCode keyCode)
+        TestKeyboardInput::instance().mKeyPressed.connect([this](KeyCode keyCode)
             {
                 pressKey(keyCode);
             });
 
     auto keyReleaseConnection =
-        TestKeyboard::instance().mKeyReleased.connect([this](KeyCode keyCode)
+        TestKeyboardInput::instance().mKeyReleased.connect([this](KeyCode keyCode)
             {
                 releaseKey(keyCode);
             });
@@ -39,6 +39,6 @@ Keyboard::Keyboard()
 }
 
 
-Keyboard::~Keyboard() = default;
+KeyboardInput::~KeyboardInput() = default;
 
 } // namespace KL

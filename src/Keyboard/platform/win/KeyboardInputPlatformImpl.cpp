@@ -11,48 +11,48 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KeyboardPlatformImpl.hpp"
+#include "KeyboardInputPlatformImpl.hpp"
 
 
 namespace KL
 {
 
-Keyboard::PlatformImpl & Keyboard::PlatformImpl::instance()
+KeyboardInput::PlatformImpl & KeyboardInput::PlatformImpl::instance()
 {
     static PlatformImpl platformKeyboard;
     return platformKeyboard;
 }
 
 
-void Keyboard::PlatformImpl::addKeyboard(const Keyboard * keyboard)
+void KeyboardInput::PlatformImpl::addKeyboardInput(const KeyboardInput * keyboardInput)
 {
-    mKeyboards.insert(keyboard);
+    mKeyboardInputs.insert(keyboardInput);
 }
 
 
-void Keyboard::PlatformImpl::removeKeyboard(const Keyboard * keyboard)
+void KeyboardInput::PlatformImpl::removeKeyboardInput(const KeyboardInput * keyboardInput)
 {
-    mKeyboards.erase(keyboard);
+    mKeyboardInputs.erase(keyboardInput);
 }
 
 
-Keyboard::PlatformImpl::PlatformImpl()
+KeyboardInput::PlatformImpl::PlatformImpl()
 {
     const auto lowLevelKeyboardProc = [](int nCode, WPARAM wParam, LPARAM lParam)
                                           -> LRESULT
     {
         if (nCode == HC_ACTION)
         {
-            const auto & platformKeyboard = PlatformImpl::instance();
+            const auto & platformKeyboardInput = PlatformImpl::instance();
             const auto hookStruct = reinterpret_cast<const KBDLLHOOKSTRUCT *>(lParam);
 
             if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)
             {
-                platformKeyboard.pressKey(hookStruct->scanCode);
+                platformKeyboardInput.pressKey(hookStruct->scanCode);
             }
             else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP)
             {
-                platformKeyboard.releaseKey(hookStruct->scanCode);
+                platformKeyboardInput.releaseKey(hookStruct->scanCode);
             }
         }
 
@@ -64,26 +64,26 @@ Keyboard::PlatformImpl::PlatformImpl()
 }
 
 
-Keyboard::PlatformImpl::~PlatformImpl()
+KeyboardInput::PlatformImpl::~PlatformImpl()
 {
     UnhookWindowsHookEx(mLowLevelKeyboardHookHandle);
 }
 
 
-void Keyboard::PlatformImpl::pressKey(KeyCode keyCode) const
+void KeyboardInput::PlatformImpl::pressKey(KeyCode keyCode) const
 {
-    for (const auto * keyboard : mKeyboards)
+    for (const auto * keyboardInput : mKeyboardInputs)
     {
-        keyboard->pressKey(keyCode);
+        keyboardInput->pressKey(keyCode);
     }
 }
 
 
-void Keyboard::PlatformImpl::releaseKey(KeyCode keyCode) const
+void KeyboardInput::PlatformImpl::releaseKey(KeyCode keyCode) const
 {
-    for (const auto * keyboard : mKeyboards)
+    for (const auto * keyboardInput : mKeyboardInputs)
     {
-        keyboard->releaseKey(keyCode);
+        keyboardInput->releaseKey(keyCode);
     }
 }
 

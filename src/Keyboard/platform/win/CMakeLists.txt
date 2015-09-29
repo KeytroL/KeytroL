@@ -12,8 +12,8 @@
 #  GNU General Public License for more details.
 
 add_library(WinKeytroLKeyboard STATIC
-    Keyboard.cpp
-    KeyboardPlatformImpl.cpp
+    KeyboardInput.cpp
+    KeyboardInputPlatformImpl.cpp
 )
 
 target_link_libraries(WinKeytroLKeyboard PUBLIC

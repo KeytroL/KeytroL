@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "KL/Keyboard/Keyboard.hpp"
+#include "KL/Keyboard/KeyboardInput.hpp"
 
 #include <string>
 
@@ -29,14 +29,14 @@ public:
         unsigned int width,
         unsigned int height,
         std::string label,
-        Keyboard::KeyCode keyCode);
+        KeyboardInput::KeyCode keyCode);
 
     ComputerKey(const ComputerKey & other) = default;
     ComputerKey & operator=(const ComputerKey & other) = default;
 
     ComputerKey(const ComputerKey & other, int x, int y);
     ComputerKey(const ComputerKey & other, std::string label);
-    ComputerKey(const ComputerKey & other, Keyboard::KeyCode keyCode);
+    ComputerKey(const ComputerKey & other, KeyboardInput::KeyCode keyCode);
 
     ComputerKey(ComputerKey && other);
     ComputerKey & operator=(ComputerKey && other);
@@ -49,7 +49,7 @@ public:
 
     const std::string & label() const;
 
-    Keyboard::KeyCode keyCode() const;
+    KeyboardInput::KeyCode keyCode() const;
 
     bool operator==(const ComputerKey & other) const;
 
@@ -62,7 +62,7 @@ private:
 
     std::string mLabel;
 
-    Keyboard::KeyCode mKeyCode;
+    KeyboardInput::KeyCode mKeyCode;
 };
 
 } // namespace KL

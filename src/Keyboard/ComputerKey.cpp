@@ -22,7 +22,7 @@ ComputerKey::ComputerKey(int x,
     unsigned int width,
     unsigned int height,
     std::string label,
-    Keyboard::KeyCode keyCode)
+    KeyboardInput::KeyCode keyCode)
     : mX(x)
     , mY(y)
     , mWidth(width)
@@ -48,7 +48,7 @@ ComputerKey::ComputerKey(const ComputerKey & other, std::string label)
 }
 
 
-ComputerKey::ComputerKey(const ComputerKey & other, Keyboard::KeyCode keyCode)
+ComputerKey::ComputerKey(const ComputerKey & other, KeyboardInput::KeyCode keyCode)
     : ComputerKey(other)
 {
     mKeyCode = keyCode;
@@ -108,7 +108,7 @@ const std::string & ComputerKey::label() const
 }
 
 
-Keyboard::KeyCode ComputerKey::keyCode() const
+KeyboardInput::KeyCode ComputerKey::keyCode() const
 {
     return mKeyCode;
 }

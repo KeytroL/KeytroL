@@ -11,17 +11,20 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KeyboardPlatformImpl.hpp"
+#include "KL/Keyboard/KeyboardInput.hpp"
 
 
 namespace KL
 {
 
-Keyboard::PlatformImpl::PlatformImpl(
-    Connection keyPressConnection, Connection keyReleaseConnection)
-    : mKeyPressConnection(std::move(keyPressConnection))
-    , mKeyReleaseConnection(std::move(keyReleaseConnection))
+class KeyboardInput::PlatformImpl
 {
-}
+};
+
+
+KeyboardInput::KeyboardInput() = default;
+
+
+KeyboardInput::~KeyboardInput() = default;
 
 } // namespace KL

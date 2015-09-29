@@ -12,7 +12,7 @@
 #  GNU General Public License for more details.
 
 add_library(DefaultKeytroLKeyboard STATIC
-    Keyboard.cpp
+    KeyboardInput.cpp
 )
 
 target_link_libraries(DefaultKeytroLKeyboard PUBLIC

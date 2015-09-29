@@ -11,9 +11,9 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard/Keyboard.hpp"
+#include "KL/Keyboard/KeyboardInput.hpp"
 
-#include "TestKeyboard.hpp"
+#include "TestKeyboardInput.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
@@ -21,12 +21,12 @@ KL_DISABLE_WARNINGS
 KL_RESTORE_WARNINGS
 
 
-TEST_CASE("Press a key", "[Keyboard]")
+TEST_CASE("Press a key", "[KeyboardInput]")
 {
-    KL::Keyboard keyboard;
+    KL::KeyboardInput keyboardInput;
     auto count = 0;
 
-    keyboard.keyPressed().connect([&count](KL::Keyboard::KeyCode keyCode)
+    keyboardInput.keyPressed().connect([&count](KL::KeyboardInput::KeyCode keyCode)
         {
             if (keyCode == 42)
             {
@@ -35,17 +35,17 @@ TEST_CASE("Press a key", "[Keyboard]")
         });
     REQUIRE(count == 0);
 
-    KL::TestKeyboard::instance().pressKey(42);
+    KL::TestKeyboardInput::instance().pressKey(42);
     REQUIRE(count == 1);
 }
 
 
-TEST_CASE("Release a key", "[Keyboard]")
+TEST_CASE("Release a key", "[KeyboardInput]")
 {
-    KL::Keyboard keyboard;
+    KL::KeyboardInput keyboardInput;
     auto count = 0;
 
-    keyboard.keyReleased().connect([&count](KL::Keyboard::KeyCode keyCode)
+    keyboardInput.keyReleased().connect([&count](KL::KeyboardInput::KeyCode keyCode)
         {
             if (keyCode == 23)
             {
@@ -54,6 +54,6 @@ TEST_CASE("Release a key", "[Keyboard]")
         });
     REQUIRE(count == 0);
 
-    KL::TestKeyboard::instance().releaseKey(23);
+    KL::TestKeyboardInput::instance().releaseKey(23);
     REQUIRE(count == 1);
 }

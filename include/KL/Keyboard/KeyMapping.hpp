@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "KL/Keyboard/Keyboard.hpp"
+#include "KL/Keyboard/KeyboardInput.hpp"
 
 #include <functional>
 #include <map>
@@ -25,8 +25,8 @@ namespace KL
 
 class KeyMapping
 {
-    using Code = Keyboard::KeyCode;
-    using State = Keyboard::KeyState;
+    using Code = KeyboardInput::KeyCode;
+    using State = KeyboardInput::KeyState;
 
 public:
     std::function<void()> & at(Code keyCode, State keyState);

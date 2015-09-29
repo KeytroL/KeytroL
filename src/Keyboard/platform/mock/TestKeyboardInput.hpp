@@ -11,20 +11,27 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard/Keyboard.hpp"
+#include "KL/Keyboard/KeyboardInput.hpp"
 
 
 namespace KL
 {
 
-class Keyboard::PlatformImpl
+class TestKeyboardInput
 {
+public:
+    static TestKeyboardInput & instance();
+
+    void pressKey(KeyboardInput::KeyCode keyCode) const;
+    void releaseKey(KeyboardInput::KeyCode keyCode) const;
+
+private:
+    TestKeyboardInput() = default;
+
+    friend class KL::KeyboardInput;
+
+    PrivateSignal<KeyboardInput::KeyCode> mKeyPressed;
+    PrivateSignal<KeyboardInput::KeyCode> mKeyReleased;
 };
-
-
-Keyboard::Keyboard() = default;
-
-
-Keyboard::~Keyboard() = default;
 
 } // namespace KL
