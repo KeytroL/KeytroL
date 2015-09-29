@@ -14,7 +14,7 @@
 add_library(KeytroLModel STATIC
     ComputerKey.cpp
     KeyboardLayout.cpp
-    KeyMapping.cpp
+    KeyboardMapping.cpp
 )
 
 target_link_libraries(KeytroLModel PUBLIC

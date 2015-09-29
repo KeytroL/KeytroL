@@ -25,7 +25,7 @@ namespace KL
 namespace Model
 {
 
-class KeyMapping
+class KeyboardMapping
 {
     using Code = IO::KeyboardInput::KeyCode;
     using State = IO::KeyboardInput::KeyState;

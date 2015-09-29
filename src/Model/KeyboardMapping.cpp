@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Model/KeyMapping.hpp"
+#include "KL/Model/KeyboardMapping.hpp"
 
 
 namespace KL
@@ -19,13 +19,13 @@ namespace KL
 namespace Model
 {
 
-std::function<void()> & KeyMapping::at(Code keyCode, State keyState)
+std::function<void()> & KeyboardMapping::at(Code keyCode, State keyState)
 {
     return mKeyToFunction[std::make_pair(keyCode, keyState)];
 }
 
 
-const std::function<void()> & KeyMapping::at(Code keyCode, State keyState) const
+const std::function<void()> & KeyboardMapping::at(Code keyCode, State keyState) const
 {
     return mKeyToFunction.at(std::make_pair(keyCode, keyState));
 }
