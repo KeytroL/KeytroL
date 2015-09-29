@@ -35,16 +35,16 @@ public:
     KeyboardInput();
     ~KeyboardInput();
 
-    Signal<KeyCode> & keyPressed();
-    Signal<KeyCode> & keyReleased();
+    Core::Signal<KeyCode> & keyPressed();
+    Core::Signal<KeyCode> & keyReleased();
 
 protected:
     void pressKey(KeyCode keyCode) const;
     void releaseKey(KeyCode keyCode) const;
 
 private:
-    PrivateSignal<KeyCode> mKeyPressed;
-    PrivateSignal<KeyCode> mKeyReleased;
+    Core::PrivateSignal<KeyCode> mKeyPressed;
+    Core::PrivateSignal<KeyCode> mKeyReleased;
 
     class PlatformImpl;
     std::unique_ptr<PlatformImpl> mPlatformImpl;

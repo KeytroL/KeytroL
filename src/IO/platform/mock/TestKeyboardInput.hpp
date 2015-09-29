@@ -30,8 +30,8 @@ private:
 
     friend class KL::KeyboardInput;
 
-    PrivateSignal<KeyboardInput::KeyCode> mKeyPressed;
-    PrivateSignal<KeyboardInput::KeyCode> mKeyReleased;
+    Core::PrivateSignal<KeyboardInput::KeyCode> mKeyPressed;
+    Core::PrivateSignal<KeyboardInput::KeyCode> mKeyReleased;
 };
 
 } // namespace KL

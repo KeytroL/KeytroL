@@ -18,6 +18,8 @@
 
 namespace KL
 {
+namespace Core
+{
 
 template <typename T>
 class Property
@@ -34,6 +36,7 @@ private:
     PrivateSignal<T> mValueChanged;
 };
 
+} // namespace Core
 } // namespace KL
 
 

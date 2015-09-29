@@ -48,7 +48,7 @@ void KeyboardLayout::removeComputerKey(SizeType index)
 }
 
 
-const NotifyingVector<ComputerKey>::Vector & KeyboardLayout::computerKeys() const
+const Core::NotifyingVector<ComputerKey>::Vector & KeyboardLayout::computerKeys() const
 {
     return mComputerKeys.vector();
 }
@@ -56,19 +56,19 @@ const NotifyingVector<ComputerKey>::Vector & KeyboardLayout::computerKeys() cons
 
 void KeyboardLayout::replace(SizeType first,
     SizeType last,
-    const NotifyingVector<ComputerKey>::Vector & replacement)
+    const Core::NotifyingVector<ComputerKey>::Vector & replacement)
 {
     mComputerKeys.replace(first, last, replacement);
 }
 
 
-NotifyingVector<ComputerKey>::Notification & KeyboardLayout::beforeReplace()
+Core::NotifyingVector<ComputerKey>::Notification & KeyboardLayout::beforeReplace()
 {
     return mComputerKeys.beforeReplace();
 }
 
 
-NotifyingVector<ComputerKey>::Notification & KeyboardLayout::afterReplace()
+Core::NotifyingVector<ComputerKey>::Notification & KeyboardLayout::afterReplace()
 {
     return mComputerKeys.afterReplace();
 }

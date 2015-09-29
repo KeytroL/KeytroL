@@ -17,13 +17,13 @@
 namespace KL
 {
 
-Signal<KeyboardInput::KeyCode> & KeyboardInput::keyPressed()
+Core::Signal<KeyboardInput::KeyCode> & KeyboardInput::keyPressed()
 {
     return mKeyPressed;
 }
 
 
-Signal<KeyboardInput::KeyCode> & KeyboardInput::keyReleased()
+Core::Signal<KeyboardInput::KeyCode> & KeyboardInput::keyReleased()
 {
     return mKeyReleased;
 }

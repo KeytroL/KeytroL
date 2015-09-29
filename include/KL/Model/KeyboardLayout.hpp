@@ -24,7 +24,7 @@ namespace KL
 class KeyboardLayout
 {
 public:
-    using SizeType = NotifyingVector<ComputerKey>::SizeType;
+    using SizeType = Core::NotifyingVector<ComputerKey>::SizeType;
 
     KeyboardLayout() = default;
 
@@ -34,17 +34,17 @@ public:
     void addComputerKey(ComputerKey computerKey);
     void removeComputerKey(SizeType index);
 
-    const NotifyingVector<ComputerKey>::Vector & computerKeys() const;
+    const Core::NotifyingVector<ComputerKey>::Vector & computerKeys() const;
 
     void replace(SizeType first,
         SizeType last,
-        const NotifyingVector<ComputerKey>::Vector & replacement);
+        const Core::NotifyingVector<ComputerKey>::Vector & replacement);
 
-    NotifyingVector<ComputerKey>::Notification & beforeReplace();
-    NotifyingVector<ComputerKey>::Notification & afterReplace();
+    Core::NotifyingVector<ComputerKey>::Notification & beforeReplace();
+    Core::NotifyingVector<ComputerKey>::Notification & afterReplace();
 
 private:
-    NotifyingVector<ComputerKey> mComputerKeys;
+    Core::NotifyingVector<ComputerKey> mComputerKeys;
 };
 
 } // namespace KL

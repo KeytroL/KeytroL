@@ -18,6 +18,8 @@
 
 namespace KL
 {
+namespace Core
+{
 
 template <typename T>
 NotifyingVector<T>::NotifyingVector(NotifyingVector<T> && other)
@@ -96,4 +98,5 @@ typename NotifyingVector<T>::Notification & NotifyingVector<T>::afterReplace()
     return mAfterReplace;
 }
 
+} // namespace Core
 } // namespace KL

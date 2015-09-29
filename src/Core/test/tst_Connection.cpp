@@ -23,17 +23,17 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Construct a Connection, then assign it another Connection", "[Connection]")
 {
-    KL::Connection connection;
+    KL::Core::Connection connection;
     REQUIRE_FALSE(connection.isConnected());
 
-    KL::PrivateSignal<bool> signal;
+    KL::Core::PrivateSignal<bool> signal;
 
     connection = signal.connect([](bool)
         {
         });
     REQUIRE(connection.isConnected());
 
-    connection = KL::Connection{};
+    connection = KL::Core::Connection{};
     REQUIRE_FALSE(connection.isConnected());
 }
 
@@ -41,24 +41,24 @@ TEST_CASE("Construct a Connection, then assign it another Connection", "[Connect
 TEST_CASE(
     "Construct a ScopedConnection, then assign it another Connection", "[Connection]")
 {
-    KL::ScopedConnection scopedConnection;
+    KL::Core::ScopedConnection scopedConnection;
     REQUIRE_FALSE(scopedConnection.isConnected());
 
-    KL::PrivateSignal<bool> signal;
+    KL::Core::PrivateSignal<bool> signal;
 
     scopedConnection = signal.connect([](bool)
         {
         });
     REQUIRE(scopedConnection.isConnected());
 
-    scopedConnection = KL::ScopedConnection{};
+    scopedConnection = KL::Core::ScopedConnection{};
     REQUIRE_FALSE(scopedConnection.isConnected());
 }
 
 
 TEST_CASE("Disconnect automatically with a ScopedConnection", "[Connection]")
 {
-    KL::PrivateSignal<bool> signal;
+    KL::Core::PrivateSignal<bool> signal;
 
     auto connection = signal.connect([](bool)
         {
@@ -66,7 +66,7 @@ TEST_CASE("Disconnect automatically with a ScopedConnection", "[Connection]")
     REQUIRE(connection.isConnected());
 
     {
-        KL::ScopedConnection scopedConnection = connection;
+        KL::Core::ScopedConnection scopedConnection = connection;
         REQUIRE(scopedConnection.isConnected());
         REQUIRE(connection.isConnected());
     }

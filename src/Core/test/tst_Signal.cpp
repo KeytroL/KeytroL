@@ -21,7 +21,7 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Connect to a Signal", "[Signal]")
 {
-    KL::Signal<bool> signal;
+    KL::Core::Signal<bool> signal;
 
     auto connection = signal.connect([](bool)
         {
@@ -33,7 +33,7 @@ TEST_CASE("Connect to a Signal", "[Signal]")
 
 TEST_CASE("Emit a Signal", "[Signal]")
 {
-    KL::PrivateSignal<bool> signal;
+    KL::Core::PrivateSignal<bool> signal;
     auto count = 0;
 
     signal.connect([&count](bool value)
@@ -55,7 +55,7 @@ TEST_CASE("Emit a Signal", "[Signal]")
 
 TEST_CASE("Disconnect from a Signal", "[Signal]")
 {
-    KL::PrivateSignal<bool> signal;
+    KL::Core::PrivateSignal<bool> signal;
     auto count = 0;
 
     auto connection = signal.connect([&count](bool)

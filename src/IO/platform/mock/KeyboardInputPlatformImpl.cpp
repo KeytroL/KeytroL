@@ -18,7 +18,7 @@ namespace KL
 {
 
 KeyboardInput::PlatformImpl::PlatformImpl(
-    Connection keyPressConnection, Connection keyReleaseConnection)
+    Core::Connection keyPressConnection, Core::Connection keyReleaseConnection)
     : mKeyPressConnection(std::move(keyPressConnection))
     , mKeyReleaseConnection(std::move(keyReleaseConnection))
 {

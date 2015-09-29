@@ -70,7 +70,7 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    using ReplaceDiff = NotifyingVector<ComputerKey>::ReplaceDiff;
+    using ReplaceDiff = Core::NotifyingVector<ComputerKey>::ReplaceDiff;
 
     void beforeModelReplace(const ReplaceDiff & replaceDiff);
     void afterModelReplace(const ReplaceDiff & replaceDiff);

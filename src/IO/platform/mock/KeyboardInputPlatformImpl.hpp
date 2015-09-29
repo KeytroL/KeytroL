@@ -21,10 +21,11 @@ namespace KL
 class KeyboardInput::PlatformImpl
 {
 public:
-    PlatformImpl(Connection keyPressConnection, Connection keyReleaseConnection);
+    PlatformImpl(
+        Core::Connection keyPressConnection, Core::Connection keyReleaseConnection);
 
-    ScopedConnection mKeyPressConnection;
-    ScopedConnection mKeyReleaseConnection;
+    Core::ScopedConnection mKeyPressConnection;
+    Core::ScopedConnection mKeyReleaseConnection;
 };
 
 } // namespace KL

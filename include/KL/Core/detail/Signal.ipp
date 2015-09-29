@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace Core
+{
 
 template <typename T>
 Signal<T>::Signal(Signal && other)
@@ -67,4 +69,5 @@ void PrivateSignal<T>::emit(const T & value) const
     }
 }
 
+} // namespace Core
 } // namespace KL
