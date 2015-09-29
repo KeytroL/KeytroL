@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace ViewIO
+{
 
 ViewKeyboardInput::ViewKeyboardInput(QObject * parent)
     : QObject(parent)
@@ -31,4 +33,5 @@ ViewKeyboardInput::ViewKeyboardInput(QObject * parent)
         });
 }
 
+} // namespace ViewIO
 } // namespace KL

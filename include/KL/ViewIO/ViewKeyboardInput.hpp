@@ -23,6 +23,8 @@ KL_RESTORE_WARNINGS
 
 namespace KL
 {
+namespace ViewIO
+{
 
 class ViewKeyboardInput : public QObject
 {
@@ -39,4 +41,5 @@ private:
     IO::KeyboardInput mKeyboardInput;
 };
 
+} // namespace ViewIO
 } // namespace KL

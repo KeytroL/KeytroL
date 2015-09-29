@@ -18,6 +18,8 @@
 
 namespace KL
 {
+namespace ViewIO
+{
 
 ViewMidiOut::ViewMidiOut(QObject * parent)
     : QObject(parent)
@@ -66,4 +68,5 @@ void ViewMidiOut::updateDevice()
     }
 }
 
+} // namespace ViewIO
 } // namespace KL

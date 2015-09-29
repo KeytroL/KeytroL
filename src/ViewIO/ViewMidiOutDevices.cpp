@@ -18,6 +18,8 @@
 
 namespace KL
 {
+namespace ViewIO
+{
 
 ViewMidiOutDevices::ViewMidiOutDevices(QObject * parent)
     : QObject(parent)
@@ -36,4 +38,5 @@ QString ViewMidiOutDevices::name(unsigned int index) const
     return QString::fromStdString(IO::MidiOut::deviceName(index));
 }
 
+} // namespace ViewIO
 } // namespace KL

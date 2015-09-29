@@ -21,6 +21,8 @@ KL_RESTORE_WARNINGS
 
 namespace KL
 {
+namespace ViewIO
+{
 
 class ViewMidiOutDevices : public QObject
 {
@@ -33,4 +35,5 @@ public:
     Q_INVOKABLE QString name(unsigned int index) const;
 };
 
+} // namespace ViewIO
 } // namespace KL

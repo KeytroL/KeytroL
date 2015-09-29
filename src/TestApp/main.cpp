@@ -31,14 +31,14 @@ int main(int argc, char * argv[])
 
     auto midiOutDevicesSingletonProvider = [](QQmlEngine *, QJSEngine *) -> QObject *
     {
-        return new KL::ViewMidiOutDevices;
+        return new KL::ViewIO::ViewMidiOutDevices;
     };
 
-    qmlRegisterSingletonType<KL::ViewMidiOutDevices>(
+    qmlRegisterSingletonType<KL::ViewIO::ViewMidiOutDevices>(
         "KeytroL.IO", 1, 0, "MidiOutDevices", midiOutDevicesSingletonProvider);
 
-    qmlRegisterType<KL::ViewKeyboardInput>("KeytroL.IO", 1, 0, "KeyboardInput");
-    qmlRegisterType<KL::ViewMidiOut>("KeytroL.IO", 1, 0, "MidiOut");
+    qmlRegisterType<KL::ViewIO::ViewKeyboardInput>("KeytroL.IO", 1, 0, "KeyboardInput");
+    qmlRegisterType<KL::ViewIO::ViewMidiOut>("KeytroL.IO", 1, 0, "MidiOut");
 
     qmlRegisterType<KL::KeyboardLayoutViewModel>("KeytroL.Model", 1, 0, "KeyboardLayout");
     qmlRegisterType<KL::XmlKeyboardLayout>("KeytroL.Model", 1, 0, "XmlKeyboardLayout");

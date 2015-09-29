@@ -29,6 +29,9 @@ class MidiOut;
 }
 
 
+namespace ViewIO
+{
+
 class ViewMidiOut : public QObject
 {
     Q_OBJECT
@@ -56,4 +59,5 @@ private:
     std::unique_ptr<IO::MidiOut> mDevice;
 };
 
+} // namespace ViewIO
 } // namespace KL
