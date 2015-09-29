@@ -24,12 +24,12 @@ namespace KL
 namespace ViewIO
 {
 
-class ViewMidiOutDevices : public QObject
+class MidiOutDevices : public QObject
 {
     Q_OBJECT
 
 public:
-    ViewMidiOutDevices(QObject * parent = nullptr);
+    MidiOutDevices(QObject * parent = nullptr);
 
     Q_INVOKABLE unsigned int count() const;
     Q_INVOKABLE QString name(unsigned int index) const;

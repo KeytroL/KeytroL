@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/ViewIO/ViewMidiOutDevices.hpp"
+#include "KL/ViewIO/MidiOutDevices.hpp"
 
 #include "KL/IO/MidiOut.hpp"
 
@@ -21,19 +21,19 @@ namespace KL
 namespace ViewIO
 {
 
-ViewMidiOutDevices::ViewMidiOutDevices(QObject * parent)
+MidiOutDevices::MidiOutDevices(QObject * parent)
     : QObject(parent)
 {
 }
 
 
-unsigned int ViewMidiOutDevices::count() const
+unsigned int MidiOutDevices::count() const
 {
     return IO::MidiOut::deviceCount();
 }
 
 
-QString ViewMidiOutDevices::name(unsigned int index) const
+QString MidiOutDevices::name(unsigned int index) const
 {
     return QString::fromStdString(IO::MidiOut::deviceName(index));
 }
