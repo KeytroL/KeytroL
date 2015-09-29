@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/ViewModel/XmlKeyboardLayout.hpp"
+#include "KL/ViewModel/XmlFile.hpp"
 
 #include "KL/Model/KeyboardLayout.hpp"
 #include "KL/ViewModel/KeyboardLayout.hpp"
@@ -29,13 +29,13 @@ namespace KL
 namespace ViewModel
 {
 
-XmlKeyboardLayout::XmlKeyboardLayout(QObject * parent)
+XmlFile::XmlFile(QObject * parent)
     : QObject(parent)
 {
 }
 
 
-bool XmlKeyboardLayout::load(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
+bool XmlFile::load(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
 {
     if (!keyboardLayout)
     {
@@ -80,7 +80,7 @@ bool XmlKeyboardLayout::load(const QUrl & fileUrl, KeyboardLayout * keyboardLayo
 }
 
 
-bool XmlKeyboardLayout::save(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
+bool XmlFile::save(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
 {
     if (!keyboardLayout)
     {

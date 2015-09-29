@@ -15,7 +15,7 @@
 #include "KL/ViewIO/MidiOut.hpp"
 #include "KL/ViewIO/MidiOutDevices.hpp"
 #include "KL/ViewModel/KeyboardLayout.hpp"
-#include "KL/ViewModel/XmlKeyboardLayout.hpp"
+#include "KL/ViewModel/XmlFile.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
@@ -42,8 +42,7 @@ int main(int argc, char * argv[])
 
     qmlRegisterType<KL::ViewModel::KeyboardLayout>(
         "KeytroL.Model", 1, 0, "KeyboardLayout");
-    qmlRegisterType<KL::ViewModel::XmlKeyboardLayout>(
-        "KeytroL.Model", 1, 0, "XmlKeyboardLayout");
+    qmlRegisterType<KL::ViewModel::XmlFile>("KeytroL.Model", 1, 0, "XmlFile");
 
     QQmlApplicationEngine engine(QUrl::fromLocalFile(QML_MAIN));
 

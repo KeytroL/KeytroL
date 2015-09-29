@@ -40,7 +40,7 @@ ApplicationWindow {
                     onTriggered: {
                         if (fileDialog.fileUrl.toString() !== "") {
                             console.log("Saving file: " + fileDialog.fileUrl);
-                            if (!xmlKeyboardLayout.save(fileDialog.fileUrl, keyboardLayout)) {
+                            if (!xmlFile.save(fileDialog.fileUrl, keyboardLayout)) {
                                 cannotSaveFileDialog.open();
                             }
                         }
@@ -99,7 +99,7 @@ ApplicationWindow {
         onAccepted: {
             if (fileDialog.selectExisting) {
                 console.log("Loading file: " + fileDialog.fileUrl);
-                if (!xmlKeyboardLayout.load(fileDialog.fileUrl, keyboardLayout)) {
+                if (!xmlFile.load(fileDialog.fileUrl, keyboardLayout)) {
                     cannotLoadFileDialog.open();
                 }
             }
@@ -125,8 +125,8 @@ ApplicationWindow {
         standardButtons: StandardButton.Ok
     }
 
-    XmlKeyboardLayout {
-        id: xmlKeyboardLayout
+    XmlFile {
+        id: xmlFile
     }
 
     KeyboardLayout {

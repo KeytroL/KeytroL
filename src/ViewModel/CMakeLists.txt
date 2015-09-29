@@ -13,9 +13,9 @@
 
 add_library(KeytroLViewModel STATIC
     ../../include/KL/ViewModel/KeyboardLayout.hpp
-    ../../include/KL/ViewModel/XmlKeyboardLayout.hpp
+    ../../include/KL/ViewModel/XmlFile.hpp
     KeyboardLayout.cpp
-    XmlKeyboardLayout.cpp
+    XmlFile.cpp
 )
 
 target_link_libraries(KeytroLViewModel PUBLIC

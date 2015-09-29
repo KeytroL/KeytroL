@@ -28,12 +28,12 @@ namespace ViewModel
 class KeyboardLayout;
 
 
-class XmlKeyboardLayout : public QObject
+class XmlFile : public QObject
 {
     Q_OBJECT
 
 public:
-    XmlKeyboardLayout(QObject * parent = nullptr);
+    XmlFile(QObject * parent = nullptr);
 
     Q_INVOKABLE bool load(
         const QUrl & fileUrl, KL::ViewModel::KeyboardLayout * keyboardLayout);
