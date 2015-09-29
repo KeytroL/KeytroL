@@ -13,6 +13,7 @@
 
 add_library(DefaultKeytroLIO STATIC
     KeyboardInput.cpp
+    MidiOut.cpp
 )
 
 target_link_libraries(DefaultKeytroLIO PUBLIC

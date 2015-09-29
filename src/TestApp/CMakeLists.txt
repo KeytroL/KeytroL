@@ -22,7 +22,6 @@ add_executable(KeytroLTestApp
 
 target_link_libraries(KeytroLTestApp PRIVATE
     KeytroLIO
-    KeytroLMidi
     KeytroLModel
     Qt5::Quick
 )

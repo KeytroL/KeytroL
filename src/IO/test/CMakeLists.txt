@@ -12,7 +12,9 @@
 #  GNU General Public License for more details.
 
 add_executable(KeytroLIOTest
+    ../platform/default/MidiOut.cpp
     tst_KeyboardInput.cpp
+    tst_MidiOut.cpp
 )
 
 target_link_libraries(KeytroLIOTest PRIVATE

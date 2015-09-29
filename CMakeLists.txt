@@ -56,7 +56,6 @@ add_subdirectory(third-party/Catch)
 
 add_subdirectory(src/Core)
 add_subdirectory(src/IO)
-add_subdirectory(src/Midi)
 add_subdirectory(src/Model)
 
 find_package(Qt5Quick 5.3)

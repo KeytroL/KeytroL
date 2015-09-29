@@ -13,7 +13,7 @@
 
 #include "ViewMidiOut.hpp"
 
-#include "KL/Midi/MidiOut.hpp"
+#include "KL/IO/MidiOut.hpp"
 
 
 namespace KL

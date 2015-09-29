@@ -11,40 +11,21 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Midi/MidiOut.hpp"
+#include "KL/IO/MidiOut.hpp"
+
+#include "KL/Warnings.hpp"
+KL_DISABLE_WARNINGS
+#include <catch.hpp>
+KL_RESTORE_WARNINGS
 
 
-namespace KL
+TEST_CASE("Default MIDI out device count is null", "[MidiOut]")
 {
-
-class MidiOut::PlatformImpl
-{
-};
-
-
-unsigned int MidiOut::deviceCount()
-{
-    return 0;
+    REQUIRE(KL::MidiOut::deviceCount() == 0);
 }
 
 
-std::string MidiOut::deviceName(unsigned int)
+TEST_CASE("Default MIDI out device name is empty", "[MidiOut]")
 {
-    return {};
+    REQUIRE(KL::MidiOut::deviceName(0) == std::string());
 }
-
-
-MidiOut::MidiOut(unsigned int)
-    : mPlatformImpl(nullptr)
-{
-}
-
-
-MidiOut::~MidiOut() = default;
-
-
-void MidiOut::sendMessage(Byte, Byte, Byte) const
-{
-}
-
-} // namespace KL

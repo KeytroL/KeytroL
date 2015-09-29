@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Midi/MidiOut.hpp"
+#include "KL/IO/MidiOut.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS

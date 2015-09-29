@@ -14,6 +14,7 @@
 add_library(WinKeytroLIO STATIC
     KeyboardInput.cpp
     KeyboardInputPlatformImpl.cpp
+    MidiOut.cpp
 )
 
 target_link_libraries(WinKeytroLIO PUBLIC
@@ -22,4 +23,5 @@ target_link_libraries(WinKeytroLIO PUBLIC
 
 target_link_libraries(WinKeytroLIO PRIVATE
     User32.lib
+    Winmm.lib
 )
