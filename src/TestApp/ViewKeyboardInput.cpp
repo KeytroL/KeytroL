@@ -11,13 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "ViewKeyboard.hpp"
+#include "ViewKeyboardInput.hpp"
 
 
 namespace KL
 {
 
-ViewKeyboard::ViewKeyboard(QObject * parent)
+ViewKeyboardInput::ViewKeyboardInput(QObject * parent)
     : QObject(parent)
 {
     mKeyboardInput.keyPressed().connect([this](KeyboardInput::KeyCode keyCode)

@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 
 #include "KeyboardLayoutViewModel.hpp"
-#include "ViewKeyboard.hpp"
+#include "ViewKeyboardInput.hpp"
 #include "ViewMidiOut.hpp"
 #include "ViewMidiOutDevices.hpp"
 #include "XmlKeyboardLayout.hpp"
@@ -29,7 +29,7 @@ int main(int argc, char * argv[])
 {
     QGuiApplication application(argc, argv);
 
-    qmlRegisterType<KL::ViewKeyboard>("KeytroL.Keyboard", 1, 0, "Keyboard");
+    qmlRegisterType<KL::ViewKeyboardInput>("KeytroL.Keyboard", 1, 0, "KeyboardInput");
     qmlRegisterType<KL::KeyboardLayoutViewModel>(
         "KeytroL.Keyboard", 1, 0, "KeyboardLayout");
     qmlRegisterType<KL::XmlKeyboardLayout>("KeytroL.Keyboard", 1, 0, "XmlKeyboardLayout");

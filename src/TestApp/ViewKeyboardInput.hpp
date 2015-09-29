@@ -24,12 +24,12 @@ KL_RESTORE_WARNINGS
 namespace KL
 {
 
-class ViewKeyboard : public QObject
+class ViewKeyboardInput : public QObject
 {
     Q_OBJECT
 
 public:
-    ViewKeyboard(QObject * parent = nullptr);
+    ViewKeyboardInput(QObject * parent = nullptr);
 
 Q_SIGNALS:
     void keyPressed(unsigned int keyCode);

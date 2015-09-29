@@ -190,7 +190,7 @@ ApplicationWindow {
         }
 
         Connections {
-            target: keyboard
+            target: keyboardInput
 
             onKeyPressed: {
                 if (mouseArea.bindToKeyCode && mouseArea.selectedComputerKey !== null) {
@@ -268,7 +268,7 @@ ApplicationWindow {
                 }
 
                 Connections {
-                    target: keyboard
+                    target: keyboardInput
 
                     onKeyPressed: {
                         if (model.keyCode == keyCode) {
@@ -286,8 +286,8 @@ ApplicationWindow {
         }
     }
 
-    Keyboard {
-        id: keyboard
+    KeyboardInput {
+        id: keyboardInput
     }
 
     MidiOut {
@@ -299,7 +299,7 @@ ApplicationWindow {
     }
 
     Connections {
-        target: keyboard
+        target: keyboardInput
 
         onKeyPressed: {
             midiOut.sendMessage(0x90, keyCode, 100);
