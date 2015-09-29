@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "ViewMidiOutDevices.hpp"
+#include "KL/ViewIO/ViewMidiOutDevices.hpp"
 
 #include "KL/IO/MidiOut.hpp"
 

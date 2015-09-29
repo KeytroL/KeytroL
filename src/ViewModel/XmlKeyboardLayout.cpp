@@ -11,11 +11,10 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "XmlKeyboardLayout.hpp"
-
-#include "KeyboardLayoutViewModel.hpp"
+#include "KL/ViewModel/XmlKeyboardLayout.hpp"
 
 #include "KL/Model/KeyboardLayout.hpp"
+#include "KL/ViewModel/KeyboardLayoutViewModel.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
