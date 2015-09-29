@@ -27,9 +27,7 @@ target_link_libraries(KeytroLTestApp PRIVATE
 )
 
 set_target_properties(KeytroLTestApp PROPERTIES AUTOMOC ON)
-set_target_properties(KeytroLTestApp PROPERTIES AUTOMOC_MOC_OPTIONS -bMocWarnings.hpp)
-
-target_include_directories(KeytroLTestApp PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+set_target_properties(KeytroLTestApp PROPERTIES AUTOMOC_MOC_OPTIONS -bKL/MocWarnings.hpp)
 
 target_compile_definitions(KeytroLTestApp PRIVATE
     QML_MAIN="${CMAKE_CURRENT_LIST_DIR}/main.qml"
