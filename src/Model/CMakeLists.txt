@@ -22,5 +22,6 @@ target_link_libraries(KeytroLModel PUBLIC
     KeytroLIO
 )
 
+
 add_subdirectory(test)
 add_test(NAME KeytroLModel COMMAND KeytroLModelTest)

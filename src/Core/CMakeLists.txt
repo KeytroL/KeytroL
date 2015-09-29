@@ -15,5 +15,6 @@ add_library(KeytroLCore STATIC
     Connection.cpp
 )
 
+
 add_subdirectory(test)
 add_test(NAME KeytroLCore COMMAND KeytroLCoreTest)
