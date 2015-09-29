@@ -29,6 +29,7 @@
         _Pragma("clang diagnostic ignored \"-Wsign-conversion\"") \
         _Pragma("clang diagnostic ignored \"-Wundefined-reinterpret-cast\"") \
         _Pragma("clang diagnostic ignored \"-Wused-but-marked-unused\"") \
+        _Pragma("clang diagnostic ignored \"-Wweak-vtables\"") \
         /**/
 
     #define KL_RESTORE_WARNINGS \

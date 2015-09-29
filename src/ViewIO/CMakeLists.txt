@@ -27,3 +27,10 @@ target_link_libraries(KeytroLViewIO PUBLIC
 
 set_target_properties(KeytroLViewIO PROPERTIES AUTOMOC ON)
 set_target_properties(KeytroLViewIO PROPERTIES AUTOMOC_MOC_OPTIONS -bKL/MocWarnings.hpp)
+
+
+find_package(Qt5Test 5.3)
+if (Qt5Test_FOUND)
+    add_subdirectory(test)
+    add_test(NAME KeytroLViewIO COMMAND KeytroLViewIOTest)
+endif ()
