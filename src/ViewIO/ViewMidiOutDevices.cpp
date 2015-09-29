@@ -27,13 +27,13 @@ ViewMidiOutDevices::ViewMidiOutDevices(QObject * parent)
 
 unsigned int ViewMidiOutDevices::count() const
 {
-    return MidiOut::deviceCount();
+    return IO::MidiOut::deviceCount();
 }
 
 
 QString ViewMidiOutDevices::name(unsigned int index) const
 {
-    return QString::fromStdString(MidiOut::deviceName(index));
+    return QString::fromStdString(IO::MidiOut::deviceName(index));
 }
 
 } // namespace KL

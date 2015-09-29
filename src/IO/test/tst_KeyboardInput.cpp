@@ -23,10 +23,10 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Press a key", "[KeyboardInput]")
 {
-    KL::KeyboardInput keyboardInput;
+    KL::IO::KeyboardInput keyboardInput;
     auto count = 0;
 
-    keyboardInput.keyPressed().connect([&count](KL::KeyboardInput::KeyCode keyCode)
+    keyboardInput.keyPressed().connect([&count](KL::IO::KeyboardInput::KeyCode keyCode)
         {
             if (keyCode == 42)
             {
@@ -35,17 +35,17 @@ TEST_CASE("Press a key", "[KeyboardInput]")
         });
     REQUIRE(count == 0);
 
-    KL::TestKeyboardInput::instance().pressKey(42);
+    KL::IO::TestKeyboardInput::instance().pressKey(42);
     REQUIRE(count == 1);
 }
 
 
 TEST_CASE("Release a key", "[KeyboardInput]")
 {
-    KL::KeyboardInput keyboardInput;
+    KL::IO::KeyboardInput keyboardInput;
     auto count = 0;
 
-    keyboardInput.keyReleased().connect([&count](KL::KeyboardInput::KeyCode keyCode)
+    keyboardInput.keyReleased().connect([&count](KL::IO::KeyboardInput::KeyCode keyCode)
         {
             if (keyCode == 23)
             {
@@ -54,6 +54,6 @@ TEST_CASE("Release a key", "[KeyboardInput]")
         });
     REQUIRE(count == 0);
 
-    KL::TestKeyboardInput::instance().releaseKey(23);
+    KL::IO::TestKeyboardInput::instance().releaseKey(23);
     REQUIRE(count == 1);
 }

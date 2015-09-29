@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 Core::Signal<KeyboardInput::KeyCode> & KeyboardInput::keyPressed()
 {
@@ -40,4 +42,5 @@ void KeyboardInput::releaseKey(KeyCode keyCode) const
     mKeyReleased.emit(keyCode);
 }
 
+} // namespace IO
 } // namespace KL

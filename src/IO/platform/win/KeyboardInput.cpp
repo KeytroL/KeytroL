@@ -18,6 +18,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 KeyboardInput::KeyboardInput()
     : mPlatformImpl(nullptr)
@@ -31,4 +33,5 @@ KeyboardInput::~KeyboardInput()
     PlatformImpl::instance().removeKeyboardInput(this);
 }
 
+} // namespace IO
 } // namespace KL

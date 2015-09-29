@@ -22,6 +22,8 @@ KL_RESTORE_WARNINGS
 
 namespace KL
 {
+namespace IO
+{
 
 class MidiOut::PlatformImpl
 {
@@ -75,4 +77,5 @@ void MidiOut::sendMessage(Byte statusByte, Byte dataByte1, Byte dataByte2) const
     midiOutShortMsg(mPlatformImpl->mMidiOutHandle, message.doubleWord);
 }
 
+} // namespace IO
 } // namespace KL

@@ -36,7 +36,7 @@ Q_SIGNALS:
     void keyReleased(unsigned int keyCode);
 
 private:
-    KeyboardInput mKeyboardInput;
+    IO::KeyboardInput mKeyboardInput;
 };
 
 } // namespace KL

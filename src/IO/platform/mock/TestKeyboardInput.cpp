@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 TestKeyboardInput & TestKeyboardInput::instance()
 {
@@ -35,4 +37,5 @@ void TestKeyboardInput::releaseKey(KeyboardInput::KeyCode keyCode) const
     mKeyReleased.emit(keyCode);
 }
 
+} // namespace IO
 } // namespace KL

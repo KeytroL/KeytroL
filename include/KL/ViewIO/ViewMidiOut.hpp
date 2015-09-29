@@ -23,7 +23,10 @@ KL_RESTORE_WARNINGS
 
 namespace KL
 {
+namespace IO
+{
 class MidiOut;
+}
 
 
 class ViewMidiOut : public QObject
@@ -50,7 +53,7 @@ private:
     void updateDevice();
 
     int mDeviceIndex;
-    std::unique_ptr<MidiOut> mDevice;
+    std::unique_ptr<IO::MidiOut> mDevice;
 };
 
 } // namespace KL

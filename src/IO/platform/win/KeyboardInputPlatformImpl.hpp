@@ -23,6 +23,8 @@ KL_RESTORE_WARNINGS
 
 namespace KL
 {
+namespace IO
+{
 
 class KeyboardInput::PlatformImpl
 {
@@ -44,4 +46,5 @@ private:
     HHOOK mLowLevelKeyboardHookHandle = nullptr;
 };
 
+} // namespace IO
 } // namespace KL

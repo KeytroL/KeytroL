@@ -20,6 +20,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 class KeyboardInput
 {
@@ -50,4 +52,5 @@ private:
     std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
+} // namespace IO
 } // namespace KL

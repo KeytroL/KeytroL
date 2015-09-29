@@ -17,6 +17,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 class KeyboardInput::PlatformImpl
 {
@@ -28,4 +30,5 @@ public:
     Core::ScopedConnection mKeyReleaseConnection;
 };
 
+} // namespace IO
 } // namespace KL

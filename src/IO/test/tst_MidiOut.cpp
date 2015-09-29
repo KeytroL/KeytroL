@@ -21,11 +21,11 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Default MIDI out device count is null", "[MidiOut]")
 {
-    REQUIRE(KL::MidiOut::deviceCount() == 0);
+    REQUIRE(KL::IO::MidiOut::deviceCount() == 0);
 }
 
 
 TEST_CASE("Default MIDI out device name is empty", "[MidiOut]")
 {
-    REQUIRE(KL::MidiOut::deviceName(0) == std::string());
+    REQUIRE(KL::IO::MidiOut::deviceName(0) == std::string());
 }

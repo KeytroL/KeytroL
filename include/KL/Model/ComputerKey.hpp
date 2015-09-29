@@ -29,14 +29,14 @@ public:
         unsigned int width,
         unsigned int height,
         std::string label,
-        KeyboardInput::KeyCode keyCode);
+        IO::KeyboardInput::KeyCode keyCode);
 
     ComputerKey(const ComputerKey & other) = default;
     ComputerKey & operator=(const ComputerKey & other) = default;
 
     ComputerKey(const ComputerKey & other, int x, int y);
     ComputerKey(const ComputerKey & other, std::string label);
-    ComputerKey(const ComputerKey & other, KeyboardInput::KeyCode keyCode);
+    ComputerKey(const ComputerKey & other, IO::KeyboardInput::KeyCode keyCode);
 
     ComputerKey(ComputerKey && other);
     ComputerKey & operator=(ComputerKey && other);
@@ -49,7 +49,7 @@ public:
 
     const std::string & label() const;
 
-    KeyboardInput::KeyCode keyCode() const;
+    IO::KeyboardInput::KeyCode keyCode() const;
 
     bool operator==(const ComputerKey & other) const;
 
@@ -62,7 +62,7 @@ private:
 
     std::string mLabel;
 
-    KeyboardInput::KeyCode mKeyCode;
+    IO::KeyboardInput::KeyCode mKeyCode;
 };
 
 } // namespace KL

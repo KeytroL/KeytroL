@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 KeyboardInput::PlatformImpl & KeyboardInput::PlatformImpl::instance()
 {
@@ -87,4 +89,5 @@ void KeyboardInput::PlatformImpl::releaseKey(KeyCode keyCode) const
     }
 }
 
+} // namespace IO
 } // namespace KL

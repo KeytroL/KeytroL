@@ -19,6 +19,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 KeyboardInput::KeyboardInput()
 {
@@ -41,4 +43,5 @@ KeyboardInput::KeyboardInput()
 
 KeyboardInput::~KeyboardInput() = default;
 
+} // namespace IO
 } // namespace KL

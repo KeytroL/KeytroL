@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 KeyboardInput::PlatformImpl::PlatformImpl(
     Core::Connection keyPressConnection, Core::Connection keyReleaseConnection)
@@ -24,4 +26,5 @@ KeyboardInput::PlatformImpl::PlatformImpl(
 {
 }
 
+} // namespace IO
 } // namespace KL

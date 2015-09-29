@@ -19,6 +19,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 class MidiOut
 {
@@ -38,4 +40,5 @@ private:
     std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
+} // namespace IO
 } // namespace KL

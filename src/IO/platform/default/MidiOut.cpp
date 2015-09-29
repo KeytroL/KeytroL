@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 class MidiOut::PlatformImpl
 {
@@ -47,4 +49,5 @@ void MidiOut::sendMessage(Byte, Byte, Byte) const
 {
 }
 
+} // namespace IO
 } // namespace KL

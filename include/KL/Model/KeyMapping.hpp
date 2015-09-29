@@ -25,8 +25,8 @@ namespace KL
 
 class KeyMapping
 {
-    using Code = KeyboardInput::KeyCode;
-    using State = KeyboardInput::KeyState;
+    using Code = IO::KeyboardInput::KeyCode;
+    using State = IO::KeyboardInput::KeyState;
 
 public:
     std::function<void()> & at(Code keyCode, State keyState);

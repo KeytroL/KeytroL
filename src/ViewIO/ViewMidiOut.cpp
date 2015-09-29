@@ -62,7 +62,7 @@ void ViewMidiOut::updateDevice()
 {
     if (mDeviceIndex >= 0)
     {
-        mDevice.reset(new MidiOut(static_cast<unsigned int>(mDeviceIndex)));
+        mDevice.reset(new IO::MidiOut(static_cast<unsigned int>(mDeviceIndex)));
     }
 }
 

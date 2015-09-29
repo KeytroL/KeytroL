@@ -24,7 +24,7 @@ TEST_CASE("Add a mapping to a KeyMapping", "[KeyMapping]")
     KL::KeyMapping keyMapping;
     auto sentinel = 'a';
 
-    keyMapping.at(2, KL::KeyboardInput::KeyState::Pressed) = [&sentinel]()
+    keyMapping.at(2, KL::IO::KeyboardInput::KeyState::Pressed) = [&sentinel]()
     {
         sentinel = 'b';
     };
@@ -32,7 +32,7 @@ TEST_CASE("Add a mapping to a KeyMapping", "[KeyMapping]")
 
     const auto & readOnlyMapping = keyMapping;
 
-    readOnlyMapping.at(2, KL::KeyboardInput::KeyState::Pressed)();
+    readOnlyMapping.at(2, KL::IO::KeyboardInput::KeyState::Pressed)();
     REQUIRE(sentinel == 'b');
 }
 
@@ -43,18 +43,18 @@ TEST_CASE("Change a mapping in a KeyMapping", "[KeyMapping]")
 
     auto sentinel = 'a';
 
-    keyMapping.at(2, KL::KeyboardInput::KeyState::Pressed) = [&sentinel]()
+    keyMapping.at(2, KL::IO::KeyboardInput::KeyState::Pressed) = [&sentinel]()
     {
         sentinel = 'b';
     };
     REQUIRE(sentinel == 'a');
 
-    keyMapping.at(2, KL::KeyboardInput::KeyState::Pressed) = [&sentinel]()
+    keyMapping.at(2, KL::IO::KeyboardInput::KeyState::Pressed) = [&sentinel]()
     {
         sentinel = 'c';
     };
     REQUIRE(sentinel == 'a');
 
-    keyMapping.at(2, KL::KeyboardInput::KeyState::Pressed)();
+    keyMapping.at(2, KL::IO::KeyboardInput::KeyState::Pressed)();
     REQUIRE(sentinel == 'c');
 }

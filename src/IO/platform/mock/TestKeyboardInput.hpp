@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 class TestKeyboardInput
 {
@@ -28,10 +30,11 @@ public:
 private:
     TestKeyboardInput() = default;
 
-    friend class KL::KeyboardInput;
+    friend class KL::IO::KeyboardInput;
 
     Core::PrivateSignal<KeyboardInput::KeyCode> mKeyPressed;
     Core::PrivateSignal<KeyboardInput::KeyCode> mKeyReleased;
 };
 
+} // namespace IO
 } // namespace KL

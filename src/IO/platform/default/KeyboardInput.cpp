@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace IO
+{
 
 class KeyboardInput::PlatformImpl
 {
@@ -27,4 +29,5 @@ KeyboardInput::KeyboardInput() = default;
 
 KeyboardInput::~KeyboardInput() = default;
 
+} // namespace IO
 } // namespace KL
