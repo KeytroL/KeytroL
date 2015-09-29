@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/ViewIO/ViewMidiOut.hpp"
+#include "KL/ViewIO/MidiOut.hpp"
 
 #include "KL/IO/MidiOut.hpp"
 
@@ -21,20 +21,19 @@ namespace KL
 namespace ViewIO
 {
 
-ViewMidiOut::ViewMidiOut(QObject * parent)
+MidiOut::MidiOut(QObject * parent)
     : QObject(parent)
     , mDeviceIndex(-1)
     , mDevice(nullptr)
 {
-    QObject::connect(
-        this, &ViewMidiOut::deviceIndexChanged, this, &ViewMidiOut::updateDevice);
+    QObject::connect(this, &MidiOut::deviceIndexChanged, this, &MidiOut::updateDevice);
 }
 
 
-ViewMidiOut::~ViewMidiOut() = default;
+MidiOut::~MidiOut() = default;
 
 
-void ViewMidiOut::sendMessage(
+void MidiOut::sendMessage(
     unsigned char statusByte, unsigned char dataByte1, unsigned char dataByte2) const
 {
     if (mDevice)
@@ -44,13 +43,13 @@ void ViewMidiOut::sendMessage(
 }
 
 
-int ViewMidiOut::deviceIndex() const
+int MidiOut::deviceIndex() const
 {
     return mDeviceIndex;
 }
 
 
-void ViewMidiOut::setDeviceIndex(int deviceIndex)
+void MidiOut::setDeviceIndex(int deviceIndex)
 {
     if (mDeviceIndex != deviceIndex)
     {
@@ -60,7 +59,7 @@ void ViewMidiOut::setDeviceIndex(int deviceIndex)
 }
 
 
-void ViewMidiOut::updateDevice()
+void MidiOut::updateDevice()
 {
     if (mDeviceIndex >= 0)
     {

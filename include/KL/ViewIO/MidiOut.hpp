@@ -32,7 +32,7 @@ class MidiOut;
 namespace ViewIO
 {
 
-class ViewMidiOut : public QObject
+class MidiOut : public QObject
 {
     Q_OBJECT
 
@@ -40,8 +40,8 @@ class ViewMidiOut : public QObject
         int deviceIndex READ deviceIndex WRITE setDeviceIndex NOTIFY deviceIndexChanged)
 
 public:
-    ViewMidiOut(QObject * parent = nullptr);
-    ~ViewMidiOut();
+    MidiOut(QObject * parent = nullptr);
+    ~MidiOut();
 
     Q_INVOKABLE void sendMessage(
         unsigned char statusByte, unsigned char dataByte1, unsigned char dataByte2) const;

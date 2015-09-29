@@ -13,10 +13,10 @@
 
 add_library(KeytroLViewIO STATIC
     ../../include/KL/ViewIO/KeyboardInput.hpp
-    ../../include/KL/ViewIO/ViewMidiOut.hpp
+    ../../include/KL/ViewIO/MidiOut.hpp
     ../../include/KL/ViewIO/ViewMidiOutDevices.hpp
     KeyboardInput.cpp
-    ViewMidiOut.cpp
+    MidiOut.cpp
     ViewMidiOutDevices.cpp
 )
 
