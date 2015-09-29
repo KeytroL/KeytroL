@@ -12,10 +12,10 @@
 #  GNU General Public License for more details.
 
 add_library(KeytroLViewIO STATIC
-    ../../include/KL/ViewIO/ViewKeyboardInput.hpp
+    ../../include/KL/ViewIO/KeyboardInput.hpp
     ../../include/KL/ViewIO/ViewMidiOut.hpp
     ../../include/KL/ViewIO/ViewMidiOutDevices.hpp
-    ViewKeyboardInput.cpp
+    KeyboardInput.cpp
     ViewMidiOut.cpp
     ViewMidiOutDevices.cpp
 )

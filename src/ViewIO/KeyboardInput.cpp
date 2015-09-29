@@ -11,14 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
-
-#include "KL/IO/KeyboardInput.hpp"
-
-#include "KL/Warnings.hpp"
-KL_DISABLE_WARNINGS
-#include <QtCore/QObject>
-KL_RESTORE_WARNINGS
+#include "KL/ViewIO/KeyboardInput.hpp"
 
 
 namespace KL
@@ -26,20 +19,19 @@ namespace KL
 namespace ViewIO
 {
 
-class ViewKeyboardInput : public QObject
+KeyboardInput::KeyboardInput(QObject * parent)
+    : QObject(parent)
 {
-    Q_OBJECT
+    mKeyboardInput.keyPressed().connect([this](IO::KeyboardInput::KeyCode keyCode)
+        {
+            Q_EMIT keyPressed(keyCode);
+        });
 
-public:
-    ViewKeyboardInput(QObject * parent = nullptr);
-
-Q_SIGNALS:
-    void keyPressed(unsigned int keyCode);
-    void keyReleased(unsigned int keyCode);
-
-private:
-    IO::KeyboardInput mKeyboardInput;
-};
+    mKeyboardInput.keyReleased().connect([this](IO::KeyboardInput::KeyCode keyCode)
+        {
+            Q_EMIT keyReleased(keyCode);
+        });
+}
 
 } // namespace ViewIO
 } // namespace KL

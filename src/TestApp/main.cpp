@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/ViewIO/ViewKeyboardInput.hpp"
+#include "KL/ViewIO/KeyboardInput.hpp"
 #include "KL/ViewIO/ViewMidiOut.hpp"
 #include "KL/ViewIO/ViewMidiOutDevices.hpp"
 #include "KL/ViewModel/KeyboardLayoutViewModel.hpp"
@@ -37,7 +37,7 @@ int main(int argc, char * argv[])
     qmlRegisterSingletonType<KL::ViewIO::ViewMidiOutDevices>(
         "KeytroL.IO", 1, 0, "MidiOutDevices", midiOutDevicesSingletonProvider);
 
-    qmlRegisterType<KL::ViewIO::ViewKeyboardInput>("KeytroL.IO", 1, 0, "KeyboardInput");
+    qmlRegisterType<KL::ViewIO::KeyboardInput>("KeytroL.IO", 1, 0, "KeyboardInput");
     qmlRegisterType<KL::ViewIO::ViewMidiOut>("KeytroL.IO", 1, 0, "MidiOut");
 
     qmlRegisterType<KL::ViewModel::KeyboardLayoutViewModel>(
