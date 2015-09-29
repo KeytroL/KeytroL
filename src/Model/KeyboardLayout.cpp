@@ -18,6 +18,8 @@
 
 namespace KL
 {
+namespace Model
+{
 
 KeyboardLayout::KeyboardLayout(KeyboardLayout && other)
     : mComputerKeys(std::move(other.mComputerKeys))
@@ -73,4 +75,5 @@ Core::NotifyingVector<ComputerKey>::Notification & KeyboardLayout::afterReplace(
     return mComputerKeys.afterReplace();
 }
 
+} // namespace Model
 } // namespace KL

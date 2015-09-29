@@ -45,8 +45,8 @@ public:
 
     KeyboardLayoutViewModel(QObject * parent = nullptr);
 
-    const KeyboardLayout & model() const;
-    void setModel(KeyboardLayout model);
+    const Model::KeyboardLayout & model() const;
+    void setModel(Model::KeyboardLayout model);
 
     Q_INVOKABLE void addComputerKey(int x,
         int y,
@@ -70,12 +70,12 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    using ReplaceDiff = Core::NotifyingVector<ComputerKey>::ReplaceDiff;
+    using ReplaceDiff = Core::NotifyingVector<Model::ComputerKey>::ReplaceDiff;
 
     void beforeModelReplace(const ReplaceDiff & replaceDiff);
     void afterModelReplace(const ReplaceDiff & replaceDiff);
 
-    KeyboardLayout mModel;
+    Model::KeyboardLayout mModel;
 };
 
 } // namespace KL

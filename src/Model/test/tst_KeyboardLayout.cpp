@@ -21,7 +21,7 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Construct a KeyboardLayout", "[KeyboardLayout]")
 {
-    KL::KeyboardLayout keyboardLayout;
+    KL::Model::KeyboardLayout keyboardLayout;
 
     REQUIRE(keyboardLayout.computerKeys().size() == 0u);
 }
@@ -29,9 +29,9 @@ TEST_CASE("Construct a KeyboardLayout", "[KeyboardLayout]")
 
 TEST_CASE("Add a ComputerKey to a KeyboardLayout", "[KeyboardLayout]")
 {
-    KL::KeyboardLayout keyboardLayout;
+    KL::Model::KeyboardLayout keyboardLayout;
 
-    keyboardLayout.addComputerKey(KL::ComputerKey(23, 42, 8, 7, "", 0));
+    keyboardLayout.addComputerKey(KL::Model::ComputerKey(23, 42, 8, 7, "", 0));
 
     REQUIRE(keyboardLayout.computerKeys().size() == 1u);
     REQUIRE(keyboardLayout.computerKeys().begin()->y() == 42);
@@ -40,9 +40,9 @@ TEST_CASE("Add a ComputerKey to a KeyboardLayout", "[KeyboardLayout]")
 
 TEST_CASE("Remove a ComputerKey from a KeyboardLayout", "[KeyboardLayout]")
 {
-    KL::KeyboardLayout keyboardLayout;
+    KL::Model::KeyboardLayout keyboardLayout;
 
-    keyboardLayout.addComputerKey(KL::ComputerKey(23, 42, 8, 7, "", 0));
+    keyboardLayout.addComputerKey(KL::Model::ComputerKey(23, 42, 8, 7, "", 0));
     REQUIRE(keyboardLayout.computerKeys().size() == 1u);
 
     keyboardLayout.removeComputerKey(0);

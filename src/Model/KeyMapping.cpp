@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace Model
+{
 
 std::function<void()> & KeyMapping::at(Code keyCode, State keyState)
 {
@@ -28,4 +30,5 @@ const std::function<void()> & KeyMapping::at(Code keyCode, State keyState) const
     return mKeyToFunction.at(std::make_pair(keyCode, keyState));
 }
 
+} // namespace Model
 } // namespace KL

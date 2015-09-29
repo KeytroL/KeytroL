@@ -20,6 +20,8 @@
 
 namespace KL
 {
+namespace Model
+{
 
 class KeyboardLayout
 {
@@ -47,4 +49,5 @@ private:
     Core::NotifyingVector<ComputerKey> mComputerKeys;
 };
 
+} // namespace Model
 } // namespace KL

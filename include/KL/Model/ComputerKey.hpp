@@ -20,6 +20,8 @@
 
 namespace KL
 {
+namespace Model
+{
 
 class ComputerKey
 {
@@ -65,4 +67,5 @@ private:
     IO::KeyboardInput::KeyCode mKeyCode;
 };
 
+} // namespace Model
 } // namespace KL

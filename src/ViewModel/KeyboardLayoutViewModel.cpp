@@ -20,17 +20,17 @@ namespace KL
 KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * parent)
     : QAbstractListModel(parent)
 {
-    setModel(KeyboardLayout());
+    setModel(Model::KeyboardLayout());
 }
 
 
-const KeyboardLayout & KeyboardLayoutViewModel::model() const
+const Model::KeyboardLayout & KeyboardLayoutViewModel::model() const
 {
     return mModel;
 }
 
 
-void KeyboardLayoutViewModel::setModel(KeyboardLayout model)
+void KeyboardLayoutViewModel::setModel(Model::KeyboardLayout model)
 {
     beginResetModel();
     mModel = std::move(model);
@@ -55,7 +55,8 @@ void KeyboardLayoutViewModel::addComputerKey(int x,
     const QString & label,
     unsigned int keyCode)
 {
-    mModel.addComputerKey(ComputerKey(x, y, width, height, label.toStdString(), keyCode));
+    mModel.addComputerKey(
+        Model::ComputerKey(x, y, width, height, label.toStdString(), keyCode));
 }
 
 
@@ -63,7 +64,8 @@ void KeyboardLayoutViewModel::removeComputerKey(const QModelIndex & index)
 {
     if (index.isValid())
     {
-        mModel.removeComputerKey(static_cast<KeyboardLayout::SizeType>(index.row()));
+        mModel.removeComputerKey(
+            static_cast<Model::KeyboardLayout::SizeType>(index.row()));
     }
 }
 
@@ -72,8 +74,10 @@ void KeyboardLayoutViewModel::moveComputerKey(const QModelIndex & index, int x, 
 {
     if (index.isValid())
     {
-        const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
-        auto computerKey = ComputerKey(mModel.computerKeys().at(computerKeyIndex), x, y);
+        const auto computerKeyIndex =
+            static_cast<Model::KeyboardLayout::SizeType>(index.row());
+        auto computerKey =
+            Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), x, y);
 
         mModel.removeComputerKey(computerKeyIndex);
         mModel.addComputerKey(std::move(computerKey));
@@ -86,10 +90,11 @@ void KeyboardLayoutViewModel::renameComputerKey(
 {
     if (index.isValid())
     {
-        const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
+        const auto computerKeyIndex =
+            static_cast<Model::KeyboardLayout::SizeType>(index.row());
         mModel.replace(computerKeyIndex,
             computerKeyIndex + 1,
-            {ComputerKey(
+            {Model::ComputerKey(
                 mModel.computerKeys().at(computerKeyIndex), label.toStdString())});
     }
 }
@@ -100,10 +105,11 @@ void KeyboardLayoutViewModel::bindComputerKey(
 {
     if (index.isValid())
     {
-        const auto computerKeyIndex = static_cast<KeyboardLayout::SizeType>(index.row());
+        const auto computerKeyIndex =
+            static_cast<Model::KeyboardLayout::SizeType>(index.row());
         mModel.replace(computerKeyIndex,
             computerKeyIndex + 1,
-            {ComputerKey(mModel.computerKeys().at(computerKeyIndex), keyCode)});
+            {Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), keyCode)});
     }
 }
 
@@ -132,8 +138,8 @@ QVariant KeyboardLayoutViewModel::data(const QModelIndex & index, int role) cons
         return {};
     }
 
-    const auto & computerKey =
-        mModel.computerKeys().at(static_cast<KeyboardLayout::SizeType>(index.row()));
+    const auto & computerKey = mModel.computerKeys().at(
+        static_cast<Model::KeyboardLayout::SizeType>(index.row()));
 
     if (role == XRole)
     {

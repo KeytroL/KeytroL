@@ -21,7 +21,7 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Add a mapping to a KeyMapping", "[KeyMapping]")
 {
-    KL::KeyMapping keyMapping;
+    KL::Model::KeyMapping keyMapping;
     auto sentinel = 'a';
 
     keyMapping.at(2, KL::IO::KeyboardInput::KeyState::Pressed) = [&sentinel]()
@@ -39,7 +39,7 @@ TEST_CASE("Add a mapping to a KeyMapping", "[KeyMapping]")
 
 TEST_CASE("Change a mapping in a KeyMapping", "[KeyMapping]")
 {
-    KL::KeyMapping keyMapping;
+    KL::Model::KeyMapping keyMapping;
 
     auto sentinel = 'a';
 

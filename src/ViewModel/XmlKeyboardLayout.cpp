@@ -46,7 +46,7 @@ bool XmlKeyboardLayout::load(
     if (file.open(QFile::ReadOnly | QFile::Text))
     {
         QXmlStreamReader xml{&file};
-        KeyboardLayout keyboardLayout;
+        Model::KeyboardLayout keyboardLayout;
 
         if (xml.readNextStartElement() && xml.name() == "KeyboardLayout")
         {
@@ -58,7 +58,7 @@ bool XmlKeyboardLayout::load(
                     const auto & attributes = xml.attributes();
 
                     keyboardLayout.addComputerKey(
-                        ComputerKey(attributes.value("x").toInt(),
+                        Model::ComputerKey(attributes.value("x").toInt(),
                             attributes.value("y").toInt(),
                             attributes.value("width").toUInt(),
                             attributes.value("height").toUInt(),

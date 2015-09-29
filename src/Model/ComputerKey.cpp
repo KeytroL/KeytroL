@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace Model
+{
 
 ComputerKey::ComputerKey(int x,
     int y,
@@ -121,4 +123,5 @@ bool ComputerKey::operator==(const ComputerKey & other) const
         && mKeyCode == other.mKeyCode;
 }
 
+} // namespace Model
 } // namespace KL

@@ -21,7 +21,7 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Construct a ComputerKey", "[ComputerKey]")
 {
-    const KL::ComputerKey computerKey(23, 42, 8, 7, "A", 2);
+    const KL::Model::ComputerKey computerKey(23, 42, 8, 7, "A", 2);
 
     REQUIRE(computerKey.x() == 23);
     REQUIRE(computerKey.y() == 42);

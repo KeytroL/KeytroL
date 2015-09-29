@@ -22,6 +22,8 @@
 
 namespace KL
 {
+namespace Model
+{
 
 class KeyMapping
 {
@@ -36,4 +38,5 @@ private:
     std::map<std::pair<Code, State>, std::function<void()>> mKeyToFunction;
 };
 
+} // namespace Model
 } // namespace KL
