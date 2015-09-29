@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/ViewModel/KeyboardLayoutViewModel.hpp"
+#include "KL/ViewModel/KeyboardLayout.hpp"
 
 
 namespace KL
@@ -19,20 +19,20 @@ namespace KL
 namespace ViewModel
 {
 
-KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * parent)
+KeyboardLayout::KeyboardLayout(QObject * parent)
     : QAbstractListModel(parent)
 {
     setModel(Model::KeyboardLayout());
 }
 
 
-const Model::KeyboardLayout & KeyboardLayoutViewModel::model() const
+const Model::KeyboardLayout & KeyboardLayout::model() const
 {
     return mModel;
 }
 
 
-void KeyboardLayoutViewModel::setModel(Model::KeyboardLayout model)
+void KeyboardLayout::setModel(Model::KeyboardLayout model)
 {
     beginResetModel();
     mModel = std::move(model);
@@ -50,7 +50,7 @@ void KeyboardLayoutViewModel::setModel(Model::KeyboardLayout model)
 }
 
 
-void KeyboardLayoutViewModel::addComputerKey(int x,
+void KeyboardLayout::addComputerKey(int x,
     int y,
     unsigned int width,
     unsigned int height,
@@ -62,7 +62,7 @@ void KeyboardLayoutViewModel::addComputerKey(int x,
 }
 
 
-void KeyboardLayoutViewModel::removeComputerKey(const QModelIndex & index)
+void KeyboardLayout::removeComputerKey(const QModelIndex & index)
 {
     if (index.isValid())
     {
@@ -72,7 +72,7 @@ void KeyboardLayoutViewModel::removeComputerKey(const QModelIndex & index)
 }
 
 
-void KeyboardLayoutViewModel::moveComputerKey(const QModelIndex & index, int x, int y)
+void KeyboardLayout::moveComputerKey(const QModelIndex & index, int x, int y)
 {
     if (index.isValid())
     {
@@ -87,8 +87,7 @@ void KeyboardLayoutViewModel::moveComputerKey(const QModelIndex & index, int x, 
 }
 
 
-void KeyboardLayoutViewModel::renameComputerKey(
-    const QModelIndex & index, const QString & label)
+void KeyboardLayout::renameComputerKey(const QModelIndex & index, const QString & label)
 {
     if (index.isValid())
     {
@@ -102,7 +101,7 @@ void KeyboardLayoutViewModel::renameComputerKey(
 }
 
 
-void KeyboardLayoutViewModel::bindComputerKey(
+void KeyboardLayout::bindComputerKey(
     const QModelIndex & index, IO::KeyboardInput::KeyCode keyCode)
 {
     if (index.isValid())
@@ -116,13 +115,13 @@ void KeyboardLayoutViewModel::bindComputerKey(
 }
 
 
-QModelIndex KeyboardLayoutViewModel::modelIndex(int row) const
+QModelIndex KeyboardLayout::modelIndex(int row) const
 {
     return index(row, 0);
 }
 
 
-int KeyboardLayoutViewModel::rowCount(const QModelIndex & index) const
+int KeyboardLayout::rowCount(const QModelIndex & index) const
 {
     if (index.isValid())
     {
@@ -133,7 +132,7 @@ int KeyboardLayoutViewModel::rowCount(const QModelIndex & index) const
 }
 
 
-QVariant KeyboardLayoutViewModel::data(const QModelIndex & index, int role) const
+QVariant KeyboardLayout::data(const QModelIndex & index, int role) const
 {
     if (!index.isValid())
     {
@@ -172,7 +171,7 @@ QVariant KeyboardLayoutViewModel::data(const QModelIndex & index, int role) cons
 }
 
 
-QHash<int, QByteArray> KeyboardLayoutViewModel::roleNames() const
+QHash<int, QByteArray> KeyboardLayout::roleNames() const
 {
     return {{XRole, "x"},
         {YRole, "y"},
@@ -183,7 +182,7 @@ QHash<int, QByteArray> KeyboardLayoutViewModel::roleNames() const
 }
 
 
-void KeyboardLayoutViewModel::beforeModelReplace(const ReplaceDiff & replaceDiff)
+void KeyboardLayout::beforeModelReplace(const ReplaceDiff & replaceDiff)
 {
     const auto newLast = replaceDiff.first + replaceDiff.replacementSize;
 
@@ -202,7 +201,7 @@ void KeyboardLayoutViewModel::beforeModelReplace(const ReplaceDiff & replaceDiff
 }
 
 
-void KeyboardLayoutViewModel::afterModelReplace(const ReplaceDiff & replaceDiff)
+void KeyboardLayout::afterModelReplace(const ReplaceDiff & replaceDiff)
 {
     const auto newLast = replaceDiff.first + replaceDiff.replacementSize;
 

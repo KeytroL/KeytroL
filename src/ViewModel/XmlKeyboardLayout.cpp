@@ -14,7 +14,7 @@
 #include "KL/ViewModel/XmlKeyboardLayout.hpp"
 
 #include "KL/Model/KeyboardLayout.hpp"
-#include "KL/ViewModel/KeyboardLayoutViewModel.hpp"
+#include "KL/ViewModel/KeyboardLayout.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
@@ -35,10 +35,9 @@ XmlKeyboardLayout::XmlKeyboardLayout(QObject * parent)
 }
 
 
-bool XmlKeyboardLayout::load(
-    const QUrl & fileUrl, KeyboardLayoutViewModel * keyboardLayoutViewModel)
+bool XmlKeyboardLayout::load(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
 {
-    if (!keyboardLayoutViewModel)
+    if (!keyboardLayout)
     {
         return false;
     }
@@ -48,7 +47,7 @@ bool XmlKeyboardLayout::load(
     if (file.open(QFile::ReadOnly | QFile::Text))
     {
         QXmlStreamReader xml{&file};
-        Model::KeyboardLayout keyboardLayout;
+        Model::KeyboardLayout modelKeyboardLayout;
 
         if (xml.readNextStartElement() && xml.name() == "KeyboardLayout")
         {
@@ -59,7 +58,7 @@ bool XmlKeyboardLayout::load(
                 {
                     const auto & attributes = xml.attributes();
 
-                    keyboardLayout.addComputerKey(
+                    modelKeyboardLayout.addComputerKey(
                         Model::ComputerKey(attributes.value("x").toInt(),
                             attributes.value("y").toInt(),
                             attributes.value("width").toUInt(),
@@ -72,7 +71,7 @@ bool XmlKeyboardLayout::load(
 
         if (!xml.hasError())
         {
-            keyboardLayoutViewModel->setModel(std::move(keyboardLayout));
+            keyboardLayout->setModel(std::move(modelKeyboardLayout));
             return true;
         }
     }
@@ -81,10 +80,9 @@ bool XmlKeyboardLayout::load(
 }
 
 
-bool XmlKeyboardLayout::save(
-    const QUrl & fileUrl, KeyboardLayoutViewModel * keyboardLayoutViewModel)
+bool XmlKeyboardLayout::save(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
 {
-    if (!keyboardLayoutViewModel)
+    if (!keyboardLayout)
     {
         return false;
     }
@@ -99,7 +97,7 @@ bool XmlKeyboardLayout::save(
         xml.writeStartDocument();
         xml.writeStartElement("KeyboardLayout");
 
-        for (const auto & computerKey : keyboardLayoutViewModel->model().computerKeys())
+        for (const auto & computerKey : keyboardLayout->model().computerKeys())
         {
             xml.writeStartElement("ComputerKey");
             xml.writeAttribute("x", QString::number(computerKey.x()));

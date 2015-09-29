@@ -30,7 +30,7 @@ namespace KL
 namespace ViewModel
 {
 
-class KeyboardLayoutViewModel : public QAbstractListModel
+class KeyboardLayout : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -45,7 +45,7 @@ public:
         KeyCodeRole,
     };
 
-    KeyboardLayoutViewModel(QObject * parent = nullptr);
+    KeyboardLayout(QObject * parent = nullptr);
 
     const Model::KeyboardLayout & model() const;
     void setModel(Model::KeyboardLayout model);

@@ -25,7 +25,7 @@ namespace KL
 namespace ViewModel
 {
 
-class KeyboardLayoutViewModel;
+class KeyboardLayout;
 
 
 class XmlKeyboardLayout : public QObject
@@ -35,11 +35,11 @@ class XmlKeyboardLayout : public QObject
 public:
     XmlKeyboardLayout(QObject * parent = nullptr);
 
-    Q_INVOKABLE bool load(const QUrl & fileUrl,
-        KL::ViewModel::KeyboardLayoutViewModel * keyboardLayoutViewModel);
+    Q_INVOKABLE bool load(
+        const QUrl & fileUrl, KL::ViewModel::KeyboardLayout * keyboardLayout);
 
-    Q_INVOKABLE bool save(const QUrl & fileUrl,
-        KL::ViewModel::KeyboardLayoutViewModel * keyboardLayoutViewModel);
+    Q_INVOKABLE bool save(
+        const QUrl & fileUrl, KL::ViewModel::KeyboardLayout * keyboardLayout);
 };
 
 } // namespace ViewModel

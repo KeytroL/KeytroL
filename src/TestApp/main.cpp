@@ -14,7 +14,7 @@
 #include "KL/ViewIO/KeyboardInput.hpp"
 #include "KL/ViewIO/MidiOut.hpp"
 #include "KL/ViewIO/MidiOutDevices.hpp"
-#include "KL/ViewModel/KeyboardLayoutViewModel.hpp"
+#include "KL/ViewModel/KeyboardLayout.hpp"
 #include "KL/ViewModel/XmlKeyboardLayout.hpp"
 
 #include "KL/Warnings.hpp"
@@ -40,7 +40,7 @@ int main(int argc, char * argv[])
     qmlRegisterType<KL::ViewIO::KeyboardInput>("KeytroL.IO", 1, 0, "KeyboardInput");
     qmlRegisterType<KL::ViewIO::MidiOut>("KeytroL.IO", 1, 0, "MidiOut");
 
-    qmlRegisterType<KL::ViewModel::KeyboardLayoutViewModel>(
+    qmlRegisterType<KL::ViewModel::KeyboardLayout>(
         "KeytroL.Model", 1, 0, "KeyboardLayout");
     qmlRegisterType<KL::ViewModel::XmlKeyboardLayout>(
         "KeytroL.Model", 1, 0, "XmlKeyboardLayout");

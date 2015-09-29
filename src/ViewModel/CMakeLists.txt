@@ -12,9 +12,9 @@
 #  GNU General Public License for more details.
 
 add_library(KeytroLViewModel STATIC
-    ../../include/KL/ViewModel/KeyboardLayoutViewModel.hpp
+    ../../include/KL/ViewModel/KeyboardLayout.hpp
     ../../include/KL/ViewModel/XmlKeyboardLayout.hpp
-    KeyboardLayoutViewModel.cpp
+    KeyboardLayout.cpp
     XmlKeyboardLayout.cpp
 )
 
