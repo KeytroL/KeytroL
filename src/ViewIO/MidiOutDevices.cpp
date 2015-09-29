@@ -11,33 +11,32 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
+#include "KL/ViewIO/MidiOutDevices.hpp"
 
-#include "KL/Core/Signal.hpp"
+#include "KL/IO/MidiOut.hpp"
 
 
 namespace KL
 {
-namespace Core
+namespace ViewIO
 {
 
-template <typename T>
-class Property
+MidiOutDevices::MidiOutDevices(QObject * parent)
+    : QObject(parent)
 {
-public:
-    explicit Property(T value);
+}
 
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
 
-private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
-};
+unsigned int MidiOutDevices::count() const
+{
+    return IO::MidiOut::deviceCount();
+}
 
-} // namespace Core
+
+QString MidiOutDevices::name(unsigned int index) const
+{
+    return QString::fromStdString(IO::MidiOut::deviceName(index));
+}
+
+} // namespace ViewIO
 } // namespace KL
-
-
-#include "detail/Property.ipp"

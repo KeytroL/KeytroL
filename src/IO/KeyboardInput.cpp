@@ -11,33 +11,36 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
-
-#include "KL/Core/Signal.hpp"
+#include "KL/IO/KeyboardInput.hpp"
 
 
 namespace KL
 {
-namespace Core
+namespace IO
 {
 
-template <typename T>
-class Property
+Core::Signal<KeyboardInput::KeyCode> & KeyboardInput::keyPressed()
 {
-public:
-    explicit Property(T value);
+    return mKeyPressed;
+}
 
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
 
-private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
-};
+Core::Signal<KeyboardInput::KeyCode> & KeyboardInput::keyReleased()
+{
+    return mKeyReleased;
+}
 
-} // namespace Core
+
+void KeyboardInput::pressKey(KeyCode keyCode) const
+{
+    mKeyPressed.emit(keyCode);
+}
+
+
+void KeyboardInput::releaseKey(KeyCode keyCode) const
+{
+    mKeyReleased.emit(keyCode);
+}
+
+} // namespace IO
 } // namespace KL
-
-
-#include "detail/Property.ipp"

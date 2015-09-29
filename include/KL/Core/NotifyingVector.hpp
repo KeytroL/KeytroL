@@ -20,6 +20,8 @@
 
 namespace KL
 {
+namespace Core
+{
 
 template <typename T>
 class NotifyingVector
@@ -58,6 +60,7 @@ private:
     PrivateSignal<const ReplaceDiff &> mAfterReplace;
 };
 
+} // namespace Core
 } // namespace KL
 
 

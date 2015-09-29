@@ -15,29 +15,42 @@
 
 #include "KL/Core/Signal.hpp"
 
+#include <memory>
+
 
 namespace KL
 {
-namespace Core
+namespace IO
 {
 
-template <typename T>
-class Property
+class KeyboardInput
 {
 public:
-    explicit Property(T value);
+    using KeyCode = unsigned int;
 
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
+    enum class KeyState : bool
+    {
+        Pressed,
+        Released,
+    };
+
+    KeyboardInput();
+    ~KeyboardInput();
+
+    Core::Signal<KeyCode> & keyPressed();
+    Core::Signal<KeyCode> & keyReleased();
+
+protected:
+    void pressKey(KeyCode keyCode) const;
+    void releaseKey(KeyCode keyCode) const;
 
 private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
+    Core::PrivateSignal<KeyCode> mKeyPressed;
+    Core::PrivateSignal<KeyCode> mKeyReleased;
+
+    class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
-} // namespace Core
+} // namespace IO
 } // namespace KL
-
-
-#include "detail/Property.ipp"

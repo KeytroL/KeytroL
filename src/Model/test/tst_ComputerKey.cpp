@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Property.hpp"
+#include "KL/Model/ComputerKey.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
@@ -19,26 +19,14 @@ KL_DISABLE_WARNINGS
 KL_RESTORE_WARNINGS
 
 
-TEST_CASE("Construct a char Property", "[Property]")
+TEST_CASE("Construct a ComputerKey", "[ComputerKey]")
 {
-    const KL::Core::Property<char> property('a');
+    const KL::Model::ComputerKey computerKey(23, 42, 8, 7, "A", 2);
 
-    REQUIRE(property.value() == 'a');
-}
-
-
-TEST_CASE("Modify a char Property", "[Property]")
-{
-    KL::Core::Property<char> property('a');
-    auto sentinel = 'b';
-
-    property.valueChanged().connect([&sentinel](char value)
-        {
-            sentinel = value;
-        });
-
-    REQUIRE(sentinel == 'b');
-
-    property.setValue('c');
-    REQUIRE(sentinel == 'c');
+    REQUIRE(computerKey.x() == 23);
+    REQUIRE(computerKey.y() == 42);
+    REQUIRE(computerKey.width() == 8);
+    REQUIRE(computerKey.height() == 7);
+    REQUIRE(computerKey.label() == "A");
+    REQUIRE(computerKey.keyCode() == 2);
 }

@@ -13,31 +13,30 @@
 
 #pragma once
 
-#include "KL/Core/Signal.hpp"
+#include "KL/IO/KeyboardInput.hpp"
+
+#include <functional>
+#include <map>
+#include <utility>
 
 
 namespace KL
 {
-namespace Core
+namespace Model
 {
 
-template <typename T>
-class Property
+class KeyMapping
 {
+    using Code = IO::KeyboardInput::KeyCode;
+    using State = IO::KeyboardInput::KeyState;
+
 public:
-    explicit Property(T value);
-
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
+    std::function<void()> & at(Code keyCode, State keyState);
+    const std::function<void()> & at(Code keyCode, State keyState) const;
 
 private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
+    std::map<std::pair<Code, State>, std::function<void()>> mKeyToFunction;
 };
 
-} // namespace Core
+} // namespace Model
 } // namespace KL
-
-
-#include "detail/Property.ipp"

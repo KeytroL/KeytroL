@@ -11,7 +11,9 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Signal.hpp"
+#include "KL/IO/KeyboardInput.hpp"
+
+#include "TestKeyboardInput.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
@@ -19,58 +21,39 @@ KL_DISABLE_WARNINGS
 KL_RESTORE_WARNINGS
 
 
-TEST_CASE("Connect to a Signal", "[Signal]")
+TEST_CASE("Press a key", "[KeyboardInput]")
 {
-    KL::Core::Signal<bool> signal;
-
-    auto connection = signal.connect([](bool)
-        {
-        });
-
-    REQUIRE(connection.isConnected());
-}
-
-
-TEST_CASE("Emit a Signal", "[Signal]")
-{
-    KL::Core::PrivateSignal<bool> signal;
+    KL::IO::KeyboardInput keyboardInput;
     auto count = 0;
 
-    signal.connect([&count](bool value)
+    keyboardInput.keyPressed().connect([&count](KL::IO::KeyboardInput::KeyCode keyCode)
         {
-            if (value)
+            if (keyCode == 42)
             {
                 ++count;
             }
         });
     REQUIRE(count == 0);
 
-    signal.emit(true);
-    REQUIRE(count == 1);
-
-    signal.emit(false);
+    KL::IO::TestKeyboardInput::instance().pressKey(42);
     REQUIRE(count == 1);
 }
 
 
-TEST_CASE("Disconnect from a Signal", "[Signal]")
+TEST_CASE("Release a key", "[KeyboardInput]")
 {
-    KL::Core::PrivateSignal<bool> signal;
+    KL::IO::KeyboardInput keyboardInput;
     auto count = 0;
 
-    auto connection = signal.connect([&count](bool)
+    keyboardInput.keyReleased().connect([&count](KL::IO::KeyboardInput::KeyCode keyCode)
         {
-            ++count;
+            if (keyCode == 23)
+            {
+                ++count;
+            }
         });
     REQUIRE(count == 0);
-    REQUIRE(connection.isConnected());
 
-    signal.emit(true);
-    REQUIRE(count == 1);
-
-    connection.disconnect();
-    REQUIRE_FALSE(connection.isConnected());
-
-    signal.emit(true);
+    KL::IO::TestKeyboardInput::instance().releaseKey(23);
     REQUIRE(count == 1);
 }

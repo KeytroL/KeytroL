@@ -11,11 +11,11 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KeyboardLayoutViewModel.hpp"
-#include "ViewKeyboard.hpp"
-#include "ViewMidiOut.hpp"
-#include "ViewMidiOutDevices.hpp"
-#include "XmlKeyboardLayout.hpp"
+#include "KL/ViewIO/KeyboardInput.hpp"
+#include "KL/ViewIO/MidiOut.hpp"
+#include "KL/ViewIO/MidiOutDevices.hpp"
+#include "KL/ViewModel/KeyboardLayout.hpp"
+#include "KL/ViewModel/XmlFile.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
@@ -29,19 +29,20 @@ int main(int argc, char * argv[])
 {
     QGuiApplication application(argc, argv);
 
-    qmlRegisterType<KL::ViewKeyboard>("KeytroL.Keyboard", 1, 0, "Keyboard");
-    qmlRegisterType<KL::KeyboardLayoutViewModel>(
-        "KeytroL.Keyboard", 1, 0, "KeyboardLayout");
-    qmlRegisterType<KL::XmlKeyboardLayout>("KeytroL.Keyboard", 1, 0, "XmlKeyboardLayout");
-
     auto midiOutDevicesSingletonProvider = [](QQmlEngine *, QJSEngine *) -> QObject *
     {
-        return new KL::ViewMidiOutDevices;
+        return new KL::ViewIO::MidiOutDevices;
     };
 
-    qmlRegisterSingletonType<KL::ViewMidiOutDevices>(
-        "KeytroL.Midi", 1, 0, "MidiOutDevices", midiOutDevicesSingletonProvider);
-    qmlRegisterType<KL::ViewMidiOut>("KeytroL.Midi", 1, 0, "MidiOut");
+    qmlRegisterSingletonType<KL::ViewIO::MidiOutDevices>(
+        "KeytroL.IO", 1, 0, "MidiOutDevices", midiOutDevicesSingletonProvider);
+
+    qmlRegisterType<KL::ViewIO::KeyboardInput>("KeytroL.IO", 1, 0, "KeyboardInput");
+    qmlRegisterType<KL::ViewIO::MidiOut>("KeytroL.IO", 1, 0, "MidiOut");
+
+    qmlRegisterType<KL::ViewModel::KeyboardLayout>(
+        "KeytroL.Model", 1, 0, "KeyboardLayout");
+    qmlRegisterType<KL::ViewModel::XmlFile>("KeytroL.Model", 1, 0, "XmlFile");
 
     QQmlApplicationEngine engine(QUrl::fromLocalFile(QML_MAIN));
 

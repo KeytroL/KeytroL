@@ -11,16 +11,25 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_executable(KeytroLTestApp
-    main.cpp
+add_library(BaseKeytroLIO STATIC
+    KeyboardInput.cpp
 )
 
-target_link_libraries(KeytroLTestApp PRIVATE
-    KeytroLViewIO
-    KeytroLViewModel
-    Qt5::Quick
+target_link_libraries(BaseKeytroLIO PUBLIC
+    KeytroLCore
 )
 
-target_compile_definitions(KeytroLTestApp PRIVATE
-    QML_MAIN="${CMAKE_CURRENT_LIST_DIR}/main.qml"
-)
+
+add_subdirectory(platform/default)
+
+if (WIN32)
+    add_subdirectory(platform/win)
+    add_library(KeytroLIO ALIAS WinKeytroLIO)
+else ()
+    add_library(KeytroLIO ALIAS DefaultKeytroLIO)
+endif ()
+
+
+add_subdirectory(platform/mock)
+add_subdirectory(test)
+add_test(NAME KeytroLIO COMMAND KeytroLIOTest)

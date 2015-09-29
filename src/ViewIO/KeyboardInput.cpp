@@ -11,34 +11,27 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Property.hpp"
-
-#include "KL/Warnings.hpp"
-KL_DISABLE_WARNINGS
-#include <catch.hpp>
-KL_RESTORE_WARNINGS
+#include "KL/ViewIO/KeyboardInput.hpp"
 
 
-TEST_CASE("Construct a char Property", "[Property]")
+namespace KL
 {
-    const KL::Core::Property<char> property('a');
-
-    REQUIRE(property.value() == 'a');
-}
-
-
-TEST_CASE("Modify a char Property", "[Property]")
+namespace ViewIO
 {
-    KL::Core::Property<char> property('a');
-    auto sentinel = 'b';
 
-    property.valueChanged().connect([&sentinel](char value)
+KeyboardInput::KeyboardInput(QObject * parent)
+    : QObject(parent)
+{
+    mKeyboardInput.keyPressed().connect([this](IO::KeyboardInput::KeyCode keyCode)
         {
-            sentinel = value;
+            Q_EMIT keyPressed(keyCode);
         });
 
-    REQUIRE(sentinel == 'b');
-
-    property.setValue('c');
-    REQUIRE(sentinel == 'c');
+    mKeyboardInput.keyReleased().connect([this](IO::KeyboardInput::KeyCode keyCode)
+        {
+            Q_EMIT keyReleased(keyCode);
+        });
 }
+
+} // namespace ViewIO
+} // namespace KL

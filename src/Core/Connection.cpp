@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace Core
+{
 
 Connection::Connection(Connection && other)
     : mConnected(std::move(other.mConnected))
@@ -82,4 +84,5 @@ ScopedConnection & ScopedConnection::operator=(const Connection & other)
     return *this;
 }
 
+} // namespace Core
 } // namespace KL

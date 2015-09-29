@@ -2,8 +2,8 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 
-import KeytroL.Keyboard 1.0
-import KeytroL.Midi 1.0
+import KeytroL.IO 1.0
+import KeytroL.Model 1.0
 
 
 ApplicationWindow {
@@ -40,7 +40,7 @@ ApplicationWindow {
                     onTriggered: {
                         if (fileDialog.fileUrl.toString() !== "") {
                             console.log("Saving file: " + fileDialog.fileUrl);
-                            if (!xmlKeyboardLayout.save(fileDialog.fileUrl, keyboardLayout)) {
+                            if (!xmlFile.save(fileDialog.fileUrl, keyboardLayout)) {
                                 cannotSaveFileDialog.open();
                             }
                         }
@@ -99,7 +99,7 @@ ApplicationWindow {
         onAccepted: {
             if (fileDialog.selectExisting) {
                 console.log("Loading file: " + fileDialog.fileUrl);
-                if (!xmlKeyboardLayout.load(fileDialog.fileUrl, keyboardLayout)) {
+                if (!xmlFile.load(fileDialog.fileUrl, keyboardLayout)) {
                     cannotLoadFileDialog.open();
                 }
             }
@@ -125,8 +125,8 @@ ApplicationWindow {
         standardButtons: StandardButton.Ok
     }
 
-    XmlKeyboardLayout {
-        id: xmlKeyboardLayout
+    XmlFile {
+        id: xmlFile
     }
 
     KeyboardLayout {
@@ -190,7 +190,7 @@ ApplicationWindow {
         }
 
         Connections {
-            target: keyboard
+            target: keyboardInput
 
             onKeyPressed: {
                 if (mouseArea.bindToKeyCode && mouseArea.selectedComputerKey !== null) {
@@ -268,7 +268,7 @@ ApplicationWindow {
                 }
 
                 Connections {
-                    target: keyboard
+                    target: keyboardInput
 
                     onKeyPressed: {
                         if (model.keyCode == keyCode) {
@@ -286,8 +286,8 @@ ApplicationWindow {
         }
     }
 
-    Keyboard {
-        id: keyboard
+    KeyboardInput {
+        id: keyboardInput
     }
 
     MidiOut {
@@ -299,7 +299,7 @@ ApplicationWindow {
     }
 
     Connections {
-        target: keyboard
+        target: keyboardInput
 
         onKeyPressed: {
             midiOut.sendMessage(0x90, keyCode, 100);

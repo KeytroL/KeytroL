@@ -23,6 +23,8 @@
 
 namespace KL
 {
+namespace Core
+{
 
 template <typename T>
 class Signal
@@ -55,6 +57,7 @@ public:
     void emit(const T & value) const;
 };
 
+} // namespace Core
 } // namespace KL
 
 

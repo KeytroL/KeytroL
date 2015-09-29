@@ -11,33 +11,43 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
-
-#include "KL/Core/Signal.hpp"
+#include "KL/IO/MidiOut.hpp"
 
 
 namespace KL
 {
-namespace Core
+namespace IO
 {
 
-template <typename T>
-class Property
+class MidiOut::PlatformImpl
 {
-public:
-    explicit Property(T value);
-
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
-
-private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
 };
 
-} // namespace Core
+
+unsigned int MidiOut::deviceCount()
+{
+    return 0;
+}
+
+
+std::string MidiOut::deviceName(unsigned int)
+{
+    return {};
+}
+
+
+MidiOut::MidiOut(unsigned int)
+    : mPlatformImpl(nullptr)
+{
+}
+
+
+MidiOut::~MidiOut() = default;
+
+
+void MidiOut::sendMessage(Byte, Byte, Byte) const
+{
+}
+
+} // namespace IO
 } // namespace KL
-
-
-#include "detail/Property.ipp"

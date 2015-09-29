@@ -18,6 +18,8 @@
 
 namespace KL
 {
+namespace Core
+{
 
 template <typename T>
 Property<T>::Property(T value)
@@ -50,4 +52,5 @@ Signal<T> & Property<T>::valueChanged()
     return mValueChanged;
 }
 
+} // namespace Core
 } // namespace KL

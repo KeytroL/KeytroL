@@ -13,31 +13,32 @@
 
 #pragma once
 
-#include "KL/Core/Signal.hpp"
+#include <memory>
+#include <string>
 
 
 namespace KL
 {
-namespace Core
+namespace IO
 {
 
-template <typename T>
-class Property
+class MidiOut
 {
 public:
-    explicit Property(T value);
+    using Byte = unsigned char;
 
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
+    static unsigned int deviceCount();
+    static std::string deviceName(unsigned int deviceIndex);
+
+    explicit MidiOut(unsigned int deviceIndex);
+    ~MidiOut();
+
+    void sendMessage(Byte statusByte, Byte dataByte1, Byte dataByte2) const;
 
 private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
+    class PlatformImpl;
+    std::unique_ptr<PlatformImpl> mPlatformImpl;
 };
 
-} // namespace Core
+} // namespace IO
 } // namespace KL
-
-
-#include "detail/Property.ipp"

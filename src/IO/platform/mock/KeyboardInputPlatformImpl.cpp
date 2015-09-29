@@ -11,33 +11,20 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
-
-#include "KL/Core/Signal.hpp"
+#include "KeyboardInputPlatformImpl.hpp"
 
 
 namespace KL
 {
-namespace Core
+namespace IO
 {
 
-template <typename T>
-class Property
+KeyboardInput::PlatformImpl::PlatformImpl(
+    Core::Connection keyPressConnection, Core::Connection keyReleaseConnection)
+    : mKeyPressConnection(std::move(keyPressConnection))
+    , mKeyReleaseConnection(std::move(keyReleaseConnection))
 {
-public:
-    explicit Property(T value);
+}
 
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
-
-private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
-};
-
-} // namespace Core
+} // namespace IO
 } // namespace KL
-
-
-#include "detail/Property.ipp"

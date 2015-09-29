@@ -11,34 +11,29 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Property.hpp"
+#pragma once
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
-#include <catch.hpp>
+#include <QtCore/QObject>
 KL_RESTORE_WARNINGS
 
 
-TEST_CASE("Construct a char Property", "[Property]")
+namespace KL
 {
-    const KL::Core::Property<char> property('a');
-
-    REQUIRE(property.value() == 'a');
-}
-
-
-TEST_CASE("Modify a char Property", "[Property]")
+namespace ViewIO
 {
-    KL::Core::Property<char> property('a');
-    auto sentinel = 'b';
 
-    property.valueChanged().connect([&sentinel](char value)
-        {
-            sentinel = value;
-        });
+class MidiOutDevices : public QObject
+{
+    Q_OBJECT
 
-    REQUIRE(sentinel == 'b');
+public:
+    MidiOutDevices(QObject * parent = nullptr);
 
-    property.setValue('c');
-    REQUIRE(sentinel == 'c');
-}
+    Q_INVOKABLE unsigned int count() const;
+    Q_INVOKABLE QString name(unsigned int index) const;
+};
+
+} // namespace ViewIO
+} // namespace KL

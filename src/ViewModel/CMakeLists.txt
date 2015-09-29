@@ -11,16 +11,17 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_executable(KeytroLTestApp
-    main.cpp
+add_library(KeytroLViewModel STATIC
+    ../../include/KL/ViewModel/KeyboardLayout.hpp
+    ../../include/KL/ViewModel/XmlFile.hpp
+    KeyboardLayout.cpp
+    XmlFile.cpp
 )
 
-target_link_libraries(KeytroLTestApp PRIVATE
-    KeytroLViewIO
-    KeytroLViewModel
-    Qt5::Quick
+target_link_libraries(KeytroLViewModel PUBLIC
+    KeytroLModel
+    Qt5::Core
 )
 
-target_compile_definitions(KeytroLTestApp PRIVATE
-    QML_MAIN="${CMAKE_CURRENT_LIST_DIR}/main.qml"
-)
+set_target_properties(KeytroLViewModel PROPERTIES AUTOMOC ON)
+set_target_properties(KeytroLViewModel PROPERTIES AUTOMOC_MOC_OPTIONS -bKL/MocWarnings.hpp)

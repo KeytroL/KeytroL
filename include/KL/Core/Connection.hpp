@@ -18,6 +18,8 @@
 
 namespace KL
 {
+namespace Core
+{
 
 template <typename T>
 class Signal;
@@ -39,7 +41,7 @@ public:
 
 private:
     template <typename T>
-    friend class KL::Signal;
+    friend class KL::Core::Signal;
 
     explicit Connection(std::shared_ptr<bool> connected);
 
@@ -60,4 +62,5 @@ public:
     ScopedConnection & operator=(const Connection & other);
 };
 
+} // namespace Core
 } // namespace KL

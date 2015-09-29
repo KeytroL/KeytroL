@@ -11,33 +11,27 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
+#include "KL/IO/KeyboardInput.hpp"
 
-#include "KL/Core/Signal.hpp"
+#include "KeyboardInputPlatformImpl.hpp"
 
 
 namespace KL
 {
-namespace Core
+namespace IO
 {
 
-template <typename T>
-class Property
+KeyboardInput::KeyboardInput()
+    : mPlatformImpl(nullptr)
 {
-public:
-    explicit Property(T value);
+    PlatformImpl::instance().addKeyboardInput(this);
+}
 
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
 
-private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
-};
+KeyboardInput::~KeyboardInput()
+{
+    PlatformImpl::instance().removeKeyboardInput(this);
+}
 
-} // namespace Core
+} // namespace IO
 } // namespace KL
-
-
-#include "detail/Property.ipp"

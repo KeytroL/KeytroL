@@ -11,16 +11,20 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_executable(KeytroLTestApp
-    main.cpp
+add_library(MockKeytroLIO STATIC
+    KeyboardInput.cpp
+    KeyboardInputPlatformImpl.cpp
+    TestKeyboardInput.cpp
 )
 
-target_link_libraries(KeytroLTestApp PRIVATE
-    KeytroLViewIO
-    KeytroLViewModel
-    Qt5::Quick
+target_include_directories(MockKeytroLIO PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+
+target_link_libraries(MockKeytroLIO PUBLIC
+    BaseKeytroLIO
 )
 
-target_compile_definitions(KeytroLTestApp PRIVATE
-    QML_MAIN="${CMAKE_CURRENT_LIST_DIR}/main.qml"
-)
+if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
+    target_compile_options(MockKeytroLIO PRIVATE
+        -Wno-exit-time-destructors
+    )
+endif ()

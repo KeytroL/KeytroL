@@ -11,34 +11,40 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Property.hpp"
+#include "KL/IO/KeyboardInput.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
-#include <catch.hpp>
+#include <Windows.h>
 KL_RESTORE_WARNINGS
 
+#include <set>
 
-TEST_CASE("Construct a char Property", "[Property]")
+
+namespace KL
 {
-    const KL::Core::Property<char> property('a');
-
-    REQUIRE(property.value() == 'a');
-}
-
-
-TEST_CASE("Modify a char Property", "[Property]")
+namespace IO
 {
-    KL::Core::Property<char> property('a');
-    auto sentinel = 'b';
 
-    property.valueChanged().connect([&sentinel](char value)
-        {
-            sentinel = value;
-        });
+class KeyboardInput::PlatformImpl
+{
+public:
+    static PlatformImpl & instance();
+    ~PlatformImpl();
 
-    REQUIRE(sentinel == 'b');
+    void addKeyboardInput(const KeyboardInput * keyboardInput);
+    void removeKeyboardInput(const KeyboardInput * keyboardInput);
 
-    property.setValue('c');
-    REQUIRE(sentinel == 'c');
-}
+private:
+    PlatformImpl();
+
+    void pressKey(KeyCode keyCode) const;
+    void releaseKey(KeyCode keyCode) const;
+
+    std::set<const KeyboardInput *> mKeyboardInputs;
+
+    HHOOK mLowLevelKeyboardHookHandle = nullptr;
+};
+
+} // namespace IO
+} // namespace KL

@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Property.hpp"
+#include "KL/IO/MidiOut.hpp"
 
 #include "KL/Warnings.hpp"
 KL_DISABLE_WARNINGS
@@ -19,26 +19,13 @@ KL_DISABLE_WARNINGS
 KL_RESTORE_WARNINGS
 
 
-TEST_CASE("Construct a char Property", "[Property]")
+TEST_CASE("Default MIDI out device count is null", "[MidiOut]")
 {
-    const KL::Core::Property<char> property('a');
-
-    REQUIRE(property.value() == 'a');
+    REQUIRE(KL::IO::MidiOut::deviceCount() == 0);
 }
 
 
-TEST_CASE("Modify a char Property", "[Property]")
+TEST_CASE("Default MIDI out device name is empty", "[MidiOut]")
 {
-    KL::Core::Property<char> property('a');
-    auto sentinel = 'b';
-
-    property.valueChanged().connect([&sentinel](char value)
-        {
-            sentinel = value;
-        });
-
-    REQUIRE(sentinel == 'b');
-
-    property.setValue('c');
-    REQUIRE(sentinel == 'c');
+    REQUIRE(KL::IO::MidiOut::deviceName(0) == std::string());
 }

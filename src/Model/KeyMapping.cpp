@@ -11,33 +11,24 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
-
-#include "KL/Core/Signal.hpp"
+#include "KL/Model/KeyMapping.hpp"
 
 
 namespace KL
 {
-namespace Core
+namespace Model
 {
 
-template <typename T>
-class Property
+std::function<void()> & KeyMapping::at(Code keyCode, State keyState)
 {
-public:
-    explicit Property(T value);
+    return mKeyToFunction[std::make_pair(keyCode, keyState)];
+}
 
-    const T & value() const;
-    void setValue(const T & value);
-    Signal<T> & valueChanged();
 
-private:
-    T mValue;
-    PrivateSignal<T> mValueChanged;
-};
+const std::function<void()> & KeyMapping::at(Code keyCode, State keyState) const
+{
+    return mKeyToFunction.at(std::make_pair(keyCode, keyState));
+}
 
-} // namespace Core
+} // namespace Model
 } // namespace KL
-
-
-#include "detail/Property.ipp"

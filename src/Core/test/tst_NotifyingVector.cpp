@@ -23,13 +23,13 @@ TEST_CASE("Construct a NotifyingVector of integers", "[NotifyingVector]")
 {
     SECTION("Default construction")
     {
-        KL::NotifyingVector<int> ints;
+        KL::Core::NotifyingVector<int> ints;
         REQUIRE(ints.vector().size() == 0u);
     }
 
     SECTION("Construction from a std::vector")
     {
-        KL::NotifyingVector<int> ints({1, 2, 3});
+        KL::Core::NotifyingVector<int> ints({1, 2, 3});
         REQUIRE(ints.vector().size() == 3u);
     }
 }
@@ -37,7 +37,7 @@ TEST_CASE("Construct a NotifyingVector of integers", "[NotifyingVector]")
 
 TEST_CASE("Fail to replace elements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints({1, 2, 3});
 
     SECTION("When first > last")
     {
@@ -53,7 +53,7 @@ TEST_CASE("Fail to replace elements in a NotifyingVector", "[NotifyingVector]")
 
 TEST_CASE("Increase number of elements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints({1, 2, 3});
 
     SECTION("By inserting one new element")
     {
@@ -77,7 +77,7 @@ TEST_CASE("Increase number of elements in a NotifyingVector", "[NotifyingVector]
 
 TEST_CASE("Decrease number of elements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints({1, 2, 3});
 
     SECTION("By clearing the container")
     {
@@ -101,7 +101,7 @@ TEST_CASE("Decrease number of elements in a NotifyingVector", "[NotifyingVector]
 
 TEST_CASE("Keep same number of elements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints({1, 2, 3});
 
     SECTION("By replacing no elements")
     {
@@ -125,9 +125,10 @@ TEST_CASE("Keep same number of elements in a NotifyingVector", "[NotifyingVector
 
 TEST_CASE("Observe replacements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints({1, 2, 3});
 
-    auto testNotification = [](const KL::NotifyingVector<int>::ReplaceDiff & replaceDiff)
+    auto testNotification =
+        [](const KL::Core::NotifyingVector<int>::ReplaceDiff & replaceDiff)
     {
         REQUIRE(replaceDiff.first == 0u);
         REQUIRE(replaceDiff.last == 1u);
