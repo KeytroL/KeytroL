@@ -11,33 +11,37 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard/KeyboardInput.hpp"
+#include "KL/IO/KeyboardInput.hpp"
+
+#include "KL/Warnings.hpp"
+KL_DISABLE_WARNINGS
+#include <Windows.h>
+KL_RESTORE_WARNINGS
+
+#include <set>
 
 
 namespace KL
 {
 
-Signal<KeyboardInput::KeyCode> & KeyboardInput::keyPressed()
+class KeyboardInput::PlatformImpl
 {
-    return mKeyPressed;
-}
+public:
+    static PlatformImpl & instance();
+    ~PlatformImpl();
 
+    void addKeyboardInput(const KeyboardInput * keyboardInput);
+    void removeKeyboardInput(const KeyboardInput * keyboardInput);
 
-Signal<KeyboardInput::KeyCode> & KeyboardInput::keyReleased()
-{
-    return mKeyReleased;
-}
+private:
+    PlatformImpl();
 
+    void pressKey(KeyCode keyCode) const;
+    void releaseKey(KeyCode keyCode) const;
 
-void KeyboardInput::pressKey(KeyCode keyCode) const
-{
-    mKeyPressed.emit(keyCode);
-}
+    std::set<const KeyboardInput *> mKeyboardInputs;
 
-
-void KeyboardInput::releaseKey(KeyCode keyCode) const
-{
-    mKeyReleased.emit(keyCode);
-}
+    HHOOK mLowLevelKeyboardHookHandle = nullptr;
+};
 
 } // namespace KL

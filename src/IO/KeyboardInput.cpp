@@ -11,29 +11,33 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#pragma once
-
 #include "KL/IO/KeyboardInput.hpp"
-
-#include <functional>
-#include <map>
-#include <utility>
 
 
 namespace KL
 {
 
-class KeyMapping
+Signal<KeyboardInput::KeyCode> & KeyboardInput::keyPressed()
 {
-    using Code = KeyboardInput::KeyCode;
-    using State = KeyboardInput::KeyState;
+    return mKeyPressed;
+}
 
-public:
-    std::function<void()> & at(Code keyCode, State keyState);
-    const std::function<void()> & at(Code keyCode, State keyState) const;
 
-private:
-    std::map<std::pair<Code, State>, std::function<void()>> mKeyToFunction;
-};
+Signal<KeyboardInput::KeyCode> & KeyboardInput::keyReleased()
+{
+    return mKeyReleased;
+}
+
+
+void KeyboardInput::pressKey(KeyCode keyCode) const
+{
+    mKeyPressed.emit(keyCode);
+}
+
+
+void KeyboardInput::releaseKey(KeyCode keyCode) const
+{
+    mKeyReleased.emit(keyCode);
+}
 
 } // namespace KL

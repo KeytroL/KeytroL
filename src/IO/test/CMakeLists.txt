@@ -11,20 +11,11 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(MockKeytroLKeyboard STATIC
-    KeyboardInput.cpp
-    KeyboardInputPlatformImpl.cpp
-    TestKeyboardInput.cpp
+add_executable(KeytroLIOTest
+    tst_KeyboardInput.cpp
 )
 
-target_include_directories(MockKeytroLKeyboard PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-
-target_link_libraries(MockKeytroLKeyboard PUBLIC
-    BaseKeytroLKeyboard
+target_link_libraries(KeytroLIOTest PRIVATE
+    Catch
+    MockKeytroLIO
 )
-
-if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
-    target_compile_options(MockKeytroLKeyboard PRIVATE
-        -Wno-exit-time-destructors
-    )
-endif ()

@@ -19,6 +19,7 @@ add_library(KeytroLModel STATIC
 
 target_link_libraries(KeytroLModel PUBLIC
     KeytroLCore
+    KeytroLIO
 )
 
 add_subdirectory(test)

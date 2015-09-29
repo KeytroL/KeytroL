@@ -11,24 +11,34 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard/KeyboardInput.hpp"
+#include "KL/IO/KeyboardInput.hpp"
 
 #include "KeyboardInputPlatformImpl.hpp"
+#include "TestKeyboardInput.hpp"
 
 
 namespace KL
 {
 
 KeyboardInput::KeyboardInput()
-    : mPlatformImpl(nullptr)
 {
-    PlatformImpl::instance().addKeyboardInput(this);
+    auto keyPressConnection =
+        TestKeyboardInput::instance().mKeyPressed.connect([this](KeyCode keyCode)
+            {
+                pressKey(keyCode);
+            });
+
+    auto keyReleaseConnection =
+        TestKeyboardInput::instance().mKeyReleased.connect([this](KeyCode keyCode)
+            {
+                releaseKey(keyCode);
+            });
+
+    mPlatformImpl = std::unique_ptr<PlatformImpl>(
+        new PlatformImpl{std::move(keyPressConnection), std::move(keyReleaseConnection)});
 }
 
 
-KeyboardInput::~KeyboardInput()
-{
-    PlatformImpl::instance().removeKeyboardInput(this);
-}
+KeyboardInput::~KeyboardInput() = default;
 
 } // namespace KL

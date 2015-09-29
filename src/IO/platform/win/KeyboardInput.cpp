@@ -11,20 +11,24 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Keyboard/KeyboardInput.hpp"
+#include "KL/IO/KeyboardInput.hpp"
+
+#include "KeyboardInputPlatformImpl.hpp"
 
 
 namespace KL
 {
 
-class KeyboardInput::PlatformImpl
+KeyboardInput::KeyboardInput()
+    : mPlatformImpl(nullptr)
 {
-};
+    PlatformImpl::instance().addKeyboardInput(this);
+}
 
 
-KeyboardInput::KeyboardInput() = default;
-
-
-KeyboardInput::~KeyboardInput() = default;
+KeyboardInput::~KeyboardInput()
+{
+    PlatformImpl::instance().removeKeyboardInput(this);
+}
 
 } // namespace KL

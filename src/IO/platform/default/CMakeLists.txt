@@ -11,11 +11,10 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_executable(KeytroLKeyboardTest
-    tst_KeyboardInput.cpp
+add_library(DefaultKeytroLIO STATIC
+    KeyboardInput.cpp
 )
 
-target_link_libraries(KeytroLKeyboardTest PRIVATE
-    Catch
-    MockKeytroLKeyboard
+target_link_libraries(DefaultKeytroLIO PUBLIC
+    BaseKeytroLIO
 )

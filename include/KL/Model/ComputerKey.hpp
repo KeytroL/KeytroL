@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "KL/Keyboard/KeyboardInput.hpp"
+#include "KL/IO/KeyboardInput.hpp"
 
 #include <string>
 
