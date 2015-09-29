@@ -40,8 +40,10 @@ int main(int argc, char * argv[])
     qmlRegisterType<KL::ViewIO::ViewKeyboardInput>("KeytroL.IO", 1, 0, "KeyboardInput");
     qmlRegisterType<KL::ViewIO::ViewMidiOut>("KeytroL.IO", 1, 0, "MidiOut");
 
-    qmlRegisterType<KL::KeyboardLayoutViewModel>("KeytroL.Model", 1, 0, "KeyboardLayout");
-    qmlRegisterType<KL::XmlKeyboardLayout>("KeytroL.Model", 1, 0, "XmlKeyboardLayout");
+    qmlRegisterType<KL::ViewModel::KeyboardLayoutViewModel>(
+        "KeytroL.Model", 1, 0, "KeyboardLayout");
+    qmlRegisterType<KL::ViewModel::XmlKeyboardLayout>(
+        "KeytroL.Model", 1, 0, "XmlKeyboardLayout");
 
     QQmlApplicationEngine engine(QUrl::fromLocalFile(QML_MAIN));
 

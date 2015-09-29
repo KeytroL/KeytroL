@@ -16,6 +16,8 @@
 
 namespace KL
 {
+namespace ViewModel
+{
 
 KeyboardLayoutViewModel::KeyboardLayoutViewModel(QObject * parent)
     : QAbstractListModel(parent)
@@ -220,4 +222,5 @@ void KeyboardLayoutViewModel::afterModelReplace(const ReplaceDiff & replaceDiff)
     }
 }
 
+} // namespace ViewModel
 } // namespace KL

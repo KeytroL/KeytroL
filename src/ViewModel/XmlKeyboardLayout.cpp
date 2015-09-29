@@ -26,6 +26,8 @@ KL_RESTORE_WARNINGS
 
 namespace KL
 {
+namespace ViewModel
+{
 
 XmlKeyboardLayout::XmlKeyboardLayout(QObject * parent)
     : QObject(parent)
@@ -121,4 +123,5 @@ bool XmlKeyboardLayout::save(
     return false;
 }
 
+} // namespace ViewModel
 } // namespace KL

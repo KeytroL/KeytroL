@@ -27,6 +27,8 @@ KL_RESTORE_WARNINGS
 
 namespace KL
 {
+namespace ViewModel
+{
 
 class KeyboardLayoutViewModel : public QAbstractListModel
 {
@@ -78,4 +80,5 @@ private:
     Model::KeyboardLayout mModel;
 };
 
+} // namespace ViewModel
 } // namespace KL

@@ -22,6 +22,8 @@ KL_RESTORE_WARNINGS
 
 namespace KL
 {
+namespace ViewModel
+{
 
 class KeyboardLayoutViewModel;
 
@@ -33,11 +35,12 @@ class XmlKeyboardLayout : public QObject
 public:
     XmlKeyboardLayout(QObject * parent = nullptr);
 
-    Q_INVOKABLE bool load(
-        const QUrl & fileUrl, KL::KeyboardLayoutViewModel * keyboardLayoutViewModel);
+    Q_INVOKABLE bool load(const QUrl & fileUrl,
+        KL::ViewModel::KeyboardLayoutViewModel * keyboardLayoutViewModel);
 
-    Q_INVOKABLE bool save(
-        const QUrl & fileUrl, KL::KeyboardLayoutViewModel * keyboardLayoutViewModel);
+    Q_INVOKABLE bool save(const QUrl & fileUrl,
+        KL::ViewModel::KeyboardLayoutViewModel * keyboardLayoutViewModel);
 };
 
+} // namespace ViewModel
 } // namespace KL
