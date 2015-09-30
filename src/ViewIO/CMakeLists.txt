@@ -21,7 +21,7 @@ add_library(KeytroLViewIO STATIC
 )
 
 target_link_libraries(KeytroLViewIO PUBLIC
-    KeytroLIO
+    BaseKeytroLIO
     Qt5::Core
 )
 

@@ -18,6 +18,7 @@ add_executable(KeytroLTestApp
 target_link_libraries(KeytroLTestApp PRIVATE
     KeytroLViewIO
     KeytroLViewModel
+    PlatformKeytroLIO
     Qt5::Quick
 )
 
