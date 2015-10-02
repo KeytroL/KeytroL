@@ -11,8 +11,6 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/IO/MidiOut.hpp"
-
 #include "TestMidiOut.hpp"
 
 
@@ -21,35 +19,28 @@ namespace KL
 namespace IO
 {
 
-class MidiOut::PlatformImpl
+TestMidiOut & TestMidiOut::instance()
 {
-};
-
-
-unsigned int MidiOut::deviceCount()
-{
-    return TestMidiOut::deviceCount();
+    static TestMidiOut testMidiOut;
+    return testMidiOut;
 }
 
 
-std::string MidiOut::deviceName(unsigned int deviceIndex)
+unsigned int TestMidiOut::deviceCount()
 {
-    return TestMidiOut::deviceName(deviceIndex);
+    return 42;
 }
 
 
-MidiOut::MidiOut(unsigned int)
-    : mPlatformImpl(nullptr)
+std::string TestMidiOut::deviceName(unsigned int)
 {
+    return {"Foo"};
 }
 
 
-MidiOut::~MidiOut() = default;
-
-
-void MidiOut::sendMessage(Byte statusByte, Byte dataByte1, Byte dataByte2) const
+const TestMidiOut::Message & TestMidiOut::message() const
 {
-    TestMidiOut::instance().mMessage = {statusByte, dataByte1, dataByte2};
+    return mMessage;
 }
 
 } // namespace IO

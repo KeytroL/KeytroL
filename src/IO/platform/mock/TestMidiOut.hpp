@@ -13,44 +13,36 @@
 
 #include "KL/IO/MidiOut.hpp"
 
-#include "TestMidiOut.hpp"
-
 
 namespace KL
 {
 namespace IO
 {
 
-class MidiOut::PlatformImpl
+class TestMidiOut
 {
+public:
+    static TestMidiOut & instance();
+
+    static unsigned int deviceCount();
+    static std::string deviceName(unsigned int deviceIndex);
+
+    struct Message
+    {
+        MidiOut::Byte statusByte;
+        MidiOut::Byte dataByte1;
+        MidiOut::Byte dataByte2;
+    };
+
+    const Message & message() const;
+
+private:
+    TestMidiOut() = default;
+
+    friend class KL::IO::MidiOut;
+
+    Message mMessage;
 };
-
-
-unsigned int MidiOut::deviceCount()
-{
-    return TestMidiOut::deviceCount();
-}
-
-
-std::string MidiOut::deviceName(unsigned int deviceIndex)
-{
-    return TestMidiOut::deviceName(deviceIndex);
-}
-
-
-MidiOut::MidiOut(unsigned int)
-    : mPlatformImpl(nullptr)
-{
-}
-
-
-MidiOut::~MidiOut() = default;
-
-
-void MidiOut::sendMessage(Byte statusByte, Byte dataByte1, Byte dataByte2) const
-{
-    TestMidiOut::instance().mMessage = {statusByte, dataByte1, dataByte2};
-}
 
 } // namespace IO
 } // namespace KL
