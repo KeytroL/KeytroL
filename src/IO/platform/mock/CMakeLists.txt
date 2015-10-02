@@ -13,6 +13,7 @@
 
 add_library(MockKeytroLIO STATIC
     KeyboardInput.cpp
+    MidiOut.cpp
     TestKeyboardInput.cpp
 )
 

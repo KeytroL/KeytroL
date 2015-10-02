@@ -13,19 +13,41 @@
 
 #include "KL/IO/MidiOut.hpp"
 
-#include "KL/Warnings.hpp"
-KL_DISABLE_WARNINGS
-#include <catch.hpp>
-KL_RESTORE_WARNINGS
 
-
-TEST_CASE("Query the count of MIDI out devices", "[MidiOut]")
+namespace KL
 {
-    REQUIRE(KL::IO::MidiOut::deviceCount() == 0);
+namespace IO
+{
+
+class MidiOut::PlatformImpl
+{
+};
+
+
+unsigned int MidiOut::deviceCount()
+{
+    return 0;
 }
 
 
-TEST_CASE("Query the name of the first MIDI out device", "[MidiOut]")
+std::string MidiOut::deviceName(unsigned int deviceIndex)
 {
-    REQUIRE(KL::IO::MidiOut::deviceName(0) == std::string());
+    return {};
 }
+
+
+MidiOut::MidiOut(unsigned int)
+    : mPlatformImpl(nullptr)
+{
+}
+
+
+MidiOut::~MidiOut() = default;
+
+
+void MidiOut::sendMessage(Byte, Byte, Byte) const
+{
+}
+
+} // namespace IO
+} // namespace KL
