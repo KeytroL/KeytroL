@@ -13,7 +13,6 @@
 
 #include "KL/IO/KeyboardInput.hpp"
 
-#include "KeyboardInputPlatformImpl.hpp"
 #include "TestKeyboardInput.hpp"
 
 
@@ -21,6 +20,21 @@ namespace KL
 {
 namespace IO
 {
+
+class KeyboardInput::PlatformImpl
+{
+public:
+    PlatformImpl(
+        Core::Connection keyPressConnection, Core::Connection keyReleaseConnection)
+        : mKeyPressConnection(std::move(keyPressConnection))
+        , mKeyReleaseConnection(std::move(keyReleaseConnection))
+    {
+    }
+
+    Core::ScopedConnection mKeyPressConnection;
+    Core::ScopedConnection mKeyReleaseConnection;
+};
+
 
 KeyboardInput::KeyboardInput()
 {

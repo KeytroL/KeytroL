@@ -11,8 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KL/Core/Connection.hpp"
-#include "KL/IO/KeyboardInput.hpp"
+#include "KL/IO/MidiOut.hpp"
 
 
 namespace KL
@@ -20,14 +19,29 @@ namespace KL
 namespace IO
 {
 
-class KeyboardInput::PlatformImpl
+class TestMidiOut
 {
 public:
-    PlatformImpl(
-        Core::Connection keyPressConnection, Core::Connection keyReleaseConnection);
+    static TestMidiOut & instance();
 
-    Core::ScopedConnection mKeyPressConnection;
-    Core::ScopedConnection mKeyReleaseConnection;
+    static unsigned int deviceCount();
+    static std::string deviceName(unsigned int deviceIndex);
+
+    struct Message
+    {
+        MidiOut::Byte statusByte;
+        MidiOut::Byte dataByte1;
+        MidiOut::Byte dataByte2;
+    };
+
+    const Message & message() const;
+
+private:
+    TestMidiOut() = default;
+
+    friend class KL::IO::MidiOut;
+
+    Message mMessage;
 };
 
 } // namespace IO

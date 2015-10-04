@@ -11,24 +11,15 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-add_library(KeytroLViewModel STATIC
-    ../../include/KL/ViewModel/KeyboardLayout.hpp
-    ../../include/KL/ViewModel/XmlFile.hpp
-    KeyboardLayout.cpp
-    XmlFile.cpp
+add_executable(KeytroLViewIOTest
+    tst_KeyboardInput.cpp
+    tst_MidiOut.cpp
+    tst_MidiOutDevices.cpp
 )
 
-target_link_libraries(KeytroLViewModel PUBLIC
-    KeytroLModel
-    Qt5::Core
+target_link_libraries(KeytroLViewIOTest PRIVATE
+    Catch
+    KeytroLViewIO
+    MockKeytroLIO
+    Qt5::Test
 )
-
-set_target_properties(KeytroLViewModel PROPERTIES AUTOMOC ON)
-set_target_properties(KeytroLViewModel PROPERTIES AUTOMOC_MOC_OPTIONS -bKL/MocWarnings.hpp)
-
-
-find_package(Qt5Test 5.3)
-if (Qt5Test_FOUND)
-    add_subdirectory(test)
-    add_test(NAME KeytroLViewModel COMMAND KeytroLViewModelTest)
-endif ()

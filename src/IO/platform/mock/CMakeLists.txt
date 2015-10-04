@@ -13,8 +13,9 @@
 
 add_library(MockKeytroLIO STATIC
     KeyboardInput.cpp
-    KeyboardInputPlatformImpl.cpp
+    MidiOut.cpp
     TestKeyboardInput.cpp
+    TestMidiOut.cpp
 )
 
 target_include_directories(MockKeytroLIO PUBLIC ${CMAKE_CURRENT_LIST_DIR})

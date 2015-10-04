@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
-#include "KeyboardInputPlatformImpl.hpp"
+#include "TestMidiOut.hpp"
 
 
 namespace KL
@@ -19,11 +19,28 @@ namespace KL
 namespace IO
 {
 
-KeyboardInput::PlatformImpl::PlatformImpl(
-    Core::Connection keyPressConnection, Core::Connection keyReleaseConnection)
-    : mKeyPressConnection(std::move(keyPressConnection))
-    , mKeyReleaseConnection(std::move(keyReleaseConnection))
+TestMidiOut & TestMidiOut::instance()
 {
+    static TestMidiOut testMidiOut;
+    return testMidiOut;
+}
+
+
+unsigned int TestMidiOut::deviceCount()
+{
+    return 42;
+}
+
+
+std::string TestMidiOut::deviceName(unsigned int)
+{
+    return {"Foo"};
+}
+
+
+const TestMidiOut::Message & TestMidiOut::message() const
+{
+    return mMessage;
 }
 
 } // namespace IO

@@ -24,9 +24,9 @@ add_subdirectory(platform/default)
 
 if (WIN32)
     add_subdirectory(platform/win)
-    add_library(KeytroLIO ALIAS WinKeytroLIO)
+    add_library(PlatformKeytroLIO ALIAS WinKeytroLIO)
 else ()
-    add_library(KeytroLIO ALIAS DefaultKeytroLIO)
+    add_library(PlatformKeytroLIO ALIAS DefaultKeytroLIO)
 endif ()
 
 
