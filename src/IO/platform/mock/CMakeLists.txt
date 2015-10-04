@@ -13,7 +13,6 @@
 
 add_library(MockKeytroLIO STATIC
     KeyboardInput.cpp
-    KeyboardInputPlatformImpl.cpp
     TestKeyboardInput.cpp
 )
 
