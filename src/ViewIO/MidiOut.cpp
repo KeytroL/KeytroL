@@ -61,9 +61,14 @@ void MidiOut::setDeviceIndex(int deviceIndex)
 
 void MidiOut::updateDevice()
 {
-    if (mDeviceIndex >= 0)
+    if (mDeviceIndex >= 0
+        && static_cast<unsigned int>(mDeviceIndex) < IO::MidiOut::deviceCount())
     {
         mDevice.reset(new IO::MidiOut(static_cast<unsigned int>(mDeviceIndex)));
+    }
+    else
+    {
+        mDevice.reset();
     }
 }
 
