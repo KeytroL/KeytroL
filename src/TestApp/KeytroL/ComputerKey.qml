@@ -15,7 +15,47 @@ import QtQuick 2.3
 
 
 Rectangle {
+    id: root
+
+    property string label: ""
+
+    readonly property TextInput labelInput: labelInput
+
     antialiasing: false
     border.width: 1
     radius: 5
+
+    Keys.onPressed: {
+        if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
+            if (root.activeFocus) {
+                labelInput.forceActiveFocus();
+            }
+            else {
+                forceActiveFocus();
+            }
+        }
+    }
+
+    TextInput {
+        id: labelInput
+
+        anchors.fill: parent
+        anchors.margins: 5
+
+        visible: labelInput.activeFocus
+
+        text: root.label
+        font.pixelSize: 9
+        wrapMode: Text.Wrap
+    }
+
+    Text {
+        visible: !labelInput.visible
+
+        anchors.fill: labelInput.anchors.fill
+        anchors.margins: labelInput.anchors.margins
+        font: labelInput.font
+        text: labelInput.text
+        wrapMode: labelInput.wrapMode
+    }
 }

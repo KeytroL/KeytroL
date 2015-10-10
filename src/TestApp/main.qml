@@ -235,47 +235,20 @@ ApplicationWindow {
                 width: root.scale * model.width - 2
                 height: root.scale * model.height - 2
 
+                label: model.label
+
                 readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
                 readonly property bool selected:
                     mouseArea.selectedComputerKey === computerKey
 
-                Keys.onPressed: {
-                    if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
-                        if (computerKey.activeFocus) {
-                            labelInput.forceActiveFocus();
-                        }
-                        else {
-                            forceActiveFocus();
-                        }
-                    }
-                }
-
-                TextInput {
-                    id: labelInput
-
-                    anchors.fill: parent
-                    anchors.margins: 5
-                    visible: labelInput.activeFocus
-
-                    text: model.label
-                    font.pixelSize: 9
-                    wrapMode: Text.Wrap
+                Connections {
+                    target: labelInput
 
                     onEditingFinished: {
                         keyboardLayout.renameComputerKey(
                             computerKey.modelIndex, labelInput.text);
                     }
-                }
-
-                Text {
-                    visible: !labelInput.visible
-
-                    anchors.fill: labelInput.anchors.fill
-                    anchors.margins: labelInput.anchors.margins
-                    font: labelInput.font
-                    text: labelInput.text
-                    wrapMode: labelInput.wrapMode
                 }
 
                 Connections {
