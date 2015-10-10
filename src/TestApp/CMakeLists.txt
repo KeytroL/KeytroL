@@ -13,6 +13,7 @@
 
 add_executable(KeytroLTestApp
     main.cpp
+    resources.qrc
 )
 
 target_link_libraries(KeytroLTestApp PRIVATE
@@ -22,6 +23,4 @@ target_link_libraries(KeytroLTestApp PRIVATE
     Qt5::Quick
 )
 
-target_compile_definitions(KeytroLTestApp PRIVATE
-    QML_MAIN="${CMAKE_CURRENT_LIST_DIR}/main.qml"
-)
+set_target_properties(KeytroLTestApp PROPERTIES AUTORCC ON)

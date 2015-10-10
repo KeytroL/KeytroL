@@ -1,3 +1,16 @@
+// KeytroL
+// Copyright (C) 2015 Alain Martin
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
 import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
@@ -79,7 +92,7 @@ ApplicationWindow {
 
                 delegate: MenuItem {
                     action: Action {
-                        property int deviceIndex: index
+                        readonly property int deviceIndex: index
 
                         checkable: true
                         exclusiveGroup: midiOutDevicesGroup
@@ -205,11 +218,13 @@ ApplicationWindow {
             model: keyboardLayout
 
             delegate: Rectangle {
+                id: computerKey
+
                 antialiasing: false
                 border.width: 1
-                border.color: activeFocus || computerKeyLabelInput.activeFocus
+                border.color: computerKey.activeFocus || labelInput.activeFocus
                     ? "black"
-                    : selected && mouseArea.bindToKeyCode
+                    : computerKey.selected && mouseArea.bindToKeyCode
                         ? "red"
                         : "lightgray"
                 radius: 5
@@ -224,13 +239,13 @@ ApplicationWindow {
 
                 readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
-                readonly property bool selected: mouseArea.selectedComputerKey !== null
-                    && mouseArea.selectedComputerKey.modelIndex === modelIndex
+                readonly property bool selected:
+                    mouseArea.selectedComputerKey === computerKey
 
                 Keys.onPressed: {
                     if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
-                        if (activeFocus) {
-                            computerKeyLabelInput.forceActiveFocus();
+                        if (computerKey.activeFocus) {
+                            labelInput.forceActiveFocus();
                         }
                         else {
                             forceActiveFocus();
@@ -238,47 +253,45 @@ ApplicationWindow {
                     }
                 }
 
-                Text {
-                    id: computerKeyLabel
+                TextInput {
+                    id: labelInput
 
                     anchors.fill: parent
                     anchors.margins: 5
-                    visible: !computerKeyLabelInput.visible
+                    visible: labelInput.activeFocus
 
                     text: model.label
                     font.pixelSize: 9
                     wrapMode: Text.Wrap
-                }
-
-                TextInput {
-                    id: computerKeyLabelInput
-
-                    visible: computerKeyLabelInput.activeFocus
-
-                    anchors.fill: computerKeyLabel.anchors.fill
-                    anchors.margins: computerKeyLabel.anchors.margins
-                    font: computerKeyLabel.font
-                    text: computerKeyLabel.text
-                    wrapMode: computerKeyLabel.wrapMode
 
                     onEditingFinished: {
                         keyboardLayout.renameComputerKey(
-                            modelIndex, computerKeyLabelInput.text);
+                            computerKey.modelIndex, labelInput.text);
                     }
+                }
+
+                Text {
+                    visible: !labelInput.visible
+
+                    anchors.fill: labelInput.anchors.fill
+                    anchors.margins: labelInput.anchors.margins
+                    font: labelInput.font
+                    text: labelInput.text
+                    wrapMode: labelInput.wrapMode
                 }
 
                 Connections {
                     target: keyboardInput
 
                     onKeyPressed: {
-                        if (model.keyCode == keyCode) {
-                            color = "lightgray";
+                        if (model.keyCode === keyCode) {
+                            computerKey.color = "lightgray";
                         }
                     }
 
                     onKeyReleased: {
-                        if (model.keyCode == keyCode) {
-                            color = "white";
+                        if (model.keyCode === keyCode) {
+                            computerKey.color = "white";
                         }
                     }
                 }

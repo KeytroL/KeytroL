@@ -3,6 +3,7 @@
 *.ipp               text diff=cpp
 *.md                text
 *.qml               text
+*.qrc               text
 *.txt               text
 *.xml               text
 *.yml               text
