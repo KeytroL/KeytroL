@@ -284,13 +284,13 @@ ApplicationWindow {
                     target: keyboardInput
 
                     onKeyPressed: {
-                        if (model.keyCode == keyCode) {
+                        if (model.keyCode === keyCode) {
                             color = "lightgray";
                         }
                     }
 
                     onKeyReleased: {
-                        if (model.keyCode == keyCode) {
+                        if (model.keyCode === keyCode) {
                             color = "white";
                         }
                     }
