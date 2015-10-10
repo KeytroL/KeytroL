@@ -222,9 +222,9 @@ ApplicationWindow {
 
                 antialiasing: false
                 border.width: 1
-                border.color: activeFocus || computerKeyLabelInput.activeFocus
+                border.color: computerKey.activeFocus || computerKeyLabelInput.activeFocus
                     ? "black"
-                    : selected && mouseArea.bindToKeyCode
+                    : computerKey.selected && mouseArea.bindToKeyCode
                         ? "red"
                         : "lightgray"
                 radius: 5
@@ -244,7 +244,7 @@ ApplicationWindow {
 
                 Keys.onPressed: {
                     if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
-                        if (activeFocus) {
+                        if (computerKey.activeFocus) {
                             computerKeyLabelInput.forceActiveFocus();
                         }
                         else {
@@ -278,7 +278,7 @@ ApplicationWindow {
 
                     onEditingFinished: {
                         keyboardLayout.renameComputerKey(
-                            modelIndex, computerKeyLabelInput.text);
+                            computerKey.modelIndex, computerKeyLabelInput.text);
                     }
                 }
 
@@ -287,13 +287,13 @@ ApplicationWindow {
 
                     onKeyPressed: {
                         if (model.keyCode === keyCode) {
-                            color = "lightgray";
+                            computerKey.color = "lightgray";
                         }
                     }
 
                     onKeyReleased: {
                         if (model.keyCode === keyCode) {
-                            color = "white";
+                            computerKey.color = "white";
                         }
                     }
                 }
