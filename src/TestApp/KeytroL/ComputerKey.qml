@@ -20,11 +20,19 @@ Rectangle {
     property string label: ""
     property int keyCode: 0
 
+    property bool bindToKeyCode: false
+
     readonly property TextInput labelInput: labelInput
 
     antialiasing: false
     border.width: 1
     radius: 5
+
+    border.color: root.activeFocus || labelInput.activeFocus
+        ? "black"
+        : root.bindToKeyCode
+            ? "red"
+            : "lightgray"
 
     color: "white"
 

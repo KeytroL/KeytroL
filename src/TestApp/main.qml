@@ -221,12 +221,6 @@ ApplicationWindow {
             delegate: ComputerKey {
                 id: computerKey
 
-                border.color: computerKey.activeFocus || labelInput.activeFocus
-                    ? "black"
-                    : computerKey.selected && mouseArea.bindToKeyCode
-                        ? "red"
-                        : "lightgray"
-
                 x: root.scale * model.x + 1
                 y: root.scale * model.y + 1
 
@@ -236,10 +230,10 @@ ApplicationWindow {
                 label: model.label
                 keyCode: model.keyCode
 
-                readonly property var modelIndex: keyboardLayout.modelIndex(index)
+                bindToKeyCode: mouseArea.selectedComputerKey === computerKey
+                    && mouseArea.bindToKeyCode
 
-                readonly property bool selected:
-                    mouseArea.selectedComputerKey === computerKey
+                readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
                 Connections {
                     target: labelInput
