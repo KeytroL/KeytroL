@@ -92,7 +92,7 @@ ApplicationWindow {
 
                 delegate: MenuItem {
                     action: Action {
-                        property int deviceIndex: index
+                        readonly property int deviceIndex: index
 
                         checkable: true
                         exclusiveGroup: midiOutDevicesGroup
