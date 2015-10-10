@@ -221,14 +221,11 @@ ApplicationWindow {
             delegate: ComputerKey {
                 id: computerKey
 
-                antialiasing: false
-                border.width: 1
                 border.color: computerKey.activeFocus || labelInput.activeFocus
                     ? "black"
                     : computerKey.selected && mouseArea.bindToKeyCode
                         ? "red"
                         : "lightgray"
-                radius: 5
 
                 color: "white"
 

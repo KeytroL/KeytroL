@@ -15,4 +15,7 @@ import QtQuick 2.3
 
 
 Rectangle {
+    antialiasing: false
+    border.width: 1
+    radius: 5
 }
