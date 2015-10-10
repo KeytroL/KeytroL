@@ -218,6 +218,8 @@ ApplicationWindow {
             model: keyboardLayout
 
             delegate: Rectangle {
+                id: computerKey
+
                 antialiasing: false
                 border.width: 1
                 border.color: activeFocus || computerKeyLabelInput.activeFocus
@@ -237,8 +239,8 @@ ApplicationWindow {
 
                 readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
-                readonly property bool selected: mouseArea.selectedComputerKey !== null
-                    && mouseArea.selectedComputerKey.modelIndex === modelIndex
+                readonly property bool selected:
+                    mouseArea.selectedComputerKey === computerKey
 
                 Keys.onPressed: {
                     if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
