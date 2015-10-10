@@ -227,8 +227,6 @@ ApplicationWindow {
                         ? "red"
                         : "lightgray"
 
-                color: "white"
-
                 x: root.scale * model.x + 1
                 y: root.scale * model.y + 1
 
@@ -236,6 +234,7 @@ ApplicationWindow {
                 height: root.scale * model.height - 2
 
                 label: model.label
+                keyCode: model.keyCode
 
                 readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
@@ -255,15 +254,11 @@ ApplicationWindow {
                     target: keyboardInput
 
                     onKeyPressed: {
-                        if (model.keyCode === keyCode) {
-                            computerKey.color = "lightgray";
-                        }
+                        computerKey.press(keyCode);
                     }
 
                     onKeyReleased: {
-                        if (model.keyCode === keyCode) {
-                            computerKey.color = "white";
-                        }
+                        computerKey.release(keyCode);
                     }
                 }
             }

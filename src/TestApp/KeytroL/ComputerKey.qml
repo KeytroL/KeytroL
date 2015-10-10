@@ -18,12 +18,27 @@ Rectangle {
     id: root
 
     property string label: ""
+    property int keyCode: 0
 
     readonly property TextInput labelInput: labelInput
 
     antialiasing: false
     border.width: 1
     radius: 5
+
+    color: "white"
+
+    function press(keyCode) {
+        if (root.keyCode === keyCode) {
+            root.color = "lightgray";
+        }
+    }
+
+    function release(keyCode) {
+        if (root.keyCode === keyCode) {
+            root.color = "white";
+        }
+    }
 
     Keys.onPressed: {
         if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
