@@ -222,7 +222,7 @@ ApplicationWindow {
 
                 antialiasing: false
                 border.width: 1
-                border.color: computerKey.activeFocus || computerKeyLabelInput.activeFocus
+                border.color: computerKey.activeFocus || labelInput.activeFocus
                     ? "black"
                     : computerKey.selected && mouseArea.bindToKeyCode
                         ? "red"
@@ -245,7 +245,7 @@ ApplicationWindow {
                 Keys.onPressed: {
                     if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
                         if (computerKey.activeFocus) {
-                            computerKeyLabelInput.forceActiveFocus();
+                            labelInput.forceActiveFocus();
                         }
                         else {
                             forceActiveFocus();
@@ -254,11 +254,11 @@ ApplicationWindow {
                 }
 
                 TextInput {
-                    id: computerKeyLabelInput
+                    id: labelInput
 
                     anchors.fill: parent
                     anchors.margins: 5
-                    visible: computerKeyLabelInput.activeFocus
+                    visible: labelInput.activeFocus
 
                     text: model.label
                     font.pixelSize: 9
@@ -266,18 +266,18 @@ ApplicationWindow {
 
                     onEditingFinished: {
                         keyboardLayout.renameComputerKey(
-                            computerKey.modelIndex, computerKeyLabelInput.text);
+                            computerKey.modelIndex, labelInput.text);
                     }
                 }
 
                 Text {
-                    visible: !computerKeyLabelInput.visible
+                    visible: !labelInput.visible
 
-                    anchors.fill: computerKeyLabelInput.anchors.fill
-                    anchors.margins: computerKeyLabelInput.anchors.margins
-                    font: computerKeyLabelInput.font
-                    text: computerKeyLabelInput.text
-                    wrapMode: computerKeyLabelInput.wrapMode
+                    anchors.fill: labelInput.anchors.fill
+                    anchors.margins: labelInput.anchors.margins
+                    font: labelInput.font
+                    text: labelInput.text
+                    wrapMode: labelInput.wrapMode
                 }
 
                 Connections {
