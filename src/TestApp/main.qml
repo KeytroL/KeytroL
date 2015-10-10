@@ -253,33 +253,31 @@ ApplicationWindow {
                     }
                 }
 
-                Text {
-                    id: computerKeyLabel
+                TextInput {
+                    id: computerKeyLabelInput
 
                     anchors.fill: parent
                     anchors.margins: 5
-                    visible: !computerKeyLabelInput.visible
+                    visible: computerKeyLabelInput.activeFocus
 
                     text: model.label
                     font.pixelSize: 9
                     wrapMode: Text.Wrap
-                }
-
-                TextInput {
-                    id: computerKeyLabelInput
-
-                    visible: computerKeyLabelInput.activeFocus
-
-                    anchors.fill: computerKeyLabel.anchors.fill
-                    anchors.margins: computerKeyLabel.anchors.margins
-                    font: computerKeyLabel.font
-                    text: computerKeyLabel.text
-                    wrapMode: computerKeyLabel.wrapMode
 
                     onEditingFinished: {
                         keyboardLayout.renameComputerKey(
                             computerKey.modelIndex, computerKeyLabelInput.text);
                     }
+                }
+
+                Text {
+                    visible: !computerKeyLabelInput.visible
+
+                    anchors.fill: computerKeyLabelInput.anchors.fill
+                    anchors.margins: computerKeyLabelInput.anchors.margins
+                    font: computerKeyLabelInput.font
+                    text: computerKeyLabelInput.text
+                    wrapMode: computerKeyLabelInput.wrapMode
                 }
 
                 Connections {
