@@ -15,6 +15,7 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 
+import KeytroL 1.0
 import KeytroL.IO 1.0
 import KeytroL.Model 1.0
 
@@ -154,7 +155,7 @@ ApplicationWindow {
 
         acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-        property Rectangle selectedComputerKey: null
+        property ComputerKey selectedComputerKey: null
         property bool bindToKeyCode: false
 
         function updateSelectedComputerKey(mouseEvent) {
@@ -217,7 +218,7 @@ ApplicationWindow {
         Repeater {
             model: keyboardLayout
 
-            delegate: Rectangle {
+            delegate: ComputerKey {
                 id: computerKey
 
                 antialiasing: false

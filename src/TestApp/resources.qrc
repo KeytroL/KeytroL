@@ -13,6 +13,8 @@
 -->
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
+    <file>KeytroL/ComputerKey.qml</file>
+    <file>KeytroL/qmldir</file>
     <file>main.qml</file>
 </qresource>
 </RCC>
