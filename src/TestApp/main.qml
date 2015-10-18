@@ -15,6 +15,7 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 
+import KeytroL 1.0
 import KeytroL.IO 1.0
 import KeytroL.Model 1.0
 
@@ -154,7 +155,7 @@ ApplicationWindow {
 
         acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-        property Rectangle selectedComputerKey: null
+        property ComputerKey selectedComputerKey: null
         property bool bindToKeyCode: false
 
         function updateSelectedComputerKey(mouseEvent) {
@@ -217,19 +218,8 @@ ApplicationWindow {
         Repeater {
             model: keyboardLayout
 
-            delegate: Rectangle {
+            delegate: ComputerKey {
                 id: computerKey
-
-                antialiasing: false
-                border.width: 1
-                border.color: computerKey.activeFocus || labelInput.activeFocus
-                    ? "black"
-                    : computerKey.selected && mouseArea.bindToKeyCode
-                        ? "red"
-                        : "lightgray"
-                radius: 5
-
-                color: "white"
 
                 x: root.scale * model.x + 1
                 y: root.scale * model.y + 1
@@ -237,32 +227,16 @@ ApplicationWindow {
                 width: root.scale * model.width - 2
                 height: root.scale * model.height - 2
 
+                label: model.label
+                keyCode: model.keyCode
+
+                bindToKeyCode: mouseArea.selectedComputerKey === computerKey
+                    && mouseArea.bindToKeyCode
+
                 readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
-                readonly property bool selected:
-                    mouseArea.selectedComputerKey === computerKey
-
-                Keys.onPressed: {
-                    if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
-                        if (computerKey.activeFocus) {
-                            labelInput.forceActiveFocus();
-                        }
-                        else {
-                            forceActiveFocus();
-                        }
-                    }
-                }
-
-                TextInput {
-                    id: labelInput
-
-                    anchors.fill: parent
-                    anchors.margins: 5
-                    visible: labelInput.activeFocus
-
-                    text: model.label
-                    font.pixelSize: 9
-                    wrapMode: Text.Wrap
+                Connections {
+                    target: labelInput
 
                     onEditingFinished: {
                         keyboardLayout.renameComputerKey(
@@ -270,29 +244,15 @@ ApplicationWindow {
                     }
                 }
 
-                Text {
-                    visible: !labelInput.visible
-
-                    anchors.fill: labelInput.anchors.fill
-                    anchors.margins: labelInput.anchors.margins
-                    font: labelInput.font
-                    text: labelInput.text
-                    wrapMode: labelInput.wrapMode
-                }
-
                 Connections {
                     target: keyboardInput
 
                     onKeyPressed: {
-                        if (model.keyCode === keyCode) {
-                            computerKey.color = "lightgray";
-                        }
+                        computerKey.press(keyCode);
                     }
 
                     onKeyReleased: {
-                        if (model.keyCode === keyCode) {
-                            computerKey.color = "white";
-                        }
+                        computerKey.release(keyCode);
                     }
                 }
             }

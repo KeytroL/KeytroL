@@ -44,7 +44,9 @@ int main(int argc, char * argv[])
         "KeytroL.Model", 1, 0, "KeyboardLayout");
     qmlRegisterType<KL::ViewModel::XmlFile>("KeytroL.Model", 1, 0, "XmlFile");
 
-    QQmlApplicationEngine engine(QUrl("qrc:main.qml"));
+    QQmlApplicationEngine engine;
+    engine.addImportPath(":");
+    engine.load(QUrl("qrc:main.qml"));
 
     return application.exec();
 }
