@@ -157,6 +157,7 @@ ApplicationWindow {
 
         property ComputerKey selectedComputerKey: null
         property bool bindToKeyCode: false
+        property point moveOffset
 
         function updateSelectedComputerKey(mouseEvent) {
             var computerKey = childAt(mouseEvent.x, mouseEvent.y);
@@ -172,14 +173,19 @@ ApplicationWindow {
 
         onPressed: {
             updateSelectedComputerKey(mouse);
+            if (mouseArea.selectedComputerKey !== null) {
+                mouseArea.moveOffset = Qt.point(
+                    mouseArea.selectedComputerKey.x - mouse.x,
+                    mouseArea.selectedComputerKey.y - mouse.y);
+            }
         }
 
         onPositionChanged: {
             if (mouseArea.selectedComputerKey !== null) {
                 keyboardLayout.moveComputerKey(
                     mouseArea.selectedComputerKey.modelIndex,
-                    Math.round(mouse.x / root.scale - root.defaultKeySize / 2),
-                    Math.round(mouse.y / root.scale - root.defaultKeySize / 2)
+                    Math.round((mouse.x + mouseArea.moveOffset.x) / root.scale),
+                    Math.round((mouse.y + mouseArea.moveOffset.y) / root.scale)
                 );
 
                 updateSelectedComputerKey(mouse);
