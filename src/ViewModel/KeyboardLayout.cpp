@@ -226,7 +226,7 @@ void KeyboardLayout::afterModelReplace(const ReplaceDiff & replaceDiff)
         endRemoveRows();
     }
 
-    if ((replaceDiff.first != replaceDiff.last) && replaceDiff.replacementSize != 0)
+    if ((replaceDiff.first != replaceDiff.last) && (replaceDiff.replacementSize != 0))
     {
         dataChanged(modelIndex(static_cast<int>(replaceDiff.first)),
             modelIndex(static_cast<int>(std::min(replaceDiff.last, newLast) - 1)));
