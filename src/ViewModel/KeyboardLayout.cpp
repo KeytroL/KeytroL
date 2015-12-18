@@ -69,7 +69,7 @@ void KeyboardLayout::addComputerKey(int x,
 
 void KeyboardLayout::removeComputerKey(const QModelIndex & index)
 {
-    if (!index.isValid())
+    if (index.model() != this || !index.isValid())
     {
         return;
     }
@@ -80,7 +80,7 @@ void KeyboardLayout::removeComputerKey(const QModelIndex & index)
 
 void KeyboardLayout::moveComputerKey(const QModelIndex & index, int x, int y)
 {
-    if (!index.isValid())
+    if (index.model() != this || !index.isValid())
     {
         return;
     }
@@ -97,7 +97,7 @@ void KeyboardLayout::moveComputerKey(const QModelIndex & index, int x, int y)
 
 void KeyboardLayout::renameComputerKey(const QModelIndex & index, const QString & label)
 {
-    if (!index.isValid())
+    if (index.model() != this || !index.isValid())
     {
         return;
     }
@@ -114,7 +114,7 @@ void KeyboardLayout::renameComputerKey(const QModelIndex & index, const QString 
 void KeyboardLayout::bindComputerKey(
     const QModelIndex & index, IO::KeyboardInput::KeyCode keyCode)
 {
-    if (!index.isValid())
+    if (index.model() != this || !index.isValid())
     {
         return;
     }
@@ -146,7 +146,7 @@ int KeyboardLayout::rowCount(const QModelIndex & index) const
 
 QVariant KeyboardLayout::data(const QModelIndex & index, int role) const
 {
-    if (!index.isValid())
+    if (index.model() != this || !index.isValid())
     {
         return {};
     }
