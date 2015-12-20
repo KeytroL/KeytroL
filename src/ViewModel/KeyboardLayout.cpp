@@ -69,54 +69,61 @@ void KeyboardLayout::addComputerKey(int x,
 
 void KeyboardLayout::removeComputerKey(const QModelIndex & index)
 {
-    if (index.isValid())
+    if (!index.isValid())
     {
-        mModel.removeComputerKey(
-            static_cast<Model::KeyboardLayout::SizeType>(index.row()));
+        return;
     }
+
+    mModel.removeComputerKey(static_cast<Model::KeyboardLayout::SizeType>(index.row()));
 }
 
 
 void KeyboardLayout::moveComputerKey(const QModelIndex & index, int x, int y)
 {
-    if (index.isValid())
+    if (!index.isValid())
     {
-        const auto computerKeyIndex =
-            static_cast<Model::KeyboardLayout::SizeType>(index.row());
-        auto computerKey =
-            Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), x, y);
-
-        mModel.removeComputerKey(computerKeyIndex);
-        mModel.addComputerKey(std::move(computerKey));
+        return;
     }
+
+    const auto computerKeyIndex =
+        static_cast<Model::KeyboardLayout::SizeType>(index.row());
+    auto computerKey =
+        Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), x, y);
+
+    mModel.removeComputerKey(computerKeyIndex);
+    mModel.addComputerKey(std::move(computerKey));
 }
 
 
 void KeyboardLayout::renameComputerKey(const QModelIndex & index, const QString & label)
 {
-    if (index.isValid())
+    if (!index.isValid())
     {
-        const auto computerKeyIndex =
-            static_cast<Model::KeyboardLayout::SizeType>(index.row());
-        mModel.replace(computerKeyIndex,
-            computerKeyIndex + 1,
-            {Model::ComputerKey(
-                mModel.computerKeys().at(computerKeyIndex), label.toStdString())});
+        return;
     }
+
+    const auto computerKeyIndex =
+        static_cast<Model::KeyboardLayout::SizeType>(index.row());
+    mModel.replace(computerKeyIndex,
+        computerKeyIndex + 1,
+        {Model::ComputerKey(
+            mModel.computerKeys().at(computerKeyIndex), label.toStdString())});
 }
 
 
 void KeyboardLayout::bindComputerKey(
     const QModelIndex & index, IO::KeyboardInput::KeyCode keyCode)
 {
-    if (index.isValid())
+    if (!index.isValid())
     {
-        const auto computerKeyIndex =
-            static_cast<Model::KeyboardLayout::SizeType>(index.row());
-        mModel.replace(computerKeyIndex,
-            computerKeyIndex + 1,
-            {Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), keyCode)});
+        return;
     }
+
+    const auto computerKeyIndex =
+        static_cast<Model::KeyboardLayout::SizeType>(index.row());
+    mModel.replace(computerKeyIndex,
+        computerKeyIndex + 1,
+        {Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), keyCode)});
 }
 
 
