@@ -34,19 +34,24 @@ const Model::KeyboardLayout & KeyboardLayout::model() const
 
 void KeyboardLayout::setModel(Model::KeyboardLayout model)
 {
+    mBeforeModelReplaceConnection.disconnect();
+    mAfterModelReplaceConnection.disconnect();
+
     beginResetModel();
     mModel = std::move(model);
     endResetModel();
 
-    mModel.beforeReplace().connect([this](const ReplaceDiff & replaceDiff)
-        {
-            beforeModelReplace(replaceDiff);
-        });
+    mBeforeModelReplaceConnection =
+        mModel.beforeReplace().connect([this](const ReplaceDiff & replaceDiff)
+            {
+                beforeModelReplace(replaceDiff);
+            });
 
-    mModel.afterReplace().connect([this](const ReplaceDiff & replaceDiff)
-        {
-            afterModelReplace(replaceDiff);
-        });
+    mAfterModelReplaceConnection =
+        mModel.afterReplace().connect([this](const ReplaceDiff & replaceDiff)
+            {
+                afterModelReplace(replaceDiff);
+            });
 }
 
 
