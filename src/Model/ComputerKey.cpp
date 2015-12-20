@@ -25,102 +25,94 @@ ComputerKey::ComputerKey(int x,
     unsigned int height,
     std::string label,
     IO::KeyboardInput::KeyCode keyCode)
-    : mX(x)
-    , mY(y)
-    , mWidth(width)
-    , mHeight(height)
-    , mLabel(std::move(label))
-    , mKeyCode(keyCode)
+    : mValues(std::make_shared<ComputerKeyValues>(
+          ComputerKeyValues{x, y, width, height, std::move(label), keyCode}))
 {
 }
 
 
 ComputerKey::ComputerKey(const ComputerKey & other, int x, int y)
-    : ComputerKey(other)
+    : mValues(std::make_shared<ComputerKeyValues>(ComputerKeyValues{
+          x, y, other.width(), other.height(), other.label(), other.keyCode()}))
 {
-    mX = x;
-    mY = y;
 }
 
 
 ComputerKey::ComputerKey(const ComputerKey & other, std::string label)
-    : ComputerKey(other)
+    : mValues(std::make_shared<ComputerKeyValues>(ComputerKeyValues{other.x(),
+          other.y(),
+          other.width(),
+          other.height(),
+          std::move(label),
+          other.keyCode()}))
 {
-    mLabel = std::move(label);
 }
 
 
 ComputerKey::ComputerKey(const ComputerKey & other, IO::KeyboardInput::KeyCode keyCode)
-    : ComputerKey(other)
+    : mValues(std::make_shared<ComputerKeyValues>(ComputerKeyValues{
+          other.x(), other.y(), other.width(), other.height(), other.label(), keyCode}))
 {
-    mKeyCode = keyCode;
 }
 
 
 ComputerKey::ComputerKey(ComputerKey && other)
-    : mX(std::move(other.mX))
-    , mY(std::move(other.mY))
-    , mWidth(std::move(other.mWidth))
-    , mHeight(std::move(other.mHeight))
-    , mLabel(std::move(other.mLabel))
-    , mKeyCode(std::move(other.mKeyCode))
+    : mValues(std::move(other.mValues))
 {
 }
 
 
 ComputerKey & ComputerKey::operator=(ComputerKey && other)
 {
-    mX = std::move(other.mX);
-    mY = std::move(other.mY);
-    mWidth = std::move(other.mWidth);
-    mHeight = std::move(other.mHeight);
-    mLabel = std::move(other.mLabel);
-    mKeyCode = std::move(other.mKeyCode);
+    mValues = std::move(other.mValues);
     return *this;
 }
 
 
 int ComputerKey::x() const
 {
-    return mX;
+    return mValues->x;
 }
 
 
 int ComputerKey::y() const
 {
-    return mY;
+    return mValues->y;
 }
 
 
 unsigned int ComputerKey::width() const
 {
-    return mWidth;
+    return mValues->width;
 }
 
 
 unsigned int ComputerKey::height() const
 {
-    return mHeight;
+    return mValues->height;
 }
 
 
 const std::string & ComputerKey::label() const
 {
-    return mLabel;
+    return mValues->label;
 }
 
 
 IO::KeyboardInput::KeyCode ComputerKey::keyCode() const
 {
-    return mKeyCode;
+    return mValues->keyCode;
 }
 
 
 bool ComputerKey::operator==(const ComputerKey & other) const
 {
-    return mX == other.mX && mY == other.mY && mWidth == other.mWidth
-        && mHeight == other.mHeight && mLabel == other.mLabel
-        && mKeyCode == other.mKeyCode;
+    return mValues == other.mValues
+        || (mValues->x == other.mValues->x && mValues->y == other.mValues->y
+               && mValues->width == other.mValues->width
+               && mValues->height == other.mValues->height
+               && mValues->label == other.mValues->label
+               && mValues->keyCode == other.mValues->keyCode);
 }
 
 } // namespace Model

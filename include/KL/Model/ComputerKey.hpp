@@ -15,6 +15,7 @@
 
 #include "KL/IO/KeyboardInput.hpp"
 
+#include <memory>
 #include <string>
 
 
@@ -56,15 +57,20 @@ public:
     bool operator==(const ComputerKey & other) const;
 
 private:
-    int mX;
-    int mY;
+    struct ComputerKeyValues
+    {
+        int x;
+        int y;
 
-    unsigned int mWidth;
-    unsigned int mHeight;
+        unsigned int width;
+        unsigned int height;
 
-    std::string mLabel;
+        std::string label;
 
-    IO::KeyboardInput::KeyCode mKeyCode;
+        IO::KeyboardInput::KeyCode keyCode;
+    };
+
+    std::shared_ptr<const ComputerKeyValues> mValues;
 };
 
 } // namespace Model
