@@ -29,6 +29,7 @@ namespace KL
 namespace ViewModel
 {
 
+const QString KeytroLDocumentElementName = "KeytroLDocument";
 const QString KeyboardLayoutElementName = "KeyboardLayout";
 const QString ComputerKeyElementName = "ComputerKey";
 
@@ -53,22 +54,25 @@ bool XmlFile::load(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
         QXmlStreamReader xml{&file};
         Model::KeyboardLayout modelKeyboardLayout;
 
-        if (xml.readNextStartElement() && xml.name() == KeyboardLayoutElementName)
+        if (xml.readNextStartElement() && xml.name() == KeytroLDocumentElementName)
         {
-            while (!xml.atEnd())
+            if (xml.readNextStartElement() && xml.name() == KeyboardLayoutElementName)
             {
-                if (xml.readNext() == QXmlStreamReader::StartElement
-                    && xml.name() == ComputerKeyElementName)
+                while (!xml.atEnd())
                 {
-                    const auto & attributes = xml.attributes();
+                    if (xml.readNext() == QXmlStreamReader::StartElement
+                        && xml.name() == ComputerKeyElementName)
+                    {
+                        const auto & attributes = xml.attributes();
 
-                    modelKeyboardLayout.addComputerKey(
-                        Model::ComputerKey(attributes.value("x").toInt(),
-                            attributes.value("y").toInt(),
-                            attributes.value("width").toUInt(),
-                            attributes.value("height").toUInt(),
-                            attributes.value("label").toString().toStdString(),
-                            attributes.value("keyCode").toUInt()));
+                        modelKeyboardLayout.addComputerKey(
+                            Model::ComputerKey(attributes.value("x").toInt(),
+                                attributes.value("y").toInt(),
+                                attributes.value("width").toUInt(),
+                                attributes.value("height").toUInt(),
+                                attributes.value("label").toString().toStdString(),
+                                attributes.value("keyCode").toUInt()));
+                    }
                 }
             }
         }
@@ -99,6 +103,7 @@ bool XmlFile::save(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
         xml.setAutoFormatting(true);
 
         xml.writeStartDocument();
+        xml.writeStartElement(KeytroLDocumentElementName);
         xml.writeStartElement(KeyboardLayoutElementName);
 
         for (const auto & computerKey : keyboardLayout->model().computerKeys())
@@ -113,6 +118,7 @@ bool XmlFile::save(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
             xml.writeEndElement();
         }
 
+        xml.writeEndElement();
         xml.writeEndElement();
         xml.writeEndDocument();
 
