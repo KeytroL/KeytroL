@@ -29,6 +29,10 @@ namespace KL
 namespace ViewModel
 {
 
+const QString KeyboardLayoutElementName = "KeyboardLayout";
+const QString ComputerKeyElementName = "ComputerKey";
+
+
 XmlFile::XmlFile(QObject * parent)
     : QObject(parent)
 {
@@ -49,12 +53,12 @@ bool XmlFile::load(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
         QXmlStreamReader xml{&file};
         Model::KeyboardLayout modelKeyboardLayout;
 
-        if (xml.readNextStartElement() && xml.name() == "KeyboardLayout")
+        if (xml.readNextStartElement() && xml.name() == KeyboardLayoutElementName)
         {
             while (!xml.atEnd())
             {
                 if (xml.readNext() == QXmlStreamReader::StartElement
-                    && xml.name() == "ComputerKey")
+                    && xml.name() == ComputerKeyElementName)
                 {
                     const auto & attributes = xml.attributes();
 
@@ -95,11 +99,11 @@ bool XmlFile::save(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
         xml.setAutoFormatting(true);
 
         xml.writeStartDocument();
-        xml.writeStartElement("KeyboardLayout");
+        xml.writeStartElement(KeyboardLayoutElementName);
 
         for (const auto & computerKey : keyboardLayout->model().computerKeys())
         {
-            xml.writeStartElement("ComputerKey");
+            xml.writeStartElement(ComputerKeyElementName);
             xml.writeAttribute("x", QString::number(computerKey.x()));
             xml.writeAttribute("y", QString::number(computerKey.y()));
             xml.writeAttribute("width", QString::number(computerKey.width()));
