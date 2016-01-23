@@ -27,16 +27,13 @@ before_script:
   # - if [ ${TRAVIS_OS_NAME} == 'osx' ]; then git diff --exit-code; fi
 
 script:
-  - mkdir build build/Debug build/Release
+  - mkdir build
+  - cd build
 
-  - cd build/Debug
-  - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Debug
+  - cmake .. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Debug
   - cmake --build .
   - ctest --output-on-failure
-  - cd ../..
 
-  - cd build/Release
-  - cmake ../.. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Release
+  - cmake .. -DCMAKE_OSX_ARCHITECTURES=$ARCHITECTURE -DCMAKE_BUILD_TYPE=Release
   - cmake --build .
   - ctest --output-on-failure
-  - cd ../..
