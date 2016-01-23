@@ -78,6 +78,8 @@ private:
     void afterModelReplace(const ReplaceDiff & replaceDiff);
 
     Model::KeyboardLayout mModel;
+    Core::ScopedConnection mBeforeModelReplaceConnection;
+    Core::ScopedConnection mAfterModelReplaceConnection;
 };
 
 } // namespace ViewModel
