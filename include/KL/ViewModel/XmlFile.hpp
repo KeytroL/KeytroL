@@ -35,11 +35,11 @@ class XmlFile : public QObject
 public:
     XmlFile(QObject * parent = nullptr);
 
-    Q_INVOKABLE bool load(
-        const QUrl & fileUrl, KL::ViewModel::KeyboardLayout * keyboardLayout);
+    Q_INVOKABLE bool load(const QUrl & fileUrl,
+                          KL::ViewModel::KeyboardLayout * keyboardLayout);
 
-    Q_INVOKABLE bool save(
-        const QUrl & fileUrl, KL::ViewModel::KeyboardLayout * keyboardLayout);
+    Q_INVOKABLE bool save(const QUrl & fileUrl,
+                          KL::ViewModel::KeyboardLayout * keyboardLayout);
 };
 
 } // namespace ViewModel

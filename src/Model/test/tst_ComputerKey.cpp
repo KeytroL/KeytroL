@@ -21,7 +21,7 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Construct a ComputerKey", "[ComputerKey]")
 {
-    const KL::Model::ComputerKey computerKey(23, 42, 8, 7, "A", 2);
+    const KL::Model::ComputerKey computerKey{23, 42, 8, 7, "A", 2};
 
     REQUIRE(computerKey.x() == 23);
     REQUIRE(computerKey.y() == 42);
@@ -34,9 +34,9 @@ TEST_CASE("Construct a ComputerKey", "[ComputerKey]")
 
 TEST_CASE("Construct a ComputerKey from another one and a new position", "[ComputerKey]")
 {
-    const KL::Model::ComputerKey first(23, 42, 8, 7, "A", 2);
+    const KL::Model::ComputerKey first{23, 42, 8, 7, "A", 2};
 
-    const KL::Model::ComputerKey second(first, -32, -24);
+    const KL::Model::ComputerKey second{first, -32, -24};
 
     REQUIRE(second.x() == -32);
     REQUIRE(second.y() == -24);
@@ -49,9 +49,9 @@ TEST_CASE("Construct a ComputerKey from another one and a new position", "[Compu
 
 TEST_CASE("Construct a ComputerKey from another one and a new label", "[ComputerKey]")
 {
-    const KL::Model::ComputerKey first(23, 42, 8, 7, "A", 2);
+    const KL::Model::ComputerKey first{23, 42, 8, 7, "A", 2};
 
-    const KL::Model::ComputerKey second(first, "B");
+    const KL::Model::ComputerKey second{first, "B"};
 
     REQUIRE(second.x() == first.x());
     REQUIRE(second.y() == first.y());
@@ -64,9 +64,9 @@ TEST_CASE("Construct a ComputerKey from another one and a new label", "[Computer
 
 TEST_CASE("Construct a ComputerKey from another one and a new key code", "[ComputerKey]")
 {
-    const KL::Model::ComputerKey first(23, 42, 8, 7, "A", 2);
+    const KL::Model::ComputerKey first{23, 42, 8, 7, "A", 2};
 
-    const KL::Model::ComputerKey second(first, 0);
+    const KL::Model::ComputerKey second{first, 0};
 
     REQUIRE(second.x() == first.x());
     REQUIRE(second.y() == first.y());
@@ -79,8 +79,8 @@ TEST_CASE("Construct a ComputerKey from another one and a new key code", "[Compu
 
 TEST_CASE("Compare two ComputerKeys that are equal", "[ComputerKey]")
 {
-    const KL::Model::ComputerKey first(23, 42, 8, 7, "A", 2);
-    const KL::Model::ComputerKey second(23, 42, 8, 7, "A", 2);
+    const KL::Model::ComputerKey first{23, 42, 8, 7, "A", 2};
+    const KL::Model::ComputerKey second{23, 42, 8, 7, "A", 2};
 
     REQUIRE(first == second);
 }
@@ -88,42 +88,42 @@ TEST_CASE("Compare two ComputerKeys that are equal", "[ComputerKey]")
 
 TEST_CASE("Compare two ComputerKeys that are not equal", "[ComputerKey]")
 {
-    const KL::Model::ComputerKey first(23, 42, 8, 7, "A", 2);
-    KL::Model::ComputerKey second(23, 42, 8, 7, "A", 2);
+    const KL::Model::ComputerKey first{23, 42, 8, 7, "A", 2};
+    KL::Model::ComputerKey second{23, 42, 8, 7, "A", 2};
 
     SECTION("because they have different x")
     {
-        second = KL::Model::ComputerKey(-32, 42, 8, 7, "A", 2);
+        second = KL::Model::ComputerKey{-32, 42, 8, 7, "A", 2};
         REQUIRE(second.x() != first.x());
     }
 
     SECTION("because they have different y")
     {
-        second = KL::Model::ComputerKey(23, -24, 8, 7, "A", 2);
+        second = KL::Model::ComputerKey{23, -24, 8, 7, "A", 2};
         REQUIRE(second.y() != first.y());
     }
 
     SECTION("because they have different width")
     {
-        second = KL::Model::ComputerKey(23, 42, 4, 7, "A", 2);
+        second = KL::Model::ComputerKey{23, 42, 4, 7, "A", 2};
         REQUIRE(second.width() != first.width());
     }
 
     SECTION("because they have different height")
     {
-        second = KL::Model::ComputerKey(23, 42, 8, 4, "A", 2);
+        second = KL::Model::ComputerKey{23, 42, 8, 4, "A", 2};
         REQUIRE(second.height() != first.height());
     }
 
     SECTION("because they have different label")
     {
-        second = KL::Model::ComputerKey(23, 42, 8, 7, "B", 2);
+        second = KL::Model::ComputerKey{23, 42, 8, 7, "B", 2};
         REQUIRE(second.label() != first.label());
     }
 
     SECTION("because they have different keyCode")
     {
-        second = KL::Model::ComputerKey(23, 42, 8, 7, "A", 0);
+        second = KL::Model::ComputerKey{23, 42, 8, 7, "A", 0};
         REQUIRE(second.keyCode() != first.keyCode());
     }
 

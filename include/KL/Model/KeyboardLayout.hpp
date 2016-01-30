@@ -39,8 +39,8 @@ public:
     const Core::NotifyingVector<ComputerKey>::Vector & computerKeys() const;
 
     void replace(SizeType first,
-        SizeType last,
-        const Core::NotifyingVector<ComputerKey>::Vector & replacement);
+                 SizeType last,
+                 const Core::NotifyingVector<ComputerKey>::Vector & replacement);
 
     Core::NotifyingVector<ComputerKey>::Notification & beforeReplace();
     Core::NotifyingVector<ComputerKey>::Notification & afterReplace();

@@ -24,8 +24,8 @@ TEST_CASE("Connect to a Signal", "[Signal]")
     KL::Core::Signal<bool> signal;
 
     auto connection = signal.connect([](bool)
-        {
-        });
+                                     {
+                                     });
 
     REQUIRE(connection.isConnected());
 }
@@ -37,12 +37,12 @@ TEST_CASE("Emit a Signal", "[Signal]")
     auto count = 0;
 
     signal.connect([&count](bool value)
-        {
-            if (value)
-            {
-                ++count;
-            }
-        });
+                   {
+                       if (value)
+                       {
+                           ++count;
+                       }
+                   });
     REQUIRE(count == 0);
 
     signal.emit(true);
@@ -59,9 +59,9 @@ TEST_CASE("Disconnect from a Signal", "[Signal]")
     auto count = 0;
 
     auto connection = signal.connect([&count](bool)
-        {
-            ++count;
-        });
+                                     {
+                                         ++count;
+                                     });
     REQUIRE(count == 0);
     REQUIRE(connection.isConnected());
 

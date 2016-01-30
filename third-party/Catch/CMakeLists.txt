@@ -15,13 +15,17 @@ add_library(Catch STATIC
     CatchMain.cpp
 )
 
-target_include_directories(Catch PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(Catch PUBLIC
+    ${CMAKE_CURRENT_LIST_DIR}
+)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
-    target_compile_options(Catch
-        INTERFACE -Wno-global-constructors
-        INTERFACE -Wno-unused-variable
-        PUBLIC -Wno-exit-time-destructors
+    target_compile_options(Catch INTERFACE
+        -Wno-global-constructors
+        -Wno-unused-variable
+    )
+    target_compile_options(Catch PUBLIC
+        -Wno-exit-time-destructors
     )
 elseif (MSVC)
     target_compile_options(Catch PRIVATE

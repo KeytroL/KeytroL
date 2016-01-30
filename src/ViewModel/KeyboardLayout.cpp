@@ -43,27 +43,26 @@ void KeyboardLayout::setModel(Model::KeyboardLayout model)
 
     mBeforeModelReplaceConnection =
         mModel.beforeReplace().connect([this](const ReplaceDiff & replaceDiff)
-            {
-                beforeModelReplace(replaceDiff);
-            });
+                                       {
+                                           beforeModelReplace(replaceDiff);
+                                       });
 
     mAfterModelReplaceConnection =
         mModel.afterReplace().connect([this](const ReplaceDiff & replaceDiff)
-            {
-                afterModelReplace(replaceDiff);
-            });
+                                      {
+                                          afterModelReplace(replaceDiff);
+                                      });
 }
 
 
 void KeyboardLayout::addComputerKey(int x,
-    int y,
-    unsigned int width,
-    unsigned int height,
-    const QString & label,
-    unsigned int keyCode)
+                                    int y,
+                                    unsigned int width,
+                                    unsigned int height,
+                                    const QString & label,
+                                    unsigned int keyCode)
 {
-    mModel.addComputerKey(
-        Model::ComputerKey(x, y, width, height, label.toStdString(), keyCode));
+    mModel.addComputerKey({x, y, width, height, label.toStdString(), keyCode});
 }
 
 
@@ -87,8 +86,7 @@ void KeyboardLayout::moveComputerKey(const QModelIndex & index, int x, int y)
 
     const auto computerKeyIndex =
         static_cast<Model::KeyboardLayout::SizeType>(index.row());
-    auto computerKey =
-        Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), x, y);
+    Model::ComputerKey computerKey{mModel.computerKeys().at(computerKeyIndex), x, y};
 
     mModel.removeComputerKey(computerKeyIndex);
     mModel.addComputerKey(std::move(computerKey));
@@ -105,14 +103,13 @@ void KeyboardLayout::renameComputerKey(const QModelIndex & index, const QString 
     const auto computerKeyIndex =
         static_cast<Model::KeyboardLayout::SizeType>(index.row());
     mModel.replace(computerKeyIndex,
-        computerKeyIndex + 1,
-        {Model::ComputerKey(
-            mModel.computerKeys().at(computerKeyIndex), label.toStdString())});
+                   computerKeyIndex + 1,
+                   {{mModel.computerKeys().at(computerKeyIndex), label.toStdString()}});
 }
 
 
-void KeyboardLayout::bindComputerKey(
-    const QModelIndex & index, IO::KeyboardInput::KeyCode keyCode)
+void KeyboardLayout::bindComputerKey(const QModelIndex & index,
+                                     IO::KeyboardInput::KeyCode keyCode)
 {
     if (index.model() != this || !index.isValid())
     {
@@ -122,8 +119,8 @@ void KeyboardLayout::bindComputerKey(
     const auto computerKeyIndex =
         static_cast<Model::KeyboardLayout::SizeType>(index.row());
     mModel.replace(computerKeyIndex,
-        computerKeyIndex + 1,
-        {Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), keyCode)});
+                   computerKeyIndex + 1,
+                   {{mModel.computerKeys().at(computerKeyIndex), keyCode}});
 }
 
 
@@ -186,11 +183,11 @@ QVariant KeyboardLayout::data(const QModelIndex & index, int role) const
 QHash<int, QByteArray> KeyboardLayout::roleNames() const
 {
     return {{XRole, "x"},
-        {YRole, "y"},
-        {WidthRole, "width"},
-        {HeightRole, "height"},
-        {LabelRole, "label"},
-        {KeyCodeRole, "keyCode"}};
+            {YRole, "y"},
+            {WidthRole, "width"},
+            {HeightRole, "height"},
+            {LabelRole, "label"},
+            {KeyCodeRole, "keyCode"}};
 }
 
 
@@ -201,14 +198,14 @@ void KeyboardLayout::beforeModelReplace(const ReplaceDiff & replaceDiff)
     if (newLast > replaceDiff.last)
     {
         beginInsertRows(QModelIndex(),
-            static_cast<int>(replaceDiff.last),
-            static_cast<int>(newLast - 1));
+                        static_cast<int>(replaceDiff.last),
+                        static_cast<int>(newLast - 1));
     }
     else if (newLast < replaceDiff.last)
     {
         beginRemoveRows(QModelIndex(),
-            static_cast<int>(newLast),
-            static_cast<int>(replaceDiff.last - 1));
+                        static_cast<int>(newLast),
+                        static_cast<int>(replaceDiff.last - 1));
     }
 }
 
@@ -228,7 +225,8 @@ void KeyboardLayout::afterModelReplace(const ReplaceDiff & replaceDiff)
 
     if ((replaceDiff.first != replaceDiff.last) && (replaceDiff.replacementSize != 0))
     {
-        dataChanged(modelIndex(static_cast<int>(replaceDiff.first)),
+        dataChanged(
+            modelIndex(static_cast<int>(replaceDiff.first)),
             modelIndex(static_cast<int>(std::min(replaceDiff.last, newLast) - 1)));
     }
 }

@@ -25,7 +25,7 @@ TEST_CASE("Cannot load without a valid KeyboardLayout", "[XmlFile]")
 {
     KL::ViewModel::XmlFile xmlFile;
 
-    REQUIRE_FALSE(xmlFile.load(QUrl("file:test-layout.xml"), nullptr));
+    REQUIRE_FALSE(xmlFile.load(QUrl{"file:test-layout.xml"}, nullptr));
 }
 
 
@@ -34,7 +34,7 @@ TEST_CASE("Cannot load from a non-existing file", "[XmlFile]")
     KL::ViewModel::XmlFile xmlFile;
     KL::ViewModel::KeyboardLayout keyboardLayout;
 
-    REQUIRE_FALSE(xmlFile.load(QUrl("file:do-not-exist.xml"), &keyboardLayout));
+    REQUIRE_FALSE(xmlFile.load(QUrl{"file:do-not-exist.xml"}, &keyboardLayout));
 }
 
 
@@ -42,7 +42,7 @@ TEST_CASE("Cannot save without a valid KeyboardLayout", "[XmlFile]")
 {
     KL::ViewModel::XmlFile xmlFile;
 
-    REQUIRE_FALSE(xmlFile.save(QUrl("file:test-layout.xml"), nullptr));
+    REQUIRE_FALSE(xmlFile.save(QUrl{"file:test-layout.xml"}, nullptr));
 }
 
 
@@ -51,7 +51,7 @@ TEST_CASE("Cannot save to an invalid file path", "[XmlFile]")
     KL::ViewModel::XmlFile xmlFile;
     KL::ViewModel::KeyboardLayout keyboardLayout;
 
-    REQUIRE_FALSE(xmlFile.save(QUrl("invalid.xml"), &keyboardLayout));
+    REQUIRE_FALSE(xmlFile.save(QUrl{"invalid.xml"}, &keyboardLayout));
 }
 
 
@@ -64,11 +64,11 @@ TEST_CASE("Loading a saved keyboard layout creates the same keyboard layout", "[
     saved.addComputerKey(15, 22, 25, 4, "", 57);
     saved.addComputerKey(88, 10, 4, 8, "+", 78);
 
-    REQUIRE(xmlFile.save(QUrl("file:test-layout.xml"), &saved));
+    REQUIRE(xmlFile.save(QUrl{"file:test-layout.xml"}, &saved));
 
     KL::ViewModel::KeyboardLayout loaded;
 
-    REQUIRE(xmlFile.load(QUrl("file:test-layout.xml"), &loaded));
+    REQUIRE(xmlFile.load(QUrl{"file:test-layout.xml"}, &loaded));
 
     REQUIRE(loaded.model().computerKeys() == saved.model().computerKeys());
 }

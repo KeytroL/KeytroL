@@ -30,9 +30,9 @@ KL::Model::KeyboardLayout createModelKeyboardLayout()
 {
     KL::Model::KeyboardLayout modelKeyboardLayout;
     modelKeyboardLayout.replace(0,
-        0,
-        {KL::Model::ComputerKey{0, 0, 4, 4, "Esc", 1},
-         KL::Model::ComputerKey{15, 22, 25, 4, "", 57}});
+                                0,
+                                {KL::Model::ComputerKey{0, 0, 4, 4, "Esc", 1},
+                                 KL::Model::ComputerKey{15, 22, 25, 4, "", 57}});
     return modelKeyboardLayout;
 }
 
@@ -84,9 +84,9 @@ TEST_CASE("The underlying model can be changed", "[KeyboardLayout]")
 
     REQUIRE(keyboardLayout.model().computerKeys().size() == 2u);
     REQUIRE(keyboardLayout.model().computerKeys().at(0)
-        == KL::Model::ComputerKey(0, 0, 4, 4, "Esc", 1));
+            == KL::Model::ComputerKey(0, 0, 4, 4, "Esc", 1));
     REQUIRE(keyboardLayout.model().computerKeys().at(1)
-        == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
+            == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
 }
 
 
@@ -102,7 +102,7 @@ TEST_CASE("Adding a computer key always succeeds", "[KeyboardLayout]")
 
     REQUIRE(keyboardLayout.model().computerKeys().size() == originalSize + 1);
     REQUIRE(keyboardLayout.model().computerKeys().back()
-        == KL::Model::ComputerKey(88, 10, 4, 8, "+", 78));
+            == KL::Model::ComputerKey(88, 10, 4, 8, "+", 78));
 
     REQUIRE(spys.rowsAboutToBeInserted.count() == 1);
     REQUIRE(spys.rowsInserted.count() == 1);
@@ -126,7 +126,7 @@ TEST_CASE("Removing a computer key", "[KeyboardLayout]")
 
         REQUIRE(keyboardLayout.model().computerKeys().size() == originalSize);
         REQUIRE(keyboardLayout.model().computerKeys().front()
-            == KL::Model::ComputerKey(0, 0, 4, 4, "Esc", 1));
+                == KL::Model::ComputerKey(0, 0, 4, 4, "Esc", 1));
 
         REQUIRE(spys.allCountsAreEqualTo(0));
     }
@@ -137,7 +137,7 @@ TEST_CASE("Removing a computer key", "[KeyboardLayout]")
 
         REQUIRE(keyboardLayout.model().computerKeys().size() == originalSize - 1);
         REQUIRE(keyboardLayout.model().computerKeys().front()
-            == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
+                == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
 
         REQUIRE(spys.rowsAboutToBeInserted.count() == 0);
         REQUIRE(spys.rowsInserted.count() == 0);
@@ -162,7 +162,7 @@ TEST_CASE("Moving a computer key", "[KeyboardLayout]")
 
         REQUIRE(keyboardLayout.model().computerKeys().size() == originalSize);
         REQUIRE(keyboardLayout.model().computerKeys().at(1)
-            == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
+                == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
 
         REQUIRE(spys.allCountsAreEqualTo(0));
     }
@@ -173,7 +173,7 @@ TEST_CASE("Moving a computer key", "[KeyboardLayout]")
 
         REQUIRE(keyboardLayout.model().computerKeys().size() == originalSize);
         REQUIRE(keyboardLayout.model().computerKeys().at(1)
-            == KL::Model::ComputerKey(23, 42, 25, 4, "", 57));
+                == KL::Model::ComputerKey(23, 42, 25, 4, "", 57));
 
         REQUIRE(spys.rowsAboutToBeInserted.count() == 1);
         REQUIRE(spys.rowsInserted.count() == 1);
@@ -198,7 +198,7 @@ TEST_CASE("Renaming a computer key", "[KeyboardLayout]")
 
         REQUIRE(keyboardLayout.model().computerKeys().size() == originalSize);
         REQUIRE(keyboardLayout.model().computerKeys().at(1)
-            == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
+                == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
 
         REQUIRE(spys.allCountsAreEqualTo(0));
     }
@@ -209,7 +209,7 @@ TEST_CASE("Renaming a computer key", "[KeyboardLayout]")
 
         REQUIRE(keyboardLayout.model().computerKeys().size() == originalSize);
         REQUIRE(keyboardLayout.model().computerKeys().at(1)
-            == KL::Model::ComputerKey(15, 22, 25, 4, "A", 57));
+                == KL::Model::ComputerKey(15, 22, 25, 4, "A", 57));
 
         REQUIRE(spys.rowsAboutToBeInserted.count() == 0);
         REQUIRE(spys.rowsInserted.count() == 0);
@@ -234,7 +234,7 @@ TEST_CASE("Binding a computer key", "[KeyboardLayout]")
 
         REQUIRE(keyboardLayout.model().computerKeys().size() == originalSize);
         REQUIRE(keyboardLayout.model().computerKeys().at(1)
-            == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
+                == KL::Model::ComputerKey(15, 22, 25, 4, "", 57));
 
         REQUIRE(spys.allCountsAreEqualTo(0));
     }
@@ -245,7 +245,7 @@ TEST_CASE("Binding a computer key", "[KeyboardLayout]")
 
         REQUIRE(keyboardLayout.model().computerKeys().size() == originalSize);
         REQUIRE(keyboardLayout.model().computerKeys().at(1)
-            == KL::Model::ComputerKey(15, 22, 25, 4, "", 2));
+                == KL::Model::ComputerKey(15, 22, 25, 4, "", 2));
 
         REQUIRE(spys.rowsAboutToBeInserted.count() == 0);
         REQUIRE(spys.rowsInserted.count() == 0);
@@ -257,7 +257,7 @@ TEST_CASE("Binding a computer key", "[KeyboardLayout]")
 
 
 TEST_CASE("The abstract methods of QAbstractListModel are properly implemented",
-    "[KeyboardLayout]")
+          "[KeyboardLayout]")
 {
     KeyboardLayout keyboardLayout;
     keyboardLayout.setModel(createModelKeyboardLayout());
@@ -267,13 +267,13 @@ TEST_CASE("The abstract methods of QAbstractListModel are properly implemented",
         REQUIRE(keyboardLayout.rowCount(keyboardLayout.modelIndex(0)) == 0);
         REQUIRE(keyboardLayout.rowCount(keyboardLayout.modelIndex(1)) == 0);
 
-        REQUIRE(keyboardLayout.rowCount(QModelIndex())
-            == static_cast<int>(keyboardLayout.model().computerKeys().size()));
+        REQUIRE(keyboardLayout.rowCount({})
+                == static_cast<int>(keyboardLayout.model().computerKeys().size()));
     }
 
     SECTION("data()")
     {
-        REQUIRE(keyboardLayout.data(QModelIndex(), KeyboardLayout::XRole) == QVariant());
+        REQUIRE(keyboardLayout.data({}, KeyboardLayout::XRole) == QVariant());
 
         const auto modelIndex = keyboardLayout.modelIndex(1);
         REQUIRE(keyboardLayout.data(modelIndex, KeyboardLayout::XRole) == 15);

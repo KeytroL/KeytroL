@@ -25,7 +25,7 @@ KL_RESTORE_WARNINGS
 TEST_CASE("Emits a signal when a physical key is pressed", "[KeyboardInput]")
 {
     KL::ViewIO::KeyboardInput keyboardInput;
-    QSignalSpy keyPressedSpy(&keyboardInput, SIGNAL(keyPressed(unsigned int)));
+    QSignalSpy keyPressedSpy{&keyboardInput, SIGNAL(keyPressed(unsigned int))};
 
     KL::IO::TestKeyboardInput::instance().pressKey(42);
 
@@ -37,7 +37,7 @@ TEST_CASE("Emits a signal when a physical key is pressed", "[KeyboardInput]")
 TEST_CASE("Emits a signal when a physical key is released", "[KeyboardInput]")
 {
     KL::ViewIO::KeyboardInput keyboardInput;
-    QSignalSpy keyReleasedSpy(&keyboardInput, SIGNAL(keyReleased(unsigned int)));
+    QSignalSpy keyReleasedSpy{&keyboardInput, SIGNAL(keyReleased(unsigned int))};
 
     KL::IO::TestKeyboardInput::instance().releaseKey(23);
 

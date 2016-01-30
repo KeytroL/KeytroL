@@ -21,7 +21,7 @@ KL_RESTORE_WARNINGS
 
 TEST_CASE("Construct a char Property", "[Property]")
 {
-    const KL::Core::Property<char> property('a');
+    const KL::Core::Property<char> property{'a'};
 
     REQUIRE(property.value() == 'a');
 }
@@ -29,13 +29,13 @@ TEST_CASE("Construct a char Property", "[Property]")
 
 TEST_CASE("Modify a char Property", "[Property]")
 {
-    KL::Core::Property<char> property('a');
+    KL::Core::Property<char> property{'a'};
     auto sentinel = 'b';
 
     property.valueChanged().connect([&sentinel](char value)
-        {
-            sentinel = value;
-        });
+                                    {
+                                        sentinel = value;
+                                    });
 
     REQUIRE(sentinel == 'b');
 

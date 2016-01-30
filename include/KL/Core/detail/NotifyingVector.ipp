@@ -55,15 +55,16 @@ const typename NotifyingVector<T>::Vector & NotifyingVector<T>::vector() const
 
 
 template <typename T>
-void NotifyingVector<T>::replace(
-    SizeType first, SizeType last, const Vector & replacement)
+void NotifyingVector<T>::replace(SizeType first,
+                                 SizeType last,
+                                 const Vector & replacement)
 {
     if (first > last || last > mVector.size())
     {
         throw std::invalid_argument("invalid argument: first or last");
     }
 
-    ReplaceDiff replaceDiff = {first, last, replacement.size()};
+    ReplaceDiff replaceDiff{first, last, replacement.size()};
     mBeforeReplace.emit(replaceDiff);
 
     if (first != last)

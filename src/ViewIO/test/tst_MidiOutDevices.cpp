@@ -21,8 +21,8 @@ KL_DISABLE_WARNINGS
 KL_RESTORE_WARNINGS
 
 
-TEST_CASE(
-    "MidiOutDevices replicates the static interface of IO::MidiOut", "[MidiOutDevices]")
+TEST_CASE("MidiOutDevices replicates the static interface of IO::MidiOut",
+          "[MidiOutDevices]")
 {
     KL::ViewIO::MidiOutDevices devices;
 

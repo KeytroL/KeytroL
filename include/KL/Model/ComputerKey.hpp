@@ -27,11 +27,11 @@ class ComputerKey
 {
 public:
     ComputerKey(int x,
-        int y,
-        unsigned int width,
-        unsigned int height,
-        std::string label,
-        IO::KeyboardInput::KeyCode keyCode);
+                int y,
+                unsigned int width,
+                unsigned int height,
+                std::string label,
+                IO::KeyboardInput::KeyCode keyCode);
 
     ComputerKey(const ComputerKey & other) = default;
     ComputerKey & operator=(const ComputerKey & other) = default;

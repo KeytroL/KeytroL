@@ -30,12 +30,12 @@ class KeyboardInput : public QObject
 {
     Q_OBJECT
 
-public:
-    KeyboardInput(QObject * parent = nullptr);
-
 Q_SIGNALS:
     void keyPressed(unsigned int keyCode);
     void keyReleased(unsigned int keyCode);
+
+public:
+    KeyboardInput(QObject * parent = nullptr);
 
 private:
     IO::KeyboardInput mKeyboardInput;

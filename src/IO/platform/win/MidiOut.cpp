@@ -72,7 +72,7 @@ MidiOut::~MidiOut()
 
 void MidiOut::sendMessage(Byte statusByte, Byte dataByte1, Byte dataByte2) const
 {
-    const PlatformImpl::MidiMessage message = {statusByte, dataByte1, dataByte2, 0};
+    const PlatformImpl::MidiMessage message{statusByte, dataByte1, dataByte2, 0};
 
     midiOutShortMsg(mPlatformImpl->mMidiOutHandle, message.doubleWord);
 }
