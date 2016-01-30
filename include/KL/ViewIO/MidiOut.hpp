@@ -39,15 +39,15 @@ class MidiOut : public QObject
     Q_PROPERTY(
         int deviceIndex READ deviceIndex WRITE setDeviceIndex NOTIFY deviceIndexChanged)
 
+Q_SIGNALS:
+    void deviceIndexChanged();
+
 public:
     MidiOut(QObject * parent = nullptr);
     ~MidiOut();
 
     Q_INVOKABLE void sendMessage(
         unsigned char statusByte, unsigned char dataByte1, unsigned char dataByte2) const;
-
-Q_SIGNALS:
-    void deviceIndexChanged();
 
 private:
     int deviceIndex() const;
