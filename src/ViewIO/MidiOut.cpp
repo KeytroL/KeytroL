@@ -33,8 +33,9 @@ MidiOut::MidiOut(QObject * parent)
 MidiOut::~MidiOut() = default;
 
 
-void MidiOut::sendMessage(
-    unsigned char statusByte, unsigned char dataByte1, unsigned char dataByte2) const
+void MidiOut::sendMessage(unsigned char statusByte,
+                          unsigned char dataByte1,
+                          unsigned char dataByte2) const
 {
     if (mDevice)
     {

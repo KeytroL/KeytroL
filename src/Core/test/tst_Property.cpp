@@ -33,9 +33,9 @@ TEST_CASE("Modify a char Property", "[Property]")
     auto sentinel = 'b';
 
     property.valueChanged().connect([&sentinel](char value)
-        {
-            sentinel = value;
-        });
+                                    {
+                                        sentinel = value;
+                                    });
 
     REQUIRE(sentinel == 'b');
 

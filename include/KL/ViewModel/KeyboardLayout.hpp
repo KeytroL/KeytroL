@@ -51,11 +51,11 @@ public:
     void setModel(Model::KeyboardLayout model);
 
     Q_INVOKABLE void addComputerKey(int x,
-        int y,
-        unsigned int width,
-        unsigned int height,
-        const QString & label,
-        unsigned int keyCode);
+                                    int y,
+                                    unsigned int width,
+                                    unsigned int height,
+                                    const QString & label,
+                                    unsigned int keyCode);
 
     Q_INVOKABLE void removeComputerKey(const QModelIndex & index);
 

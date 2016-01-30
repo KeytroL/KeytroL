@@ -24,8 +24,8 @@ namespace IO
 class KeyboardInput::PlatformImpl
 {
 public:
-    PlatformImpl(
-        Core::Connection keyPressConnection, Core::Connection keyReleaseConnection)
+    PlatformImpl(Core::Connection keyPressConnection,
+                 Core::Connection keyReleaseConnection)
         : mKeyPressConnection(std::move(keyPressConnection))
         , mKeyReleaseConnection(std::move(keyReleaseConnection))
     {
@@ -40,15 +40,15 @@ KeyboardInput::KeyboardInput()
 {
     auto keyPressConnection =
         TestKeyboardInput::instance().mKeyPressed.connect([this](KeyCode keyCode)
-            {
-                pressKey(keyCode);
-            });
+                                                          {
+                                                              pressKey(keyCode);
+                                                          });
 
     auto keyReleaseConnection =
         TestKeyboardInput::instance().mKeyReleased.connect([this](KeyCode keyCode)
-            {
-                releaseKey(keyCode);
-            });
+                                                           {
+                                                               releaseKey(keyCode);
+                                                           });
 
     mPlatformImpl = std::unique_ptr<PlatformImpl>(
         new PlatformImpl{std::move(keyPressConnection), std::move(keyReleaseConnection)});

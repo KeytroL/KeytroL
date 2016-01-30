@@ -48,8 +48,8 @@ TEST_CASE("Setting a new device index emits a signal", "[MidiOut]")
 }
 
 
-TEST_CASE(
-    "Sending a MIDI message only works when there is an underlying device", "[MidiOut]")
+TEST_CASE("Sending a MIDI message only works when there is an underlying device",
+          "[MidiOut]")
 {
     KL::ViewIO::MidiOut midiOut;
 

@@ -27,12 +27,12 @@ TEST_CASE("Press a key", "[KeyboardInput]")
     auto count = 0;
 
     keyboardInput.keyPressed().connect([&count](KL::IO::KeyboardInput::KeyCode keyCode)
-        {
-            if (keyCode == 42)
-            {
-                ++count;
-            }
-        });
+                                       {
+                                           if (keyCode == 42)
+                                           {
+                                               ++count;
+                                           }
+                                       });
     REQUIRE(count == 0);
 
     KL::IO::TestKeyboardInput::instance().pressKey(42);
@@ -46,12 +46,12 @@ TEST_CASE("Release a key", "[KeyboardInput]")
     auto count = 0;
 
     keyboardInput.keyReleased().connect([&count](KL::IO::KeyboardInput::KeyCode keyCode)
-        {
-            if (keyCode == 23)
-            {
-                ++count;
-            }
-        });
+                                        {
+                                            if (keyCode == 23)
+                                            {
+                                                ++count;
+                                            }
+                                        });
     REQUIRE(count == 0);
 
     KL::IO::TestKeyboardInput::instance().releaseKey(23);

@@ -29,8 +29,8 @@ TEST_CASE("Construct a Connection, then assign it another Connection", "[Connect
     KL::Core::PrivateSignal<bool> signal;
 
     connection = signal.connect([](bool)
-        {
-        });
+                                {
+                                });
     REQUIRE(connection.isConnected());
 
     connection = KL::Core::Connection{};
@@ -38,8 +38,8 @@ TEST_CASE("Construct a Connection, then assign it another Connection", "[Connect
 }
 
 
-TEST_CASE(
-    "Construct a ScopedConnection, then assign it another Connection", "[Connection]")
+TEST_CASE("Construct a ScopedConnection, then assign it another Connection",
+          "[Connection]")
 {
     KL::Core::ScopedConnection scopedConnection;
     REQUIRE_FALSE(scopedConnection.isConnected());
@@ -47,8 +47,8 @@ TEST_CASE(
     KL::Core::PrivateSignal<bool> signal;
 
     scopedConnection = signal.connect([](bool)
-        {
-        });
+                                      {
+                                      });
     REQUIRE(scopedConnection.isConnected());
 
     scopedConnection = KL::Core::ScopedConnection{};
@@ -61,8 +61,8 @@ TEST_CASE("Disconnect automatically with a ScopedConnection", "[Connection]")
     KL::Core::PrivateSignal<bool> signal;
 
     auto connection = signal.connect([](bool)
-        {
-        });
+                                     {
+                                     });
     REQUIRE(connection.isConnected());
 
     {

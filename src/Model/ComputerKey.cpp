@@ -20,11 +20,11 @@ namespace Model
 {
 
 ComputerKey::ComputerKey(int x,
-    int y,
-    unsigned int width,
-    unsigned int height,
-    std::string label,
-    IO::KeyboardInput::KeyCode keyCode)
+                         int y,
+                         unsigned int width,
+                         unsigned int height,
+                         std::string label,
+                         IO::KeyboardInput::KeyCode keyCode)
     : mX(x)
     , mY(y)
     , mWidth(width)

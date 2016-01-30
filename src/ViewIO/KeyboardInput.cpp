@@ -23,14 +23,14 @@ KeyboardInput::KeyboardInput(QObject * parent)
     : QObject(parent)
 {
     mKeyboardInput.keyPressed().connect([this](IO::KeyboardInput::KeyCode keyCode)
-        {
-            Q_EMIT keyPressed(keyCode);
-        });
+                                        {
+                                            Q_EMIT keyPressed(keyCode);
+                                        });
 
     mKeyboardInput.keyReleased().connect([this](IO::KeyboardInput::KeyCode keyCode)
-        {
-            Q_EMIT keyReleased(keyCode);
-        });
+                                         {
+                                             Q_EMIT keyReleased(keyCode);
+                                         });
 }
 
 } // namespace ViewIO
