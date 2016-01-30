@@ -49,10 +49,10 @@ public:
     Q_INVOKABLE void sendMessage(
         unsigned char statusByte, unsigned char dataByte1, unsigned char dataByte2) const;
 
-private:
     int deviceIndex() const;
     void setDeviceIndex(int deviceIndex);
 
+private:
     void updateDevice();
 
     int mDeviceIndex;

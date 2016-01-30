@@ -27,7 +27,7 @@ TEST_CASE("The default device index is not a valid device index", "[MidiOut]")
 {
     KL::ViewIO::MidiOut midiOut;
 
-    REQUIRE(midiOut.property("deviceIndex").toInt() == -1);
+    REQUIRE(midiOut.deviceIndex() == -1);
 }
 
 
@@ -36,14 +36,14 @@ TEST_CASE("Setting a new device index emits a signal", "[MidiOut]")
     KL::ViewIO::MidiOut midiOut;
     QSignalSpy deviceIndexChangedSpy(&midiOut, SIGNAL(deviceIndexChanged()));
 
-    midiOut.setProperty("deviceIndex", 23);
+    midiOut.setDeviceIndex(23);
 
-    REQUIRE(midiOut.property("deviceIndex").toInt() == 23);
+    REQUIRE(midiOut.deviceIndex() == 23);
     REQUIRE(deviceIndexChangedSpy.count() == 1);
 
-    midiOut.setProperty("deviceIndex", 23);
+    midiOut.setDeviceIndex(23);
 
-    REQUIRE(midiOut.property("deviceIndex").toInt() == 23);
+    REQUIRE(midiOut.deviceIndex() == 23);
     REQUIRE(deviceIndexChangedSpy.count() == 1);
 }
 
@@ -53,14 +53,14 @@ TEST_CASE(
 {
     KL::ViewIO::MidiOut midiOut;
 
-    midiOut.setProperty("deviceIndex", 23);
+    midiOut.setDeviceIndex(23);
     midiOut.sendMessage(0x80, 69, 100);
 
     REQUIRE(KL::IO::TestMidiOut::instance().message().statusByte == 0x80);
     REQUIRE(KL::IO::TestMidiOut::instance().message().dataByte1 == 69);
     REQUIRE(KL::IO::TestMidiOut::instance().message().dataByte2 == 100);
 
-    midiOut.setProperty("deviceIndex", -1);
+    midiOut.setDeviceIndex(-1);
     midiOut.sendMessage(0x90, 42, 64);
 
     REQUIRE(KL::IO::TestMidiOut::instance().message().statusByte == 0x80);
@@ -68,7 +68,7 @@ TEST_CASE(
     REQUIRE(KL::IO::TestMidiOut::instance().message().dataByte2 == 100);
 
     REQUIRE_FALSE(77 < KL::IO::MidiOut::deviceCount());
-    midiOut.setProperty("deviceIndex", 77);
+    midiOut.setDeviceIndex(77);
     midiOut.sendMessage(0x90, 42, 64);
 
     REQUIRE(KL::IO::TestMidiOut::instance().message().statusByte == 0x80);
