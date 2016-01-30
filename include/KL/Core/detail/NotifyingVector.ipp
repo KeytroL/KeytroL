@@ -63,7 +63,7 @@ void NotifyingVector<T>::replace(
         throw std::invalid_argument("invalid argument: first or last");
     }
 
-    ReplaceDiff replaceDiff = {first, last, replacement.size()};
+    ReplaceDiff replaceDiff{first, last, replacement.size()};
     mBeforeReplace.emit(replaceDiff);
 
     if (first != last)

@@ -58,13 +58,12 @@ bool XmlFile::load(const QUrl & fileUrl, KeyboardLayout * keyboardLayout)
                 {
                     const auto & attributes = xml.attributes();
 
-                    modelKeyboardLayout.addComputerKey(
-                        Model::ComputerKey(attributes.value("x").toInt(),
-                            attributes.value("y").toInt(),
-                            attributes.value("width").toUInt(),
-                            attributes.value("height").toUInt(),
-                            attributes.value("label").toString().toStdString(),
-                            attributes.value("keyCode").toUInt()));
+                    modelKeyboardLayout.addComputerKey({attributes.value("x").toInt(),
+                        attributes.value("y").toInt(),
+                        attributes.value("width").toUInt(),
+                        attributes.value("height").toUInt(),
+                        attributes.value("label").toString().toStdString(),
+                        attributes.value("keyCode").toUInt()});
                 }
             }
         }

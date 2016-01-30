@@ -62,8 +62,7 @@ void KeyboardLayout::addComputerKey(int x,
     const QString & label,
     unsigned int keyCode)
 {
-    mModel.addComputerKey(
-        Model::ComputerKey(x, y, width, height, label.toStdString(), keyCode));
+    mModel.addComputerKey({x, y, width, height, label.toStdString(), keyCode});
 }
 
 
@@ -87,8 +86,7 @@ void KeyboardLayout::moveComputerKey(const QModelIndex & index, int x, int y)
 
     const auto computerKeyIndex =
         static_cast<Model::KeyboardLayout::SizeType>(index.row());
-    auto computerKey =
-        Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), x, y);
+    Model::ComputerKey computerKey{mModel.computerKeys().at(computerKeyIndex), x, y};
 
     mModel.removeComputerKey(computerKeyIndex);
     mModel.addComputerKey(std::move(computerKey));
@@ -106,8 +104,7 @@ void KeyboardLayout::renameComputerKey(const QModelIndex & index, const QString 
         static_cast<Model::KeyboardLayout::SizeType>(index.row());
     mModel.replace(computerKeyIndex,
         computerKeyIndex + 1,
-        {Model::ComputerKey(
-            mModel.computerKeys().at(computerKeyIndex), label.toStdString())});
+        {{mModel.computerKeys().at(computerKeyIndex), label.toStdString()}});
 }
 
 
@@ -123,7 +120,7 @@ void KeyboardLayout::bindComputerKey(
         static_cast<Model::KeyboardLayout::SizeType>(index.row());
     mModel.replace(computerKeyIndex,
         computerKeyIndex + 1,
-        {Model::ComputerKey(mModel.computerKeys().at(computerKeyIndex), keyCode)});
+        {{mModel.computerKeys().at(computerKeyIndex), keyCode}});
 }
 
 

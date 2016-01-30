@@ -29,7 +29,7 @@ TEST_CASE("Construct a NotifyingVector of integers", "[NotifyingVector]")
 
     SECTION("Construction from a std::vector")
     {
-        KL::Core::NotifyingVector<int> ints({1, 2, 3});
+        KL::Core::NotifyingVector<int> ints{{1, 2, 3}};
         REQUIRE(ints.vector().size() == 3u);
     }
 }
@@ -37,7 +37,7 @@ TEST_CASE("Construct a NotifyingVector of integers", "[NotifyingVector]")
 
 TEST_CASE("Fail to replace elements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::Core::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints{{1, 2, 3}};
 
     SECTION("When first > last")
     {
@@ -53,31 +53,31 @@ TEST_CASE("Fail to replace elements in a NotifyingVector", "[NotifyingVector]")
 
 TEST_CASE("Increase number of elements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::Core::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints{{1, 2, 3}};
 
     SECTION("By inserting one new element")
     {
         ints.replace(1, 1, {4});
-        REQUIRE(ints.vector() == std::vector<int>({1, 4, 2, 3}));
+        REQUIRE(ints.vector() == (std::vector<int>{{1, 4, 2, 3}}));
     }
 
     SECTION("By inserting several new elements")
     {
         ints.replace(3, 3, {4, 5});
-        REQUIRE(ints.vector() == std::vector<int>({1, 2, 3, 4, 5}));
+        REQUIRE(ints.vector() == (std::vector<int>{{1, 2, 3, 4, 5}}));
     }
 
     SECTION("By inserting new elements and replacing elements")
     {
         ints.replace(2, 3, {4, 5});
-        REQUIRE(ints.vector() == std::vector<int>({1, 2, 4, 5}));
+        REQUIRE(ints.vector() == (std::vector<int>{{1, 2, 4, 5}}));
     }
 }
 
 
 TEST_CASE("Decrease number of elements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::Core::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints{{1, 2, 3}};
 
     SECTION("By clearing the container")
     {
@@ -88,44 +88,44 @@ TEST_CASE("Decrease number of elements in a NotifyingVector", "[NotifyingVector]
     SECTION("By erasing one element")
     {
         ints.replace(1, 2, {});
-        REQUIRE(ints.vector() == std::vector<int>({1, 3}));
+        REQUIRE(ints.vector() == (std::vector<int>{{1, 3}}));
     }
 
     SECTION("By erasing and replacing elements")
     {
         ints.replace(0, 2, {4});
-        REQUIRE(ints.vector() == std::vector<int>({4, 3}));
+        REQUIRE(ints.vector() == (std::vector<int>{{4, 3}}));
     }
 }
 
 
 TEST_CASE("Keep same number of elements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::Core::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints{{1, 2, 3}};
 
     SECTION("By replacing no elements")
     {
         ints.replace(2, 2, {});
-        REQUIRE(ints.vector() == std::vector<int>({1, 2, 3}));
+        REQUIRE(ints.vector() == (std::vector<int>{{1, 2, 3}}));
     }
 
     SECTION("By replacing one element")
     {
         ints.replace(0, 1, {4});
-        REQUIRE(ints.vector() == std::vector<int>({4, 2, 3}));
+        REQUIRE(ints.vector() == (std::vector<int>{{4, 2, 3}}));
     }
 
     SECTION("By replacing several elements")
     {
         ints.replace(1, 3, {4, 5});
-        REQUIRE(ints.vector() == std::vector<int>({1, 4, 5}));
+        REQUIRE(ints.vector() == (std::vector<int>{{1, 4, 5}}));
     }
 }
 
 
 TEST_CASE("Observe replacements in a NotifyingVector", "[NotifyingVector]")
 {
-    KL::Core::NotifyingVector<int> ints({1, 2, 3});
+    KL::Core::NotifyingVector<int> ints{{1, 2, 3}};
 
     auto testNotification =
         [](const KL::Core::NotifyingVector<int>::ReplaceDiff & replaceDiff)
@@ -140,5 +140,5 @@ TEST_CASE("Observe replacements in a NotifyingVector", "[NotifyingVector]")
 
     ints.replace(0, 1, {4, 2});
 
-    REQUIRE(ints.vector() == std::vector<int>({4, 2, 2, 3}));
+    REQUIRE(ints.vector() == (std::vector<int>{{4, 2, 2, 3}}));
 }

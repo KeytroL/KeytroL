@@ -267,13 +267,13 @@ TEST_CASE("The abstract methods of QAbstractListModel are properly implemented",
         REQUIRE(keyboardLayout.rowCount(keyboardLayout.modelIndex(0)) == 0);
         REQUIRE(keyboardLayout.rowCount(keyboardLayout.modelIndex(1)) == 0);
 
-        REQUIRE(keyboardLayout.rowCount(QModelIndex())
+        REQUIRE(keyboardLayout.rowCount({})
             == static_cast<int>(keyboardLayout.model().computerKeys().size()));
     }
 
     SECTION("data()")
     {
-        REQUIRE(keyboardLayout.data(QModelIndex(), KeyboardLayout::XRole) == QVariant());
+        REQUIRE(keyboardLayout.data({}, KeyboardLayout::XRole) == QVariant());
 
         const auto modelIndex = keyboardLayout.modelIndex(1);
         REQUIRE(keyboardLayout.data(modelIndex, KeyboardLayout::XRole) == 15);

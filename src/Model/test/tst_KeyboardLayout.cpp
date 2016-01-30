@@ -31,7 +31,7 @@ TEST_CASE("Add a ComputerKey to a KeyboardLayout", "[KeyboardLayout]")
 {
     KL::Model::KeyboardLayout keyboardLayout;
 
-    keyboardLayout.addComputerKey(KL::Model::ComputerKey(23, 42, 8, 7, "", 0));
+    keyboardLayout.addComputerKey({23, 42, 8, 7, "", 0});
 
     REQUIRE(keyboardLayout.computerKeys().size() == 1u);
     REQUIRE(keyboardLayout.computerKeys().begin()->y() == 42);
@@ -42,7 +42,7 @@ TEST_CASE("Remove a ComputerKey from a KeyboardLayout", "[KeyboardLayout]")
 {
     KL::Model::KeyboardLayout keyboardLayout;
 
-    keyboardLayout.addComputerKey(KL::Model::ComputerKey(23, 42, 8, 7, "", 0));
+    keyboardLayout.addComputerKey({23, 42, 8, 7, "", 0});
     REQUIRE(keyboardLayout.computerKeys().size() == 1u);
 
     keyboardLayout.removeComputerKey(0);

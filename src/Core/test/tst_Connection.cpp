@@ -66,7 +66,7 @@ TEST_CASE("Disconnect automatically with a ScopedConnection", "[Connection]")
     REQUIRE(connection.isConnected());
 
     {
-        KL::Core::ScopedConnection scopedConnection = connection;
+        KL::Core::ScopedConnection scopedConnection{connection};
         REQUIRE(scopedConnection.isConnected());
         REQUIRE(connection.isConnected());
     }
