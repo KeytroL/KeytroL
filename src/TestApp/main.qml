@@ -242,11 +242,11 @@ ApplicationWindow {
                 readonly property var modelIndex: keyboardLayout.modelIndex(index)
 
                 Connections {
-                    target: labelInput
+                    target: computerKey.labelInput
 
                     onEditingFinished: {
                         keyboardLayout.renameComputerKey(
-                            computerKey.modelIndex, labelInput.text);
+                            computerKey.modelIndex, computerKey.labelInput.text);
                     }
                 }
 
