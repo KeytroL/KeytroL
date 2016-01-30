@@ -18,7 +18,9 @@ add_library(MockKeytroLIO STATIC
     TestMidiOut.cpp
 )
 
-target_include_directories(MockKeytroLIO PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(MockKeytroLIO PUBLIC
+    ${CMAKE_CURRENT_LIST_DIR}
+)
 
 target_link_libraries(MockKeytroLIO PUBLIC
     BaseKeytroLIO
