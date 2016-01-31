@@ -19,6 +19,7 @@ matrix:
 install:
   # - if [ ${TRAVIS_OS_NAME} == 'osx' ]; then brew update; fi
   # - if [ ${TRAVIS_OS_NAME} == 'osx' ]; then brew install clang-format; fi
+  - if [ ${TRAVIS_OS_NAME} == 'osx' ] && [ ${ARCHITECTURE} == 'x86_64' ]; then brew update; fi
   - if [ ${TRAVIS_OS_NAME} == 'osx' ] && [ ${ARCHITECTURE} == 'x86_64' ]; then brew install qt5; fi
 
 before_script:
